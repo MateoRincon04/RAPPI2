@@ -7,20 +7,23 @@ package Administracion;
  * clase abstracta como principios para esto, ya que tanto a la clase administrador, como a
  * cliente y tendero se les quiere guardar la informacion de estos atributos
 */ 
+import java.util.HashMap;
+import BaseDatos.Data;
 
 abstract class Perfil{
     private String nombre;
     private int telefono;
     private int comuna;
     private int clave;
-    private int ID;
+    private String userName;
+    public HashMap<String,String[]> Datos = new HashMap<>(); 
 
     protected Perfil(String nombre, int telefono, int comuna, int clave, int ID){
         this.nombre = nombre;
         this.telefono = telefono;
         this.comuna = comuna;
         this.clave = clave;
-        this.ID = ID;
+        this.userName = userName;
         
     }
 
@@ -54,12 +57,16 @@ abstract class Perfil{
     public int getClave(){
         return this.clave;
    }
-    public void setID(int ID){
-        this.ID = ID;
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
-    public int getID(){
-        return this.ID;
+    public String getUserName(){
+        return this.userName;
    }
    
+    public void RT() {
+    	Data.readTxt("datosPersonal", Datos);
+    	
+    }
 }

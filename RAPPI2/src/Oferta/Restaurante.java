@@ -11,7 +11,7 @@ package Oferta;
 		private String celular;
 		private Pedido pedido;
 		private boolean estaListo;
-		private plato[] menu;
+		private Plato[] menu;
 		public void setNombre(String nombre) {
 			this.nombre=nombre;
 		}
@@ -35,4 +35,3 @@ package Oferta;
 		}
 		
 	}
-}
