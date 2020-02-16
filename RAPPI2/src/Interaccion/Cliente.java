@@ -35,7 +35,7 @@ public class Cliente extends Perfil {
     public void hacerPedido() {
     	
     }
-    public double getCalificacion() {
+    public float getCalificacion() {
     	double contadorAux = 0;
     	if(!this.calififcaciones.isEmpty()) {
     		Iterator<Calificacion> iterator = this.calififcaciones.iterator();
@@ -51,7 +51,7 @@ public class Cliente extends Perfil {
     }
     public void calificarTendero() {
     	if(pedido.getEntregado()) {
-    		double puntuacion = 5.0;
+    		float puntuacion = 5.0;
     		Interaccion.Tendero calificando = this.pedido.getTendero();
     		Calificacion calificacionTendero = new Calificacion(this,puntuacion,calificando);
     	}
