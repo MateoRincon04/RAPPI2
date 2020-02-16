@@ -9,9 +9,12 @@ import Oferta.Restaurante;
  * su finalidad es poder modificar el menu de cada usuario, mostrar que funcionalidades
  * puede realizar cada usuario registrado, listar todas las funcionalidades en general del
  * programa, poder adicionar o eliminar funcionalidades de un usuario especifico.
+ * 
  * Las estructuras de datos relevantes utilizadas son
- * -------------------------------------------------------------
- * @author: Mateo Rincon
+ * @see #tenderos
+ * @see #restaurantes
+ * 
+ * @author: Mateo Rincón
  * @version:
 */ 
 

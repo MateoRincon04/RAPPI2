@@ -7,12 +7,21 @@ import Administracion.Perfil;
 import Oferta.Pedido;
 
 /**
+ * Clase Cliente
+ * La finalidad de esta clase es la de creacion de objetos de tipo Cliente, que seran los
+ * usuarios que puedan realizar pedidos de platos a restaurantes, tambien calificar los
+ * tenderos que entregan estos,
  * 
- * @author mythe
+ * Las estructuras revelantes de la clase son
+ * @see #calififcaciones
+ * @see #historial
+ * 
+ * @author: Santiago Tamayo, Mateo Rincón
+ * @version:
  *
  */
 public class Cliente extends Perfil {
-	private List<Calificacion> calififcaciones= new ArrayList<Calificacion>();
+	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	//private Carrito carrito;
 	private String metodoDePago;
 	private int referencia;
@@ -20,6 +29,12 @@ public class Cliente extends Perfil {
 	private Pedido pedido;
 	private List<Pedido> historial= new ArrayList<Pedido>();
 	
+	/**
+	 * Constructor para los objetos de la clase Cliente
+	 * @see Administracion.Perfil#Perfil(String, int, int, int, String)
+	 * @param saldo El parametro saldo define el saldo que tiene el Cliente
+	 * @param metodoDePago El parametro metodoDePago define el metodo de pago con el que el Cliente planea comprar platos
+	 */
 	public Cliente(String nombre, int telefono, int comuna, int clave, String userName ,long saldo,String metodoDePago) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
@@ -29,21 +44,32 @@ public class Cliente extends Perfil {
     public long getSaldo(){
         return this.saldo;
     }
+    
     public void setSaldo(long saldo){
         this.saldo = saldo;
     }
+    
+    public void agregarSaldo(long saldo) {
+    	this.saldo += saldo;
+    }
+    
     public void hacerPedido() {
     	
     }
+    
+    /**
+     * Método que calcula la calificacion promedio que le han dado los tenderos a este Cliente
+     * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
+     */
     public double getCalificacion() {
     	double contadorAux = 0;
-    	if(!this.calififcaciones.isEmpty()) {
-    		Iterator<Calificacion> iterator = this.calififcaciones.iterator();
+    	if(!this.calificaciones.isEmpty()) {
+    		Iterator<Calificacion> iterator = this.calificaciones.iterator();
     		while(iterator.hasNext()) {
     			contadorAux += iterator.next().getPuntuacion();
     		}
     	}
-    	return contadorAux;
+    	return contadorAux/this.calificaciones.size();
     	
     }
     private void setMetodoDePago(String metodoDePago) {

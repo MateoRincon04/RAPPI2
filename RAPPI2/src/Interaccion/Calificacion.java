@@ -4,7 +4,8 @@ package Interaccion;
  * Clase Calificacion
  * Esta clase tiene como finalidad hacer la conexion entre el calificado y el calificador
  * para saber cada dato de estos
- * @author: Santiago Tamayo, Mateo Rincon
+ * 
+ * @author: Santiago Tamayo, Mateo Rincón
  *@version:
  */
 
