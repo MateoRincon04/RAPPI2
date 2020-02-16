@@ -11,7 +11,7 @@ package Interaccion;
 
 public class Calificacion {
 	private Object calificado;
-	private float puntuacion= 5.0;
+	private double puntuacion= 5.0;
 	private Object calificador;
 	
 	/**
@@ -20,13 +20,13 @@ public class Calificacion {
 	 * @param puntuacion El parametro puntuacion define la puntuación que le dio el calificador a el calificado
 	 * @param calificador El parametro calificador define el objeto que realizo la calificacion
 	 */
-	public Calificacion(Object calificado,float puntuacion,Object calificador) {
+	public Calificacion(Object calificado,double puntuacion,Object calificador) {
 		this.calificado = calificado;
 		this.calificador = calificador;
 		this.puntuacion = puntuacion;
 	}
 	
-	public float getPuntuacion() {
+	public double getPuntuacion() {
 		return this.puntuacion;
 	}
 	public void setPuntuacion(float puntuacion) {
