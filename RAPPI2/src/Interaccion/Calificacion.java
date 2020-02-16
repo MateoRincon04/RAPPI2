@@ -29,7 +29,6 @@ public class Calificacion {
 		return this.puntuacion;
 	}
 	public void setPuntuacion(float puntuacion) {
-		
 		this.puntuacion = puntuacion;
 	}
 }

@@ -54,6 +54,7 @@ public class Cliente extends Perfil {
     		float puntuacion = 5.0;
     		Interaccion.Tendero calificando = this.pedido.getTendero();
     		Calificacion calificacionTendero = new Calificacion(this,puntuacion,calificando);
+    		calificando.agregarCalificacion(calificacionTendero);
     	}
     }
     public String toString(){

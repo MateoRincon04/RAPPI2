@@ -7,9 +7,9 @@ import Oferta.Pedido;
 
 public class Tendero extends Perfil{
 	private Pedido pedido;
-	private float calificacion;
 	private boolean estaDisponible;
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
+	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	private long salario;
 	
 	public Tendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
@@ -33,6 +33,9 @@ public class Tendero extends Perfil{
 	}
 	public void agregarNotificacion(Notificacion notificacion) {
 		this.notificaciones.add(notificacion);
+	}
+	public void agregarCalificacion(Calificacion calificacion) {
+		this.calificaciones.add(calificacion);
 	}
 	public void aceptarPedido() {
 		Notificacion Aux = notificaciones.get(notificaciones.size()-1);
