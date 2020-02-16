@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * que es el que decide que platos tiene en su menu y el cliente que es el que ordena
  * que plato desea comprar.
  * Estructuras de datos revelantes son
- * -----------------------------------------------------------------
+ * @see #modificaciones
  * @author: Paula A. Taborda, Mateo Rincon
  * @version:
  */

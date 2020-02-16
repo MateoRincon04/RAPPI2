@@ -3,10 +3,20 @@ package Oferta;
 import java.util.ArrayList;
 import java.util.List;
 
-/** En esta clase, el restaurante es aquel que prepara los platos
- * tiene datos propios como el nombre de restaurante, celular de contacto, dirección
- * qué pedidos están disponibles y un booleano que define si el pedido esta listo para ser
- * despachado o no.
+/**Clase Restaurante 
+ * En esta clase, el restaurante es aquel que prepara los platos
+ * tiene datos propios como el nombre de restaurante, celular de contacto, direcciónes
+ * de sus sucursales, un booleano que define si el pedido esta listo para ser
+ * despachado o no y su menu
+ * 
+ * Estructuras revelantes
+ * @see #direcciones
+ * @see #menu
+ * @see #historial
+ * 
+ * @author: Guillermo Toloza, Mateo Rincon
+ * @version:
+ * 
  */
 public class Restaurante {
 	private String nombre;
@@ -15,6 +25,12 @@ public class Restaurante {
 	private List<Plato> menu = new ArrayList<Plato>();
 	private List<Pedido> historial = new ArrayList<Pedido>();
 	
+	/**
+	 * Constructor de los objetos de la clase Restaurante
+	 * @param nombre El parametro nombre define el nombre que tendra el Restaurante
+	 * @param direccion El parametro direccion define la direccion nucleo que tendra el Restaurante
+	 * @param celular El parametro celular define el telefono celular que tendra el Restaurante
+	 */
 	public Restaurante(String nombre, String direccion, String celular) {
 		this.nombre = nombre;
 		this.celular = celular;
@@ -26,7 +42,7 @@ public class Restaurante {
 	}
 	
 	public String getNombre() {
-		return (nombre);
+		return this.nombre;
 	}
 	
 	public void cambiarDireccion(String direccion, String nueva) {
@@ -54,6 +70,10 @@ public class Restaurante {
 	
 	public void setCelular(String celular) {
 		this.celular=celular;
+	}
+	
+	public String getCelular() {
+		return this.celular;
 	}
 	
 	public void agregarPlato(Plato plato) {
