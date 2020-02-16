@@ -61,7 +61,7 @@ public class Cliente extends Perfil {
      * Método que calcula la calificacion promedio que le han dado los tenderos a este Cliente
      * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
      */
-    public double getCalificacion() {
+    public float getCalificacion() {
     	double contadorAux = 0;
     	if(!this.calificaciones.isEmpty()) {
     		Iterator<Calificacion> iterator = this.calificaciones.iterator();
@@ -77,9 +77,10 @@ public class Cliente extends Perfil {
     }
     public void calificarTendero() {
     	if(pedido.getEntregado()) {
-    		double puntuacion = 5.0;
+    		float puntuacion = 5.0;
     		Interaccion.Tendero calificando = this.pedido.getTendero();
     		Calificacion calificacionTendero = new Calificacion(this,puntuacion,calificando);
+    		calificando.agregarCalificacion(calificacionTendero);
     	}
     }
     public String toString(){

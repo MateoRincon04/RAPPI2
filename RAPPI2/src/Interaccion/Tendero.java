@@ -23,6 +23,7 @@ public class Tendero extends Perfil{
 	private Pedido pedido;
 	private boolean estaDisponible;
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
+	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	private long salario;
 	
 	/**
@@ -55,7 +56,10 @@ public class Tendero extends Perfil{
 	public void agregarNotificacion(Notificacion notificacion) {
 		this.notificaciones.add(notificacion);
 	}
-	
+
+	public void agregarCalificacion(Calificacion calificacion) {
+		this.calificaciones.add(calificacion);
+	}
 	/**
 	 * Método por el cual el Tendero podra encargarse de un Pedido para su transportación
 	 */

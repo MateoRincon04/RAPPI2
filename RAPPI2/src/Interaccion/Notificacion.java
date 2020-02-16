@@ -19,6 +19,12 @@ public class Notificacion {
 	public Pedido getPedido() {
 		return pedido;
 	}
+	public void setTomarPedido() {
+		this.tomarPedido = !this.tomarPedido;
+	}
+	public boolean getTomarPedido() {
+		return tomarPedido;
+	}
 	public void notificar() {
 		Iterator<Tendero> iterator = Administrador.getTenderos().iterator();
 		while(iterator.hasNext()) {
