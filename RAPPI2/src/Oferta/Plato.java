@@ -2,37 +2,77 @@ package Oferta;
 
 import java.util.ArrayList;
 
-public class Plato {
-	private String Nombre;
-	private ArrayList<String> Descripcion = new ArrayList<String>();
-	private float Precio;
-	private boolean Bebida;
-	private ArrayList<String> Modificaciones = new ArrayList<String>();
-	public Restaurante Restaurante;
-	public int RestriccionDeEdad;
+/**
+ * Clase Plato
+ * Esta clase define objetos con la finalidad de ser el intermediario entre el restaurte
+ * que es el que decide que platos tiene en su menu y el cliente que es el que ordena
+ * que plato desea comprar.
+ * Estructuras de datos revelantes son
+ * -----------------------------------------------------------------
+ * @author: Paula A. Taborda, Mateo Rincon
+ * @version:
+ */
 
-	public Plato(String Nombre, float Precio, boolean Bebida, int Restriccion) {
-		this.Nombre = Nombre;
-		this.Precio = Precio;
-		this.Bebida = Bebida;
-		this.RestriccionDeEdad = Restriccion;
+
+
+
+public class Plato {
+	//atributos de la clase
+	private String nombre;
+	private String descripcion;
+	private float precio;
+	private ArrayList<String> modificaciones = new ArrayList<String>();
+	public Restaurante restaurante;
+	public int restriccionDeEdad;
+	/**
+	 * Contructor para todo objeto de Plato
+	 * @param nombre El parametro nombre define el nombre del Plato
+	 * @param descripcion El parametro descripcion define la descripcion general del Plato
+	 * @param precio El parametro precio define el precio del Plato
+	 * @param restriccion El parametro defil si el Plato posee algun tipo de impedimento con respecto a la edad del Cliente 
+	 * @param restaurante El parametro define a que Restaurante pertenece el Plato
+	 */
+	public Plato(String nombre,String descripcion, float precio, int restriccion, Restaurante restaurante) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.restriccionDeEdad = restriccion;
+		this.restaurante = restaurante;
 	}
-	void setPrecio(float precio) {
-		this.Precio = precio;
-	}
+	
 	void setNombre(String nombre) {
-		this.Nombre = nombre;
+		this.nombre = nombre;
 	}
-	void setBebida(boolean Bebida) {
-		this.Bebida = Bebida;
+	
+	void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
-	public float getPrecio() {
-		return Precio;
+	
+	void setPrecio(float precio) {
+		this.precio = precio;
 	}
+	
+	void setRestriccionDeEdad(int restriccion) {
+		this.restriccionDeEdad = restriccion;
+	}
+	
 	public String getNombre() {
-		return Nombre;
+		return this.nombre;
 	}
-	public Boolean getBebida() {
-		return Bebida;
-	}	
+	
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+	
+	public float getPrecio() {
+		return this.precio;
+	}
+	
+	public Restaurante getRestaurante() {
+		return this.restaurante;
+	}
+	
+	public int getRestriccionDeEdad() {
+		return this.restriccionDeEdad;
+	}
 }

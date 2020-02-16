@@ -6,6 +6,10 @@ package Administracion;
  * su finalidad es poder optimizar la escritura de codigo, teniendo la herencia y el ser
  * clase abstracta como principios para esto, ya que tanto a la clase administrador, como a
  * cliente y tendero se les quiere guardar la informacion de estos atributos
+ * Estructuras relevantes son
+ * --------------------------------------------------------------------------
+ * @author: Mateo Rincon
+ * @version:
 */ 
 import java.util.HashMap;
 import BaseDatos.Data;
@@ -17,7 +21,15 @@ abstract public class Perfil{
     private int clave;
     private String userName;
     public HashMap<String,String[]> Datos = new HashMap<>(); 
-
+    
+    /**
+     * Constructor generico para las subclases de Perfil
+     * @param nombre El parametro nombre define el nombre que tendra el Objeto
+     * @param telefono El parametro telefono define el telefono que tendra el Objeto
+     * @param comuna El parametro comuna define la comuna deonde se encontrara el Objeto
+     * @param clave El parametro clavve define la clave con la cual se registrara el Objeto
+     * @param userName El parametro userName define el userName con el cual se registrara el Objeto
+     */
     protected Perfil(String nombre, int telefono, int comuna, int clave, String userName){
         this.nombre = nombre;
         this.telefono = telefono;
@@ -26,7 +38,10 @@ abstract public class Perfil{
         this.userName = userName;
         
     }
-
+    
+    /**
+     * Método abtracto que definira cada subclase a su manera
+     */
     public abstract String toString();
 
     public void setNombre(String nombre){

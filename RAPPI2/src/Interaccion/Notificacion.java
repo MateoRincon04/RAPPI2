@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import Oferta.Pedido;
+import Administracion.Administrador;
 
 public class Notificacion {
 	private Pedido pedido;
 	private boolean tomarPedido;
-	private List<Tendero> tenderos = new ArrayList<Tendero>();
 	
 	public Notificacion(Pedido pedido) {
 	this.pedido= pedido;
@@ -20,7 +20,7 @@ public class Notificacion {
 		return pedido;
 	}
 	public void notificar() {
-		Iterator<Tendero> iterator = this.tenderos.iterator();
+		Iterator<Tendero> iterator = Administrador.getTenderos().iterator();
 		while(iterator.hasNext()) {
 			Tendero notificado = iterator.next();
 			if(notificado.getEstaDisponible()) {

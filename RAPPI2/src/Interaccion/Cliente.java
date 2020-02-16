@@ -1,13 +1,16 @@
 package Interaccion;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import Administracion.Perfil;
 import Oferta.Pedido;
 
-
+/**
+ * 
+ * @author mythe
+ *
+ */
 public class Cliente extends Perfil {
 	private List<Calificacion> calififcaciones= new ArrayList<Calificacion>();
 	//private Carrito carrito;
