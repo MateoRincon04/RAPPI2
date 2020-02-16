@@ -10,7 +10,7 @@ package Administracion;
 import java.util.HashMap;
 import BaseDatos.Data;
 
-abstract class Perfil{
+abstract public class Perfil{
     private String nombre;
     private int telefono;
     private int comuna;
@@ -18,7 +18,7 @@ abstract class Perfil{
     private String userName;
     public HashMap<String,String[]> Datos = new HashMap<>(); 
 
-    protected Perfil(String nombre, int telefono, int comuna, int clave, int ID){
+    protected Perfil(String nombre, int telefono, int comuna, int clave, String userName){
         this.nombre = nombre;
         this.telefono = telefono;
         this.comuna = comuna;
@@ -27,7 +27,7 @@ abstract class Perfil{
         
     }
 
-    public abstract String getDatos();
+    public abstract String toString();
 
     public void setNombre(String nombre){
         this.nombre = nombre;
@@ -64,9 +64,4 @@ abstract class Perfil{
     public String getUserName(){
         return this.userName;
    }
-   
-    public void RT() {
-    	Data.readTxt("datosPersonal", Datos);
-    	
-    }
 }

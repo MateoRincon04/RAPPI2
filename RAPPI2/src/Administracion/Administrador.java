@@ -16,8 +16,8 @@ package Administracion;
 public class Administrador extends Perfil{
     private long salario;
 
-    public Administrador(String nombre, int telefono, int comuna, int clave, int ID, long salario){
-        super(nombre, telefono, comuna, clave, ID);
+    public Administrador(String nombre, int telefono, int comuna, int clave, String userName, long salario){
+        super(nombre, telefono, comuna, clave, userName);
         this.salario = salario;
     }
 
@@ -27,8 +27,8 @@ public class Administrador extends Perfil{
     public void setSalario(long salario){
         this.salario = salario;
     }
-public String getDatos(){
-        return this.getNombre() + ", " + this.getTelefono() + ", " + this.getComuna() + ", " + this.getClave() + ", " + this.getID( )+ ", " + this.getSalario();
+    public String toString(){
+        return this.getNombre() + ", " + this.getTelefono() + ", " + this.getComuna() + ", " + this.getClave() + ", " + this.getUserName( )+ ", " + this.getSalario();
     }
 
 
