@@ -9,7 +9,7 @@ package Interaccion;
  */
 
 public class Calificacion {
-	final private Object calificado;
+	private Object calificado;
 	static private double puntuacion= 5.0;
 	final private Object calificador;
 	
