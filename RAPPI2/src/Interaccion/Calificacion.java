@@ -10,8 +10,8 @@ package Interaccion;
 
 public class Calificacion {
 	private Object calificado;
-	static private double puntuacion= 5.0;
-	final private Object calificador;
+	private double puntuacion= 5.0;
+	private Object calificador;
 	
 	/**
 	 * Constructor de los objetos de la clase Calificacion
