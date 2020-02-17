@@ -17,7 +17,7 @@ import Oferta.Plato;
  * @see #calififcaciones
  * @see #historial
  * 
- * @author: Santiago Tamayo, Mateo Rincón
+ * @author: Santiago Tamayo, Mateo Rincï¿½n
  * @version:
  *
  */
@@ -67,7 +67,7 @@ public class Cliente extends Perfil {
     }
     
     /**
-     * Método que calcula la calificacion promedio que le han dado los tenderos a este Cliente
+     * Mï¿½todo que calcula la calificacion promedio que le han dado los tenderos a este Cliente
      * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
      */
     public double getCalificacionPromediada() {
@@ -87,9 +87,13 @@ public class Cliente extends Perfil {
     
     
     /**
-     * Método que califica al Tendero que entrego la orden
+     * Mï¿½todo que califica al Tendero que entrego la orden
      * @param puntuacion El parametro puntuacion define la calificacion del Tendero
      */
+    
+    
+    //men
+	//YA?
     public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Interaccion.Tendero calificando = this.pedido.getTendero();
