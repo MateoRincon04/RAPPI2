@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import Administracion.Perfil;
 import Oferta.Pedido;
+import Oferta.Plato;
 
 /**
  * Clase Cliente
@@ -53,15 +54,22 @@ public class Cliente extends Perfil {
     	this.saldo += saldo;
     }
     
-    public void hacerPedido() {
-    	
+    public void hacerPedido(Plato plato) {
+    	if(this.getSaldo()>=plato.getPrecio()) {
+    		Pedido pedido = new Pedido(this,plato);
+    		this.agregarAlHistorial(pedido);
+    	}
+    }
+    
+    public void agregarAlHistorial(Pedido pedido) {
+    	historial.add(pedido);
     }
     
     /**
      * Método que calcula la calificacion promedio que le han dado los tenderos a este Cliente
      * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
      */
-    public double getCalificacion() {
+    public double getCalificacionPromediada() {
     	double contadorAux = 0;
     	if(!this.calificaciones.isEmpty()) {
     		Iterator<Calificacion> iterator = this.calificaciones.iterator();

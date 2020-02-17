@@ -32,4 +32,16 @@ public class Calificacion {
 	public void setPuntuacion(float puntuacion) {
 		this.puntuacion = puntuacion;
 	}
+	
+	public double getCalificacionPromediada(List<Calificacion calificaciones>) {
+    	double contadorAux = 0;
+    	if(!calificaciones.isEmpty()) {
+    		Iterator<Calificacion> iterator = calificaciones.iterator();
+    		while(iterator.hasNext()) {
+    			contadorAux += iterator.next().getPuntuacion();
+    		}
+    	}
+    	return contadorAux/calificaciones.size();
+    	
+    }
 }
