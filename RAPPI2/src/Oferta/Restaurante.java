@@ -81,7 +81,8 @@ public class Restaurante {
 		return this.celular;
 	}
 	
-	public void agregarPlato(Plato plato) {
+	public void crearPlato(String nombre, String descripcion, float precio,int restriccion) {
+		plato plato = new Plato(String nombre, String descripcion, float precio,int restriccion,this);
 		if(!this.menu.contains(plato)) {
 			this.menu.add(plato);
 		}
