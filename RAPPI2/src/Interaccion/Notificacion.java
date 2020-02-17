@@ -20,6 +20,7 @@ public class Notificacion {
 	
 	public Notificacion(Pedido pedido) {
 	this.pedido= pedido;
+	this.notificar();
 	
 	}
 	
@@ -39,13 +40,13 @@ public class Notificacion {
 	 * El método notificar me permite notificar a los tenderos acerca del nuevo pedido creado y le avisa
 	 * tambien a el Restaurante asignado a el Pedido que realizara el Plato ordenado
 	 */
-	public void notificar() {
+	public static void notificar() {
 		Iterator<Tendero> iterator = Administrador.getTenderos().iterator();
 		while(iterator.hasNext()) {
 			Tendero notificado = iterator.next();
 			if(notificado.getEstaDisponible()) {
 				notificado.agregarNotificacion(this);
-				if(tomarPedido) {
+				if(tomarPedido){
 					notificado.setEstaDisponible();
 					this.pedido.setTendero(notificado);
 					break;
