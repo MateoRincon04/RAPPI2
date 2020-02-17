@@ -43,12 +43,7 @@ public class Cliente extends Perfil {
 	
     public long getSaldo(){
         return this.saldo;
-    }
-    
-    public void setSaldo(long saldo){
-        this.saldo = saldo;
-    }
-    
+    } 
     public void agregarSaldo(long saldo) {
     	this.saldo += saldo;
     }
