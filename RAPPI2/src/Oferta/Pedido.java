@@ -40,6 +40,10 @@ public class Pedido {
 		return estaListo;
 	}
 	
+	public void setEstaListo(boolean estaListo) {
+		this.estaListo = estaListo;
+	}
+	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}

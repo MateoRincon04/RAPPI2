@@ -105,6 +105,11 @@ public class Restaurante {
 	public void agregarNotificacion(Notificacion notificacion) {
 		notificaciones.add(notificacion);
 	}
+	
+
+	public void setEstaListo(Pedido pedido) {
+		pedido.setEstaListo(true);
+	}
 	//cambio 
 	public void elejirPlatoMenu(int indice) {
 		this.menu.get(indice);
