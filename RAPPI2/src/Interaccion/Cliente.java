@@ -91,6 +91,7 @@ public class Cliente extends Perfil {
     
     
     //men
+	//YA?
     public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Interaccion.Tendero calificando = this.pedido.getTendero();
