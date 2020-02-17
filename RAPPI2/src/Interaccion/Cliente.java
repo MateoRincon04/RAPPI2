@@ -75,6 +75,11 @@ public class Cliente extends Perfil {
     private void setMetodoDePago(String metodoDePago) {
     	this.metodoDePago = metodoDePago;
     }
+    /**
+     * Método que califica al tendero que entrego la orden
+     * @param puntuacion El parametro puntuacion define la calificacion del tendero
+     * @param calificando El parametro calificando define al tendero al cual se le asocia la calificacion
+     */
     public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Interaccion.Tendero calificando = this.pedido.getTendero();
