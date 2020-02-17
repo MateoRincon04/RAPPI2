@@ -94,4 +94,14 @@ public class Restaurante {
 		}
 	}
 	
+	public List<Plato> getMenu(){
+		return menu;
+	}
+	
+	
+	//cambio 
+	public void elejirPlatoMenu(int indice) {
+		this.menu.get(indice);
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import Administracion.*;
 import Oferta.Pedido;
+import Oferta.Plato;
 
 /**
  * Clase Cliente
@@ -54,15 +55,22 @@ public class Cliente extends Perfil {
     	this.saldo += saldo;
     }
     
-    public void hacerPedido() {
-    	
+    public void hacerPedido(Plato plato) {
+    	if(this.getSaldo()>=plato.getPrecio()) {
+    		Pedido pedido = new Pedido(this,plato);
+    		this.agregarAlHistorial(pedido);
+    	}
+    }
+    
+    public void agregarAlHistorial(Pedido pedido) {
+    	historial.add(pedido);
     }
     
     /**
      * Método que calcula la calificacion promedio que le han dado los tenderos a este Cliente
      * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
      */
-    public double getCalificacion() {
+    public double getCalificacionPromediada() {
     	double contadorAux = 0;
     	if(!this.calificaciones.isEmpty()) {
     		Iterator<Calificacion> iterator = this.calificaciones.iterator();
@@ -76,9 +84,13 @@ public class Cliente extends Perfil {
     private void setMetodoDePago(String metodoDePago) {
     	this.metodoDePago = metodoDePago;
     }
-    public void calificarTendero() {
+    /**
+     * Método que califica al tendero que entrego la orden
+     * @param puntuacion El parametro puntuacion define la calificacion del tendero
+     * @param calificando El parametro calificando define al tendero al cual se le asocia la calificacion
+     */
+    public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
-    		double puntuacion = 5.0;
     		Interaccion.Tendero calificando = this.pedido.getTendero();
     		Calificacion calificacionTendero = new Calificacion(this,puntuacion,calificando);
     		calificando.agregarCalificacion(calificacionTendero);
