@@ -7,6 +7,7 @@ import Interaccion.Notificacion;
 public class Pedido {
 	private Cliente cliente;
 	private Plato plato;
+	private Restaurante restaurante;
 	private boolean entregado;
 	private boolean estaListo;
 	private Tendero tendero;
@@ -14,6 +15,7 @@ public class Pedido {
 	public Pedido(Cliente cliente, Plato plato) {
 		this.cliente = cliente;
 		this.plato = plato;
+		this.restaurante = plato.restaurante;
 		Notificacion notificacion = new Notificacion(this);
 	}
 	
@@ -23,6 +25,7 @@ public class Pedido {
 	
 	public void setEntregado() {
 		this.entregado= !this.entregado;
+		
 	}
 	
 	public void setTendero(Tendero tendero) {
@@ -32,10 +35,7 @@ public class Pedido {
 	public Tendero getTendero() {
 		return this.tendero;
 	}
-
-	public void setEstaListo(boolean estaListo) {
-		this.estaListo=estaListo;
-	}
+	
 	public boolean getEstaListo() {
 		return estaListo;
 	}
@@ -46,6 +46,10 @@ public class Pedido {
 	
 	public Cliente getCliente() {
 		return this.cliente;
+	}
+	
+	public Plato getPlato() {
+		return this.plato;
 	}
 	//metodos para sumar a el historial del restaurante el plato pedido
 }

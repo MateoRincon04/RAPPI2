@@ -102,7 +102,9 @@ public class Restaurante {
 		return menu;
 	}
 	
-	
+	public void agregarNotificacion(Notificacion notificacion) {
+		notificaciones.add(notificacion);
+	}
 	//cambio 
 	public void elejirPlatoMenu(int indice) {
 		this.menu.get(indice);

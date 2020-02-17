@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import Oferta.Pedido;
+import Oferta.Restaurante;
 import Administracion.Administrador;
 
 /**
@@ -41,6 +42,8 @@ public class Notificacion {
 	 * tambien a el Restaurante asignado a el Pedido que realizara el Plato ordenado.
 	 */
 	public void notificar() {
+		Restaurante notif = pedido.getPlato().restaurante;
+		notif.agregarNotificacion(this);
 		Iterator<Tendero> iterator = Administrador.getTenderos().iterator();
 		while(iterator.hasNext()) {
 			Tendero notificado = iterator.next();
