@@ -24,6 +24,7 @@ import Interaccion.Notificacion;
 public class Restaurante {
 	private String nombre;
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
+	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	private List <String> direcciones = new ArrayList<String>();
 	private String celular;
 	private List<Plato> menu = new ArrayList<Plato>();

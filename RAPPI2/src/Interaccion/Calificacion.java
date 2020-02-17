@@ -27,7 +27,6 @@ public class Calificacion {
 		this.calificador = calificador;
 		this.puntuacion = puntuacion;
 	}
-	//
 	
 	public double getPuntuacion() {
 		return this.puntuacion;

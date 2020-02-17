@@ -35,6 +35,10 @@ public class Pedido {
 	public Tendero getTendero() {
 		return this.tendero;
 	}
+
+	public Restaurante getRestaurante() {
+		return this.restaurante;
+	}
 	
 	public boolean getEstaListo() {
 		return estaListo;
