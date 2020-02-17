@@ -38,9 +38,9 @@ public class Notificacion {
 	
 	/**
 	 * El método notificar me permite notificar a los tenderos acerca del nuevo pedido creado y le avisa
-	 * tambien a el Restaurante asignado a el Pedido que realizara el Plato ordenado
+	 * tambien a el Restaurante asignado a el Pedido que realizara el Plato ordenado.
 	 */
-	public static void notificar() {
+	public void notificar() {
 		Iterator<Tendero> iterator = Administrador.getTenderos().iterator();
 		while(iterator.hasNext()) {
 			Tendero notificado = iterator.next();

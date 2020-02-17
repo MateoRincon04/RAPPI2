@@ -3,6 +3,8 @@ package Oferta;
 import java.util.ArrayList;
 import java.util.List;
 
+import Interaccion.Notificacion;
+
 /**Clase Restaurante 
  * En esta clase, el restaurante es aquel que prepara los platos
  * tiene datos propios como el nombre de restaurante, celular de contacto, direcciónes
@@ -13,6 +15,7 @@ import java.util.List;
  * @see #direcciones
  * @see #menu
  * @see #historial
+ * @see #notificaciones
  * 
  * @author: Guillermo Toloza, Mateo Rincon
  * @version:
@@ -20,6 +23,7 @@ import java.util.List;
  */
 public class Restaurante {
 	private String nombre;
+	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 	private List <String> direcciones = new ArrayList<String>();
 	private String celular;
 	private List<Plato> menu = new ArrayList<Plato>();

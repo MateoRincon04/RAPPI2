@@ -87,13 +87,9 @@ public class Cliente extends Perfil {
     
     
     /**
-     * Mï¿½todo que califica al Tendero que entrego la orden
+     * Método que califica al Tendero que entrego la orden
      * @param puntuacion El parametro puntuacion define la calificacion del Tendero
      */
-    
-    
-    //men
-	//YA?
     public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Interaccion.Tendero calificando = this.pedido.getTendero();
