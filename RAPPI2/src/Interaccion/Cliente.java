@@ -75,9 +75,8 @@ public class Cliente extends Perfil {
     private void setMetodoDePago(String metodoDePago) {
     	this.metodoDePago = metodoDePago;
     }
-    public void calificarTendero() {
+    public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
-    		double puntuacion = 5.0;
     		Interaccion.Tendero calificando = this.pedido.getTendero();
     		Calificacion calificacionTendero = new Calificacion(this,puntuacion,calificando);
     		calificando.agregarCalificacion(calificacionTendero);
