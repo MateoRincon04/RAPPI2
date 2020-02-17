@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Interaccion.Tendero;
 import Oferta.Restaurante;
+import Interaccion.Cliente;
 
 /**Clase Administrador,
  * su finalidad es poder modificar el menu de cada usuario, mostrar que funcionalidades
@@ -13,6 +14,7 @@ import Oferta.Restaurante;
  * Las estructuras de datos relevantes utilizadas son
  * @see #tenderos
  * @see #restaurantes
+ * @see #clientes
  * 
  * @author: Mateo Rincón
  * @version:
@@ -20,6 +22,7 @@ import Oferta.Restaurante;
 
 public class Administrador extends Perfil{
     private long salario;
+    private static List<Cliente> clientes = new ArrayList<Cliente>();
     private static List<Tendero> tenderos = new ArrayList<Tendero>();
     private static List<Restaurante> restaurantes = new ArrayList<Restaurante>();
     
@@ -73,6 +76,14 @@ public class Administrador extends Perfil{
     public static List<Restaurante> getRestaurante() {
     	return restaurantes;
     }
-
-
+    
+    /**
+     * Metodo que guarda los clientes que se han creado  en el arreglo {@link #clientes}
+     * @param cliente El paramtetro cliente define el cliente que sera agregado a el arreglo
+     */
+    public static void agregarCliente(Cliente cliente) {
+     Administrador.clientes.add(cliente);
+    }
+    
+    
 }

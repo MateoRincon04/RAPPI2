@@ -3,7 +3,7 @@ package Interaccion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import Administracion.Perfil;
+import Administracion.*;
 import Oferta.Pedido;
 
 /**
@@ -39,6 +39,7 @@ public class Cliente extends Perfil {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
 		this.metodoDePago = metodoDePago;
+		Administrador.agregarCliente(this);
 	}
 	
     public long getSaldo(){
