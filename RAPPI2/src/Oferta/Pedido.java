@@ -40,6 +40,13 @@ public class Pedido {
 		return estaListo;
 	}
 	
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	public Cliente getCliente() {
+		return this.cliente;
+	}
 	//metodos para sumar a el historial del restaurante el plato pedido
 }
 

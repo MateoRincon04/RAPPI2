@@ -73,4 +73,16 @@ public class Tendero extends Perfil{
     public String toString(){
         return this.getNombre() + ", " + this.getTelefono() + ", " + this.getComuna() + ", " + this.getClave() + ", " + this.getUserName( )+ ", " + this.getSalario();
     }
+    
+    /**
+     * Método que califica al Cliente que realizo el Pedido
+     * @param puntuacion El parametro puntuacion define la calificacion del Cliente
+     */
+    public void calificarTendero(double puntuacion) {
+    	if(pedido.getEntregado()) {
+    		Interaccion.Cliente calificando = this.pedido.getCliente();
+    		Calificacion calificacionTendero = new Calificacion(this,puntuacion,calificando);
+    		calificando.agregarCalificacion(calificacionTendero);
+    	}
+    }
 }

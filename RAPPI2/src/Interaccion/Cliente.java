@@ -85,9 +85,8 @@ public class Cliente extends Perfil {
     	this.metodoDePago = metodoDePago;
     }
     /**
-     * Método que califica al tendero que entrego la orden
-     * @param puntuacion El parametro puntuacion define la calificacion del tendero
-     * @param calificando El parametro calificando define al tendero al cual se le asocia la calificacion
+     * Método que califica al Tendero que entrego la orden
+     * @param puntuacion El parametro puntuacion define la calificacion del Tendero
      */
     public void calificarTendero(double puntuacion) {
     	if(pedido.getEntregado()) {
@@ -96,8 +95,14 @@ public class Cliente extends Perfil {
     		calificando.agregarCalificacion(calificacionTendero);
     	}
     }
+    
+    public void agregarCalificacion(Calificacion calificacion) {
+		this.calificaciones.add(calificacion);
+	}
+    
     public String toString(){
     	return this.getNombre() + ", " + this.getTelefono() + ", " + this.getComuna() + ", " + this.getClave() + ", " + this.getUserName( );
     }
+    
     
 }

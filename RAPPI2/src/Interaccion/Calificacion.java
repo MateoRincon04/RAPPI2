@@ -1,12 +1,14 @@
 package Interaccion;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Clase Calificacion
  * Esta clase tiene como finalidad hacer la conexion entre el calificado y el calificador
  * para saber cada dato de estos
  * 
  * @author: Santiago Tamayo, Mateo Rincón
- *@version:
+ * @version:
  */
 
 public class Calificacion {
@@ -33,7 +35,7 @@ public class Calificacion {
 		this.puntuacion = puntuacion;
 	}
 	
-	public double getCalificacionPromediada(List<Calificacion calificaciones>) {
+	public double getCalificacionPromediada(ArrayList<Calificacion> calificaciones) {
     	double contadorAux = 0;
     	if(!calificaciones.isEmpty()) {
     		Iterator<Calificacion> iterator = calificaciones.iterator();
