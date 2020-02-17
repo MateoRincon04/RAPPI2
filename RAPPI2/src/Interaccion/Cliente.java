@@ -97,6 +97,7 @@ public class Cliente extends Perfil {
     		calificando.agregarCalificacion(calificacionTendero);
     	}
     }
+
     public void calificarRestaurante(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Interaccion.Restaurante calificando = this.pedido.getRestaurante();
