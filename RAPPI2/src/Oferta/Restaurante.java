@@ -117,7 +117,7 @@ public class Restaurante {
 	public void setEstaListo(Pedido pedido) {
 		pedido.setEstaListo(true);
 	}
-	public void elejirPlatoMenu(int indice) {
+	public void elegirPlatoMenu(int indice) {
 		this.menu.get(indice);
 	}
 	
