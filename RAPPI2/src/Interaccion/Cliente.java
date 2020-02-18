@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import Administracion.*;
-import Oferta.Pedido;
-import Oferta.Plato;
+import Oferta.*;
 
 /**
  * Clase Cliente
@@ -100,7 +99,7 @@ public class Cliente extends Perfil {
 
     public void calificarRestaurante(double puntuacion) {
     	if(pedido.getEntregado()) {
-    		Interaccion.Restaurante calificando = this.pedido.getRestaurante();
+    		Oferta.Restaurante calificando = this.pedido.getRestaurante();
     		Calificacion calificacionRestaurante = new Calificacion(this,puntuacion,calificando);
     		calificando.agregarCalificacion(calificacionRestaurante);
     	}

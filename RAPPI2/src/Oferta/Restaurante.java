@@ -3,6 +3,7 @@ package Oferta;
 import java.util.ArrayList;
 import java.util.List;
 
+import Interaccion.Calificacion;
 import Interaccion.Notificacion;
 
 /**Clase Restaurante 
@@ -81,8 +82,8 @@ public class Restaurante {
 		return this.celular;
 	}
 	
-	public void crearPlato(String nombre, String descripcion, float precio,int restriccion) {
-		plato plato = new Plato(String nombre, String descripcion, float precio,int restriccion,this);
+	public void crearPlato(String nombre,String descripcion, float precio, int restriccion) {
+		Plato plato = new Plato(nombre, descripcion, precio,restriccion,this);
 		if(!this.menu.contains(plato)) {
 			this.menu.add(plato);
 		}
@@ -106,6 +107,10 @@ public class Restaurante {
 	
 	public void agregarNotificacion(Notificacion notificacion) {
 		notificaciones.add(notificacion);
+	}
+	
+	public void agregarCalificacion(Calificacion calificacion) {
+		this.calificaciones.add(calificacion);
 	}
 	
 
