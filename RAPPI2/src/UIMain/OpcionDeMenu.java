@@ -13,10 +13,10 @@ import Interaccion.Cliente;
  * @author: Guillermo Toloza
  * @version:
  */
+
 public abstract class OpcionDeMenu {
-	ArrayList<OpcionDeMenu> menuObjetos = new ArrayList();
 	
-	//desde el menú se accede a la opción uno
+	//desde el menï¿½ se accede a la opciï¿½n uno
 	//posicion 0. guarda la funcionalidad "registrarse" si el usuario escoge esa, se ejecuta
 	//la funcionalidad.
 	abstract void ejecutar();
@@ -26,14 +26,14 @@ public abstract class OpcionDeMenu {
 
 
 
-//ligadura estática: si no sobreescribo un metodo del hijo y el padre, agarro directamente el del padre
-//ligadura dinámica: si sobreescribo un metodo del padre y el apuntador es padre pero apunta a hijo, priorizo
+//ligadura estï¿½tica: si no sobreescribo un metodo del hijo y el padre, agarro directamente el del padre
+//ligadura dinï¿½mica: si sobreescribo un metodo del padre y el apuntador es padre pero apunta a hijo, priorizo
 //el metodo del hijo.
 
 
 //debo crear una clase por cada funcionalidad.
-//Creo una lista que contenga los objetos (funcionalidades) para ejecutar. Luego el usuario pide la acción 
+//Creo una lista que contenga los objetos (funcionalidades) para ejecutar. Luego el usuario pide la acciï¿½n 
 //por numeros. 
-//le resto uno y tengo el indice de la acción en la lista. debo crear una clase por cada acción para que
-//por ligadura dinámica, se ejecute el metodo ejecutar de cada clase. cumpliendo así lo que busca el usuario.
+//le resto uno y tengo el indice de la acciï¿½n en la lista. debo crear una clase por cada acciï¿½n para que
+//por ligadura dinï¿½mica, se ejecute el metodo ejecutar de cada clase. cumpliendo asï¿½ lo que busca el usuario.
 //opcion de menu debe ser padre de todas las clases que heredan.

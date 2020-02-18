@@ -12,6 +12,13 @@ package UIMain;
  * @version:
  */
 
-public class MenuDeConsola {
+public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu diferente. El tamano
+    //varia dependiendo de las opciones de cada menu.
+
+    public void MenuDeConsola(int size){
+
+        OpcionDeMenu[] menu = new OpcionDeMenu[size];
+        
+    }
 
 }

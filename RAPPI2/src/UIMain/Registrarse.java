@@ -15,38 +15,32 @@ import BaseDatos.Data;
  * @version:
  */
 
-//para usar la base de datos necesito el main, así poder acceder a ella y comparar y/o agregar usuarios
+//para usar la base de datos necesito el main, asï¿½ poder acceder a ella y comparar y/o agregar usuarios
 //que se van a registrar
 public class Registrarse extends OpcionDeMenu {
-	public void FinalizarRegistroCliente (Cliente cliente) { 
-		if ((data.readPerfilFromFile(cliente))==null){   //no se como acceder a la base de datos jeje
-			data.writePerfilToFile(cliente);
-			System.out.println("Ha sido registrado en el sistema.");
-		}else {
-			System.out.println("Usted ya está registrado en el sistema");
-		}
-	}
+
 	public void ejecutar() {
 		
 		Scanner user = new Scanner(System.in);
-		System.out.println("Usted será registrado en el sistema.");
+		System.out.println("Usted serï¿½ registrado en el sistema.");
 		System.out.println("Ingrese su nombre: ");
 		String nombre=user.nextLine();
 		System.out.println("Ingrese su Username: ");
 		String username=user.nextLine();
 		System.out.println("Ingrese su metodo de pago: ");
 		String metodoDePago=user.nextLine();
-		System.out.println("Ingrese el número de su comuna: ");
+		System.out.println("Ingrese el nï¿½mero de su comuna: ");
 		int comuna=user.nextInt();
 		System.out.println("Ingrese su clave: ");
 		int clave= user.nextInt();
-		System.out.println("Ingrese su teléfono ");
+		System.out.println("Ingrese su telï¿½fono ");
 		int telefono= user.nextInt();
 		System.out.println("Ingrese su saldo: ");
 		long saldo= user.nextLong();
+		user.close();
 		Cliente cliente=new Cliente(nombre,telefono,comuna,clave,username,saldo,metodoDePago);
-		FinalizarRegistroCliente(cliente);
-		
-		
+		Data.WritePerfilToFile(cliente);
+		//Falta hacer la validacion de que si existe ese usuario en la base de datos	
 	}
+
 }

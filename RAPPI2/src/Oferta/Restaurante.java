@@ -8,7 +8,7 @@ import Interaccion.Notificacion;
 
 /**Clase Restaurante 
  * En esta clase, el restaurante es aquel que prepara los platos
- * tiene datos propios como el nombre de restaurante, celular de contacto, direcciónes
+ * tiene datos propios como el nombre de restaurante, celular de contacto, direcciï¿½nes
  * de sus sucursales, un booleano que define si el pedido esta listo para ser
  * despachado o no y su menu
  * 
