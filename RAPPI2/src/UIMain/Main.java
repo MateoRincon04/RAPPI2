@@ -1,11 +1,12 @@
 package UIMain;
 import BaseDatos.Data;
-
-
+import Oferta.*;
+import Interaccion.*;
+import Administracion.*;
 public class Main {
 
 
-	static String tipoUsuario = "";
+	static Perfil usuario;
 
 	public static void main(String[] args) {
 

@@ -63,7 +63,10 @@ public class Cliente extends Perfil {
     
     public void agregarAlHistorial(Pedido pedido) {
     	historial.add(pedido);
-    }
+	}
+	public List<Pedido> getHistorial (){
+		return this.historial;
+	}
     
     /**
      * M�todo que calcula la calificacion promedio que le han dado los tenderos a este Cliente
