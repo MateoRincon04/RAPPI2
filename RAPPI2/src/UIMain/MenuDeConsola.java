@@ -8,7 +8,7 @@ package UIMain;
  * Estructuras revelantes
  * ------------------
  * 
- * @author:
+ * @author:Guillermo Toloza
  * @version:
  */
 

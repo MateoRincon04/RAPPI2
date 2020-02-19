@@ -8,8 +8,16 @@ import java.util.List;
 import Oferta.Pedido;
 import Oferta.Plato;
 public class PlatosQueMasCompre extends OpcionDeMenu {
-
-	//aqu� se ejecuta la funcionalidad de los platos que m�s compr� el cliente
+	/**
+	 * Clase OpcionDeMenu
+	 * Aqui se crea la funcionalidad del cliente de saber cual es el plato que mas ha comprado
+	 * 
+	 * Estructuras revelantes
+	 * --------------------------------------------------
+	 * 
+	 * @author: Guillermo Toloza
+	 * @version:
+	 */
 	void ejecutar() {
 		Cliente usuarioUno = (Cliente)Main.usuario;
 		List<Pedido> historial = usuarioUno.getHistorial();
