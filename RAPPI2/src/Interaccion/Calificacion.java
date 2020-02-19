@@ -22,6 +22,7 @@ public class Calificacion {
 	 * @param puntuacion El parametro puntuacion define la puntuación que le dio el calificador a el calificado
 	 * @param calificador El parametro calificador define el objeto que realizo la calificacion
 	 */
+	
 	public Calificacion(Object calificado,double puntuacion,Object calificador) {
 		this.calificado = calificado;
 		this.calificador = calificador;
@@ -31,19 +32,9 @@ public class Calificacion {
 	public double getPuntuacion() {
 		return this.puntuacion;
 	}
+	
 	public void setPuntuacion(float puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 	
-	public double getCalificacionPromediada(ArrayList<Calificacion> calificaciones) {
-    	double contadorAux = 0;
-    	if(!calificaciones.isEmpty()) {
-    		Iterator<Calificacion> iterator = calificaciones.iterator();
-    		while(iterator.hasNext()) {
-    			contadorAux += iterator.next().getPuntuacion();
-    		}
-    	}
-    	return contadorAux/calificaciones.size();
-    	
-    }
 }

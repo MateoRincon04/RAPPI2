@@ -1,6 +1,7 @@
 package Oferta;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import Interaccion.Calificacion;
@@ -113,12 +114,23 @@ public class Restaurante {
 		this.calificaciones.add(calificacion);
 	}
 	
-
 	public void setEstaListo(Pedido pedido) {
 		pedido.setEstaListo(true);
 	}
-	public void elejirPlatoMenu(int indice) {
+	
+	public void elegirPlatoMenu(int indice) {
 		this.menu.get(indice);
 	}
 	
+    public double getCalificacionPromediada() {
+    	double contadorAux = 0;
+    	if(!this.calificaciones.isEmpty()) {
+    		Iterator<Calificacion> iterator = this.calificaciones.iterator();
+    		while(iterator.hasNext()) {
+    			contadorAux += iterator.next().getPuntuacion();
+    		}
+    	}
+    	return contadorAux/this.calificaciones.size();
+    	
+    }
 }

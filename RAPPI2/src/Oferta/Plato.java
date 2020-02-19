@@ -1,6 +1,10 @@
 package Oferta;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import Interaccion.Calificacion;
 
 /**
  * Clase Plato
@@ -21,7 +25,8 @@ public class Plato {
 	private String nombre;
 	private String descripcion;
 	private float precio;
-	private ArrayList<String> modificaciones = new ArrayList<String>();
+	private List<String> modificaciones = new ArrayList<String>();
+	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	public Restaurante restaurante;
 	public int restriccionDeEdad;
 	/**
@@ -75,4 +80,16 @@ public class Plato {
 	public int getRestriccionDeEdad() {
 		return this.restriccionDeEdad;
 	}
+	
+    public double getCalificacionPromediada() {
+    	double contadorAux = 0;
+    	if(!this.calificaciones.isEmpty()) {
+    		Iterator<Calificacion> iterator = this.calificaciones.iterator();
+    		while(iterator.hasNext()) {
+    			contadorAux += iterator.next().getPuntuacion();
+    		}
+    	}
+    	return contadorAux/this.calificaciones.size();
+    	
+    }
 }

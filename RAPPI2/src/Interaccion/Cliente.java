@@ -97,6 +97,10 @@ public class Cliente extends Perfil {
     	}
     }
 
+    /**
+     * Método que califica al Restaurante que preparo el pedido
+     * @param puntuacion El parametro puntuacion define la calificacion del Restaurante
+     */
     public void calificarRestaurante(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Oferta.Restaurante calificando = this.pedido.getRestaurante();
