@@ -1,13 +1,19 @@
 package UIMain;
 import Oferta.Restaurante;
-import Interaccion.calificacion;
-public class MejorRestauranteCalificado extends OpcionDeMenu {
+import Interaccion.Calificacion;
+public class MejorRestauranteCal extends OpcionDeMenu {
 
-	//aqu� se ejecuta la funcionalidad de los platos que m�s compr� el cliente
+	@Override
+	void ejecutar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*//aqu� se ejecuta la funcionalidad de los platos que m�s compr� el cliente
 	void ejecutar() {
         ArrayList<>
         
 		
-	}
+	}*/
 
 }

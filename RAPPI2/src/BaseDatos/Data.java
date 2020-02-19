@@ -113,9 +113,9 @@ public class Data {
             return null;
         }
     }
-    public static Perfil buscarUsuario (String username, int clave) {
-        Perfil usuario = new Perfil(); //con el usuario y la clave, se debe buscar en la base de datos
+    /*public static Perfil buscarUsuario (String username, int clave) {
+        //Perfil usuario = new Perfil(); //con el usuario y la clave, se debe buscar en la base de datos
         //un perfil existente, luego lo devuelven para que sea usado en la clase Login, por ejemplo.
-        return usuario;
-    }
+        //return usuario;
+    }*/
 }

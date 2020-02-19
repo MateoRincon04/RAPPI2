@@ -28,8 +28,8 @@ public class login extends OpcionDeMenu {
                 String username= user.nextLine();
                 System.out.println("Ingrese su clave: ");
                 int clave=user.nextInt();
-                Perfil usuario=Data.buscarUsuario(username, clave);
-                Main.usuario = usuario;
+                //Perfil usuario=Data.buscarUsuario(username, clave);
+                //Main.usuario = usuario;
                 System.out.println("Datos ingresados correctamente");
                 break;
                 } catch (Exception e) {
