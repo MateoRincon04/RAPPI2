@@ -16,7 +16,7 @@ import Interaccion.Cliente;
  * @see #restaurantes
  * @see #clientes
  * 
- * @author: Mateo Rincón
+ * @author: Mateo Rincï¿½n
  * @version:
 */ 
 
@@ -48,7 +48,7 @@ public class Administrador extends Perfil{
         return this.getNombre() + ", " + this.getTelefono() + ", " + this.getComuna() + ", " + this.getClave() + ", " + this.getUserName( )+ ", " + this.getSalario();
     }
     /**
-     * Método que crea un objeto de clase Tendero
+     * Mï¿½todo que crea un objeto de clase Tendero
      * @param nombre El parametro nombre define el nombre que tendra el Tendero
      * @param telefono El parametro telefono define el telefono que tendra el Tendero
      * @param comuna El parametro comuna define la comuna en la que trabajara el Tendero
@@ -64,7 +64,7 @@ public class Administrador extends Perfil{
     	return tenderos;
     }
     /**
-     * Método que crea un objeto de clase Restaurante
+     * Mï¿½todo que crea un objeto de clase Restaurante
      * @param nombre El parametro nombre define el nombre que tendra el Restaurante
      * @param direccion El parametro direccion define la direccion nucleo del restaurante
      * @param celular El parametro celular define el telefono celular que tendra el Restaurante
@@ -83,6 +83,10 @@ public class Administrador extends Perfil{
      */
     public static void agregarCliente(Cliente cliente) {
      Administrador.clientes.add(cliente);
+    }
+
+    public String getTipo() {
+        return "administrador";
     }
     
     

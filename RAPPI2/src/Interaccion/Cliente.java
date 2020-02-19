@@ -63,7 +63,10 @@ public class Cliente extends Perfil {
     
     public void agregarAlHistorial(Pedido pedido) {
     	historial.add(pedido);
-    }
+	}
+	public List<Pedido> getHistorial (){
+		return this.historial;
+	}
     
     /**
      * Mï¿½todo que calcula la calificacion promedio que le han dado los tenderos a este Cliente
@@ -86,7 +89,7 @@ public class Cliente extends Perfil {
     
     
     /**
-     * Método que califica al Tendero que entrego la orden
+     * Mï¿½todo que califica al Tendero que entrego la orden
      * @param puntuacion El parametro puntuacion define la calificacion del Tendero
      */
     public void calificarTendero(double puntuacion) {
@@ -117,5 +120,8 @@ public class Cliente extends Perfil {
     	return this.getNombre() + ", " + this.getTelefono() + ", " + this.getComuna() + ", " + this.getClave() + ", " + this.getUserName( );
     }
     
-    
+	public String getTipo() {
+        return "cliente";
+    }
+	
 }

@@ -2,6 +2,9 @@ package BaseDatos;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+
+import Administracion.Perfil;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
@@ -12,7 +15,7 @@ public class Data {
 	private static final String filepathRestaurantes = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\restaurantes";
 	
 	
-	public void WritePerfilToFile(Object obj) {
+	public static void WritePerfilToFile(Object obj) {
 		try {
 			 
             FileOutputStream fileOut = new FileOutputStream(filepathPerfil);
@@ -24,8 +27,9 @@ public class Data {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-	}
-	public void WritePlatosToFile(Object obj) {
+    }
+    
+	public static void WritePlatosToFile(Object obj) {
 		try {
 			 
             FileOutputStream fileOut = new FileOutputStream(filepathPlatos);
@@ -37,8 +41,9 @@ public class Data {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-	}
-	public void WriteRestaurantesToFile(Object obj) {
+    }
+    
+	public static void WriteRestaurantesToFile(Object obj) {
 		try {
 			 
             FileOutputStream fileOut = new FileOutputStream(filepathRestaurantes);
@@ -50,8 +55,9 @@ public class Data {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-	}
-    public Object ReadPerfilFromFile(String filepath) {
+    }
+    
+    public static Object ReadPerfilFromFile(String filepath) {
     	 
         try {
  
@@ -69,7 +75,8 @@ public class Data {
             return null;
         }
     }
-    public Object ReadPlatoFromFile(String filepath) {
+
+    public static Object ReadPlatoFromFile(String filepath) {
     	 
         try {
  
@@ -87,7 +94,8 @@ public class Data {
             return null;
         }
     }
-    public Object ReadRestauranteFromFile(String filepath) {
+
+    public static Object ReadRestauranteFromFile(String filepath) {
     	 
         try {
  
@@ -104,5 +112,10 @@ public class Data {
             ex.printStackTrace();
             return null;
         }
+    }
+    public static Perfil buscarUsuario (String username, int clave) {
+        Perfil usuario = new Perfil(); //con el usuario y la clave, se debe buscar en la base de datos
+        //un perfil existente, luego lo devuelven para que sea usado en la clase Login, por ejemplo.
+        return usuario;
     }
 }

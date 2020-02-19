@@ -9,7 +9,7 @@ import Interaccion.Notificacion;
 
 /**Clase Restaurante 
  * En esta clase, el restaurante es aquel que prepara los platos
- * tiene datos propios como el nombre de restaurante, celular de contacto, direcciónes
+ * tiene datos propios como el nombre de restaurante, celular de contacto, direcciï¿½nes
  * de sus sucursales, un booleano que define si el pedido esta listo para ser
  * despachado o no y su menu
  * 
@@ -117,7 +117,10 @@ public class Restaurante {
 	public void setEstaListo(Pedido pedido) {
 		pedido.setEstaListo(true);
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> a874e50969a6ba17146f07a6f8eb18d49124c8cf
 	public void elegirPlatoMenu(int indice) {
 		this.menu.get(indice);
 	}

@@ -15,10 +15,11 @@ import Oferta.Pedido;
  * @see #notificaciones
  * @see #calificaciones
  * 
- * @author Guillermo Toloza, Mateo Rincón
+ * @author Guillermo Toloza, Mateo Rincï¿½n
  * @version: 
  *
  */
+
 public class Tendero extends Perfil{
 	private Pedido pedido;
 	private boolean estaDisponible;
@@ -31,6 +32,7 @@ public class Tendero extends Perfil{
 	 * @see Administracion.Perfil#Perfil(String, int, int, int, String)
 	 * @param salario El parametro salario define el salario que tiene el Tendero
 	 */
+	
 	public Tendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.salario = salario;
@@ -61,7 +63,7 @@ public class Tendero extends Perfil{
 		this.calificaciones.add(calificacion);
 	}
 	/**
-	 * Método por el cual el Tendero podra encargarse de un Pedido para su transportación
+	 * Mï¿½todo por el cual el Tendero podra encargarse de un Pedido para su transportaciï¿½n
 	 */
 	public void aceptarPedido() {
 		Notificacion Aux = notificaciones.get(notificaciones.size()-1);
@@ -75,7 +77,7 @@ public class Tendero extends Perfil{
     }
     
     /**
-     * Método que califica al Cliente que realizo el Pedido
+     * Mï¿½todo que califica al Cliente que realizo el Pedido
      * @param puntuacion El parametro puntuacion define la calificacion del Cliente
      */
     
@@ -85,5 +87,10 @@ public class Tendero extends Perfil{
     		Calificacion calificacionCliente = new Calificacion(this,puntuacion,calificando);
     		calificando.agregarCalificacion(calificacionCliente);
     	}
-    }
+	}
+	
+	public String getTipo() {
+        return "tendero";
+	}
+	
 }
