@@ -9,9 +9,8 @@ import BaseDatos.Data;
 /**
  * Clase Registrarse
  * 
- * su finalidad es la implementacion  de Loguearse en el sistema a partir de la opcion del menu
- * 
- * 
+ * su finalidad es la implementacion de Loguearse en el sistema a partir de la
+ * opcion del menu
  * 
  * @author: Guillermo Toloza
  * @version:
@@ -20,25 +19,21 @@ import BaseDatos.Data;
 public class login extends OpcionDeMenu {
 
 	public void ejecutar() {
-		
-        Scanner user = new Scanner(System.in);
-        while(true){
-            try{
-                System.out.println("Ingrese su usuario: ");
-                String username= user.nextLine();
-                System.out.println("Ingrese su clave: ");
-                int clave=user.nextInt();
-                Perfil usuario=Data.buscarUsuario(username, clave);
-                Main.usuario = usuario;
-                System.out.println("Datos ingresados correctamente");
-                break;
-                } catch (Exception e) {
-                    System.out.println("Error ingresando usuario, intente nuevamente");
-            }
-        }
-    }
+
+		Scanner user = new Scanner(System.in);
+		while (true) {
+			try {
+				System.out.println("Ingrese su usuario: ");
+				String username = user.nextLine();
+				System.out.println("Ingrese su clave: ");
+				int clave = user.nextInt();
+				Perfil usuario = Data.buscarUsuario(username, clave);
+				Main.usuario = usuario;
+				System.out.println("Datos ingresados correctamente");
+				break;
+			} catch (Exception e) {
+				System.out.println("Error ingresando usuario, intente nuevamente");
+			}
+		}
+	}
 }
-
-    
-    
-

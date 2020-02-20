@@ -30,7 +30,7 @@ public class PlatosQueMasCompre extends OpcionDeMenu {
 			nombreDelPlato.add((platosPorPedido.get(i)).getNombre());
 		}
 		for (int i = 0; i < nombreDelPlato.size(); i++) {
-			if () {
+			//if () {
 				
 			}
 		}
@@ -39,4 +39,4 @@ public class PlatosQueMasCompre extends OpcionDeMenu {
 
 	}
 
-}
+

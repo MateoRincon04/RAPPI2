@@ -1,9 +1,9 @@
 package UIMain;
 
 import Oferta.Restaurante;
-import Interaccion.calificacion;
+import Interaccion.Calificacion;
 
-public class MejorRestauranteCalificado extends OpcionDeMenu {
+public class MejorRestauranteCal extends OpcionDeMenu {
 
 	// aqu� se ejecuta la funcionalidad de los platos que m�s compr� el
 	// cliente
