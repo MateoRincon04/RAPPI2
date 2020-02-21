@@ -24,3 +24,4 @@ public class CuantosPedidosHeEntregado extends OpcionDeMenu {
 		}
 	}
 }
+//Creeria que esta está lista.
