@@ -39,6 +39,10 @@ public class Tendero extends Perfil{
 		this.estaDisponible = true;
 	}
 	
+	public List<Calificacion> getCalificaciones () {
+		return calificaciones;
+	}
+	
 	public void setSalario(long salario) {
 		this.salario=salario;
 	}
