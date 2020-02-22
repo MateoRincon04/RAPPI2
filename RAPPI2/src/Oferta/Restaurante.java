@@ -118,8 +118,8 @@ public class Restaurante {
 		pedido.setEstaListo(true);
 	}
 
-	public void elegirPlatoMenu(int indice) {
-		this.menu.get(indice);
+	public Plato elegirPlatoMenu(int indice) {
+		return (this.menu.get(indice));
 	}
 	
     public double getCalificacionPromediada() {

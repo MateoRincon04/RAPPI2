@@ -58,6 +58,9 @@ public class Cliente extends Perfil {
     	if(this.getSaldo()>=plato.getPrecio()) {
     		Pedido pedido = new Pedido(this,plato);
     		this.agregarAlHistorial(pedido);
+    		System.out.println("Su pedido se ha realizado correctamente.");
+    	}else {
+    		System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
     	}
     }
     
