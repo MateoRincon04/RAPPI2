@@ -1,40 +1,124 @@
 package BaseDatos;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
-
-import com.google.gson.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import Administracion.Perfil;
+import Oferta.Restaurante;
 
 public class Data {
 	
 	private static final String filepathPerfil = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\datosPersonal";
-	private static final String filepathPlatos = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\platos";
+	//private static final String filepathPlatos = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\platos";
+	/* lo comente porque no se para que sirve
+	 */
 	private static final String filepathRestaurantes = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\restaurantes";
 	
 	
-	/*se usa para crear el database
-	 * de cada file
+	/*
+	 * se usa para crear la dataBasePerfil
 	 */
-	public static void CrearDataBase(String filepath) {
+	public static void CrearDataBasePefil() {
 		try {
-			Gson  gson = new Gson();
-			ContenedorData contenedor = new ContenedorData();
-			String JSON = gson.toJson(contenedor);
-			FileOutputStream fileOut = new FileOutputStream(filepath);
-			OutputStreamWriter myOutWriter = new OutputStreamWriter(fileOut);
-			myOutWriter.append(JSON);
-			myOutWriter.close();
-			fileOut.close();
+			ArrayList<Perfil> dataBase = new ArrayList<> ();
+			FileOutputStream fout = new FileOutputStream(filepathPerfil);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(dataBase);
+			out.close();
+            System.out.println("The Object  was succesfully written to a file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		
+	}
+	/*acceder a la DataBasePerfil dentro del file
+	 */
+	public static ArrayList<Perfil> traerDataBasePerfil() {
+		try { 
+			FileInputStream fin = new FileInputStream(filepathPerfil);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			ArrayList<Perfil> dataBase = (ArrayList<Perfil>) ois.readObject();
+            System.out.println("The Object has been read from the file");
+            return dataBase;
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+	}
+	/*
+	 * actualizar la dataBasePerfil
+	 */
+	public static void actualizarDataBasePerfil(ArrayList<Perfil> dataBase) {
+		try {
+			FileOutputStream fout = new FileOutputStream(filepathPerfil);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(dataBase);
+			out.close();
+            System.out.println("The Object  was succesfully written to a file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	
+	/*
+	 * Agregar objeto a la dataBasePerfil
+	 */
+	public static void agreagarObjetoDataBasePerfil(Perfil obj) {
+		ArrayList<Perfil> dataBase = Data.traerDataBasePerfil();
+		if(!dataBase.contains(obj)) {
+			dataBase.add(obj);
+			Data.actualizarDataBasePerfil(dataBase);
+		}
+		else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+	/*
+	 * eliminar objeto de la dataBasePerfil
+	 */
+	public static void eliminarObjetoDataBasePerfil(Perfil obj) {
+		ArrayList<Perfil> dataBase = Data.traerDataBasePerfil();
+		if(dataBase.contains(obj)) {
+			dataBase.remove(obj);
+			Data.actualizarDataBasePerfil(dataBase);
+		}
+		else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	/*
+	 * buscar un usuario en la base de datos de perfil
+	 */
+	
+	public Perfil buscarUsuario(String userName, int clave) {
+		Perfil perfil= null;
+		ArrayList<Perfil> dataBase =Data.traerDataBasePerfil();
+		Iterator<Perfil> iter = dataBase.iterator(); 
+		while(iter.hasNext()) {
+			if(userName.equals(((Perfil) iter).getUserName())&& clave==((Perfil) iter).getClave()) {
+				perfil =(Perfil) iter;
+			}
+		}
+		return perfil;
+	}
+	
+	/*
+	 * se usa para crear la dataBaseRestaurante
+	 */
+	public static void CrearDataBaseRestaurante() {
+		try {
+			ArrayList<Restaurante> dataBase = new ArrayList<> ();
+			FileOutputStream fout = new FileOutputStream(filepathRestaurantes);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(dataBase);
+			out.close();
             System.out.println("The Object  was succesfully written to a file");
  
         } catch (Exception ex) {
@@ -43,277 +127,78 @@ public class Data {
 		
 	}
 	
-	/*acceder a la base de datos dentro del file
+	/*acceder a la DataBasePerfil dentro del file
 	 */
-	public static ContenedorData traerDataBaseContenedor(String filepath) {
+	public static ArrayList<Restaurante> traerDataBaseRestaurante() {
 		try { 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
-            String aDataRow ="";
-            String aBuffer ="";
-            while ((aDataRow=myReader.readLine())!=null) {
-            	aBuffer+=aDataRow;
-            }
-            myReader.close();
-            Gson  gson = new Gson();
-            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
+			FileInputStream fin = new FileInputStream(filepathRestaurantes);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			ArrayList<Restaurante> dataBase = (ArrayList<Restaurante>) ois.readObject();
             System.out.println("The Object has been read from the file");
-            return contenedor;
+            return dataBase;
  
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
 	}
-	
 	/*
-	 * Agregar objeto a base de datos
+	 * actualizar la dataBasePerfil
 	 */
-	public static void agreagarObjetoDataBase(Object obj,String filepath) {
-		try { 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
-            String aDataRow ="";
-            String aBuffer ="";
-            while ((aDataRow=myReader.readLine())!=null) {
-            	aBuffer+=aDataRow;
-            }
-            myReader.close();
-            Gson  gson = new Gson();
-            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
-            if(contenedor.buscarExistenciaObjetoDataBase(obj)) {
-            	contenedor.agregarObjetoDataBase(obj);
-            }
-            
-            System.out.println("The Object has been read from the file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-	}
-	/*
-	 * eliminar objeto de la database
-	 */
-	public static void eliminarObjetoDataBase(Object obj,String filepath) {
-		try { 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
-            String aDataRow ="";
-            String aBuffer ="";
-            while ((aDataRow=myReader.readLine())!=null) {
-            	aBuffer+=aDataRow;
-            }
-            myReader.close();
-            Gson  gson = new Gson();
-            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
-            contenedor.eliminarObjetoDataBase(obj);
-            System.out.println("The Object has been read from the file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-	}
-	/*
-	 * buscar un objeto en la base de datos
-	 */
-	
-	public static void buscarUsuario(String userName, String password) {
-		try { 
-            FileInputStream fileIn = new FileInputStream(filepathPerfil);
-            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
-            String aDataRow ="";
-            String aBuffer ="";
-            while ((aDataRow=myReader.readLine())!=null) {
-            	aBuffer+=aDataRow;
-            }
-            myReader.close();
-            Gson  gson = new Gson();
-            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
-            contenedor.buscarUsuario(userName, password);
-            System.out.println("The Object has been read from the file");
+	public static void actualizarDataBaseRestaurante(ArrayList<Restaurante> dataBase) {
+		try {
+			FileOutputStream fout = new FileOutputStream(filepathRestaurantes);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(dataBase);
+			out.close();
+            System.out.println("The Object  was succesfully written to a file");
  
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 	}
 	
-	
-	
 	/*
-	 * de aca para abajo se deja comentado porque no se sabe si funcionara algo de arriba
+	 * Agregar objeto a la dataBasePerfil
+	 */
+	public static void agreagarObjetoDataBaseRestaurante(Restaurante obj) {
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		if(!dataBase.contains(obj)) {
+			dataBase.add(obj);
+			Data.actualizarDataBaseRestaurante(dataBase);
+		}
+		else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+	/*
+	 * eliminar objeto de la dataBasePerfil
+	 */
+	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		if(dataBase.contains(obj)) {
+			dataBase.remove(obj);
+			Data.actualizarDataBaseRestaurante(dataBase);
+		}
+		else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	/*
+	 * buscar un usuario en la base de datos de perfil
 	 */
 	
-	/* forma de usar el metodo de forma general
-	 * el filepath depende de que se este construyendo
-	 * estan en la parte de arriba 
-	 
-	public static void WriteToFile(Object obj,String filepath) {
-		try {
-			Gson  gson = new Gson();
-			String JSON = gson.toJson(obj);
-			FileOutputStream fileOut = new FileOutputStream(filepath);
-			OutputStreamWriter myOutWriter = new OutputStreamWriter(fileOut);
-			myOutWriter.append(JSON);
-			myOutWriter.close();
-			fileOut.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-	
-	
-	// mirar si de esta forma se puede leer el objeto de tipo json, gracias.
-    public static Object ReadFromFile(String filepath) {
-   	 
-        try {
- 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
-            String aDataRow ="";
-            String aBuffer ="";
-            while ((aDataRow=myReader.readLine())!=null) {
-            	aBuffer+=aDataRow;
-            }
-            myReader.close();
-            Gson  gson = new Gson();
-            Object obj =gson.fromJson(aBuffer,Object.class);
-            System.out.println("The Object has been read from the file");
-            return obj;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-    
-    //esta es la forma de lectura que yo habia encontrado pero creo que es 
-    // mejor la que plantea Mateo
-    public static Object ReadFromFile1(String filepath) {
-   	 
-        try {
- 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
- 
-            Object obj = objectIn.readObject();
- 
-            System.out.println("The Object has been read from the file");
-            objectIn.close();
-            return obj;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-	
-    
-    
-    // no borrar hasta comprobar que todo sirve
-    
-	/*public static void WritePerfilToFile(Object obj) {
-		try {
-			 
-            FileOutputStream fileOut = new FileOutputStream(filepathPerfil);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(obj);
-            objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-	public static void WritePlatosToFile(Object obj) {
-		try {
-			 
-            FileOutputStream fileOut = new FileOutputStream(filepathPlatos);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(obj);
-            objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-	public static void WriteRestaurantesToFile(Object obj) {
-		try {
-			 
-            FileOutputStream fileOut = new FileOutputStream(filepathRestaurantes);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(obj);
-            objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public static Object ReadPerfilFromFile(String filepath) {
-    	 
-        try {
- 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
- 
-            Object obj = objectIn.readObject();
- 
-            System.out.println("The Object has been read from the file");
-            objectIn.close();
-            return obj;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public static Object ReadPlatoFromFile(String filepath) {
-    	 
-        try {
- 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
- 
-            Object obj = objectIn.readObject();
- 
-            System.out.println("The Object has been read from the file");
-            objectIn.close();
-            return obj;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public static Object ReadRestauranteFromFile(String filepath) {
-    	 
-        try {
- 
-            FileInputStream fileIn = new FileInputStream(filepath);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
- 
-            Object obj = objectIn.readObject();
- 
-            System.out.println("The Object has been read from the file");
-            objectIn.close();
-            return obj;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-    public static Perfil buscarUsuario (String username, int clave) {
-        //Perfil usuario = new Perfil(); //con el usuario y la clave, se debe buscar en la base de datos
-        //un perfil existente, luego lo devuelven para que sea usado en la clase Login, por ejemplo.
-        //return usuario;
-    }*/
+	public Restaurante buscarRestaurante(String userName) {
+		Restaurante restaurante= null;
+		ArrayList<Restaurante> dataBase =Data.traerDataBaseRestaurante();
+		Iterator<Restaurante> iter = dataBase.iterator(); 
+		while(iter.hasNext()) {
+			if(userName.equals(((Restaurante) iter).getNombre())) {
+				restaurante =(Restaurante) iter;
+			}
+		}
+		return restaurante;
+	}
 }
+
+
