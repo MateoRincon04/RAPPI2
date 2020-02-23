@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,12 +22,131 @@ public class Data {
 	private static final String filepathRestaurantes = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\restaurantes";
 	
 	
+	/*se usa para crear el database
+	 * de cada file
+	 */
+	public static void CrearDataBase(String filepath) {
+		try {
+			Gson  gson = new Gson();
+			ContenedorData contenedor = new ContenedorData();
+			String JSON = gson.toJson(contenedor);
+			FileOutputStream fileOut = new FileOutputStream(filepath);
+			OutputStreamWriter myOutWriter = new OutputStreamWriter(fileOut);
+			myOutWriter.append(JSON);
+			myOutWriter.close();
+			fileOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		
+	}
 	
+	/*acceder a la base de datos dentro del file
+	 */
+	public static ContenedorData traerDataBaseContenedor(String filepath) {
+		try { 
+            FileInputStream fileIn = new FileInputStream(filepath);
+            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
+            String aDataRow ="";
+            String aBuffer ="";
+            while ((aDataRow=myReader.readLine())!=null) {
+            	aBuffer+=aDataRow;
+            }
+            myReader.close();
+            Gson  gson = new Gson();
+            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
+            System.out.println("The Object has been read from the file");
+            return contenedor;
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+	}
+	
+	/*
+	 * Agregar objeto a base de datos
+	 */
+	public static void agreagarObjetoDataBase(Object obj,String filepath) {
+		try { 
+            FileInputStream fileIn = new FileInputStream(filepath);
+            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
+            String aDataRow ="";
+            String aBuffer ="";
+            while ((aDataRow=myReader.readLine())!=null) {
+            	aBuffer+=aDataRow;
+            }
+            myReader.close();
+            Gson  gson = new Gson();
+            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
+            if(contenedor.buscarExistenciaObjetoDataBase(obj)) {
+            	contenedor.agregarObjetoDataBase(obj);
+            }
+            
+            System.out.println("The Object has been read from the file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	/*
+	 * eliminar objeto de la database
+	 */
+	public static void eliminarObjetoDataBase(Object obj,String filepath) {
+		try { 
+            FileInputStream fileIn = new FileInputStream(filepath);
+            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
+            String aDataRow ="";
+            String aBuffer ="";
+            while ((aDataRow=myReader.readLine())!=null) {
+            	aBuffer+=aDataRow;
+            }
+            myReader.close();
+            Gson  gson = new Gson();
+            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
+            contenedor.eliminarObjetoDataBase(obj);
+            System.out.println("The Object has been read from the file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	/*
+	 * buscar un objeto en la base de datos
+	 */
+	
+	public static void buscarUsuario(String userName, String password) {
+		try { 
+            FileInputStream fileIn = new FileInputStream(filepathPerfil);
+            BufferedReader myReader = new BufferedReader(new InputStreamReader(fileIn));
+            String aDataRow ="";
+            String aBuffer ="";
+            while ((aDataRow=myReader.readLine())!=null) {
+            	aBuffer+=aDataRow;
+            }
+            myReader.close();
+            Gson  gson = new Gson();
+            ContenedorData contenedor =gson.fromJson(aBuffer,ContenedorData.class);
+            contenedor.buscarUsuario(userName, password);
+            System.out.println("The Object has been read from the file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+	}
+	
+	
+	
+	/*
+	 * de aca para abajo se deja comentado porque no se sabe si funcionara algo de arriba
+	 */
 	
 	/* forma de usar el metodo de forma general
 	 * el filepath depende de que se este construyendo
 	 * estan en la parte de arriba 
-	 */
+	 
 	public static void WriteToFile(Object obj,String filepath) {
 		try {
 			Gson  gson = new Gson();
