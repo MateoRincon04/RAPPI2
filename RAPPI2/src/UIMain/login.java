@@ -25,39 +25,17 @@ public class login extends OpcionDeMenu {
         while(true){
             try{
                 System.out.println("Ingrese su usuario: ");
-                String username= user.nextLine();
+                String userName= user.nextLine();
                 System.out.println("Ingrese su clave: ");
                 int clave=user.nextInt();
-                Perfil usuario=Data.buscarUsuario(username, clave); //se necesita este metodo en la base de Datos
+                Perfil usuario=Data.buscarUsuario(userName, clave);
                 Main.usuario = usuario;
                 System.out.println("Datos ingresados correctamente");
                 break;
                 } catch (Exception e) {
                     System.out.println("Error ingresando usuario, intente nuevamente");
+                    ejecutar();
             }
         }
-    }
-}
-
-    
-    
-//=======
-//>>>>>>> 11078828b1c4d6d09754e601718721fb4346b285
-
-		Scanner user = new Scanner(System.in);
-		while (true) {
-			try {
-				System.out.println("Ingrese su usuario: ");
-				String username = user.nextLine();
-				System.out.println("Ingrese su clave: ");
-				int clave = user.nextInt();
-				Perfil usuario = Data.buscarUsuario(username, clave);
-				Main.usuario = usuario;
-				System.out.println("Datos ingresados correctamente");
-				break;
-			} catch (Exception e) {
-				System.out.println("Error ingresando usuario, intente nuevamente");
-			}
-		}
-	}
+    }	
 }

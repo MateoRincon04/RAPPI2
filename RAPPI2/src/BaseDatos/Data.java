@@ -70,14 +70,16 @@ public class Data {
 	/*
 	 * Agregar objeto a la dataBasePerfil
 	 */
-	public static void agreagarObjetoDataBasePerfil(Perfil obj) {
+	public static boolean agreagarObjetoDataBasePerfil(Perfil obj) {
 		ArrayList<Perfil> dataBase = Data.traerDataBasePerfil();
 		if(!dataBase.contains(obj)) {
 			dataBase.add(obj);
 			Data.actualizarDataBasePerfil(dataBase);
+			return true;
 		}
 		else {
 			System.out.println("no se puede agregar el elemento a la base de datos");
+			return false;
 		}
 	}
 	/*
@@ -97,7 +99,7 @@ public class Data {
 	 * buscar un usuario en la base de datos de perfil
 	 */
 	
-	public Perfil buscarUsuario(String userName, int clave) {
+	public static Perfil buscarUsuario(String userName, int clave) {
 		Perfil perfil= null;
 		ArrayList<Perfil> dataBase =Data.traerDataBasePerfil();
 		Iterator<Perfil> iter = dataBase.iterator(); 
@@ -188,7 +190,7 @@ public class Data {
 	 * buscar un usuario en la base de datos de perfil
 	 */
 	
-	public Restaurante buscarRestaurante(String userName) {
+	public static Restaurante buscarRestaurante(String userName) {
 		Restaurante restaurante= null;
 		ArrayList<Restaurante> dataBase =Data.traerDataBaseRestaurante();
 		Iterator<Restaurante> iter = dataBase.iterator(); 

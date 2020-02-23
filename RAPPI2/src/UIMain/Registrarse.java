@@ -39,8 +39,14 @@ public class Registrarse extends OpcionDeMenu {
 		long saldo= user.nextLong();
 		user.close();
 		Cliente cliente=new Cliente(nombre,telefono,comuna,clave,username,saldo,metodoDePago);
-		Data.WritePerfilToFile(cliente);
-		//Falta hacer la validacion de que si existe ese usuario en la base de datos	
+		if(Data.agreagarObjetoDataBasePerfil(cliente)) {
+			System.out.println("Usuario creado exitosamente ");
+		}
+		else {
+			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
+			ejecutar();
+		}
+			
 	}
 
 }
