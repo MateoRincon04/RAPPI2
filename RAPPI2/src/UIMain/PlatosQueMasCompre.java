@@ -15,7 +15,7 @@ public class PlatosQueMasCompre extends OpcionDeMenu {
 	 * 
 	 * Estructuras revelantes --------------------------------------------------
 	 * 
-	 * @author: Guillermo Toloza
+	 * @author: Guillermo Toloza - Santiago Tamayo
 	 * @version:
 	 */
 	void ejecutar() {
@@ -23,20 +23,21 @@ public class PlatosQueMasCompre extends OpcionDeMenu {
 		List<Pedido> historial = usuarioUno.getHistorial();
 		List<Plato> platosPorPedido = new ArrayList<Plato>();
 		List<String> nombreDelPlato = new ArrayList<String>();
+		int contador1 = 0;
+		String aux = "";
 		for (int i = 0; i < historial.size(); i++) {
-			platosPorPedido.add(historial.get(i).getPlato());
-		}
-		for (int i = 0; i < platosPorPedido.size(); i++) {
-			nombreDelPlato.add((platosPorPedido.get(i)).getNombre());
-		}
-		for (int i = 0; i < nombreDelPlato.size(); i++) {
-			//if () {
-				
+			int contador = 0;
+			for (int u = i; u < historial.size() - 1; u++) {
+				if ((historial.get(i).getPlato().getNombre()).equals(historial.get(u).getPlato().getNombre())) {
+					contador++;
+				}
+			}
+			if (contador > contador1) {
+				contador1 = contador;
+				aux = historial.get(i).getPlato().getNombre();
 			}
 		}
-		// Tengo que comparar cada nombre escrito en la lista de los diferentes que hay
-		// y imprimir aquel que mas se repita.
-
+		System.out.println("El plato más pedido es: " + aux + "y se ha pedido: " + contador1 + " veces.");
 	}
 
-
+}
