@@ -4,44 +4,22 @@ import java.util.List;
 import java.util.ArrayList;
 import Interaccion.Cliente;
 import Administracion.Administrador;
+import BaseDatos.Data;
 import Oferta.*;
 import java.util.Scanner;
-
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 public class HacerPedido implements OpcionDeMenu {
 
 	public void ejecutar() {
 		Scanner user = Main.user;
-		if (Main.usuario.getTipo().equals("cliente")) {
-			/* se esta definiendo la forma como hace el pedido el usuario*/
-			Cliente usuarioCliente = (Cliente) (Main.usuario);
-			List<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
-			Restaurante restauranteElegido = escogerRestaurante(listaRestaurantes);
-			Plato platoEscogido = escogerPlato(restauranteElegido);
-			usuarioCliente.hacerPedido(platoEscogido);
+		/* se esta definiendo la forma como hace el pedido el usuario */
+		Cliente usuarioCliente = (Cliente) (Main.usuario);
+		System.out.println("Ingrese el nombre del restaurante a buscar: ");
+		String nombre = user.nextLine();
+		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
+		Plato platoEscogido = escogerPlato(restauranteElegido);
+		usuarioCliente.hacerPedido(platoEscogido);
 
-		}
-	}
-
-	private Restaurante escogerRestaurante(List<Restaurante> listaRestaurantes) {
-		Scanner user = new Scanner(System.in);
-		listaRestaurantes = Administrador.getRestaurante();
-		System.out.println("Estos son los restaurantes disponibles: ");
-		for (int i = 0; i < listaRestaurantes.size(); i++) {
-			System.out.println(i + ") " + listaRestaurantes.get(i).getNombre());
-		}
-		System.out.println("Por favor, escriba el número del restaurante al cuál hará un pedido.");
-		while (true) {
-			try {
-				int numero = user.nextInt();
-				Restaurante restauranteEscogido = listaRestaurantes.get(numero);
-				user.close();
-				return restauranteEscogido;
-			} catch (Exception e) {
-				System.out.println("Por favor, intente nuevamente.");
-			}
-		}
 	}
 
 	private Plato escogerPlato(Restaurante restauranteElegido) {
