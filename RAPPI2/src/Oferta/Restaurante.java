@@ -121,6 +121,7 @@ public class Restaurante {
 	public Plato elegirPlatoMenu(int indice) {
 		return (this.menu.get(indice));
 	}
+
 	
     public double getCalificacionPromediada() {
     	double contadorAux = 0;

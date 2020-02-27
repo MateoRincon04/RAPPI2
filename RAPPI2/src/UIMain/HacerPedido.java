@@ -30,10 +30,16 @@ public class HacerPedido implements OpcionDeMenu {
 			System.out.println(i + ") " + listaRestaurantes.get(i).getNombre());
 		}
 		System.out.println("Por favor, escriba el número del restaurante al cuál hará un pedido.");
-		int numero = user.nextInt();
-		Restaurante restauranteEscogido = listaRestaurantes.get(numero);
-		user.close();
-		return restauranteEscogido;
+		while (true) {
+			try {
+				int numero = user.nextInt();
+				Restaurante restauranteEscogido = listaRestaurantes.get(numero);
+				user.close();
+				return restauranteEscogido;
+			} catch (Exception e) {
+				System.out.println("Por favor, intente nuevamente.");
+			}
+		}
 	}
 
 	private Plato escogerPlato(Restaurante restauranteElegido) {
@@ -45,8 +51,15 @@ public class HacerPedido implements OpcionDeMenu {
 		}
 		System.out.println("Por favor, escriba el número del plato que quiere escoger del restaurante "
 				+ restauranteElegido.getNombre());
-		int numero = user.nextInt();
-		Plato platoEscogido = restauranteElegido.elegirPlatoMenu(numero);
-		return platoEscogido;
+		while (true) {
+			try {
+				int numero = user.nextInt();
+				Plato platoEscogido = restauranteElegido.elegirPlatoMenu(numero);
+				user.close();
+				return platoEscogido;
+			} catch (Exception e) {
+				System.out.println("Por favor, intente nuevamente.");
+			}
+		}
 	}
 }
