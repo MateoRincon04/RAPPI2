@@ -31,7 +31,14 @@ public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu 
     			for(int i = 0; i<3; i++) {
     				System.out.println(i+1 + ") " + menu.get(i));
     			}
+    			pri = false;
     		}
+    		
+    		
+    		
+    		
+    		
+    		
     		System.out.println("oprima el numero indicado, de la funcion que deseas realizar");
     		int opc = Main.user.nextInt();
     		menu.get(opc-1).ejecutar();
