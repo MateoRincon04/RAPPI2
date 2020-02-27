@@ -43,7 +43,7 @@ public class login implements OpcionDeMenu {
 			System.out.println("Bienvenido Administrador " + usuario.getNombre());
 		}
 	}
-	public String ToString() {
+	public String toString() {
 		return "Log In";
 	}
 }

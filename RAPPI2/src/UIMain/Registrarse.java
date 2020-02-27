@@ -44,7 +44,7 @@ public class Registrarse implements OpcionDeMenu {
 			ejecutar();
 		}
 	}
-	public String ToString() {
+	public String toString() {
 		return "Registrarse";
 	}
 }

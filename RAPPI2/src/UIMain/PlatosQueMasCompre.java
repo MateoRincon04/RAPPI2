@@ -23,7 +23,7 @@ public class PlatosQueMasCompre implements OpcionDeMenu {
 		String nomPlato = usuarioUno.platoMasComprado();
 		System.out.println("El plato más comprado es: " + nomPlato);
 	}
-	public String ToString() {
+	public String toString() {
 		return "Platos que más compré";
 	}
 }

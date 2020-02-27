@@ -15,7 +15,7 @@ import UIMain.OpcionDeMenu;
 
 public class Data {
 	
-    private static List<OpcionDeMenu> opciones = new ArrayList<>();
+    private static ArrayList<OpcionDeMenu> opciones = new ArrayList<>();
     
     public static final void CargarOpciones() {
     	opciones.add(new Registrarse());
@@ -32,7 +32,7 @@ public class Data {
     	   	
     }
     
-    public static final List<OpcionDeMenu> getOpciones(){
+    public static final ArrayList<OpcionDeMenu> getOpciones(){
     	return opciones;
     }
 	
@@ -122,6 +122,18 @@ public class Data {
 	/*
 	 * buscar un usuario en la base de datos de perfil
 	 */
+	
+	public static Perfil buscarUsuario(String userName) {
+		Perfil perfil= null;
+		ArrayList<Perfil> dataBase =Data.traerDataBasePerfil();
+		Iterator<Perfil> iter = dataBase.iterator(); 
+		while(iter.hasNext()) {
+			if(userName.equals(((Perfil) iter).getUserName())) {
+				perfil =(Perfil) iter;
+			}
+		}
+		return perfil;
+	}
 	
 	public static Perfil buscarUsuario(String userName, int clave) {
 		Perfil perfil= null;

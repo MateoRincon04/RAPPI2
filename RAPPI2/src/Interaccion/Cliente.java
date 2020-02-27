@@ -52,6 +52,10 @@ public class Cliente extends Perfil {
 		this.opciones.add(10);
 		Data.agreagarObjetoDataBasePerfil(this);
 	}
+	
+	public List<Integer> getOpciones(){
+		return this.opciones;
+	}
 
 	public long getSaldo() {
 		return this.saldo;

@@ -21,7 +21,7 @@ public class CalificarTendero implements OpcionDeMenu {
 			}
 		}
 	}
-	public String ToString() {
+	public String toString() {
 		return "Calificar Tendero";
 	}
 }

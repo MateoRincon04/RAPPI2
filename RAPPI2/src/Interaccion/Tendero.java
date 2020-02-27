@@ -48,6 +48,10 @@ public class Tendero extends Perfil{
 		return calificaciones;
 	}
 	
+	public List<Integer> getOpciones(){
+		return this.opciones;
+	}
+	
 	public void setSalario(long salario) {
 		this.salario=salario;
 	}

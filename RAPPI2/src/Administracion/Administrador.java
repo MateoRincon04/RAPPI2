@@ -68,8 +68,18 @@ public class Administrador extends Perfil{
     	Data.agreagarObjetoDataBaseRestaurante(new Restaurante(nombre,direccion,celular));
     }
     
-    public void ListarOpciones(String username) {
-    	Perfil usuario = Data.bu
+    public void ListarOpciones(String userName) {
+    	Perfil usuario = Data.buscarUsuario(userName);
+    	
+    	if (usuario instanceof Cliente) {
+    		
+    	}
+    	else if (usuario instanceof Tendero) {
+    		
+    	}
+    	else if (usuario instanceof Administrador) {
+    		
+    	}
     }
     /**
      * Metodo que guarda los clientes que se han creado  en el arreglo {@link #clientes}
