@@ -2,8 +2,11 @@ package UIMain;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import UIMain.Main;
 
+=======
+>>>>>>> 797c571106aa179d21286e4629d68b4a8a7eab34
 import Administracion.Administrador;
 import BaseDatos.Data;
 import Interaccion.Cliente;

@@ -134,10 +134,6 @@ public class Cliente extends Perfil {
 				+ this.getUserName();
 	}
 
-	public String getTipo() {
-		return "cliente";
-	}
-
 	public List<Restaurante> verListaDeRestaurantes() {
 		return Data.traerDataBaseRestaurante();
 	}

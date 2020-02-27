@@ -20,21 +20,20 @@ public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu 
     //varia dependiendo de las opciones de cada menu.
 
     public MenuDeConsola(int size){
-        OpcionDeMenu[] Menu = new OpcionDeMenu[size];        
+        ArrayList<OpcionDeMenu> menu = new ArrayList<>();        
     }
     public void AnadirOpcion(OpcionDeMenu OpcionMenu) {
     }
     
-    public String LanzarMenu() {
+    public void LanzarMenu() {
     	return 
     }
-    static Scanner teclado = new Scanner(System.in);
     static long readLong() {
-    	return teclado.nextLong();
+    	return Main.user.nextLong();
     }
     static String readString() {
-    	teclado.nextLine();
-    	return teclado.nextLine();
+    	Main.user.nextLine();
+    	return Main.user.nextLine();
     }
 //jeje
 

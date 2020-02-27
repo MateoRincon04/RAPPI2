@@ -5,6 +5,7 @@ import java.util.List;
 import Interaccion.Tendero;
 import Oferta.Restaurante;
 import Interaccion.Cliente;
+import BaseDatos.Data;
 
 /**Clase Administrador,
  * su finalidad es poder modificar el menu de cada usuario, mostrar que funcionalidades
@@ -22,9 +23,6 @@ import Interaccion.Cliente;
 
 public class Administrador extends Perfil{
     private long salario;
-    private static List<Cliente> clientes = new ArrayList<Cliente>();
-    private static List<Tendero> tenderos = new ArrayList<Tendero>();
-    private static List<Restaurante> restaurantes = new ArrayList<Restaurante>();
     
     /**
      * Contructor para los objetos Administrador
@@ -57,12 +55,9 @@ public class Administrador extends Perfil{
      * @param salario El parametro salario define el salario que tendra el Tendero
      */
     public void crearTendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
-    	tenderos.add(new Tendero(nombre, telefono, comuna, clave, userName, salario));
+    	Data.agreagarObjetoDataBasePerfil(new Tendero(nombre, telefono, comuna, clave, userName, salario));
     }
     
-    public static List<Tendero> getTenderos() {
-    	return tenderos;
-    }
     /**
      * M�todo que crea un objeto de clase Restaurante
      * @param nombre El parametro nombre define el nombre que tendra el Restaurante
@@ -70,24 +65,12 @@ public class Administrador extends Perfil{
      * @param celular El parametro celular define el telefono celular que tendra el Restaurante
      */
     public void crearRestaurante(String nombre, String direccion, String celular) {
-    	restaurantes.add(new Restaurante(nombre, direccion, celular));
-    }
-    
-    public static List<Restaurante> getRestaurante() {
-    	return restaurantes;
+    	Data.agreagarObjetoDataBaseRestaurante(new Restaurante(nombre,direccion,celular));
     }
     
     /**
      * Metodo que guarda los clientes que se han creado  en el arreglo {@link #clientes}
      * @param cliente El paramtetro cliente define el cliente que sera agregado a el arreglo
      */
-    public static void agregarCliente(Cliente cliente) {
-     Administrador.clientes.add(cliente);
-    }
-
-    public String getTipo() {
-        return "administrador";
-    }
-    
     
 }
