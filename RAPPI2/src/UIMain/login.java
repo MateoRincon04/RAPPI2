@@ -36,10 +36,13 @@ public class login implements OpcionDeMenu {
 		}
 		if (usuario instanceof Cliente) {
 			usuario = (Cliente) Main.usuario;
+			System.out.println("Bienvenido Cliente " + usuario.getNombre());
 		} else if (usuario instanceof Tendero) {
 			usuario = (Tendero) Main.usuario;
+			System.out.println("Bienvenido Tendero " + usuario.getNombre());
 		} else if (usuario instanceof Administrador) {
 			usuario = (Administrador) Main.usuario;
+			System.out.println("Bienvenido Administrador " + usuario.getNombre());
 		}
 
 	}
