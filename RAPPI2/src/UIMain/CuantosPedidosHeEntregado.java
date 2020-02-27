@@ -10,13 +10,10 @@ import Administracion.Perfil;
 
 public class CuantosPedidosHeEntregado implements OpcionDeMenu {
 	public void ejecutar() {
-		
-		if (Main.usuario.getTipo().equals("tendero")) {
-			Tendero usuario = (Tendero) Main.usuario;
-			int aux = usuario.cantidadDePedidosEntregados();
-			System.out.println("Usted ha entregado: "+aux+" pedidos.");
-		} else {
-			
-		}
+
+		Tendero usuario = (Tendero) Main.usuario;
+		int aux = usuario.cantidadDePedidosEntregados();
+		System.out.println("Usted ha entregado: " + aux + " pedidos.");
+
 	}
 }

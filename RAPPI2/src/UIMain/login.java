@@ -20,7 +20,7 @@ public class login implements OpcionDeMenu {
 
 	public void ejecutar() {
 		Perfil usuario = null;
-		Scanner user = new Scanner(System.in);
+		Scanner user = Main.user;
 		try {
 			System.out.println("Ingrese su usuario: ");
 			String userName = user.nextLine();
@@ -34,14 +34,15 @@ public class login implements OpcionDeMenu {
 			System.out.println("Error ingresando usuario, intente nuevamente");
 			ejecutar();
 		}
-		if(usuario instanceof Cliente) {
-			
-		}
-		else if(usuario instanceof Tendero) {
-			
-		}
-		else if(usuario instanceof Administrador) {
-			
+		if (usuario instanceof Cliente) {
+			usuario = (Cliente) Main.usuario;
+			System.out.println("Bienvenido Cliente " + usuario.getNombre());
+		} else if (usuario instanceof Tendero) {
+			usuario = (Tendero) Main.usuario;
+			System.out.println("Bienvenido Tendero " + usuario.getNombre());
+		} else if (usuario instanceof Administrador) {
+			usuario = (Administrador) Main.usuario;
+			System.out.println("Bienvenido Administrador " + usuario.getNombre());
 		}
 
 	}
