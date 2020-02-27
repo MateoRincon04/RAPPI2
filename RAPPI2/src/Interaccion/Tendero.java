@@ -97,4 +97,12 @@ public class Tendero extends Perfil{
         return "tendero";
 	}
 	
+	/*
+	 * este metodo sirve para saber la cantidad de pedios entregados por un tendero
+	 * recordar que es obligatorio calificar el tendero cada que es finalizada la entrega.
+	 */
+	public  int cantidadDePedidosEntregados(){
+		return this.getCalificaciones().size();
+	}
+	
 }

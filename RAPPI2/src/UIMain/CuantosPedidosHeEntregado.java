@@ -8,20 +8,15 @@ import Interaccion.Calificacion;
 import Interaccion.Notificacion;
 import Administracion.Perfil;
 
-public class CuantosPedidosHeEntregado extends OpcionDeMenu {
-	void ejecutar() {
+public class CuantosPedidosHeEntregado implements OpcionDeMenu {
+	public void ejecutar() {
 		
 		if (Main.usuario.getTipo().equals("tendero")) {
 			Tendero usuario = (Tendero) Main.usuario;
-			List<Calificacion> calificaciones = usuario.getCalificaciones();
-			int contadorCalificaciones=0;
-			for (int i = 0; i < calificaciones.size(); i++) {
-				contadorCalificaciones++;
-			}
-			System.out.println("Usted ha entregado: "+contadorCalificaciones+" pedidos.");
+			int aux = usuario.cantidadDePedidosEntregados();
+			System.out.println("Usted ha entregado: "+aux+" pedidos.");
 		} else {
 			
 		}
 	}
 }
-//Creeria que esta está lista.

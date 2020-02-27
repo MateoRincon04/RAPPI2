@@ -1,9 +1,9 @@
 package UIMain;
 
 import java.util.Scanner;
-
-import Administracion.Perfil;
+import Administracion.*;
 import Interaccion.Cliente;
+import Interaccion.Tendero;
 import BaseDatos.Data;
 
 /**
@@ -16,26 +16,33 @@ import BaseDatos.Data;
  * @version:
  */
 
-public class login extends OpcionDeMenu {
+public class login implements OpcionDeMenu {
 
 	public void ejecutar() {
-//<<<<<<< HEAD
-		
-        Scanner user = new Scanner(System.in);
-        while(true){
-            try{
-                System.out.println("Ingrese su usuario: ");
-                String userName= user.nextLine();
-                System.out.println("Ingrese su clave: ");
-                int clave=user.nextInt();
-                Perfil usuario=Data.buscarUsuario(userName, clave);
-                Main.usuario = usuario;
-                System.out.println("Datos ingresados correctamente");
-                break;
-                } catch (Exception e) {
-                    System.out.println("Error ingresando usuario, intente nuevamente");
-                    ejecutar();
-            }
-        }
-    }	
+		Perfil usuario = null;
+		Scanner user = new Scanner(System.in);
+		try {
+			System.out.println("Ingrese su usuario: ");
+			String userName = user.nextLine();
+			System.out.println("Ingrese su clave: ");
+			int clave = user.nextInt();
+			usuario = Data.buscarUsuario(userName, clave);
+			Main.usuario = usuario;
+			System.out.println("Datos ingresados correctamente");
+
+		} catch (Exception e) {
+			System.out.println("Error ingresando usuario, intente nuevamente");
+			ejecutar();
+		}
+		if(usuario instanceof Cliente) {
+			
+		}
+		else if(usuario instanceof Tendero) {
+			
+		}
+		else if(usuario instanceof Administrador) {
+			
+		}
+
+	}
 }

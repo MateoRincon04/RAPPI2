@@ -201,6 +201,24 @@ public class Data {
 		}
 		return restaurante;
 	}
+	
+	public static ArrayList<Restaurante> OrganizarRestaurantesPorCalificacion(){
+		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
+		// bubble sort
+				boolean ordenado = false;
+				while (!ordenado) {
+					ordenado = true;
+					for (int i = 0; i < historial.size(); i++) {
+						if ((historial.get(i)).getCalificacionPromediada() < (historial.get(i - 1)).getCalificacionPromediada()) {
+							Restaurante restauranteTemp = historial.get(i);
+							historial.add(i, historial.get(i - 1));
+							historial.add(i - 1, restauranteTemp);
+							ordenado = false;
+						}
+					}
+				}
+				return historial;
+	}
 }
 
 

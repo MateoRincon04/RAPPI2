@@ -141,5 +141,23 @@ public class Cliente extends Perfil {
 	public List<Restaurante> verListaDeRestaurantes() {
 		return Data.traerDataBaseRestaurante();
 	}
+	
+	public String platoMasComprado(){
+		int contador1 = 0;
+		String aux = "";
+		for (int i = 0; i < historial.size(); i++) {
+			int contador = 0;
+			for (int u = i; u < historial.size() - 1; u++) {
+				if ((historial.get(i).getPlato().getNombre()).equals(historial.get(u).getPlato().getNombre())) {
+					contador++;
+				}
+			}
+			if (contador > contador1) {
+				contador1 = contador;
+				aux = historial.get(i).getPlato().getNombre();
+			}
+		}
+		return aux;
+	}
 
 }

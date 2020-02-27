@@ -1,5 +1,9 @@
 package UIMain;
 
+import java.util.ArrayList;
+import java.util.List;
+import Interaccion.*;
+import Administracion.*;
 /**
  * Clase MenuDeConsola
  * tiene como finalidad desplegar el menu de consola que se requiere para este trabajo
@@ -14,11 +18,17 @@ package UIMain;
 
 public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu diferente. El tamano
     //varia dependiendo de las opciones de cada menu.
-
-    public void MenuDeConsola(int size){
-
-        OpcionDeMenu[] menu = new OpcionDeMenu[size];
-        
+	ArrayList<OpcionDeMenu> menu = new ArrayList<>();
+	void ejecutar(){
+		
+	}
+    public static void main(String[] args) {
+    	
+    	System.out.println("Bienvenido");
+    	while(true) {
+    		
+    	}
+    	
     }
 
 }

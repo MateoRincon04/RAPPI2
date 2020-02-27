@@ -1,6 +1,5 @@
 package UIMain;
 
-import java.util.Scanner;
 import Interaccion.Cliente;
 import BaseDatos.Data;
 
@@ -17,27 +16,26 @@ import BaseDatos.Data;
 
 //para usar la base de datos necesito el main, as� poder acceder a ella y comparar y/o agregar usuarios
 //que se van a registrar
-public class Registrarse extends OpcionDeMenu {
+public class Registrarse implements OpcionDeMenu {
 
 	public void ejecutar() {
 		
-		Scanner user = new Scanner(System.in);
-		System.out.println("Usted ser� registrado en el sistema.");
+		
+		System.out.println("Usted seria registrado en el sistema.");
 		System.out.println("Ingrese su nombre: ");
-		String nombre=user.nextLine();
+		String nombre = Main.user.nextLine();
 		System.out.println("Ingrese su Username: ");
-		String username=user.nextLine();
+		String username =Main.user.nextLine();
 		System.out.println("Ingrese su metodo de pago: ");
-		String metodoDePago=user.nextLine();
-		System.out.println("Ingrese el n�mero de su comuna: ");
-		int comuna=user.nextInt();
+		String metodoDePago = Main.user.nextLine();
+		System.out.println("Ingrese el numero de su comuna: ");
+		int comuna = Main.user.nextInt();
 		System.out.println("Ingrese su clave: ");
-		int clave= user.nextInt();
-		System.out.println("Ingrese su tel�fono ");
-		int telefono= user.nextInt();
+		int clave = Main.user.nextInt();
+		System.out.println("Ingrese su telefono ");
+		int telefono = Main.user.nextInt();
 		System.out.println("Ingrese su saldo: ");
-		long saldo= user.nextLong();
-		user.close();
+		long saldo = Main.user.nextLong();
 		Cliente cliente=new Cliente(nombre,telefono,comuna,clave,username,saldo,metodoDePago);
 		if(Data.agreagarObjetoDataBasePerfil(cliente)) {
 			System.out.println("Usuario creado exitosamente ");

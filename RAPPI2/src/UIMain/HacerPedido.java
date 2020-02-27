@@ -7,11 +7,12 @@ import Administracion.Administrador;
 import Oferta.*;
 import java.util.Scanner;
 
-public class HacerPedido extends OpcionDeMenu {
+public class HacerPedido implements OpcionDeMenu {
+
 	public void ejecutar() {
 		Scanner user = new Scanner(System.in);
 		if (Main.usuario.getTipo().equals("cliente")) {
-
+			/* se esta definiendo la forma como hace el pedido el usuario*/
 			Cliente usuarioCliente = (Cliente) (Main.usuario);
 			List<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
 			Restaurante restauranteElegido = escogerRestaurante(listaRestaurantes);

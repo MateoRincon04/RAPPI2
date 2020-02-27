@@ -7,7 +7,7 @@ import Administracion.Administrador;
 import Oferta.*;
 import java.util.Scanner;
 
-public class CalificarRestaurante extends OpcionDeMenu {
+public class CalificarRestaurante implements OpcionDeMenu {
 	public void ejecutar() {
 		Scanner user = new Scanner(System.in);
 		if (Main.usuario.getTipo().equals("cliente")) {

@@ -14,12 +14,12 @@ import Interaccion.Cliente;
  * @version:
  */
 
-public abstract class OpcionDeMenu {
+interface OpcionDeMenu {
 	
 	//desde el men� se accede a la opci�n uno
 	//posicion 0. guarda la funcionalidad "registrarse" si el usuario escoge esa, se ejecuta
 	//la funcionalidad.
-	abstract void ejecutar();
+	void ejecutar();
 	
 	
 }
@@ -31,9 +31,9 @@ public abstract class OpcionDeMenu {
 //el metodo del hijo.
 
 
-//debo crear una clase por cada funcionalidad.
-//Creo una lista que contenga los objetos (funcionalidades) para ejecutar. Luego el usuario pide la acci�n 
-//por numeros. 
-//le resto uno y tengo el indice de la acci�n en la lista. debo crear una clase por cada acci�n para que
-//por ligadura din�mica, se ejecute el metodo ejecutar de cada clase. cumpliendo as� lo que busca el usuario.
-//opcion de menu debe ser padre de todas las clases que heredan.
+/*debo crear una clase por cada funcionalidad.
+Creo una lista que contenga los objetos (funcionalidades) para ejecutar. Luego el usuario pide la acci�n 
+por numeros. 
+le resto uno y tengo el indice de la acci�n en la lista. debo crear una clase por cada acci�n para que
+por ligadura din�mica, se ejecute el metodo ejecutar de cada clase. cumpliendo as� lo que busca el usuario.
+opcion de menu debe ser padre de todas las clases que heredan.*/
