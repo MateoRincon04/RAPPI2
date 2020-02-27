@@ -1,5 +1,7 @@
 package Administracion;
 
+import java.util.ArrayList;
+
 /**
  * Clase perfil
  * su finalidad es poder optimizar la escritura de codigo, teniendo la herencia y el ser
@@ -11,6 +13,8 @@ package Administracion;
 */
 
 import java.util.HashMap;
+import java.util.List;
+
 import BaseDatos.Data;
 
 abstract public class Perfil {
@@ -39,7 +43,6 @@ abstract public class Perfil {
 		this.comuna = comuna;
 		this.clave = clave;
 		this.userName = userName;
-
 	}
 
 	/**

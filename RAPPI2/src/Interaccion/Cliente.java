@@ -29,6 +29,7 @@ public class Cliente extends Perfil {
 	private long saldo;
 	private Pedido pedido;
 	private List<Pedido> historial = new ArrayList<Pedido>();
+	
 
 	/**
 	 * Constructor para los objetos de la clase Cliente
@@ -39,11 +40,17 @@ public class Cliente extends Perfil {
 	 *                     que el Cliente planea comprar platos
 	 */
 	public Cliente(String nombre, int telefono, int comuna, int clave, String userName, long saldo,
-			String metodoDePago) {
+		String metodoDePago) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
 		this.metodoDePago = metodoDePago;
-		Administrador.agregarCliente(this);
+		this.opciones.add(3);
+		this.opciones.add(4);
+		this.opciones.add(5);
+		this.opciones.add(6);
+		this.opciones.add(9);
+		this.opciones.add(10);
+		Data.agreagarObjetoDataBasePerfil(this);
 	}
 
 	public long getSaldo() {

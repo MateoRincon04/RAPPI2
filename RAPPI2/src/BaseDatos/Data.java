@@ -18,17 +18,18 @@ public class Data {
     private static List<OpcionDeMenu> opciones = new ArrayList<>();
     
     public static final void CargarOpciones() {
+    	opciones.add(new Registrarse());
+    	opciones.add(new login());
+    	opciones.add(new Invitado());
     	opciones.add(new HacerPedido());
     	opciones.add(new CalificarTendero());
     	opciones.add(new CalificarRestaurante());
     	opciones.add(new CuantoHeGastado());
     	opciones.add(new CuantosPedidosHeEntregado());
     	opciones.add(new EnCualesDirecciones());
-    	opciones.add(new Invitado());
-    	opciones.add(new login());
     	opciones.add(new MejorRestauranteCal());
     	opciones.add(new PlatosQueMasCompre());
-    	opciones.add(new Registrarse());    	
+    	   	
     }
     
     public static final List<OpcionDeMenu> getOpciones(){

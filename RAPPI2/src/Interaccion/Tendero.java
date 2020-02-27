@@ -28,6 +28,7 @@ public class Tendero extends Perfil{
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	public List<Integer> opciones= new ArrayList<Integer>();
+	
 	private long salario;
 	
 	/**
@@ -38,7 +39,7 @@ public class Tendero extends Perfil{
 	
 	public Tendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
-		this.opciones.add(4);
+		this.opciones.add(7);
 		this.salario = salario;
 		this.estaDisponible = true;
 	}

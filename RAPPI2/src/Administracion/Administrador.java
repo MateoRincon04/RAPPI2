@@ -68,6 +68,9 @@ public class Administrador extends Perfil{
     	Data.agreagarObjetoDataBaseRestaurante(new Restaurante(nombre,direccion,celular));
     }
     
+    public void ListarOpciones(String username) {
+    	Perfil usuario = Data.bu
+    }
     /**
      * Metodo que guarda los clientes que se han creado  en el arreglo {@link #clientes}
      * @param cliente El paramtetro cliente define el cliente que sera agregado a el arreglo
