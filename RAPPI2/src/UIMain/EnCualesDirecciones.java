@@ -2,7 +2,7 @@ package UIMain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import UIMain.Main;
 
 import Administracion.Administrador;
 import BaseDatos.Data;
@@ -11,10 +11,9 @@ import Oferta.Restaurante;
 
 public class EnCualesDirecciones implements OpcionDeMenu {
 	public void ejecutar() {
-		Scanner user = Main.user;
 		Cliente usuario = (Cliente) Main.usuario;
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
-		String nombre = user.nextLine();
+		String nombre = Main.user.nextLine();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
 		List<String> direccionesDisponibles = restauranteElegido.getDireccion();
 

@@ -6,7 +6,8 @@ import BaseDatos.Data;
 /**
  * Clase Registrarse
  * 
- * su finalidad es la implementacion  de Registrarse en el sistema a partir de la opcion del menu
+ * su finalidad es la implementacion de Registrarse en el sistema a partir de la
+ * opcion del menu
  * 
  * 
  * 
@@ -19,13 +20,12 @@ import BaseDatos.Data;
 public class Registrarse implements OpcionDeMenu {
 
 	public void ejecutar() {
-		
-		
+
 		System.out.println("Usted seria registrado en el sistema.");
 		System.out.println("Ingrese su nombre: ");
 		String nombre = Main.user.nextLine();
 		System.out.println("Ingrese su Username: ");
-		String username =Main.user.nextLine();
+		String username = Main.user.nextLine();
 		System.out.println("Ingrese su metodo de pago: ");
 		String metodoDePago = Main.user.nextLine();
 		System.out.println("Ingrese el numero de su comuna: ");
@@ -36,15 +36,14 @@ public class Registrarse implements OpcionDeMenu {
 		int telefono = Main.user.nextInt();
 		System.out.println("Ingrese su saldo: ");
 		long saldo = Main.user.nextLong();
-		Cliente cliente=new Cliente(nombre,telefono,comuna,clave,username,saldo,metodoDePago);
-		if(Data.agreagarObjetoDataBasePerfil(cliente)) {
+		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago);
+		if (Data.agreagarObjetoDataBasePerfil(cliente)) {
 			System.out.println("Usuario creado exitosamente ");
-		}
-		else {
+		} else {
 			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
 			ejecutar();
 		}
-			
+
 	}
 
 }
