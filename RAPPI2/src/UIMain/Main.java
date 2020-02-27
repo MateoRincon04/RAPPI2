@@ -13,7 +13,11 @@ public class Main {
 	public static Scanner user = new Scanner(System.in);
 	public static void main(String[] args) {
 		
-		MenuDeConsola menuInicial = new MenuDeConsola();
+		while(true) {
+			
+			
+			break;
+		}
 		
 		
 		

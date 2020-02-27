@@ -14,7 +14,7 @@ import Interaccion.Cliente;
  * @version:
  */
 
-interface OpcionDeMenu {
+public interface OpcionDeMenu {
 	
 	//desde el men� se accede a la opci�n uno
 	//posicion 0. guarda la funcionalidad "registrarse" si el usuario escoge esa, se ejecuta

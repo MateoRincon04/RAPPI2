@@ -86,7 +86,5 @@ abstract public class Perfil {
 	public String getUserName() {
 		return this.userName;
 	}
-
-	public abstract String getTipo();
-
+	
 }

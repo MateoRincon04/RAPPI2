@@ -25,6 +25,7 @@ public class Tendero extends Perfil{
 	private boolean estaDisponible;
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
+	public List<Integer> opciones= {1,2};
 	private long salario;
 	
 	/**
@@ -91,10 +92,6 @@ public class Tendero extends Perfil{
     		Calificacion calificacionCliente = new Calificacion(this,puntuacion,calificando);
     		calificando.agregarCalificacion(calificacionCliente);
     	}
-	}
-	
-	public String getTipo() {
-        return "tendero";
 	}
 	
 	/*

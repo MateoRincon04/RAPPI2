@@ -2,14 +2,12 @@ package UIMain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import Administracion.Administrador;
 import Interaccion.Cliente;
 import Oferta.Restaurante;
 
-public class EnCualesDirecciones extends OpcionDeMenu {
-	void ejecutar() {
+public class EnCualesDirecciones implements OpcionDeMenu {
+	public void ejecutar() {
 
 		if (Main.usuario.getTipo().equals("cliente")) {
 			Cliente usuario = (Cliente) Main.usuario;
@@ -26,7 +24,6 @@ public class EnCualesDirecciones extends OpcionDeMenu {
 	}
 
 	private Restaurante escogerRestaurante(List<Restaurante> listaRestaurantes) {
-		Scanner user = new Scanner(System.in);
 		listaRestaurantes = Administrador.getRestaurante();
 		System.out.println("Estos son los restaurantes disponibles: ");
 		for (int i = 0; i < listaRestaurantes.size(); i++) {
@@ -36,9 +33,9 @@ public class EnCualesDirecciones extends OpcionDeMenu {
 				"Por favor, escoja el número del restaurante al cual quiere saber las direcciones disponibles: ");
 		while (true) {
 			try {
-				int numero = user.nextInt();
+				int numero = Main.user.nextInt();
 				Restaurante restauranteEscogido = listaRestaurantes.get(numero);
-				user.close();
+				Main.user.close();
 				return restauranteEscogido;
 			} catch (Exception e) {
 				System.out.println("Por favor, intente nuevamente.");

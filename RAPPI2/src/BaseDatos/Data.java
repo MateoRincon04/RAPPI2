@@ -6,11 +6,34 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import UIMain.*;
 
 import Administracion.Perfil;
 import Oferta.Restaurante;
+import UIMain.OpcionDeMenu;
 
 public class Data {
+	
+    private static List<OpcionDeMenu> opciones = new ArrayList<>();
+    
+    public static final void CargarOpciones() {
+    	opciones.add(new HacerPedido());
+    	opciones.add(new CalificarTendero());
+    	opciones.add(new CalificarRestaurante());
+    	opciones.add(new CuantoHeGastado());
+    	opciones.add(new CuantosPedidosHeEntregado());
+    	opciones.add(new EnCualesDirecciones());
+    	opciones.add(new Invitado());
+    	opciones.add(new login());
+    	opciones.add(new MejorRestauranteCal());
+    	opciones.add(new PlatosQueMasCompre());
+    	opciones.add(new Registrarse());    	
+    }
+    
+    public static final List<OpcionDeMenu> getOpciones(){
+    	return opciones;
+    }
 	
 	private static final String filepathPerfil = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\datosPersonal";
 	//private static final String filepathPlatos = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\platos";
