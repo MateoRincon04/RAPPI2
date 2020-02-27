@@ -7,10 +7,12 @@ import Administracion.Administrador;
 import Oferta.*;
 import java.util.Scanner;
 
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
 public class HacerPedido implements OpcionDeMenu {
 
 	public void ejecutar() {
-		Scanner user = new Scanner(System.in);
+		Scanner user = Main.user;
 		if (Main.usuario.getTipo().equals("cliente")) {
 			/* se esta definiendo la forma como hace el pedido el usuario*/
 			Cliente usuarioCliente = (Cliente) (Main.usuario);

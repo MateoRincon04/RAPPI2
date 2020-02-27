@@ -5,8 +5,8 @@ import Oferta.*;
 
 import Interaccion.Cliente;
 
-public class CuantoHeGastado extends OpcionDeMenu {
-	void ejecutar() {
+public class CuantoHeGastado implements OpcionDeMenu {
+	public void ejecutar() {
 		if (Main.usuario.getTipo().equals("cliente")) {
 			Cliente cliente = (Cliente) Main.usuario;
 			int valorGastado = 0;

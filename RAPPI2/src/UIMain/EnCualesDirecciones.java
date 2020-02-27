@@ -26,7 +26,7 @@ public class EnCualesDirecciones extends OpcionDeMenu {
 	}
 
 	private Restaurante escogerRestaurante(List<Restaurante> listaRestaurantes) {
-		Scanner user = new Scanner(System.in);
+		Scanner user = Main.user;
 		listaRestaurantes = Administrador.getRestaurante();
 		System.out.println("Estos son los restaurantes disponibles: ");
 		for (int i = 0; i < listaRestaurantes.size(); i++) {

@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CalificarRestaurante implements OpcionDeMenu {
 	public void ejecutar() {
-		Scanner user = new Scanner(System.in);
+		Scanner user = Main.user;
 		if (Main.usuario.getTipo().equals("cliente")) {
 
 			Cliente usuario = (Cliente) Main.usuario;
