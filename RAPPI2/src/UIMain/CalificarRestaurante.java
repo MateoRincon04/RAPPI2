@@ -23,6 +23,9 @@ public class CalificarRestaurante implements OpcionDeMenu {
 			}
 
 		}
+	}
 
+	public String ToString() {
+		return "Calificar Restaurante";
 	}
 }

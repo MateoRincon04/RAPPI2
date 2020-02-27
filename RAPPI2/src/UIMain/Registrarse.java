@@ -43,7 +43,8 @@ public class Registrarse implements OpcionDeMenu {
 			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
 			ejecutar();
 		}
-
 	}
-
+	public String ToString() {
+		return "Registrarse";
+	}
 }

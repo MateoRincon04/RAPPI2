@@ -8,4 +8,7 @@ public class Invitado implements OpcionDeMenu {
 
 		//	F :(
 	}
+	public String ToString() {
+		return "Invitado";
+	}
 }
