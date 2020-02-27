@@ -155,5 +155,13 @@ public class Cliente extends Perfil {
 		}
 		return aux;
 	}
+	public double cuantoHeGastado() {
+		double valorGastado = 0;
+		for (Pedido pedido : this.getHistorial()) { // Por cada pedido en la lista de pedidos:
+			valorGastado += pedido.getPlato().getPrecio();
+		}
+		return valorGastado;
+
+	}
 
 }
