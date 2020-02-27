@@ -16,7 +16,6 @@ public class EnCualesDirecciones implements OpcionDeMenu {
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
 		String nombre = user.nextLine();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
-		List<Restaurante> listaRestaurantes = new ArrayList<Restaurante>();
 		List<String> direccionesDisponibles = restauranteElegido.getDireccion();
 
 		System.out.println(
@@ -27,28 +26,4 @@ public class EnCualesDirecciones implements OpcionDeMenu {
 
 	}
 
-	}
-
-	private Restaurante escogerRestaurante(List<Restaurante> listaRestaurantes) {
-		Scanner user = Main.user;
-		listaRestaurantes = Administrador.getRestaurante();
-		System.out.println("Estos son los restaurantes disponibles: ");
-		for (int i = 0; i < listaRestaurantes.size(); i++) {
-			System.out.println(i + ") " + listaRestaurantes.get(i).getNombre());
-		}
-		System.out.println(
-				"Por favor, escoja el número del restaurante al cual quiere saber las direcciones disponibles: ");
-		while (true) {
-			try {
-				int numero = user.nextInt();
-				Restaurante restauranteEscogido = listaRestaurantes.get(numero);
-				user.close();
-				return restauranteEscogido;
-			} catch (Exception e) {
-				System.out.println("Por favor, intente nuevamente.");
-			}
-
-		}
-
-	}
 }
