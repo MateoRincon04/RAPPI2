@@ -3,7 +3,9 @@ package Interaccion;
 import java.util.ArrayList;
 import java.util.List;
 import Administracion.Perfil;
+import BaseDatos.Data;
 import Oferta.Pedido;
+import UIMain.*;
 
 /**
  * Clase Tendero
@@ -25,7 +27,7 @@ public class Tendero extends Perfil{
 	private boolean estaDisponible;
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
-	public List<Integer> opciones= {1,2};
+	public List<Integer> opciones= new ArrayList<Integer>();
 	private long salario;
 	
 	/**
@@ -36,6 +38,7 @@ public class Tendero extends Perfil{
 	
 	public Tendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
+		this.opciones.add(4);
 		this.salario = salario;
 		this.estaDisponible = true;
 	}
