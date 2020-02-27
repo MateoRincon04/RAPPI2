@@ -29,7 +29,7 @@ public class Cliente extends Perfil {
 	private long saldo;
 	private Pedido pedido;
 	private List<Pedido> historial = new ArrayList<Pedido>();
-	
+	public List<Integer> opciones= new ArrayList<Integer>();
 
 	/**
 	 * Constructor para los objetos de la clase Cliente
