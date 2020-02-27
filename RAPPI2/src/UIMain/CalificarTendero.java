@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CalificarTendero implements OpcionDeMenu {
 	public void ejecutar() {
-		Scanner user =Main.user;
+		Scanner user = Main.user;
 		if (Main.usuario.getTipo().equals("cliente")) {
 			Cliente usuario = (Cliente) Main.usuario;
 			System.out.println("Ingrese una calificacion del 0 al 5 al tendero que realizó su pedido: ");

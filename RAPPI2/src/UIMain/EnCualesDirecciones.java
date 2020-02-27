@@ -8,8 +8,8 @@ import Administracion.Administrador;
 import Interaccion.Cliente;
 import Oferta.Restaurante;
 
-public class EnCualesDirecciones extends OpcionDeMenu {
-	void ejecutar() {
+public class EnCualesDirecciones implements OpcionDeMenu {
+	public void ejecutar() {
 
 		if (Main.usuario.getTipo().equals("cliente")) {
 			Cliente usuario = (Cliente) Main.usuario;
