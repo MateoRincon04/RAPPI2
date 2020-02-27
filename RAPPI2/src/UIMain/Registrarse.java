@@ -21,17 +21,17 @@ public class Registrarse implements OpcionDeMenu {
 
 	public void ejecutar() {
 
-		System.out.println("Usted seria registrado en el sistema.");
+		System.out.println("Usted sera registrado en el sistema.");
 		System.out.println("Ingrese su nombre: ");
-		String nombre = Main.user.nextLine();
+		String nombre = Main.user.next();
 		System.out.println("Ingrese su Username: ");
-		String username = Main.user.nextLine();
-		System.out.println("Ingrese su metodo de pago: ");
-		String metodoDePago = Main.user.nextLine();
+		String username = Main.user.next();
+		System.out.println("Ingrese su metodo de pago (efectivo,tarjeta): ");
+		String metodoDePago = Main.user.next();
 		System.out.println("Ingrese el numero de su comuna: ");
 		int comuna = Main.user.nextInt();
 		System.out.println("Ingrese su clave: ");
-		int clave = Main.user.nextInt();
+		String clave = Main.user.next();
 		System.out.println("Ingrese su telefono ");
 		int telefono = Main.user.nextInt();
 		System.out.println("Ingrese su saldo: ");
@@ -44,7 +44,7 @@ public class Registrarse implements OpcionDeMenu {
 			ejecutar();
 		}
 	}
-	public String ToString() {
+	public String toString() {
 		return "Registrarse";
 	}
 }

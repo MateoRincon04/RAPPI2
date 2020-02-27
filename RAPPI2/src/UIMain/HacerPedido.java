@@ -38,7 +38,7 @@ public class HacerPedido implements OpcionDeMenu {
 			}
 		}
 	}
-	public String ToString() {
+	public String toString() {
 		return "Hacer pedido";
 	}
 }

@@ -37,7 +37,7 @@ public class Tendero extends Perfil{
 	 * @param salario El parametro salario define el salario que tiene el Tendero
 	 */
 	
-	public Tendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
+	public Tendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.opciones.add(7);
 		this.salario = salario;
@@ -46,6 +46,10 @@ public class Tendero extends Perfil{
 	
 	public List<Calificacion> getCalificaciones () {
 		return calificaciones;
+	}
+	
+	public List<Integer> getOpciones(){
+		return this.opciones;
 	}
 	
 	public void setSalario(long salario) {

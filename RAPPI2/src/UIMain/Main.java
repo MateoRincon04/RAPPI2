@@ -14,21 +14,12 @@ public class Main {
 	public static Scanner user = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
-		while(true) {
-			
-			
-			break;
-		}
-		
-		
-		
+		Data.CargarOpciones();
+		MenuDeConsola menuPrrrrr = new MenuDeConsola();
+		menuPrrrrr.lanzarMenu();
 		user.close();
 		
 	}
 
-		user.close();
-
-	}
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import Oferta.Pedido;
 import Oferta.Restaurante;
 import Administracion.Administrador;
+import Administracion.Perfil;
+import BaseDatos.Data;
 
 /**
  * Clase Notificacion
@@ -44,17 +46,20 @@ public class Notificacion {
 	public void notificar() {
 		Restaurante notif = pedido.getPlato().restaurante;
 		notif.agregarNotificacion(this);
-		Iterator<Tendero> iterator = Administrador.getTenderos().iterator();
+		Iterator<Perfil> iterator = Data.traerDataBasePerfil().iterator();
 		while(iterator.hasNext()) {
-			Tendero notificado = iterator.next();
-			if(notificado.getEstaDisponible()) {
-				notificado.agregarNotificacion(this);
-				if(tomarPedido){
-					notificado.setEstaDisponible();
-					this.pedido.setTendero(notificado);
-					break;
+			if(iterator instanceof Tendero) {
+				Tendero notificado = (Tendero) iterator.next();
+				if(notificado.getEstaDisponible()) {
+					notificado.agregarNotificacion(this);
+					if(tomarPedido){
+						notificado.setEstaDisponible();
+						this.pedido.setTendero(notificado);
+						break;
+					}
 				}
 			}
+			
 			break;
 		}
 	}

@@ -23,7 +23,7 @@ public class login implements OpcionDeMenu {
 			System.out.println("Ingrese su usuario: ");
 			String userName = Main.user.nextLine();
 			System.out.println("Ingrese su clave: ");
-			int clave = Main.user.nextInt();
+			String clave = Main.user.next();
 			usuario = Data.buscarUsuario(userName, clave);
 			Main.usuario = usuario;
 			System.out.println("Datos ingresados correctamente");
@@ -43,7 +43,7 @@ public class login implements OpcionDeMenu {
 			System.out.println("Bienvenido Administrador " + usuario.getNombre());
 		}
 	}
-	public String ToString() {
+	public String toString() {
 		return "Log In";
 	}
 }

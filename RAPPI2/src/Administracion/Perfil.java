@@ -21,7 +21,7 @@ abstract public class Perfil {
 	private String nombre;
 	private int telefono;
 	private int comuna;
-	private int clave;
+	private final String clave;
 	private String userName;
 
 	/**
@@ -37,7 +37,7 @@ abstract public class Perfil {
 	 *                 registrara el Objeto
 	 */
 
-	public Perfil(String nombre, int telefono, int comuna, int clave, String userName) {
+	public Perfil(String nombre, int telefono, int comuna, String clave, String userName) {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.comuna = comuna;
@@ -74,11 +74,8 @@ abstract public class Perfil {
 		return this.comuna;
 	}
 
-	public void setClave(int clave) {
-		this.clave = clave;
-	}
 
-	public int getClave() {
+	public String getClave() {
 		return this.clave;
 	}
 
