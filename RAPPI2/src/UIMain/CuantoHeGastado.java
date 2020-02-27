@@ -11,6 +11,8 @@ public class CuantoHeGastado implements OpcionDeMenu {
 		double valorGastado = cliente.cuantoHeGastado();
 		System.out.println("Usted ha gastado: " + valorGastado);
 		System.out.println("Actualmente usted tiene: " + cliente.getSaldo() + " pesos.");
-
+	}
+	public String ToString() {
+		return "¿Cuánto he gastado?";
 	}
 }

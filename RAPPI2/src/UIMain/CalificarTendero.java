@@ -18,10 +18,10 @@ public class CalificarTendero implements OpcionDeMenu {
 				System.out.println("Ha calificado al tendero correctamente.");
 			} else {
 				System.out.println("Ingrese una calificación valida.");
-
 			}
-
 		}
-
+	}
+	public String ToString() {
+		return "Calificar Tendero";
 	}
 }

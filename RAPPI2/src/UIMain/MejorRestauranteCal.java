@@ -26,5 +26,7 @@ public class MejorRestauranteCal implements OpcionDeMenu {
 			System.out.println(i + " . " + lista.get(i).getNombre());
 		}
 	}
-
+	public String ToString() {
+		return "Mejor restaurante";
+	}
 }

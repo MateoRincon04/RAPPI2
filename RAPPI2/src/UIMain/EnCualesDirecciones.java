@@ -22,7 +22,9 @@ public class EnCualesDirecciones implements OpcionDeMenu {
 		for (int i = 0; i < direccionesDisponibles.size(); i++) {
 			System.out.println(direccionesDisponibles.get(i));
 		}
-
+	}
+	public String ToString() {
+		return "¿En cuáles direcciones?";
 	}
 
 }

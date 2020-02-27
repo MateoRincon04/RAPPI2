@@ -42,6 +42,8 @@ public class login implements OpcionDeMenu {
 			usuario = (Administrador) Main.usuario;
 			System.out.println("Bienvenido Administrador " + usuario.getNombre());
 		}
-
+	}
+	public String ToString() {
+		return "Log In";
 	}
 }
