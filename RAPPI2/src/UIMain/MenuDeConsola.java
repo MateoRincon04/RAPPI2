@@ -36,7 +36,7 @@ public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu 
     	teclado.nextLine();
     	return teclado.nextLine();
     }
-
+//jeje
 
     public static void main (String args[]) {
     	MenuDeConsola MenuInicio = new MenuDeConsola(3); //Size: , registro, cliente, cliente sin registrar
