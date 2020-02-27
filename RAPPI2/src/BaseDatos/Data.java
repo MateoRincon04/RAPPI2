@@ -135,7 +135,7 @@ public class Data {
 		return perfil;
 	}
 	
-	public static Perfil buscarUsuario(String userName, int clave) {
+	public static Perfil buscarUsuario(String userName, String clave) {
 		Perfil perfil= null;
 		ArrayList<Perfil> dataBase =Data.traerDataBasePerfil();
 		Iterator<Perfil> iter = dataBase.iterator(); 

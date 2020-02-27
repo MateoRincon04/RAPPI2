@@ -29,7 +29,7 @@ public class Administrador extends Perfil{
      * @see {@link Perfil#Perfil(String, int, int, int, String)}
      * @param salario El parametro salario define el salario que tendra el Administrador
      */
-    public Administrador(String nombre, int telefono, int comuna, int clave, String userName, long salario){
+    public Administrador(String nombre, int telefono, int comuna, String clave, String userName, long salario){
         super(nombre, telefono, comuna, clave, userName);
         this.salario = salario;
     }//Cierre del constructor
@@ -54,7 +54,7 @@ public class Administrador extends Perfil{
      * @param userName El parametro userName define el userName que tendra el Tendero para registrarse
      * @param salario El parametro salario define el salario que tendra el Tendero
      */
-    public void crearTendero(String nombre, int telefono, int comuna, int clave, String userName, long salario) {
+    public void crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
     	Data.agreagarObjetoDataBasePerfil(new Tendero(nombre, telefono, comuna, clave, userName, salario));
     }
     

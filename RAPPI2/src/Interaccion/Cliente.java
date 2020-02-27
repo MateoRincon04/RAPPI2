@@ -39,7 +39,7 @@ public class Cliente extends Perfil {
 	 * @param metodoDePago El parametro metodoDePago define el metodo de pago con el
 	 *                     que el Cliente planea comprar platos
 	 */
-	public Cliente(String nombre, int telefono, int comuna, int clave, String userName, long saldo,
+	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
 		String metodoDePago) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
