@@ -11,9 +11,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import UIMain.*;
+
 import Administracion.Perfil;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
+
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,8 +41,8 @@ public class Data {
     	return opciones;
     }
 	
-	private static final String filepathPerfil = "temp\\perfilesGuardados.json";
-	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
+	private static final String filepathPerfil = "perfilesGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 	/*
 	 * se usa al principio del Main para cargar el file con la base de datos de perfiles
 	 */
@@ -133,7 +135,7 @@ public class Data {
 	/*
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
-	public static boolean agreagarObjetoDataBasePerfil(Perfil obj) {
+	public static boolean agregarObjetoDataBasePerfil(Perfil obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
@@ -151,7 +153,7 @@ public class Data {
 	/*
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
-	public static boolean agreagarObjetoDataBaseRestaurante(Restaurante obj) {
+	public static boolean agregarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
