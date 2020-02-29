@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import UIMain.*;
@@ -50,11 +52,13 @@ public class Data {
 			System.out.println("La dataBasePerfil se ha cargado correctamente");
 		}else {
 			System.out.println("La dataBasePerfil se ha creado correctamente");
-			Gson gson = new Gson();
-			ArrayList<Perfil> arreglo = new ArrayList<>();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(DataBase));
-			bw.write(gson.toJson(arreglo));
-			bw.close();
+			JsonArray array = new JsonArray();
+			try(FileWriter fw = new FileWriter(filepathPerfil) ){
+				fw.write(array.toString());
+				fw.flush();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return DataBase;
 	}
@@ -67,24 +71,25 @@ public class Data {
 			System.out.println("La dataBaseRestaurante se ha cargado correctamente");
 		}else {
 			System.out.println("La dataRestaurante se ha creado correctamente");
-			Gson gson = new Gson();
-			ArrayList<Perfil> arreglo = new ArrayList<>();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(DataBase));
-			bw.write(gson.toJson(arreglo));
-			bw.close();
+			JsonArray array = new JsonArray();
+			try(FileWriter fw = new FileWriter(filepathPerfil) ){
+				fw.write(array.toString());
+				fw.flush();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return DataBase;
 	}
 	/*
 	 * trae la base de datos de perfiles desde su file
 	 */
-	public static ArrayList<Perfil> traerDataBasePerfil() {
-		try {
-			Gson gson = new Gson();
-			BufferedReader br = new BufferedReader(new FileReader(Data.cargarFileDataBasePerfil()));
-			ArrayList<Perfil> perfiles = (ArrayList<Perfil>) gson.fromJson(br,new TypeToken<ArrayList<Perfil>>() {}.getType());
-			br.close();
-			return perfiles;
+	public static JsonArray traerDataBasePerfil(){
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathPerfil)){
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
 		}catch(Exception ex) {
 			System.out.println("No se puede traer la dataBasePerfil correctamente");
 			return null;
@@ -93,41 +98,37 @@ public class Data {
 	/*
 	 * trae la base de datos de restaurantes desde su file
 	 */
-	public static ArrayList<Restaurante> traerDataBaseRestaurante() {
-		try {
-			Gson gson = new Gson();
-			BufferedReader br = new BufferedReader(new FileReader(Data.cargarFileDataBaseRestaurante()));
-			ArrayList<Restaurante> restaurantes = (ArrayList<Restaurante>) gson.fromJson(br,new TypeToken<ArrayList<Restaurante>>() {}.getType());
-			br.close();
-			return restaurantes;
+	public static JsonArray traerDataBaseRestaurante() {
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathRestaurantes)){
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
 		}catch(Exception ex) {
-			System.out.println("No se puede traer la dataBaseRestaurante correctamente");
+			System.out.println("No se puede traer la dataBaseRestaurantes correctamente");
 			return null;
 		}
 	}
 	/*
 	 * se usa para actualizar las bases de datos de perfiles
 	 */
-	public static void actualizarDataBasePerfil(ArrayList<Perfil> arreglo) {
-		try {
-			Gson gson = new Gson();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(Data.cargarFileDataBasePerfil()));
-			bw.write(gson.toJson(arreglo));
-			bw.close();
-		}catch(Exception ex) {
+	public static void actualizarDataBasePerfil(JsonArray array) {
+		try(FileWriter fw = new FileWriter(filepathPerfil) ){
+			fw.write(array.toString());
+			fw.flush();
+		}catch(IOException e) {
 			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
+			e.printStackTrace();
 		}
 	}
 	/*
 	 * se usa para actualizar las bases de datos de restaurantes
 	 */
-	public static void actualizarDataBaseRestaurante(ArrayList<Restaurante> arreglo) {
-		try {
-			Gson gson = new Gson();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(Data.cargarFileDataBaseRestaurante()));
-			bw.write(gson.toJson(arreglo));
-			bw.close();
-		}catch(Exception ex) {
+	public static void actualizarDataBaseRestaurante(JsonArray array) {
+		try(FileWriter fw = new FileWriter(filepathRestaurantes) ){
+			fw.write(array.toString());
+			fw.flush();
+		}catch(IOException ex) {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
@@ -135,9 +136,12 @@ public class Data {
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
 	public static boolean agreagarObjetoDataBasePerfil(Perfil obj) {
-		ArrayList<Perfil> dataBase = Data.traerDataBasePerfil();
-		if(!dataBase.contains(obj)) {
-			dataBase.add(obj);
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePerfil();
+		if(!dataBase.contains(je)) {
+			dataBase.add(je);
 			Data.actualizarDataBasePerfil(dataBase);
 			return true;
 		}
@@ -150,9 +154,12 @@ public class Data {
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
 	public static boolean agreagarObjetoDataBaseRestaurante(Restaurante obj) {
-		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
-		if(!dataBase.contains(obj)) {
-			dataBase.add(obj);
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseRestaurante();
+		if(!dataBase.contains(je)) {
+			dataBase.add(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
 			return true;
 		}
@@ -165,9 +172,12 @@ public class Data {
 	 * eliminar objeto de la dataBasePerfil
 	 */
 	public static void eliminarObjetoDataBasePerfil(Perfil obj) {
-		ArrayList<Perfil> dataBase = Data.traerDataBasePerfil();
-		if(dataBase.contains(obj)) {
-			dataBase.remove(obj);
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePerfil();
+		if(dataBase.contains(je)) {
+			dataBase.remove(je);
 			Data.actualizarDataBasePerfil(dataBase);
 		}
 		else {
@@ -178,9 +188,12 @@ public class Data {
 	 * eliminar objeto de la dataBaseRestaurante
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
-		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
-		if(dataBase.contains(obj)) {
-			dataBase.remove(obj);
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseRestaurante();
+		if(dataBase.contains(je)) {
+			dataBase.remove(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
 		}
 		else {
@@ -193,8 +206,8 @@ public class Data {
 	
 	public static Perfil buscarUsuario(String userName) {
 		Perfil perfil= null;
-		ArrayList<Perfil> dataBase =Data.traerDataBasePerfil();
-		Iterator<Perfil> iter = dataBase.iterator(); 
+		JsonArray dataBase =Data.traerDataBasePerfil();
+		Iterator<JsonElement> iter = dataBase.iterator(); 
 		while(iter.hasNext()) {
 			if(userName.equals(((Perfil) iter).getUserName())) {
 				perfil =(Perfil) iter;
@@ -205,8 +218,8 @@ public class Data {
 	
 	public static Perfil buscarUsuario(String userName, String clave) {
 		Perfil perfil= null;
-		ArrayList<Perfil> dataBase =Data.traerDataBasePerfil();
-		Iterator<Perfil> iter = dataBase.iterator(); 
+		JsonArray dataBase =Data.traerDataBasePerfil();
+		Iterator<JsonElement> iter = dataBase.iterator(); 
 		while(iter.hasNext()) {
 			if(userName.equals(((Perfil) iter).getUserName())&& clave==((Perfil) iter).getClave()) {
 				perfil =(Perfil) iter;
@@ -220,8 +233,8 @@ public class Data {
 	
 	public static Restaurante buscarRestaurante(String userName) {
 		Restaurante restaurante= null;
-		ArrayList<Restaurante> dataBase =Data.traerDataBaseRestaurante();
-		Iterator<Restaurante> iter = dataBase.iterator(); 
+		JsonArray dataBase =Data.traerDataBaseRestaurante();
+		Iterator<JsonElement> iter = dataBase.iterator(); 
 		while(iter.hasNext()) {
 			if(userName.equals(((Restaurante) iter).getNombre())) {
 				restaurante =(Restaurante) iter;
@@ -231,9 +244,9 @@ public class Data {
 	}
 	/*
 	 * organiza los restaurantes de mayor a menor segun calificacion
-	 */
+	 
 	public static ArrayList<Restaurante> OrganizarRestaurantesPorCalificacion(){
-		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
+		JsonArray historial = Data.traerDataBaseRestaurante();
 		// bubble sort
 				boolean ordenado = false;
 				while (!ordenado) {
@@ -249,5 +262,5 @@ public class Data {
 				}
 				return historial;
 	}
+	*/
 }
-
