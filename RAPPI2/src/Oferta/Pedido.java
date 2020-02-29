@@ -4,6 +4,18 @@ import Interaccion.Cliente;
 import Interaccion.Tendero;
 import Interaccion.Notificacion;
 
+/**
+ * Clase Pedido, su finalidad es poder tener un formato mas amigable para el cliente poder
+ * realizar un encargo y para que al ser creado este agregar las notificaciones a los 
+ * respectivos restaurante y tenderos para que puedan realizar cada tarea y asi suplir
+ * la peticion del cliente.
+ * 
+ * @author: Santiago Tamayo, Mateo Rincón
+ *
+ * @version:
+ * 
+ */
+
 public class Pedido {
 	private Cliente cliente;
 	private Plato plato;
@@ -12,6 +24,12 @@ public class Pedido {
 	private boolean estaListo;
 	private Tendero tendero;
 	
+	/**
+	 * Constructor de Pedido
+	 * 
+	 * @param cliente, El parametro cliente define el cliente que realizo el Pedido
+	 * @param plato, El parametro plato define el plato que desea el cliente
+	 */
 	public Pedido(Cliente cliente, Plato plato) {
 		this.cliente = cliente;
 		this.plato = plato;

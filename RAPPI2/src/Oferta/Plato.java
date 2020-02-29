@@ -81,6 +81,12 @@ public class Plato {
 		return this.restriccionDeEdad;
 	}
 	
+	/**
+	 * Método para dar la calificacion del plato de manera promediada para asi saber
+	 * cual es la calificacion general de cada plato de cada Restaurante.
+	 * 
+	 * @return double con la calificación del plato
+	 */
     public double getCalificacionPromediada() {
     	double contadorAux = 0;
     	if(!this.calificaciones.isEmpty()) {

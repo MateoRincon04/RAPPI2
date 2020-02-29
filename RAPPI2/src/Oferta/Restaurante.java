@@ -122,7 +122,10 @@ public class Restaurante {
 		return (this.menu.get(indice));
 	}
 
-	
+	/**
+	 *  @see Plato#getCalificacionPromediada()
+	 * @return
+	 */
     public double getCalificacionPromediada() {
     	double contadorAux = 0;
     	if(!this.calificaciones.isEmpty()) {
