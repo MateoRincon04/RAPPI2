@@ -1,17 +1,21 @@
 package BaseDatos;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import UIMain.*;
 
 import Administracion.Perfil;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
+
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 public class Data {
 	
@@ -25,80 +29,131 @@ public class Data {
     	opciones.add(new CalificarTendero());
     	opciones.add(new CalificarRestaurante());
     	opciones.add(new CuantoHeGastado());
-    	opciones.add(new CuantosPedidosHeEntregado());
-    	opciones.add(new EnCualesDirecciones());
     	opciones.add(new MejorRestauranteCal());
     	opciones.add(new PlatosQueMasCompre());
-    	   	
+    	opciones.add(new CuantosPedidosHeEntregado());
+    	opciones.add(new EnCualesDirecciones());	   	
     }
     
     public static final ArrayList<OpcionDeMenu> getOpciones(){
     	return opciones;
     }
 	
-	private static final String filepathPerfil = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\datosPersonal";
-	//private static final String filepathPlatos = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\platos";
-	/* lo comente porque no se para que sirve
-	 */
-	private static final String filepathRestaurantes = "C:\\Users\\mythe\\git\\repository\\RAPPI2\\temp\\restaurantes";
-	
-	
+	private static final String filepathPerfil = "perfilesGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 	/*
-	 * se usa para crear la dataBasePerfil
+	 * se usa al principio del Main para cargar el file con la base de datos de perfiles
 	 */
-	public static void CrearDataBasePefil() {
-		try {
-			ArrayList<Perfil> dataBase = new ArrayList<> ();
-			FileOutputStream fout = new FileOutputStream(filepathPerfil);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(dataBase);
-			out.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-		
+	public static File cargarFileDataBasePerfil() throws IOException {
+		File DataBase = new File(filepathPerfil);
+		if(DataBase.exists()) {
+			System.out.println("La dataBasePerfil se ha cargado correctamente");
+		}else {
+			System.out.println("La dataBasePerfil se ha creado correctamente");
+			Gson gson = new Gson();
+			ArrayList<Perfil> arreglo = new ArrayList<>();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(DataBase));
+			bw.write(gson.toJson(arreglo));
+			bw.close();
+		}
+		return DataBase;
 	}
-	/*acceder a la DataBasePerfil dentro del file
+	/*
+	 * se usa al principio del Main para cargar el file con la base de datos de restaurantes
+	 */
+	public static File cargarFileDataBaseRestaurante() throws IOException {
+		File DataBase = new File(filepathRestaurantes);
+		if(DataBase.exists()) {
+			System.out.println("La dataBaseRestaurante se ha cargado correctamente");
+		}else {
+			System.out.println("La dataRestaurante se ha creado correctamente");
+			Gson gson = new Gson();
+			ArrayList<Perfil> arreglo = new ArrayList<>();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(DataBase));
+			bw.write(gson.toJson(arreglo));
+			bw.close();
+		}
+		return DataBase;
+	}
+	/*
+	 * trae la base de datos de perfiles desde su file
 	 */
 	public static ArrayList<Perfil> traerDataBasePerfil() {
-		try { 
-			FileInputStream fin = new FileInputStream(filepathPerfil);
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			ArrayList<Perfil> dataBase = (ArrayList<Perfil>) ois.readObject();
-            System.out.println("The Object has been read from the file");
-            return dataBase;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-	}
-	/*
-	 * actualizar la dataBasePerfil
-	 */
-	public static void actualizarDataBasePerfil(ArrayList<Perfil> dataBase) {
 		try {
-			FileOutputStream fout = new FileOutputStream(filepathPerfil);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(dataBase);
-			out.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+			Gson gson = new Gson();
+			BufferedReader br = new BufferedReader(new FileReader(Data.cargarFileDataBasePerfil()));
+			ArrayList<Perfil> perfiles = (ArrayList<Perfil>) gson.fromJson(br,new TypeToken<ArrayList<Perfil>>() {}.getType());
+			br.close();
+			return perfiles;
+		}catch(Exception ex) {
+			System.out.println("No se puede traer la dataBasePerfil correctamente");
+			return null;
+		}
 	}
-	
 	/*
-	 * Agregar objeto a la dataBasePerfil
+	 * trae la base de datos de restaurantes desde su file
+	 */
+	public static ArrayList<Restaurante> traerDataBaseRestaurante() {
+		try {
+			Gson gson = new Gson();
+			BufferedReader br = new BufferedReader(new FileReader(Data.cargarFileDataBaseRestaurante()));
+			ArrayList<Restaurante> restaurantes = (ArrayList<Restaurante>) gson.fromJson(br,new TypeToken<ArrayList<Restaurante>>() {}.getType());
+			br.close();
+			return restaurantes;
+		}catch(Exception ex) {
+			System.out.println("No se puede traer la dataBaseRestaurante correctamente");
+			return null;
+		}
+	}
+	/*
+	 * se usa para actualizar las bases de datos de perfiles
+	 */
+	public static void actualizarDataBasePerfil(ArrayList<Perfil> arreglo) {
+		try {
+			Gson gson = new Gson();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(Data.cargarFileDataBasePerfil()));
+			bw.write(gson.toJson(arreglo));
+			bw.close();
+		}catch(Exception ex) {
+			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
+		}
+	}
+	/*
+	 * se usa para actualizar las bases de datos de restaurantes
+	 */
+	public static void actualizarDataBaseRestaurante(ArrayList<Restaurante> arreglo) {
+		try {
+			Gson gson = new Gson();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(Data.cargarFileDataBaseRestaurante()));
+			bw.write(gson.toJson(arreglo));
+			bw.close();
+		}catch(Exception ex) {
+			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
+		}
+	}
+	/*
+	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
 	public static boolean agreagarObjetoDataBasePerfil(Perfil obj) {
 		ArrayList<Perfil> dataBase = Data.traerDataBasePerfil();
 		if(!dataBase.contains(obj)) {
 			dataBase.add(obj);
 			Data.actualizarDataBasePerfil(dataBase);
+			return true;
+		}
+		else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+			return false;
+		}
+	}
+	/*
+	 * se usa para agregar objetos a la base de datos de perfiles
+	 */
+	public static boolean agreagarObjetoDataBaseRestaurante(Restaurante obj) {
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		if(!dataBase.contains(obj)) {
+			dataBase.add(obj);
+			Data.actualizarDataBaseRestaurante(dataBase);
 			return true;
 		}
 		else {
@@ -120,7 +175,20 @@ public class Data {
 		}
 	}
 	/*
-	 * buscar un usuario en la base de datos de perfil
+	 * eliminar objeto de la dataBaseRestaurante
+	 */
+	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		if(dataBase.contains(obj)) {
+			dataBase.remove(obj);
+			Data.actualizarDataBaseRestaurante(dataBase);
+		}
+		else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	/*
+	 * buscar un usuario en la base de datos de perfil con sobrecarga
 	 */
 	
 	public static Perfil buscarUsuario(String userName) {
@@ -146,84 +214,8 @@ public class Data {
 		}
 		return perfil;
 	}
-	
 	/*
-	 * se usa para crear la dataBaseRestaurante
-	 */
-	public static void CrearDataBaseRestaurante() {
-		try {
-			ArrayList<Restaurante> dataBase = new ArrayList<> ();
-			FileOutputStream fout = new FileOutputStream(filepathRestaurantes);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(dataBase);
-			out.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-		
-	}
-	
-	/*acceder a la DataBasePerfil dentro del file
-	 */
-	public static ArrayList<Restaurante> traerDataBaseRestaurante() {
-		try { 
-			FileInputStream fin = new FileInputStream(filepathRestaurantes);
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			ArrayList<Restaurante> dataBase = (ArrayList<Restaurante>) ois.readObject();
-            System.out.println("The Object has been read from the file");
-            return dataBase;
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-	}
-	/*
-	 * actualizar la dataBasePerfil
-	 */
-	public static void actualizarDataBaseRestaurante(ArrayList<Restaurante> dataBase) {
-		try {
-			FileOutputStream fout = new FileOutputStream(filepathRestaurantes);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(dataBase);
-			out.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-	}
-	
-	/*
-	 * Agregar objeto a la dataBasePerfil
-	 */
-	public static void agreagarObjetoDataBaseRestaurante(Restaurante obj) {
-		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
-		if(!dataBase.contains(obj)) {
-			dataBase.add(obj);
-			Data.actualizarDataBaseRestaurante(dataBase);
-		}
-		else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
-		}
-	}
-	/*
-	 * eliminar objeto de la dataBasePerfil
-	 */
-	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
-		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
-		if(dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBaseRestaurante(dataBase);
-		}
-		else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
-		}
-	}
-	/*
-	 * buscar un usuario en la base de datos de perfil
+	 * buscar un restaurante en la base de datos de restaurante
 	 */
 	
 	public static Restaurante buscarRestaurante(String userName) {
@@ -237,7 +229,9 @@ public class Data {
 		}
 		return restaurante;
 	}
-	
+	/*
+	 * organiza los restaurantes de mayor a menor segun calificacion
+	 */
 	public static ArrayList<Restaurante> OrganizarRestaurantesPorCalificacion(){
 		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
 		// bubble sort
@@ -256,5 +250,4 @@ public class Data {
 				return historial;
 	}
 }
-
 

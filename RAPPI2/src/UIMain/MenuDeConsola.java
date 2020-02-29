@@ -33,18 +33,29 @@ public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu 
     			}
     			pri = false;
     		}
-    		
-    		
-    		
-    		
-    		
-    		
     		System.out.println("oprima el numero indicado, de la funcion que deseas realizar");
-    		int opc = Main.user.nextInt();
-    		menu.get(opc-1).ejecutar();
-    		
+    		String valor;
+    		while (true) {
+    			valor = Main.user.next();
+    			try {
+    				int opc=Integer.parseInt(valor);
+    				if (opc>=0 && opc<=3) {
+    					menu.get(opc-1).ejecutar(); 
+    					break;
+    				}else {
+    					System.out.println("Ingrese un numero valido");
+    				}
+    			}catch(Exception e) {
+    				System.out.println("Ingrese un valor valido.");
+    			}
+    			
+    		}
     		break;
     	}
+    	lanzarMenu();
+    }
+    public static void lanzarMenu(Perfil usuario) {
+    	
     }
     static long readLong() {
     	return Main.user.nextLong();
