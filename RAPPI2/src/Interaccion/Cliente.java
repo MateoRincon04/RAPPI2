@@ -88,7 +88,7 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * Mï¿½todo que calcula la calificacion promedio que le han dado los tenderos a
+	 * Método que calcula la calificacion promedio que le han dado los tenderos a
 	 * este Cliente
 	 * 
 	 * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
@@ -110,7 +110,7 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * Mï¿½todo que califica al Tendero que entrego la orden
+	 * Método que califica al Tendero que entrego la orden
 	 * 
 	 * @param puntuacion El parametro puntuacion define la calificacion del Tendero
 	 */
@@ -149,6 +149,10 @@ public class Cliente extends Perfil {
 		return Data.traerDataBaseRestaurante();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String platoMasComprado(){
 		int contador1 = 0;
 		String aux = "";
