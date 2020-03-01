@@ -33,8 +33,9 @@ public class Data {
     	opciones.add(new CuantoHeGastado());
     	opciones.add(new MejorRestauranteCal());
     	opciones.add(new PlatosQueMasCompre());
+    	opciones.add(new EnCualesDirecciones());
     	opciones.add(new CuantosPedidosHeEntregado());
-    	opciones.add(new EnCualesDirecciones());	   	
+    		   	
     }
     
     public static final ArrayList<OpcionDeMenu> getOpciones(){
