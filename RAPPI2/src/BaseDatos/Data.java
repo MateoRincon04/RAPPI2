@@ -1,28 +1,17 @@
 package BaseDatos;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import UIMain.*;
 import Interaccion.Cliente;
 import Interaccion.Tendero;
 import Administracion.Administrador;
-import Administracion.Perfil;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
-
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * La clase Data tiene como finalidad la obtencio y contencion de datos en formato Json

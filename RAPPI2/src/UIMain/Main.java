@@ -1,13 +1,8 @@
 package UIMain;
 
 import BaseDatos.Data;
-import Oferta.*;
-import Interaccion.*;
-
-import java.io.EOFException;
 import java.io.IOException;
 import java.util.Scanner;
-
 import Administracion.*;
 
 public class Main {
@@ -21,8 +16,7 @@ public class Main {
 		Data.cargarFileDataBaseCliente();
 		Data.cargarFileDataBaseTendero();
 		Data.cargarFileDataBaseRestaurante();
-		MenuDeConsola menuPrrrrr = new MenuDeConsola();
-		menuPrrrrr.lanzarMenu();
+		MenuDeConsola.lanzarMenu();
 		user.close();
 		
 	}

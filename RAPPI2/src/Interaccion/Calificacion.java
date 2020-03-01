@@ -1,7 +1,6 @@
 package Interaccion;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
 /**
  * Clase Calificacion
  * Esta clase tiene como finalidad hacer la conexion entre el calificado y el calificador

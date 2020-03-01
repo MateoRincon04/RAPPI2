@@ -1,6 +1,5 @@
 package Administracion;
 
-import java.util.ArrayList;
 
 /**
  * Clase perfil
@@ -8,15 +7,9 @@ import java.util.ArrayList;
  * clase abstracta como principios para esto, ya que tanto a la clase administrador, como a
  * cliente y tendero se les quiere guardar la informacion de estos atributos
  * 
- * @author: Mateo Rinc�n
+ * @author: Mateo Rincon
  * @version:
 */
-
-import java.util.HashMap;
-import java.util.List;
-
-import BaseDatos.Data;
-
 public class Perfil {
 	private String nombre;
 	private int telefono;
@@ -46,7 +39,7 @@ public class Perfil {
 	}
 
 	/**
-	 * M�todo abtracto que definira cada subclase a su manera
+	 * Metodo abtracto que definira cada subclase a su manera
 	 */
 
 	public void setNombre(String nombre) {

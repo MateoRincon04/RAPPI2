@@ -28,7 +28,6 @@ public class Cliente extends Perfil {
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	// private Carrito carrito;
 	private String metodoDePago;
-	private int referencia;
 	private long saldo;
 	private Pedido pedido;
 	private List<Pedido> historial = new ArrayList<Pedido>();
@@ -46,7 +45,7 @@ public class Cliente extends Perfil {
 		String metodoDePago) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
-		this.metodoDePago = metodoDePago;
+		this.setMetodoDePago(metodoDePago);
 		this.opciones.add(3);
 		this.opciones.add(4);
 		this.opciones.add(5);

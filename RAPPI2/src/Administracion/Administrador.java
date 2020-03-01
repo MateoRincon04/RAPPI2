@@ -1,7 +1,5 @@
 package Administracion;
 
-import java.util.ArrayList;
-import java.util.List;
 import Interaccion.Tendero;
 import Oferta.Restaurante;
 import UIMain.Main;
