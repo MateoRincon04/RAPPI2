@@ -23,10 +23,24 @@ import UIMain.OpcionDeMenu;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * La clase Data tiene como finalidad la obtencio y contencion de datos en formato Json
+ * para el correcto funcionamiento de la aplicacion.
+ * 
+ * Estructuras importantes:
+ * @see: {@link #opciones}
+ * 
+ * @author: Santiago Tamayo
+ * @version:
+ */
 public class Data {
 	
     private static ArrayList<OpcionDeMenu> opciones = new ArrayList<>();
     
+    
+    /**
+     * Método en el se cargan todas las opciones de menu generales. 
+     */
     public static final void CargarOpciones() {
     	opciones.add(new Registrarse());
     	opciones.add(new login());
@@ -48,8 +62,9 @@ public class Data {
 	
 	private static final String filepathPerfil = "temp\\perfilesGuardados.json";
 	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
-	/*
-	 * se usa al principio del Main para cargar el file con la base de datos de perfiles
+	
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de perfiles
 	 */
 	public static File cargarFileDataBasePerfil() throws IOException {
 		File DataBase = new File(filepathPerfil);
@@ -67,8 +82,8 @@ public class Data {
 		}
 		return DataBase;
 	}
-	/*
-	 * se usa al principio del Main para cargar el file con la base de datos de restaurantes
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de restaurantes
 	 */
 	public static File cargarFileDataBaseRestaurante() throws IOException {
 		File DataBase = new File(filepathRestaurantes);
@@ -86,8 +101,8 @@ public class Data {
 		}
 		return DataBase;
 	}
-	/*
-	 * trae la base de datos de perfiles desde su file
+	/**
+	 * Metodo que lee la base de datos de perfiles desde su file y obtiene los objetos alli guardados
 	 */
 	public static JsonArray traerDataBasePerfil(){
 		JsonParser jp = new JsonParser();
@@ -100,8 +115,8 @@ public class Data {
 			return null;
 		}
 	}
-	/*
-	 * trae la base de datos de restaurantes desde su file
+	/**
+	 * Metodo que lee la base de datos de restaurantes desde su file para asi obtener aquellos objetos creados previamente
 	 */
 	public static JsonArray traerDataBaseRestaurante() {
 		JsonParser jp = new JsonParser();
@@ -114,8 +129,8 @@ public class Data {
 			return null;
 		}
 	}
-	/*
-	 * se usa para actualizar las bases de datos de perfiles
+	/**
+	 * Metodo que se usa para actualizar las bases de datos de perfiles, escribiendo los nuevos objetos que se necesiten guardar
 	 */
 	public static void actualizarDataBasePerfil(JsonArray array) {
 		try(FileWriter fw = new FileWriter(filepathPerfil) ){
@@ -126,8 +141,8 @@ public class Data {
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * se usa para actualizar las bases de datos de restaurantes
+	/**
+	 * Metodo que se usa para actualizar las bases de datos de restaurantes, escribiendo aquellos nuevos restaurantes que se vayan a tener en cuenta en la oferta
 	 */
 	public static void actualizarDataBaseRestaurante(JsonArray array) {
 		try(FileWriter fw = new FileWriter(filepathRestaurantes) ){
@@ -137,8 +152,12 @@ public class Data {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
-	/*
-	 * se usa para agregar objetos a la base de datos de perfiles
+	/**
+	 * Metodo que se usa para agregar objetos a la base de datos de perfiles, convirtiendo asi el objeto a guardar en un JsonElement para
+	 * poder insertarlo en el archivo respectivo
+	 * 
+	 * @see: #actualizarDataBasePerfil(JsonArray)
+	 * @see: {@link #traerDataBasePerfil()}
 	 */
 	public static void agregarObjetoDataBasePerfil(Perfil obj) {
 		Gson gson = new Gson();
@@ -153,8 +172,12 @@ public class Data {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}
 	}
-	/*
-	 * se usa para agregar objetos a la base de datos de perfiles
+	/**
+	 * Metodo se usa para agregar objetos a la base de datos de restaurante, conviritiendo estos objetos en los JsonElements para 
+	 * asi insertarlos a su respectivo archivo
+	 * 
+	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
+	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
 	public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
@@ -169,8 +192,11 @@ public class Data {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}
 	}
-	/*
-	 * eliminar objeto de la dataBasePerfil
+	/**
+	 * Metodo que elimina cierto objeto de la dataBasePerfil
+	 * 
+	 * @see: {@link #traerDataBasePerfil()}
+	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBasePerfil(Perfil obj) {
 		Gson gson = new Gson();
@@ -185,8 +211,11 @@ public class Data {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
-	/*
-	 * eliminar objeto de la dataBaseRestaurante
+	/**
+	 * Metodo para eliminar cierto objeto de la dataBaseRestaurante
+	 * 
+	 * @see: {@link #traerDataBaseRestaurante()}
+	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
@@ -201,8 +230,10 @@ public class Data {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
-	/*
-	 * buscar un usuario en la base de datos de perfil con sobrecarga
+	/**
+	 * Metodo para buscar un usuario en la base de datos de perfil usando solo el userName
+	 * 
+	 * @see: {@link #traerDataBasePerfil()}
 	 */
 	
 	public static Perfil buscarUsuario(String userName) {
@@ -218,6 +249,11 @@ public class Data {
 		return perfil;
 	}
 	
+	/**
+	 * Metodo para buscar un usuario en la base de datos de perfil usando el userName y la clave del usuario
+	 * 
+	 * @see: {@link #traerDataBasePerfil()}
+	 */
 	public static Perfil buscarUsuario(String userName, String clave) {
 		Perfil perfil= null;
 		Gson gson = new Gson();
@@ -230,8 +266,8 @@ public class Data {
 		}
 		return perfil;
 	}
-	/*
-	 * buscar un restaurante en la base de datos de restaurante
+	/**
+	 * Metodo para buscar un restaurante en la base de datos de restaurante
 	 */
 	
 	public static Restaurante buscarRestaurante(String userName) {
@@ -246,8 +282,8 @@ public class Data {
 		}
 		return restaurante;
 	}
-	/*
-	 * organiza los restaurantes de mayor a menor segun calificacion
+	/**
+	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
 	 */
 	public static ArrayList<Restaurante> OrganizarRestaurantesPorCalificacion(){
 		Gson gson = new Gson();
