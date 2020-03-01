@@ -67,7 +67,7 @@ public class Administrador extends Perfil {
 	 * @param salario  El parametro salario define el salario que tendra el Tendero
 	 */
 	public void crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
-		Data.agreagarObjetoDataBasePerfil(new Tendero(nombre, telefono, comuna, clave, userName, salario));
+		Data.agregarObjetoDataBasePerfil(new Tendero(nombre, telefono, comuna, clave, userName, salario));
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class Administrador extends Perfil {
 	 *                  el Restaurante
 	 */
 	public void crearRestaurante(String nombre, String direccion, String celular) {
-		Data.agreagarObjetoDataBaseRestaurante(new Restaurante(nombre, direccion, celular));
+		Data.agregarObjetoDataBaseRestaurante(new Restaurante(nombre, direccion, celular));
 	}
 
 	public void setOpciones(int posicion) {

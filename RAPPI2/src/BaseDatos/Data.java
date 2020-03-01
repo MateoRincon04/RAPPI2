@@ -8,14 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import UIMain.*;
-
 import Administracion.Perfil;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
-
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -85,7 +84,7 @@ public class Data {
 	 * trae la base de datos de perfiles desde su file
 	 */
 	public static JsonArray traerDataBasePerfil(){
-		JsonParser jp = new JsonParser();
+		/*JsonParser jp = new JsonParser();
 		try (FileReader fr = new FileReader(filepathPerfil)){
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
@@ -93,7 +92,9 @@ public class Data {
 		}catch(Exception ex) {
 			System.out.println("No se puede traer la dataBasePerfil correctamente");
 			return null;
-		}
+		}*/
+		
+		
 	}
 	/*
 	 * trae la base de datos de restaurantes desde su file

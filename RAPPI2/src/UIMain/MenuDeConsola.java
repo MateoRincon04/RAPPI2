@@ -55,15 +55,22 @@ public class MenuDeConsola{  //Se desplega cada vez que se vaya a crear un menu 
     	lanzarMenu();
     }
     public static void lanzarMenu(Perfil usuario) {
+    
+    	if (usuario instanceof Administrador) {
+    		
+    		
+    	}
+    	
+    	else if (usuario instanceof Cliente) {
+    		
+    	}
+    	
+    	else {
+    		
+    	}
+    		
+    		
     	
     }
-    static long readLong() {
-    	return Main.user.nextLong();
-    }
-    static String readString() {
-    	Main.user.nextLine();
-    	return Main.user.nextLine();
-    }
-//jeje
 
 }
