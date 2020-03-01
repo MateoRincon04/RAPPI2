@@ -3,6 +3,9 @@ package Interaccion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.gson.JsonArray;
+
 import Administracion.*;
 import Oferta.*;
 import BaseDatos.Data;
@@ -50,7 +53,6 @@ public class Cliente extends Perfil {
 		this.opciones.add(6);
 		this.opciones.add(9);
 		this.opciones.add(10);
-		Data.agregarObjetoDataBasePerfil(this);
 	}
 	
 	public List<Integer> getOpciones(){
@@ -88,7 +90,7 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * Método que calcula la calificacion promedio que le han dado los tenderos a
+	 * Mï¿½todo que calcula la calificacion promedio que le han dado los tenderos a
 	 * este Cliente
 	 * 
 	 * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
@@ -110,7 +112,7 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * Método que califica al Tendero que entrego la orden
+	 * Mï¿½todo que califica al Tendero que entrego la orden
 	 * 
 	 * @param puntuacion El parametro puntuacion define la calificacion del Tendero
 	 */
@@ -123,7 +125,7 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * Método que califica al Restaurante que preparo el pedido
+	 * Mï¿½todo que califica al Restaurante que preparo el pedido
 	 * 
 	 * @param puntuacion El parametro puntuacion define la calificacion del
 	 *                   Restaurante
@@ -145,7 +147,7 @@ public class Cliente extends Perfil {
 				+ this.getUserName();
 	}
 
-	public List<Restaurante> verListaDeRestaurantes() {
+	public JsonArray verListaDeRestaurantes() {
 		return Data.traerDataBaseRestaurante();
 	}
 	
