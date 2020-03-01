@@ -53,9 +53,7 @@ public class Notificacion {
 		Iterator<JsonElement> iterator = Data.traerDataBaseTendero().iterator();
 		Gson gson = new Gson();
 		while(iterator.hasNext()) {
-			Perfil iter = gson.fromJson(iterator.next(), Perfil.class);
-			if(iterator instanceof Tendero) {
-				Tendero notificado = (Tendero) iter;
+			Tendero notificado = gson.fromJson(iterator.next(), Tendero.class);
 				if(notificado.getEstaDisponible()) {
 					notificado.agregarNotificacion(this);
 					if(tomarPedido){
@@ -64,7 +62,6 @@ public class Notificacion {
 						break;
 					}
 				}
-			}
 			
 			break;
 		}
