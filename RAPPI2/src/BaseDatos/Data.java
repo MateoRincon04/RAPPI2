@@ -46,8 +46,8 @@ public class Data {
     	return opciones;
     }
 	
-	private static final String filepathPerfil = "perfilesGuardados.json";
-	private static final String filepathRestaurantes = "restaurantesGuardados.json";
+	private static final String filepathPerfil = "temp\\perfilesGuardados.json";
+	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
 	/*
 	 * se usa al principio del Main para cargar el file con la base de datos de perfiles
 	 */
