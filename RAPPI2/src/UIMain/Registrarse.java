@@ -41,17 +41,17 @@ public class Registrarse implements OpcionDeMenu {
 		int comuna = Main.user.nextInt();
 		System.out.println("Ingrese su clave: ");
 		String clave = Main.user.next();
-		System.out.println("Ingrese su telefono ");
+		System.out.println("Ingrese su telefono: ");
 		int telefono = Main.user.nextInt();
 		System.out.println("Ingrese su saldo: ");
 		long saldo = Main.user.nextLong();
 		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago);
-		/*if (Data.agreagarObjetoDataBasePerfil(cliente)) {
+		if (Data.agregarObjetoDataBasePerfil(cliente)) {
 			System.out.println("Usuario creado exitosamente ");
 		} else {
 			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
 			ejecutar();
-		}*/
+		}
 	}
 	public String toString() {
 		return "Registrarse";
