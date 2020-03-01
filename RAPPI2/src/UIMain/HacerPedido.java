@@ -12,6 +12,7 @@ public class HacerPedido implements OpcionDeMenu {
 	public void ejecutar() {
 		/* se esta definiendo la forma como hace el pedido el usuario */
 		Cliente usuarioCliente = (Cliente) (Main.usuario);
+
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
 		String nombre = Main.user.nextLine();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
@@ -38,6 +39,7 @@ public class HacerPedido implements OpcionDeMenu {
 			}
 		}
 	}
+
 	public String toString() {
 		return "Hacer pedido";
 	}
