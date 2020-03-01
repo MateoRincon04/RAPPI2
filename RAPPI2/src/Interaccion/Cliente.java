@@ -31,7 +31,7 @@ public class Cliente extends Perfil {
 	private long saldo;
 	private Pedido pedido;
 	private List<Pedido> historial = new ArrayList<Pedido>();
-	public List<Integer> opciones= new ArrayList<Integer>();
+	public List<Integer> opciones = new ArrayList<Integer>();
 
 	/**
 	 * Constructor para los objetos de la clase Cliente
@@ -42,7 +42,7 @@ public class Cliente extends Perfil {
 	 *                     que el Cliente planea comprar platos
 	 */
 	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
-		String metodoDePago) {
+			String metodoDePago) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
 		this.setMetodoDePago(metodoDePago);
@@ -53,8 +53,8 @@ public class Cliente extends Perfil {
 		this.opciones.add(7);
 		this.opciones.add(8);
 	}
-	
-	public List<Integer> getOpciones(){
+
+	public List<Integer> getOpciones() {
 		return this.opciones;
 	}
 
@@ -71,12 +71,15 @@ public class Cliente extends Perfil {
 	}
 
 	public void hacerPedido(Plato plato) {
+
 		if (this.getSaldo() >= plato.getPrecio()) {
 			Pedido pedido = new Pedido(this, plato);
 			this.agregarAlHistorial(pedido);
 			System.out.println("Su pedido se ha realizado correctamente.");
+
 		} else {
 			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
+			this.hacerPedido(plato);
 		}
 	}
 
@@ -149,12 +152,12 @@ public class Cliente extends Perfil {
 	public JsonArray verListaDeRestaurantes() {
 		return Data.traerDataBaseRestaurante();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public String platoMasComprado(){
+	public String platoMasComprado() {
 		int contador1 = 0;
 		String aux = "";
 		for (int i = 0; i < historial.size(); i++) {
@@ -171,6 +174,7 @@ public class Cliente extends Perfil {
 		}
 		return aux;
 	}
+
 	public double cuantoHeGastado() {
 		double valorGastado = 0;
 		for (Pedido pedido : this.getHistorial()) { // Por cada pedido en la lista de pedidos:
