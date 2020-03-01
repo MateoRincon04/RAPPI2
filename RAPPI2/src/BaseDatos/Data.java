@@ -135,7 +135,7 @@ public class Data {
 	/*
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
-	public static void agreagarObjetoDataBasePerfil(Perfil obj) {
+	public static void agregarObjetoDataBasePerfil(Perfil obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
@@ -151,7 +151,7 @@ public class Data {
 	/*
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
-	public static void agreagarObjetoDataBaseRestaurante(Restaurante obj) {
+	public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
