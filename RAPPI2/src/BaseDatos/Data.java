@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import UIMain.*;
+import Interaccion.Cliente;
 
 import Administracion.Perfil;
 import Oferta.Restaurante;
@@ -201,12 +202,14 @@ public class Data {
 	 */
 	
 	public static Perfil buscarUsuario(String userName) {
+		Gson gson = new Gson();
 		Perfil perfil= null;
 		JsonArray dataBase =Data.traerDataBasePerfil();
 		Iterator<JsonElement> iter = dataBase.iterator(); 
 		while(iter.hasNext()) {
-			if(userName.equals(((Perfil) iter).getUserName())) {
-				perfil =(Perfil) iter;
+			JsonObject obj = iter.next().getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString())) {
+				perfil = gson.fromJson(obj, Perfil.class);
 			}
 		}
 		return perfil;
@@ -214,16 +217,13 @@ public class Data {
 	
 	public static Perfil buscarUsuario(String userName, String clave) {
 		Perfil perfil= null;
+		Gson gson = new Gson();
 		JsonArray dataBase =Data.traerDataBasePerfil();
-		System.out.println(dataBase.toString());
 		Iterator<JsonElement> iter = dataBase.iterator(); 
 		while(iter.hasNext()) {
-			Gson gson = new Gson();
-			String aux = gson.toJson(iter);
-			Perfil je = gson.fromJson(aux, Perfil.class);
-			if(userName.equals(je.getUserName())&& clave.equals(je.getClave())) {
-				perfil =je;
-				break;
+			JsonObject obj = iter.next().getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
+				perfil = gson.fromJson(obj, Perfil.class);
 			}
 		}
 		return perfil;

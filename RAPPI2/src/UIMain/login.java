@@ -21,14 +21,14 @@ public class login implements OpcionDeMenu {
 		Perfil usuario = null;
 		try {
 			System.out.println("Ingrese su usuario: ");
-			String userName = Main.user.nextLine();
+			String userName = Main.user.next();
 			System.out.println("Ingrese su clave: ");
 			String clave = Main.user.next();
 			usuario = Data.buscarUsuario(userName, clave);
 			Main.usuario = usuario;
 			System.out.println("Datos ingresados correctamente");
-
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Error ingresando usuario, intente nuevamente");
 			ejecutar();
 		}
