@@ -50,10 +50,10 @@ public class Data {
     	return opciones;
     }
 	
-	private static final String filepathCliente = "temp\\clientesGuardados.json";
-	private static final String filepathTendero = "temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
+	private static final String filepathCliente = "clientesGuardados.json";
+	private static final String filepathTendero = "tenderosGuardados.json";
+	private static final String filepathAdministrador = "administradoresGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 	
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de clientes
@@ -71,7 +71,6 @@ public class Data {
 				fw.write(array.toString());
 				fw.flush();
 			}catch(IOException e) {
-				e.printStackTrace();
 			}
 		}
 		return DataBase;
@@ -93,7 +92,6 @@ public class Data {
 				fw.write(array.toString());
 				fw.flush();
 			}catch(IOException e) {
-				e.printStackTrace();
 			}
 		}
 		return DataBase;
@@ -115,7 +113,6 @@ public class Data {
 				fw.write(array.toString());
 				fw.flush();
 			}catch(IOException e) {
-				e.printStackTrace();
 			}
 		}
 		return DataBase;
@@ -137,7 +134,6 @@ public class Data {
 				fw.write(array.toString());
 				fw.flush();
 			}catch(IOException e) {
-				e.printStackTrace();
 			}
 		}
 		return DataBase;
@@ -153,7 +149,7 @@ public class Data {
 			JsonArray array = (JsonArray) obj;
 			return array;
 		}catch(Exception ex) {
-			System.out.println("No se puede traer la dataBasePerfil correctamente");
+			System.out.println("No se puede traer la dataBaseCliente correctamente");
 			return null;
 		}
 	}
@@ -211,8 +207,7 @@ public class Data {
 			fw.write(array.toString());
 			fw.flush();
 		}catch(IOException e) {
-			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
-			e.printStackTrace();
+			System.out.println("No se puede actualizar la dataBaseCliente correctamente");
 		}
 	}
 	
@@ -224,7 +219,7 @@ public class Data {
 			fw.write(array.toString());
 			fw.flush();
 		}catch(IOException e) {
-			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
+			System.out.println("No se puede actualizar la dataBaseTendero correctamente");
 			e.printStackTrace();
 		}
 	}
@@ -237,7 +232,7 @@ public class Data {
 			fw.write(array.toString());
 			fw.flush();
 		}catch(IOException e) {
-			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
+			System.out.println("No se puede actualizar la dataBaseAdministrador correctamente");
 			e.printStackTrace();
 		}
 	}

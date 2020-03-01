@@ -28,13 +28,13 @@ public class login implements OpcionDeMenu {
 			if(usuario == null) {
 				usuario = Data.buscarAdministrador(userName, clave);
 			}
-			else {
+			else if(usuario == null) {
 				usuario = Data.buscarTendero(userName, clave);
 			}
 			Main.usuario = usuario;
+			
 			System.out.println("Datos ingresados correctamente");
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("Error ingresando usuario, intente nuevamente");
 			ejecutar();
 		}
