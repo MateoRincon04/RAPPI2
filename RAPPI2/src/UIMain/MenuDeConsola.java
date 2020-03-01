@@ -53,7 +53,16 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			}
 			break;
 		}
-		lanzarMenu((Cliente) Main.usuario);
+		try {
+			lanzarMenu((Tendero) Main.usuario);
+		}catch(Exception e) {
+			try {
+				lanzarMenu((Cliente) Main.usuario);
+			}catch(Exception e1) {
+				lanzarMenu((Administrador) Main.usuario);
+			}
+		}
+		
 	}
 	public static void lanzarMenu(Cliente usuario) {
 		boolean pri = true;
