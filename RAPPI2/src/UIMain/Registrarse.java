@@ -1,6 +1,11 @@
 package UIMain;
 
 import Interaccion.Cliente;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+
 import BaseDatos.Data;
 
 /**
@@ -46,12 +51,17 @@ public class Registrarse implements OpcionDeMenu {
 		System.out.println("Ingrese su saldo: ");
 		long saldo = Main.user.nextLong();
 		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago);
-		/*if (Data.agreagarObjetoDataBasePerfil(cliente)) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(cliente);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePerfil();
+		if (!dataBase.contains(je)) {
+			Data.agreagarObjetoDataBasePerfil(cliente);
 			System.out.println("Usuario creado exitosamente ");
 		} else {
 			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
 			ejecutar();
-		}*/
+		}
 	}
 	public String toString() {
 		return "Registrarse";

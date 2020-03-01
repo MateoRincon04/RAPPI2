@@ -67,12 +67,12 @@ public class Data {
 	 */
 	public static File cargarFileDataBaseRestaurante() throws IOException {
 		File DataBase = new File(filepathRestaurantes);
-		if(DataBase.exists()) {
-			System.out.println("La dataBaseRestaurante se ha cargado correctamente");
+		if(Data.traerDataBasePerfil()!=null) {
+			System.out.println("La dataBaseRestaurantes se ha cargado correctamente");
 		}else {
-			System.out.println("La dataRestaurante se ha creado correctamente");
+			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
 			JsonArray array = new JsonArray();
-			try(FileWriter fw = new FileWriter(filepathPerfil) ){
+			try(FileWriter fw = new FileWriter(filepathRestaurantes) ){
 				fw.write(array.toString());
 				fw.flush();
 			}catch(IOException e) {
@@ -141,7 +141,6 @@ public class Data {
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBasePerfil();
 		if(!dataBase.contains(je)) {
-			System.out.println("se esta agregando el elemento a la base de datos");
 			dataBase.add(je);
 			Data.actualizarDataBasePerfil(dataBase);
 		}
