@@ -50,7 +50,7 @@ public class Notificacion {
 	public void notificar() {
 		Restaurante notif = pedido.getPlato().restaurante;
 		notif.agregarNotificacion(this);
-		Iterator<JsonElement> iterator = Data.traerDataBasePerfil().iterator();
+		Iterator<JsonElement> iterator = Data.traerDataBaseTendero().iterator();
 		Gson gson = new Gson();
 		while(iterator.hasNext()) {
 			Perfil iter = gson.fromJson(iterator.next(), Perfil.class);

@@ -54,9 +54,9 @@ public class Registrarse implements OpcionDeMenu {
 		Gson gson = new Gson();
 		String aux = gson.toJson(cliente);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePerfil();
+		JsonArray dataBase = Data.traerDataBaseCliente();
 		if (!dataBase.contains(je)) {
-			Data.agregarObjetoDataBasePerfil(cliente);
+			Data.agregarObjetoDataBaseCliente(cliente);
 			System.out.println("Usuario creado exitosamente ");
 		} else {
 			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");

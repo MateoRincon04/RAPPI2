@@ -17,7 +17,10 @@ public class Main {
 
 	public static void main(String[] args) throws IOException{
 		Data.CargarOpciones();
-		Data.cargarFileDataBasePerfil();
+		Data.cargarFileDataBaseAdministrador();
+		Data.cargarFileDataBaseCliente();
+		Data.cargarFileDataBaseTendero();
+		Data.cargarFileDataBaseRestaurante();
 		MenuDeConsola menuPrrrrr = new MenuDeConsola();
 		menuPrrrrr.lanzarMenu();
 		user.close();

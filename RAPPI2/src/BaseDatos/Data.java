@@ -15,7 +15,8 @@ import java.util.List;
 
 import UIMain.*;
 import Interaccion.Cliente;
-
+import Interaccion.Tendero;
+import Administracion.Administrador;
 import Administracion.Perfil;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
@@ -60,20 +61,24 @@ public class Data {
     	return opciones;
     }
 	
-	private static final String filepathPerfil = "temp\\perfilesGuardados.json";
+	private static final String filepathCliente = "temp\\clientesGuardados.json";
+	private static final String filepathTendero = "temp\\tenderosGuardados.json";
+	private static final String filepathAdministrador = "temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
 	
 	/**
-	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de perfiles
+	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de clientes
+	 * 
+	 * @see: {@link #traerDataBaseCliente()}
 	 */
-	public static File cargarFileDataBasePerfil() throws IOException {
-		File DataBase = new File(filepathPerfil);
-		if(Data.traerDataBasePerfil()!=null) {
+	public static File cargarFileDataBaseCliente() throws IOException {
+		File DataBase = new File(filepathCliente);
+		if(Data.traerDataBaseCliente()!=null) {
 			System.out.println("La dataBasePerfil se ha cargado correctamente");
 		}else {
 			System.out.println("La dataBasePerfil se ha creado correctamente");
 			JsonArray array = new JsonArray();
-			try(FileWriter fw = new FileWriter(filepathPerfil) ){
+			try(FileWriter fw = new FileWriter(filepathCliente) ){
 				fw.write(array.toString());
 				fw.flush();
 			}catch(IOException e) {
@@ -82,12 +87,59 @@ public class Data {
 		}
 		return DataBase;
 	}
+	
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de tenderos
+	 * 
+	 * @see: {@link #traerDataBaseTendero()}
+	 */
+	public static File cargarFileDataBaseTendero() throws IOException {
+		File DataBase = new File(filepathTendero);
+		if(Data.traerDataBaseTendero()!=null) {
+			System.out.println("La dataBasePerfil se ha cargado correctamente");
+		}else {
+			System.out.println("La dataBasePerfil se ha creado correctamente");
+			JsonArray array = new JsonArray();
+			try(FileWriter fw = new FileWriter(filepathTendero) ){
+				fw.write(array.toString());
+				fw.flush();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return DataBase;
+	}
+	
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de administradores
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	public static File cargarFileDataBaseAdministrador() throws IOException {
+		File DataBase = new File(filepathAdministrador);
+		if(Data.traerDataBaseAdministrador()!=null) {
+			System.out.println("La dataBasePerfil se ha cargado correctamente");
+		}else {
+			System.out.println("La dataBasePerfil se ha creado correctamente");
+			JsonArray array = new JsonArray();
+			try(FileWriter fw = new FileWriter(filepathAdministrador) ){
+				fw.write(array.toString());
+				fw.flush();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return DataBase;
+	}
+	
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de datos de restaurantes
+	 * 
+	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
 	public static File cargarFileDataBaseRestaurante() throws IOException {
 		File DataBase = new File(filepathRestaurantes);
-		if(Data.traerDataBasePerfil()!=null) {
+		if(Data.traerDataBaseRestaurante()!=null) {
 			System.out.println("La dataBaseRestaurantes se ha cargado correctamente");
 		}else {
 			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
@@ -101,12 +153,13 @@ public class Data {
 		}
 		return DataBase;
 	}
+	
 	/**
-	 * Metodo que lee la base de datos de perfiles desde su file y obtiene los objetos alli guardados
+	 * Metodo que lee la base de datos de clientes desde su file y obtiene los objetos alli guardados
 	 */
-	public static JsonArray traerDataBasePerfil(){
+	public static JsonArray traerDataBaseCliente(){
 		JsonParser jp = new JsonParser();
-		try (FileReader fr = new FileReader(filepathPerfil)){
+		try (FileReader fr = new FileReader(filepathCliente)){
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
 			return array;
@@ -115,6 +168,37 @@ public class Data {
 			return null;
 		}
 	}
+	
+	/**
+	 * Metodo que lee la base de datos de tenderos desde su file y obtiene los objetos alli guardados
+	 */
+	public static JsonArray traerDataBaseTendero(){
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathTendero)){
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		}catch(Exception ex) {
+			System.out.println("No se puede traer la dataBasePerfil correctamente");
+			return null;
+		}
+	}
+	
+	/**
+	 * Metodo que lee la base de datos de administradores desde su file y obtiene los objetos alli guardados
+	 */
+	public static JsonArray traerDataBaseAdministrador(){
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathAdministrador)){
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		}catch(Exception ex) {
+			System.out.println("No se puede traer la dataBasePerfil correctamente");
+			return null;
+		}
+	}
+	
 	/**
 	 * Metodo que lee la base de datos de restaurantes desde su file para asi obtener aquellos objetos creados previamente
 	 */
@@ -129,11 +213,12 @@ public class Data {
 			return null;
 		}
 	}
+	
 	/**
-	 * Metodo que se usa para actualizar las bases de datos de perfiles, escribiendo los nuevos objetos que se necesiten guardar
+	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo los nuevos objetos que se necesiten guardar
 	 */
-	public static void actualizarDataBasePerfil(JsonArray array) {
-		try(FileWriter fw = new FileWriter(filepathPerfil) ){
+	public static void actualizarDataBaseCliente(JsonArray array) {
+		try(FileWriter fw = new FileWriter(filepathCliente) ){
 			fw.write(array.toString());
 			fw.flush();
 		}catch(IOException e) {
@@ -141,6 +226,33 @@ public class Data {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Metodo que se usa para actualizar las bases de datos de tenderos, escribiendo los nuevos objetos que se necesiten guardar
+	 */
+	public static void actualizarDataBaseTendero(JsonArray array) {
+		try(FileWriter fw = new FileWriter(filepathTendero) ){
+			fw.write(array.toString());
+			fw.flush();
+		}catch(IOException e) {
+			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Metodo que se usa para actualizar las bases de datos de administradores, escribiendo los nuevos objetos que se necesiten guardar
+	 */
+	public static void actualizarDataBaseAdministrador(JsonArray array) {
+		try(FileWriter fw = new FileWriter(filepathAdministrador) ){
+			fw.write(array.toString());
+			fw.flush();
+		}catch(IOException e) {
+			System.out.println("No se puede actualizar la dataBasePerfil correctamente");
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Metodo que se usa para actualizar las bases de datos de restaurantes, escribiendo aquellos nuevos restaurantes que se vayan a tener en cuenta en la oferta
 	 */
@@ -152,26 +264,70 @@ public class Data {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
+	
 	/**
-	 * Metodo que se usa para agregar objetos a la base de datos de perfiles, convirtiendo asi el objeto a guardar en un JsonElement para
+	 * Metodo que se usa para agregar objetos a la base de datos de clientes, convirtiendo asi el objeto a guardar en un JsonElement para
 	 * poder insertarlo en el archivo respectivo
 	 * 
-	 * @see: #actualizarDataBasePerfil(JsonArray)
-	 * @see: {@link #traerDataBasePerfil()}
+	 * @see: {@link #traerDataBaseCliente()}
+	 * @see: {@link #actualizarDataBaseCliente(JsonArray)}
 	 */
-	public static void agregarObjetoDataBasePerfil(Perfil obj) {
+	public static void agregarObjetoDataBaseCliente(Cliente obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePerfil();
+		JsonArray dataBase = Data.traerDataBaseCliente();
 		if(!dataBase.contains(je)) {
 			dataBase.add(je);
-			Data.actualizarDataBasePerfil(dataBase);
+			Data.actualizarDataBaseCliente(dataBase);
 		}
 		else {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}
 	}
+	
+	/**
+	 * Metodo que se usa para agregar objetos a la base de datos de tenderos, convirtiendo asi el objeto a guardar en un JsonElement para
+	 * poder insertarlo en el archivo respectivo
+	 * 
+	 * @see: {@link #traerDataBaseTendero()}
+	 * @see: {@link #actualizarDataBaseTendero(JsonArray)}
+	 */
+	public static void agregarObjetoDataBaseTendero(Tendero obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseTendero();
+		if(!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBaseTendero(dataBase);
+		}
+		else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+	
+	/**
+	 * Metodo que se usa para agregar objetos a la base de datos de administradores, convirtiendo asi el objeto a guardar en un JsonElement para
+	 * poder insertarlo en el archivo respectivo
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
+	 */
+	public static void agregarObjetoDataBaseAdministrador(Administrador obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseAdministrador();
+		if(!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBaseAdministrador(dataBase);
+		}
+		else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+	
 	/**
 	 * Metodo se usa para agregar objetos a la base de datos de restaurante, conviritiendo estos objetos en los JsonElements para 
 	 * asi insertarlos a su respectivo archivo
@@ -192,25 +348,67 @@ public class Data {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}
 	}
+	
 	/**
-	 * Metodo que elimina cierto objeto de la dataBasePerfil
+	 * Metodo que elimina cierto objeto de la dataBaseCliente
 	 * 
-	 * @see: {@link #traerDataBasePerfil()}
-	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
+	 * @see: {@link #traerDataBaseCliente()}
+	 * @see: {@link #actualizarDataBaseCliente(JsonArray)}
 	 */
-	public static void eliminarObjetoDataBasePerfil(Perfil obj) {
+	public static void eliminarObjetoDataBaseCliente(Cliente obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePerfil();
+		JsonArray dataBase = Data.traerDataBaseCliente();
 		if(dataBase.contains(je)) {
 			dataBase.remove(je);
-			Data.actualizarDataBasePerfil(dataBase);
+			Data.actualizarDataBaseCliente(dataBase);
 		}
 		else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
+	
+	/**
+	 * Metodo que elimina cierto objeto de la dataBaseTendero
+	 * 
+	 * @see: {@link #traerDataBaseTendero()}
+	 * @see: {@link #actualizarDataBaseTendero(JsonArray)}
+	 */
+	public static void eliminarObjetoDataBaseTendero(Tendero obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseTendero();
+		if(dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBaseTendero(dataBase);
+		}
+		else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	
+	/**
+	 * Metodo que elimina cierto objeto de la dataBaseAdministrador
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
+	 */
+	public static void eliminarObjetoDataBaseAdministrador(Administrador obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseAdministrador();
+		if(dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBaseAdministrador(dataBase);
+		}
+		else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	
 	/**
 	 * Metodo para eliminar cierto objeto de la dataBaseRestaurante
 	 * 
@@ -230,42 +428,121 @@ public class Data {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
+	
 	/**
-	 * Metodo para buscar un usuario en la base de datos de perfil usando solo el userName
+	 * Metodo para buscar un usuario en la base de datos de cliente usando solo el userName
 	 * 
-	 * @see: {@link #traerDataBasePerfil()}
+	 * @see: {@link #traerDataBaseCliente()}
 	 */
 	
-	public static Perfil buscarUsuario(String userName) {
+	public static Cliente buscarCliente(String userName) {
 		Gson gson = new Gson();
-		Perfil perfil= null;
-		JsonArray dataBase =Data.traerDataBasePerfil(); 
+		Cliente cliente= null;
+		JsonArray dataBase =Data.traerDataBaseCliente(); 
 		for (JsonElement jsonElement : dataBase) {
 			JsonObject obj = jsonElement.getAsJsonObject();
 			if(userName.equals(obj.get("userName").getAsString())) {
-				perfil = gson.fromJson(obj, Perfil.class);
+				cliente = gson.fromJson(obj, Cliente.class);
 			}
 		}
-		return perfil;
+		return cliente;
 	}
 	
 	/**
-	 * Metodo para buscar un usuario en la base de datos de perfil usando el userName y la clave del usuario
+	 * Metodo para buscar un usuario en la base de datos de cliente usando el userName y la clave del usuario
 	 * 
-	 * @see: {@link #traerDataBasePerfil()}
+	 * @see: {@link #traerDataBaseCliente()}
 	 */
-	public static Perfil buscarUsuario(String userName, String clave) {
-		Perfil perfil= null;
+	public static Cliente buscarCliente(String userName, String clave) {
+		Cliente cliente= null;
 		Gson gson = new Gson();
-		JsonArray dataBase =Data.traerDataBasePerfil();
+		JsonArray dataBase =Data.traerDataBaseCliente();
 		for (JsonElement jsonElement : dataBase) {
 			JsonObject obj = jsonElement.getAsJsonObject();
 			if(userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
-				perfil = gson.fromJson(obj, Perfil.class) ;
+				cliente = gson.fromJson(obj, Cliente.class) ;
 			}
 		}
-		return perfil;
+		return cliente;
 	}
+	
+	
+	/**
+	 * Metodo para buscar un usuario en la base de datos de tendero usando solo el userName
+	 * 
+	 * @see: {@link #traerDataBaseTendero()}
+	 */
+	
+	public static Tendero buscarTendero(String userName) {
+		Gson gson = new Gson();
+		Tendero tendero= null;
+		JsonArray dataBase =Data.traerDataBaseTendero(); 
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString())) {
+				tendero = gson.fromJson(obj, Tendero.class);
+			}
+		}
+		return tendero;
+	}
+	
+	/**
+	 * Metodo para buscar un usuario en la base de datos de tendero usando el userName y la clave del usuario
+	 * 
+	 * @see: {@link #traerDataBaseTendero()}
+	 */
+	public static Tendero buscarTendero(String userName, String clave) {
+		Tendero tendero= null;
+		Gson gson = new Gson();
+		JsonArray dataBase =Data.traerDataBaseTendero();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
+				tendero = gson.fromJson(obj, Tendero.class) ;
+			}
+		}
+		return tendero;
+	}
+	
+	
+	/**
+	 * Metodo para buscar un usuario en la base de datos de administrador usando solo el userName
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	
+	public static Administrador buscarAdministrador(String userName) {
+		Gson gson = new Gson();
+		Administrador administrador= null;
+		JsonArray dataBase =Data.traerDataBaseAdministrador(); 
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString())) {
+				administrador = gson.fromJson(obj, Administrador.class);
+			}
+		}
+		return administrador;
+	}
+	
+	/**
+	 * Metodo para buscar un usuario en la base de datos de administrador usando el userName y la clave del usuario
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	public static Administrador buscarAdministrador(String userName, String clave) {
+		Administrador administrador= null;
+		Gson gson = new Gson();
+		JsonArray dataBase =Data.traerDataBaseAdministrador();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
+				administrador = gson.fromJson(obj, Administrador.class) ;
+			}
+		}
+		return administrador;
+	}
+	
+	
 	/**
 	 * Metodo para buscar un restaurante en la base de datos de restaurante
 	 */
@@ -282,6 +559,7 @@ public class Data {
 		}
 		return restaurante;
 	}
+	
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
 	 */

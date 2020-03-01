@@ -14,13 +14,8 @@ import BaseDatos.Data;
  * todas las funcionalidades en general del programa, poder adicionar o eliminar
  * funcionalidades de un usuario especifico.
  * 
- * Las estructuras de datos relevantes utilizadas son
  * 
- * @see #tenderos
- * @see #restaurantes
- * @see #clientes
- * 
- * @author: Mateo Rinc�n
+ * @author: Mateo Rincon
  * @version:
  */
 
@@ -53,7 +48,7 @@ public class Administrador extends Perfil {
 	}
 
 	/**
-	 * M�todo que crea un objeto de clase Tendero
+	 * Metodo que crea un objeto de clase Tendero
 	 * 
 	 * @param nombre   El parametro nombre define el nombre que tendra el Tendero
 	 * @param telefono El parametro telefono define el telefono que tendra el
@@ -67,11 +62,11 @@ public class Administrador extends Perfil {
 	 * @param salario  El parametro salario define el salario que tendra el Tendero
 	 */
 	public void crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
-		Data.agregarObjetoDataBasePerfil(new Tendero(nombre, telefono, comuna, clave, userName, salario));
+		Data.agregarObjetoDataBaseTendero(new Tendero(nombre, telefono, comuna, clave, userName, salario));
 	}
 
 	/**
-	 * M�todo que crea un objeto de clase Restaurante
+	 * Metodo que crea un objeto de clase Restaurante
 	 * 
 	 * @param nombre    El parametro nombre define el nombre que tendra el
 	 *                  Restaurante
