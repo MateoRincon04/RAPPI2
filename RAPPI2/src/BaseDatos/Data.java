@@ -8,13 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import UIMain.*;
+
 import Administracion.Perfil;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
+
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -47,7 +48,7 @@ public class Data {
 	 */
 	public static File cargarFileDataBasePerfil() throws IOException {
 		File DataBase = new File(filepathPerfil);
-		if(DataBase.exists()) {
+		if(Data.traerDataBasePerfil()!=null) {
 			System.out.println("La dataBasePerfil se ha cargado correctamente");
 		}else {
 			System.out.println("La dataBasePerfil se ha creado correctamente");
@@ -84,7 +85,7 @@ public class Data {
 	 * trae la base de datos de perfiles desde su file
 	 */
 	public static JsonArray traerDataBasePerfil(){
-		/*JsonParser jp = new JsonParser();
+		JsonParser jp = new JsonParser();
 		try (FileReader fr = new FileReader(filepathPerfil)){
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
@@ -92,9 +93,7 @@ public class Data {
 		}catch(Exception ex) {
 			System.out.println("No se puede traer la dataBasePerfil correctamente");
 			return null;
-		}*/
-		
-		
+		}
 	}
 	/*
 	 * trae la base de datos de restaurantes desde su file
@@ -136,25 +135,24 @@ public class Data {
 	/*
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
-	public static boolean agregarObjetoDataBasePerfil(Perfil obj) {
+	public static void agreagarObjetoDataBasePerfil(Perfil obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBasePerfil();
 		if(!dataBase.contains(je)) {
+			System.out.println("se esta agregando el elemento a la base de datos");
 			dataBase.add(je);
 			Data.actualizarDataBasePerfil(dataBase);
-			return true;
 		}
 		else {
 			System.out.println("no se puede agregar el elemento a la base de datos");
-			return false;
 		}
 	}
 	/*
 	 * se usa para agregar objetos a la base de datos de perfiles
 	 */
-	public static boolean agregarObjetoDataBaseRestaurante(Restaurante obj) {
+	public static void agreagarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
@@ -162,11 +160,9 @@ public class Data {
 		if(!dataBase.contains(je)) {
 			dataBase.add(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
-			return true;
 		}
 		else {
 			System.out.println("no se puede agregar el elemento a la base de datos");
-			return false;
 		}
 	}
 	/*
@@ -220,10 +216,15 @@ public class Data {
 	public static Perfil buscarUsuario(String userName, String clave) {
 		Perfil perfil= null;
 		JsonArray dataBase =Data.traerDataBasePerfil();
+		System.out.println(dataBase.toString());
 		Iterator<JsonElement> iter = dataBase.iterator(); 
 		while(iter.hasNext()) {
-			if(userName.equals(((Perfil) iter).getUserName())&& clave==((Perfil) iter).getClave()) {
-				perfil =(Perfil) iter;
+			Gson gson = new Gson();
+			String aux = gson.toJson(iter);
+			Perfil je = gson.fromJson(aux, Perfil.class);
+			if(userName.equals(je.getUserName())&& clave.equals(je.getClave())) {
+				perfil =je;
+				break;
 			}
 		}
 		return perfil;

@@ -3,6 +3,9 @@ package Interaccion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.gson.JsonArray;
+
 import Administracion.*;
 import Oferta.*;
 import BaseDatos.Data;
@@ -50,7 +53,6 @@ public class Cliente extends Perfil {
 		this.opciones.add(6);
 		this.opciones.add(9);
 		this.opciones.add(10);
-		Data.agregarObjetoDataBasePerfil(this);
 	}
 	
 	public List<Integer> getOpciones(){
@@ -145,7 +147,7 @@ public class Cliente extends Perfil {
 				+ this.getUserName();
 	}
 
-	public List<Restaurante> verListaDeRestaurantes() {
+	public JsonArray verListaDeRestaurantes() {
 		return Data.traerDataBaseRestaurante();
 	}
 	
