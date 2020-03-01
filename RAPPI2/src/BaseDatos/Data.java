@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+
 import UIMain.*;
 import Interaccion.Cliente;
 
@@ -205,10 +208,9 @@ public class Data {
 	public static Perfil buscarUsuario(String userName) {
 		Gson gson = new Gson();
 		Perfil perfil= null;
-		JsonArray dataBase =Data.traerDataBasePerfil();
-		Iterator<JsonElement> iter = dataBase.iterator(); 
-		while(iter.hasNext()) {
-			JsonObject obj = iter.next().getAsJsonObject();
+		JsonArray dataBase =Data.traerDataBasePerfil(); 
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
 			if(userName.equals(obj.get("userName").getAsString())) {
 				perfil = gson.fromJson(obj, Perfil.class);
 			}
@@ -220,11 +222,10 @@ public class Data {
 		Perfil perfil= null;
 		Gson gson = new Gson();
 		JsonArray dataBase =Data.traerDataBasePerfil();
-		Iterator<JsonElement> iter = dataBase.iterator(); 
-		while(iter.hasNext()) {
-			JsonObject obj = iter.next().getAsJsonObject();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
 			if(userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
-				perfil = gson.fromJson(obj, Perfil.class);
+				perfil = gson.fromJson(obj, Perfil.class) ;
 			}
 		}
 		return perfil;
@@ -235,34 +236,39 @@ public class Data {
 	
 	public static Restaurante buscarRestaurante(String userName) {
 		Restaurante restaurante= null;
+		Gson gson = new Gson();
 		JsonArray dataBase =Data.traerDataBaseRestaurante();
-		Iterator<JsonElement> iter = dataBase.iterator(); 
-		while(iter.hasNext()) {
-			if(userName.equals(((Restaurante) iter).getNombre())) {
-				restaurante =(Restaurante) iter;
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString())) {
+				restaurante = gson.fromJson(obj, Restaurante.class) ;
 			}
 		}
 		return restaurante;
 	}
 	/*
 	 * organiza los restaurantes de mayor a menor segun calificacion
-	 
+	 */
 	public static ArrayList<Restaurante> OrganizarRestaurantesPorCalificacion(){
+		Gson gson = new Gson();
 		JsonArray historial = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> best = new ArrayList<Restaurante>();
 		// bubble sort
 				boolean ordenado = false;
 				while (!ordenado) {
 					ordenado = true;
 					for (int i = 0; i < historial.size(); i++) {
-						if ((historial.get(i)).getCalificacionPromediada() < (historial.get(i - 1)).getCalificacionPromediada()) {
-							Restaurante restauranteTemp = historial.get(i);
-							historial.add(i, historial.get(i - 1));
-							historial.add(i - 1, restauranteTemp);
+						Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class) ;
+						Restaurante aux2 = gson.fromJson(historial.get(i-1), Restaurante.class) ;
+						if (aux1.getCalificacionPromediada() < aux2.getCalificacionPromediada()) {
+							Restaurante restauranteTemp = aux1;
+							best.add(i, aux1);
+							best.add(i - 1, restauranteTemp);
 							ordenado = false;
 						}
 					}
 				}
-				return historial;
+				return best;
 	}
-	*/
+	
 }

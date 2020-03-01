@@ -17,7 +17,7 @@ import java.util.List;
 
 import BaseDatos.Data;
 
-abstract public class Perfil {
+public class Perfil {
 	private String nombre;
 	private int telefono;
 	private int comuna;
@@ -48,7 +48,6 @@ abstract public class Perfil {
 	/**
 	 * M�todo abtracto que definira cada subclase a su manera
 	 */
-	public abstract String toString();
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

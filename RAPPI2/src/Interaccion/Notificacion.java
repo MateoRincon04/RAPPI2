@@ -3,6 +3,10 @@ package Interaccion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
 import Oferta.Pedido;
 import Oferta.Restaurante;
 import Administracion.Administrador;
@@ -46,10 +50,12 @@ public class Notificacion {
 	public void notificar() {
 		Restaurante notif = pedido.getPlato().restaurante;
 		notif.agregarNotificacion(this);
-		Iterator<Perfil> iterator = Data.traerDataBasePerfil().iterator();
+		Iterator<JsonElement> iterator = Data.traerDataBasePerfil().iterator();
+		Gson gson = new Gson();
 		while(iterator.hasNext()) {
+			Perfil iter = gson.fromJson(iterator.next(), Perfil.class);
 			if(iterator instanceof Tendero) {
-				Tendero notificado = (Tendero) iterator.next();
+				Tendero notificado = (Tendero) iter;
 				if(notificado.getEstaDisponible()) {
 					notificado.agregarNotificacion(this);
 					if(tomarPedido){
