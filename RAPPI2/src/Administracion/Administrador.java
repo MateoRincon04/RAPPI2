@@ -91,8 +91,8 @@ public class Administrador extends Perfil {
 			if (posicion >= 0 && posicion <= 10) {
 				if (usuario instanceof Cliente) {
 					while (true) {
-						if (posicion == 3 | posicion == 4 | posicion == 5 | posicion == 6 | posicion == 9
-								| posicion == 10) {
+						if (posicion == 3 | posicion == 4 | posicion == 5 | posicion == 6 | posicion == 7 | posicion == 8
+								| posicion == 9) {
 							usuario = (Cliente) Main.usuario;
 							((Cliente) usuario).opciones.add(posicion);
 						} else {
@@ -101,7 +101,7 @@ public class Administrador extends Perfil {
 					}
 				} else if (usuario instanceof Tendero) {
 					while (true) {
-						if (posicion == 7) {
+						if (posicion == 10) {
 							usuario = (Tendero) Main.usuario;
 							((Tendero) usuario).opciones.add(posicion);
 						} else {
