@@ -40,6 +40,7 @@ public class Cliente extends Perfil {
 	 * @param saldo El parametro saldo define el saldo que tiene el Cliente
 	 * @param metodoDePago El parametro metodoDePago define el metodo de pago con el
 	 *                     que el Cliente planea comprar platos
+	 * @param direccion El paramtro direccion define la direccion a la que el cliente desea que le lleguen los pedidos
 	 */
 	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
 			String metodoDePago, String direccion) {

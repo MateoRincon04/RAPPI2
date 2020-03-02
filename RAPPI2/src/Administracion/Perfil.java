@@ -9,7 +9,7 @@ package Administracion;
  * 
  * @author: Mateo Rincon, Paula A. Taborda, Guillermo Toloza, Santiago Tamayo
 */
-public class Perfil {
+public abstract class Perfil {
 	private String nombre;
 	private int telefono;
 	private int comuna;

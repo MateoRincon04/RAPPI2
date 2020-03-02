@@ -45,7 +45,9 @@ public class Registrarse implements OpcionDeMenu {
 		int telefono = Main.user.nextInt();
 		System.out.println("Ingrese su saldo: ");
 		long saldo = Main.user.nextLong();
-		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago);
+		System.out.println("Ingrese su direccion: ");
+		String direccion = Main.user.next();
+		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago, direccion);
 		Gson gson = new Gson();
 		String aux = gson.toJson(cliente);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
