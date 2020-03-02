@@ -17,9 +17,7 @@ import UIMain.*;
  * @see #notificaciones
  * @see #calificaciones
  * 
- * @author Guillermo Toloza, Mateo Rinc�n
- * @version: 
- *
+ * @author Guillermo Toloza, Mateo Rincon, Santiago Tamayo, Paula A. Taborda
  */
 
 public class Tendero extends Perfil{
@@ -33,6 +31,7 @@ public class Tendero extends Perfil{
 	
 	/**
 	 * Constructor de objetos de la clase Tendero
+	 * 
 	 * @see Administracion.Perfil#Perfil(String, int, int, int, String)
 	 * @param salario El parametro salario define el salario que tiene el Tendero
 	 */
@@ -76,7 +75,7 @@ public class Tendero extends Perfil{
 		this.calificaciones.add(calificacion);
 	}
 	/**
-	 * M�todo por el cual el Tendero podra encargarse de un Pedido para su transportaci�n
+	 * Metodo por el cual el Tendero podra encargarse de un Pedido para su transportaci�n
 	 */
 	public void aceptarPedido() {
 		Notificacion Aux = notificaciones.get(notificaciones.size()-1);
@@ -90,10 +89,9 @@ public class Tendero extends Perfil{
     }
     
     /**
-     * M�todo que califica al Cliente que realizo el Pedido
+     * Metodo que califica al Cliente que realizo el Pedido
      * @param puntuacion El parametro puntuacion define la calificacion del Cliente
      */
-    
     public void calificarCliente(double puntuacion) {
     	if(pedido.getEntregado()) {
     		Interaccion.Cliente calificando = this.pedido.getCliente();
@@ -102,8 +100,8 @@ public class Tendero extends Perfil{
     	}
 	}
 	
-	/*
-	 * este metodo sirve para saber la cantidad de pedios entregados por un tendero
+	/**
+	 * Metodo sirve para saber la cantidad de pedios entregados por un tendero
 	 * recordar que es obligatorio calificar el tendero cada que es finalizada la entrega.
 	 */
 	public  int cantidadDePedidosEntregados(){

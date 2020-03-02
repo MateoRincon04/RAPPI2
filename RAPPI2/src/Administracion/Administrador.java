@@ -13,8 +13,7 @@ import BaseDatos.Data;
  * funcionalidades de un usuario especifico.
  * 
  * 
- * @author: Mateo Rincon, Guillermo Toloza, Andrea Taborda, Santiago Tamayo
- * @version:
+ * @author: Mateo Rincon, Guillermo Toloza, Paula A. Taborda, Santiago Tamayo
  */
 
 public class Administrador extends Perfil {

@@ -9,6 +9,11 @@ import BaseDatos.Data;
 import Interaccion.Cliente;
 import Oferta.Restaurante;
 
+/**
+ * Clase EnCualesDirecciones, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
+ * 
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
+ */
 public class EnCualesDirecciones implements OpcionDeMenu {
 	public void ejecutar() {
 		Cliente usuario = (Cliente) Main.usuario;

@@ -6,7 +6,11 @@ import Interaccion.Cliente;
 import Administracion.Administrador;
 import Oferta.*;
 
-
+/**
+ * Clase CalificarRestaurante, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
+ * 
+ * @author Guillermo Toloza, Paula A. Taborda, Santiago Tamayo, Mateo Rincon
+ */
 public class CalificarRestaurante implements OpcionDeMenu {
 	public void ejecutar() {
 

@@ -6,6 +6,12 @@ import Interaccion.Cliente;
 import Administracion.Administrador;
 import Oferta.*;
 
+/**
+ * Clase CalificarTendero, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
+ * 
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
+ *
+ */
 public class CalificarTendero implements OpcionDeMenu {
 	public void ejecutar() {
 

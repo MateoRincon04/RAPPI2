@@ -17,12 +17,11 @@ import BaseDatos.Data;
  * 
  * Las estructuras revelantes de la clase son
  * 
- * @see #calififcaciones
- * @see #historial
+ * @see: {@link #opciones}
+ * @see: {@link #calificaciones}
+ * @see: {@link #historial}
  * 
- * @author: Santiago Tamayo, Mateo Rincon, Guillermo Toloza, Andrea Taborda
- * @version:
- *
+ * @author: Santiago Tamayo, Mateo Rincon, Guillermo Toloza, Paula A. Taborda
  */
 public class Cliente extends Perfil {
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
@@ -36,8 +35,8 @@ public class Cliente extends Perfil {
 	/**
 	 * Constructor para los objetos de la clase Cliente
 	 * 
-	 * @see Administracion.Perfil#Perfil(String, int, int, int, String)
-	 * @param saldo        El parametro saldo define el saldo que tiene el Cliente
+	 * @see: {@link Administracion.Perfil#Perfil(String, int, int, String, String)
+	 * @param saldo El parametro saldo define el saldo que tiene el Cliente
 	 * @param metodoDePago El parametro metodoDePago define el metodo de pago con el
 	 *                     que el Cliente planea comprar platos
 	 */
@@ -70,8 +69,13 @@ public class Cliente extends Perfil {
 		this.saldo += saldo;
 	}
 
+	/**
+	 * Metodo para realizar la solicitud del pedido
+	 * 
+	 * @see: {@link #agregarAlHistorial(Pedido)}
+	 * @param plato El parametro plato define el plato que sera solicitado por el cliente
+	 */
 	public void hacerPedido(Plato plato) {
-
 		if (this.getSaldo() >= plato.getPrecio()) {
 			Pedido pedido = new Pedido(this, plato);
 			this.agregarAlHistorial(pedido);

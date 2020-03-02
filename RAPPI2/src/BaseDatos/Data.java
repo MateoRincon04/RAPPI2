@@ -20,8 +20,7 @@ import com.google.gson.*;
  * Estructuras importantes:
  * @see: {@link #opciones}
  * 
- * @author: Santiago Tamayo, Andrea Taborda, Mateo Rincon, Guillermo Toloza
- * @version:
+ * @author: Santiago Tamayo, Paula A. Taborda, Mateo Rincon, Guillermo Toloza
  */
 public class Data {
 	

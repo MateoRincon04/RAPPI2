@@ -6,7 +6,7 @@ import Interaccion.Tendero;
 import BaseDatos.Data;
 
 /**
- * Clase Registrarse
+ * Clase login
  * 
  * su finalidad es la implementacion de Loguearse en el sistema a partir de la
  * opcion del menu
