@@ -29,6 +29,7 @@ public class Cliente extends Perfil {
 	private String metodoDePago;
 	private long saldo;
 	private Pedido pedido;
+	private String direccion;
 	private List<Pedido> historial = new ArrayList<Pedido>();
 	public List<Integer> opciones = new ArrayList<Integer>();
 
@@ -41,9 +42,10 @@ public class Cliente extends Perfil {
 	 *                     que el Cliente planea comprar platos
 	 */
 	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
-			String metodoDePago) {
+			String metodoDePago, String direccion) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.saldo = saldo;
+		this.direccion = direccion;
 		this.setMetodoDePago(metodoDePago);
 		this.opciones.add(3);
 		this.opciones.add(4);
@@ -195,6 +197,14 @@ public class Cliente extends Perfil {
 		}
 		return valorGastado;
 
+	}
+	
+	public String getDireccion() {
+		return this.direccion;
+	}
+	
+	public void setDireccion(String dir) {
+		this.direccion = dir;
 	}
 
 }
