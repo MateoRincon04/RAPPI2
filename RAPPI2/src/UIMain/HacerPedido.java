@@ -4,7 +4,7 @@ import java.util.List;
 import Interaccion.Cliente;
 import BaseDatos.Data;
 import Oferta.*;
-
+import Interaccion.Notificacion;
 /**
  * Clase HacerPedido, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
  * 
@@ -20,7 +20,14 @@ public class HacerPedido implements OpcionDeMenu {
 		String nombre = Main.user.nextLine();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
 		Plato platoEscogido = escogerPlato(restauranteElegido);
-		usuarioCliente.hacerPedido(platoEscogido);
+		boolean valor = usuarioCliente.hacerPedido(platoEscogido);
+		if (valor) {
+			Pedido pedidoUltimo= usuarioCliente.getHistorial().get(usuarioCliente.getHistorial().size()-1);
+			Notificacion notificacion = new Notificacion(pedidoUltimo); //notifico una vez hecho el pedido
+		}else {
+			usuarioCliente.hacerPedido(platoEscogido);
+		}
+		
 
 	}
 

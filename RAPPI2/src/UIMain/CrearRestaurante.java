@@ -27,5 +27,7 @@ public class CrearRestaurante implements OpcionDeMenu {
 			ejecutar();
 		}
 	}
-
+	public String toString() {
+		return "Crear Restaurante";
+	}
 }

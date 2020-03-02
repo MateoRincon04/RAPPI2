@@ -37,10 +37,11 @@ public class Cliente extends Perfil {
 	 * Constructor para los objetos de la clase Cliente
 	 * 
 	 * @see: {@link Administracion.Perfil#Perfil(String, int, int, String, String)
-	 * @param saldo El parametro saldo define el saldo que tiene el Cliente
+	 * @param saldo        El parametro saldo define el saldo que tiene el Cliente
 	 * @param metodoDePago El parametro metodoDePago define el metodo de pago con el
 	 *                     que el Cliente planea comprar platos
-	 * @param direccion El paramtro direccion define la direccion a la que el cliente desea que le lleguen los pedidos
+	 * @param direccion    El paramtro direccion define la direccion a la que el
+	 *                     cliente desea que le lleguen los pedidos
 	 */
 	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
 			String metodoDePago, String direccion) {
@@ -76,17 +77,19 @@ public class Cliente extends Perfil {
 	 * Metodo para realizar la solicitud del pedido
 	 * 
 	 * @see: {@link #agregarAlHistorial(Pedido)}
-	 * @param plato El parametro plato define el plato que sera solicitado por el cliente
+	 * @param plato El parametro plato define el plato que sera solicitado por el
+	 *              cliente
 	 */
-	public void hacerPedido(Plato plato) {
+	public boolean hacerPedido(Plato plato) {
 		if (this.getSaldo() >= plato.getPrecio()) {
 			Pedido pedido = new Pedido(this, plato);
 			this.agregarAlHistorial(pedido);
 			System.out.println("Su pedido se ha realizado correctamente.");
-
+			return true;
 		} else {
 			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
-			this.hacerPedido(plato);
+
+			return false;
 		}
 	}
 
@@ -163,7 +166,8 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * Metodo que consulta cual es el plato mas comprado por el cliente que esta preguntando.
+	 * Metodo que consulta cual es el plato mas comprado por el cliente que esta
+	 * preguntando.
 	 * 
 	 * @see: {@link #historial}
 	 * @return String con el nombre del plato que mas compro el cliente
@@ -185,9 +189,10 @@ public class Cliente extends Perfil {
 		}
 		return aux;
 	}
-	
+
 	/**
-	 * Metodo que me muestra cuanto dinero ha gastado el cliente a lo largo de su historia.
+	 * Metodo que me muestra cuanto dinero ha gastado el cliente a lo largo de su
+	 * historia.
 	 * 
 	 * @return double que me da el valor total del gasto
 	 */
@@ -199,11 +204,11 @@ public class Cliente extends Perfil {
 		return valorGastado;
 
 	}
-	
+
 	public String getDireccion() {
 		return this.direccion;
 	}
-	
+
 	public void setDireccion(String dir) {
 		this.direccion = dir;
 	}

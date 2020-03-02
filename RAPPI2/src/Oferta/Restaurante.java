@@ -59,9 +59,14 @@ public class Restaurante {
 		return this.nombre;
 	}
 
-	public void cambiarDireccion(String direccion, String nueva) {
+	public boolean cambiarDireccion(String direccion, String nueva) {
 		if (this.direcciones.contains(direccion)) {
 			this.direcciones.set(this.direcciones.indexOf(direccion), nueva);
+			System.out.println("Se ha cambiado la direccion correctamente.");
+			return true;
+		}else {
+			System.out.println("No se encuentra la direccion a cambiar. Intente nuevamente.");
+			return false;
 		}
 	}
 
@@ -125,16 +130,27 @@ public class Restaurante {
 		}
 	}
 
-	public void cambiarPlato(Plato plato, Plato nuevo) {
+	public boolean cambiarPlato(Plato plato, Plato nuevo) {
 		if (this.menu.contains(plato)) {
 			this.menu.set(this.menu.indexOf(plato), nuevo);
+			System.out.println("Su plato se ha cambiado correctamente");
+			return true;
+		}else {
+			System.out.println("No se encuentra el plato para el cambio. Intente nuevamente.");
+			return false;
 		}
 	}
 
-	public void eliminarPlato(Plato plato) {
+	public boolean eliminarPlato(Plato plato) {
 		if (this.menu.contains(plato)) {
 			this.menu.remove(plato);
+			System.out.println("Su plato se ha removido correctamente. ");
+			return true;
+		}else {
+			System.out.println("Error borrando el plato. Intente nuevamente.");
+			return false;
 		}
+		
 	}
 
 	public List<Plato> getMenu() {

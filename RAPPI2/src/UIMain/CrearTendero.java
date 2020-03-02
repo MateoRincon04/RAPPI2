@@ -32,4 +32,7 @@ public class CrearTendero implements OpcionDeMenu {
 
 		}
 	}
+	public String toString() {
+		return "Crear Tendero";
+	}
 }

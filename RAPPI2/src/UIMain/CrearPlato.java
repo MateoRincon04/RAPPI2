@@ -19,4 +19,7 @@ public class CrearPlato implements OpcionDeMenu {
 			ejecutar();
 		}
 	}
+	public String toString() {
+		return "Crear Plato Restaurante";
+	}
 }

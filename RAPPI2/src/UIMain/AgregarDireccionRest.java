@@ -12,4 +12,7 @@ public class AgregarDireccionRest implements OpcionDeMenu {
 			ejecutar();
 		}
 	}
+	public String toString() {
+		return "Agregar Direccion Restaurante";
+	}
 }

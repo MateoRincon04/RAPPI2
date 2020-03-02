@@ -1,12 +1,39 @@
 package UIMain;
 
+import java.util.List;
+
+import Oferta.Plato;
 import Oferta.Restaurante;
 
 public class CambiarPlato implements OpcionDeMenu {
 	public void ejecutar() {
-		System.out.println("Ingrese el nombre del plato que desea cambiar: ");
-		String nombre = Main.user.next();
+		System.out.println("Cambiará un plato del menú. ");
 		Restaurante restaurante = Main.usuarioRestaurante;
-		//restaurante.cambiarPlato(plato, nuevo); pensar bien
+		List<Plato> menuPlatos = restaurante.getMenu();
+		System.out.println("Este es el menú de platos que cuenta el restaurante.");
+		System.out.println("Por favor, escriba el numero del plato el cual desea cambiar: ");
+		for (int i = 0; i < menuPlatos.size(); i++) {
+			System.out.println((i + 1) + ") " + menuPlatos.get(i).getNombre());
+		}
+		int numero = Main.user.nextInt() - 1;
+		Plato platoBase = restaurante.elegirPlatoMenu(numero);
+		System.out.println("Ingrese los datos del nuevo plato: ");
+		System.out.println("Ingrese el nombre: ");
+		String nombre = Main.user.next();
+		System.out.println("Ingrese la descripción del plato: ");
+		String descripcion = Main.user.next();
+		System.out.println("Ingrese el precio: ");
+		float precio = Main.user.nextFloat();
+		System.out.println("ingrese la restriccion de edad del plato: ");
+		int restriccion = Main.user.nextInt();
+		Plato platoCambio = new Plato(nombre, descripcion, precio, restriccion, restaurante);
+		boolean valor = restaurante.cambiarPlato(platoBase, platoCambio);
+		if (!valor) {
+			ejecutar();
+		}
+	}
+
+	public String toString() {
+		return "Cambiar Plato Restaurante";
 	}
 }

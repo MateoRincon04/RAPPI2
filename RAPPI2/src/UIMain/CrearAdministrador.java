@@ -24,5 +24,8 @@ public class CrearAdministrador implements OpcionDeMenu {
 
 		}
 	}
+	public String toString() {
+		return "Crear Administrador";
+	}
 
 }
