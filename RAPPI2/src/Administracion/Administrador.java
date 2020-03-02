@@ -4,6 +4,11 @@ import Interaccion.Tendero;
 import Oferta.Restaurante;
 import UIMain.Main;
 import Interaccion.Cliente;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+
 import BaseDatos.Data;
 
 /**
@@ -59,8 +64,20 @@ public class Administrador extends Perfil {
 	 *                 Tendero para registrarse
 	 * @param salario  El parametro salario define el salario que tendra el Tendero
 	 */
-	public void crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
-		Data.agregarObjetoDataBaseTendero(new Tendero(nombre, telefono, comuna, clave, userName, salario));
+	public boolean crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
+		Gson gson = new Gson();
+		Tendero tendero = new Tendero(nombre,telefono,comuna,clave,userName,salario);
+		String aux = gson.toJson(tendero);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseTendero();
+		if (!dataBase.contains(je)) {
+			Data.agregarObjetoDataBaseTendero(tendero);
+			System.out.println("Tendero creado exitosamente ");
+			return true;
+		} else {
+			System.out.println("Tendero ya existente, por favor ingrese de nuevo ");
+			return false;
+		}
 	}
 
 	/**
@@ -73,8 +90,20 @@ public class Administrador extends Perfil {
 	 * @param celular   El parametro celular define el telefono celular que tendra
 	 *                  el Restaurante
 	 */
-	public void crearRestaurante(String nombre, String direccion, String celular) {
-		Data.agregarObjetoDataBaseRestaurante(new Restaurante(nombre, direccion, celular));
+	public boolean crearRestaurante(String nombre, String direccion, String celular) {
+		Gson gson = new Gson();
+		Restaurante restaurante = new Restaurante(nombre,direccion,celular);
+		String aux = gson.toJson(restaurante);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseRestaurante();
+		if (!dataBase.contains(je)) {
+			Data.agregarObjetoDataBaseRestaurante(restaurante);
+			System.out.println("Restaurante creado exitosamente ");
+			return true;
+		} else {
+			System.out.println("Restaurante ya existente, por favor ingrese de nuevo ");
+			return false;
+		}
 	}
 
 	public void setOpciones(int posicion) {
