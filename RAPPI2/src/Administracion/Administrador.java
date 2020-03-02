@@ -65,7 +65,7 @@ public class Administrador extends Perfil {
 	 */
 	public boolean crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		Gson gson = new Gson();
-		Tendero tendero = new Tendero(nombre,telefono,comuna,clave,userName,salario);
+		Tendero tendero = new Tendero(nombre, telefono, comuna, clave, userName, salario);
 		String aux = gson.toJson(tendero);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseTendero();
@@ -78,9 +78,11 @@ public class Administrador extends Perfil {
 			return false;
 		}
 	}
-	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
+
+	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName,
+			long salario) {
 		Gson gson = new Gson();
-		Administrador administrador = new Administrador(nombre,telefono,comuna,clave,userName,salario);
+		Administrador administrador = new Administrador(nombre, telefono, comuna, clave, userName, salario);
 		String aux = gson.toJson(administrador);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseAdministrador();
@@ -89,10 +91,11 @@ public class Administrador extends Perfil {
 			System.out.println("Administrador creado exitosamente ");
 			return true;
 		} else {
-			System.out.println("Administrador ya existente, por favor ingrese de nuevo ");
+			System.out.println("Administrador	 ya existente, por favor ingrese de nuevo ");
 			return false;
 		}
 	}
+
 	/**
 	 * Metodo que crea un objeto de clase Restaurante
 	 * 
@@ -103,9 +106,9 @@ public class Administrador extends Perfil {
 	 * @param celular   El parametro celular define el telefono celular que tendra
 	 *                  el Restaurante
 	 */
-	public boolean crearRestaurante(String nombre, String direccion, String celular,String clave) {
+	public boolean crearRestaurante(String nombre, String direccion, String celular, String clave) {
 		Gson gson = new Gson();
-		Restaurante restaurante = new Restaurante(nombre,direccion,celular,clave);
+		Restaurante restaurante = new Restaurante(nombre, direccion, celular, clave);
 		String aux = gson.toJson(restaurante);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
@@ -126,8 +129,8 @@ public class Administrador extends Perfil {
 			if (posicion >= 0 && posicion <= 10) {
 				if (usuario instanceof Cliente) {
 					while (true) {
-						if (posicion == 3 | posicion == 4 | posicion == 5 | posicion == 6 | posicion == 7 | posicion == 8
-								| posicion == 9) {
+						if (posicion == 3 | posicion == 4 | posicion == 5 | posicion == 6 | posicion == 7
+								| posicion == 8 | posicion == 9) {
 							usuario = (Cliente) Main.usuario;
 							((Cliente) usuario).opciones.add(posicion);
 						} else {

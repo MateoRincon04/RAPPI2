@@ -3,7 +3,8 @@ package UIMain;
 import Interaccion.Cliente;
 
 /**
- * Clase CalificarRestaurante, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
+ * Clase CalificarRestaurante, su finalidad es la de ser aquella clase que
+ * permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad
  * 
  * @author Guillermo Toloza, Paula A. Taborda, Santiago Tamayo, Mateo Rincon
  */
