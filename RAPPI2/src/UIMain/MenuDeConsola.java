@@ -2,6 +2,7 @@ package UIMain;
 
 import java.util.ArrayList;
 import Interaccion.*;
+import Oferta.Restaurante;
 import Administracion.*;
 import BaseDatos.Data;
 
@@ -58,7 +59,12 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			try {
 				lanzarMenu((Cliente) Main.usuario);
 			}catch(Exception e1) {
-				lanzarMenu((Administrador) Main.usuario);
+				try {
+					lanzarMenu((Administrador) Main.usuario);
+				}catch(Exception e2) {
+					LanzarMenu(Main.usuarioRestaurante);
+				}
+				
 			}
 		}
 		
@@ -170,5 +176,8 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			}
 			break;
 		}
+	}
+	public static void lanzarMenu(Restaurante usuario) {
+		
 	}
 }
