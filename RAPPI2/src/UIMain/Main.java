@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.util.Scanner;
 import Administracion.*;
 
+/**
+ * Clase Main, su finalidad es la de ejecutar el codigo entero
+ * 
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
+ */
 public class Main {
 
 	public static Perfil usuario;

@@ -7,13 +7,12 @@ import Oferta.Restaurante;
 import BaseDatos.Data;
 
 /**
- * Clase Registrarse
+ * Clase login
  * 
  * su finalidad es la implementacion de Loguearse en el sistema a partir de la
  * opcion del menu
  * 
- * @author: Guillermo Toloza
- * @version:
+ * @author: Guillermo Toloza, Paula A. Taborda, Mateo Rincon, Santiago Tamayo
  */
 
 public class login implements OpcionDeMenu {
@@ -58,12 +57,12 @@ public class login implements OpcionDeMenu {
 						}
 					}
 				}
-			}
 			Main.usuario = usuario;
 			Main.usuarioRestaurante=usuarioRestaurante;
 			
 			System.out.println("Datos ingresados correctamente");
-		} catch (Exception e) {
+		} 
+		}catch (Exception e4) {
 			System.out.println("Error ingresando usuario, intente nuevamente");
 			ejecutar();
 		}

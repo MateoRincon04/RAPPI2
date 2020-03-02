@@ -30,7 +30,7 @@ public class Restaurante {
 	private List <String> direcciones = new ArrayList<String>();
 	private String celular;
 	private List<Plato> menu = new ArrayList<Plato>();
-	private List<Pedido> historial = new ArrayList<Pedido>();
+	private List<Plato> historial = new ArrayList<Plato>();
 	
 	/**
 	 * Constructor de los objetos de la clase Restaurante
@@ -83,6 +83,14 @@ public class Restaurante {
 		return this.celular;
 	}
 	
+	/**
+	 * Metodo que le permite a el restaurante crear un plato para su añadirlo a su menu
+	 * @param nombre El parametro nombre define el nombre que tendra este nuevo plato
+	 * @param descripcion El parametro descripcion define la descripcion del plato
+	 * @param precio El parametro precio define el precio en el mercado que poseera el plato
+	 * @param restriccion El parametro restriccion define si el plato tiene algun tipo de sustancia, la cual 
+	 *  para ser consumida necesita de cierta edad del cliente
+	 */
 	public void crearPlato(String nombre,String descripcion, float precio, int restriccion) {
 		Plato plato = new Plato(nombre, descripcion, precio,restriccion,this);
 		if(!this.menu.contains(plato)) {
@@ -124,7 +132,6 @@ public class Restaurante {
 
 	/**
 	 *  @see Plato#getCalificacionPromediada()
-	 * @return
 	 */
     public double getCalificacionPromediada() {
     	double contadorAux = 0;
@@ -136,5 +143,9 @@ public class Restaurante {
     	}
     	return contadorAux/this.calificaciones.size();
     	
+    }
+    
+    void addHistorial(Plato plato) {
+    	this.historial.add(plato);
     }
 }

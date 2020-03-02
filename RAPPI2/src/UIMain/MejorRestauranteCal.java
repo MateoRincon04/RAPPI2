@@ -1,25 +1,18 @@
 package UIMain;
 
-import Interaccion.Cliente;
-import Administracion.Perfil;
 import BaseDatos.Data;
 import java.util.ArrayList;
-import java.util.List;
 
 import Oferta.Restaurante;
 
+/**
+ * Clase MejorRestauranteCal, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
+ * 
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
+ */
 public class MejorRestauranteCal implements OpcionDeMenu {
-	/**
-	 * Clase OpcionDeMenu Aqui se crea la funcionalidad del cliente de saber cual es
-	 * el plato que mas ha comprado
-	 * 
-	 * Estructuras revelantes --------------------------------------------------
-	 * 
-	 * @author: Guillermo Toloza - Santiago Tamayo
-	 * @version:
-	 */
+
 	public void ejecutar() {
-		Cliente usuarioUno = (Cliente) Main.usuario;
 		ArrayList<Restaurante> lista = Data.OrganizarRestaurantesPorCalificacion();
 		System.out.println("Los restaurantes mejor calificados, del mejor al peor son: ");
 		for (int i = 0; i < lista.size(); i++) {

@@ -7,8 +7,7 @@ package Administracion;
  * clase abstracta como principios para esto, ya que tanto a la clase administrador, como a
  * cliente y tendero se les quiere guardar la informacion de estos atributos
  * 
- * @author: Mateo Rincon, Andrea Taborda, Guillermo Toloza, Santiago Tamayo
- * @version:
+ * @author: Mateo Rincon, Paula A. Taborda, Guillermo Toloza, Santiago Tamayo
 */
 public class Perfil {
 	private String nombre;
