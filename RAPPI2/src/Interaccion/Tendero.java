@@ -3,9 +3,7 @@ package Interaccion;
 import java.util.ArrayList;
 import java.util.List;
 import Administracion.Perfil;
-import BaseDatos.Data;
 import Oferta.Pedido;
-import UIMain.*;
 
 /**
  * Clase Tendero

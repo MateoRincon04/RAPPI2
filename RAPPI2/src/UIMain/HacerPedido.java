@@ -1,9 +1,7 @@
 package UIMain;
 
 import java.util.List;
-import java.util.ArrayList;
 import Interaccion.Cliente;
-import Administracion.Administrador;
 import BaseDatos.Data;
 import Oferta.*;
 

@@ -1,16 +1,11 @@
 package Interaccion;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
+import java.util.Iterator;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import Oferta.Pedido;
 import Oferta.Restaurante;
-import Administracion.Administrador;
-import Administracion.Perfil;
 import BaseDatos.Data;
 
 /**

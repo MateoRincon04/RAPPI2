@@ -1,10 +1,6 @@
 package UIMain;
 
-import java.util.List;
-import java.util.ArrayList;
 import Interaccion.Cliente;
-import Administracion.Administrador;
-import Oferta.*;
 
 /**
  * Clase CalificarRestaurante, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 

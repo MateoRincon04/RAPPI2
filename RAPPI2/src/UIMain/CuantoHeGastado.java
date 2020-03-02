@@ -1,8 +1,5 @@
 package UIMain;
 
-import Administracion.Administrador;
-import Oferta.*;
-
 import Interaccion.Cliente;
 
 /**

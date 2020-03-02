@@ -14,14 +14,9 @@ import BaseDatos.Data;
  * su finalidad es la implementacion de Registrarse en el sistema a partir de la
  * opcion del menu
  * 
- * 
- * 
- * @author: Guillermo Toloza
- * @version:
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon * 
  */
 
-//para usar la base de datos necesito el main, as� poder acceder a ella y comparar y/o agregar usuarios
-//que se van a registrar
 public class Registrarse implements OpcionDeMenu {
 
 	public void ejecutar() {

@@ -1,8 +1,5 @@
 package UIMain;
 
-import java.util.Scanner;
-import Interaccion.Cliente;
-
 /**
  * Clase Invitado, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
  * 
