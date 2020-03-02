@@ -62,7 +62,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				try {
 					lanzarMenu((Administrador) Main.usuario);
 				}catch(Exception e2) {
-					LanzarMenu(Main.usuarioRestaurante);
+					lanzarMenu(Main.usuarioRestaurante);
 				}
 				
 			}
