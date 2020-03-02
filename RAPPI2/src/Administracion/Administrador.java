@@ -78,7 +78,21 @@ public class Administrador extends Perfil {
 			return false;
 		}
 	}
-
+	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
+		Gson gson = new Gson();
+		Administrador administrador = new Administrador(nombre,telefono,comuna,clave,userName,salario);
+		String aux = gson.toJson(administrador);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseAdministrador();
+		if (!dataBase.contains(je)) {
+			Data.agregarObjetoDataBaseAdministrador(administrador);
+			System.out.println("Administrador creado exitosamente ");
+			return true;
+		} else {
+			System.out.println("Administrador ya existente, por favor ingrese de nuevo ");
+			return false;
+		}
+	}
 	/**
 	 * Metodo que crea un objeto de clase Restaurante
 	 * 
