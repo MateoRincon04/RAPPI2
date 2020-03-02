@@ -44,7 +44,16 @@ public class Registrarse implements OpcionDeMenu {
 		System.out.println("Ingrese su telefono: ");
 		int telefono = Main.user.nextInt();
 		System.out.println("Ingrese su saldo: ");
-		long saldo = Main.user.nextLong();
+		long saldo;
+		while (true) {
+			saldo = Main.user.nextLong();
+			if (Cliente.revisarSaldo(saldo) == false) {
+				System.out.println("Ingrese un saldo mayor a cero: ");
+			}
+			else {
+				break;
+			}
+		}
 		System.out.println("Ingrese su direccion: ");
 		String direccion = Main.user.next();
 		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago, direccion);

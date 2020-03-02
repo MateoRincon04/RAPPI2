@@ -46,7 +46,7 @@ public class Cliente extends Perfil {
 	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
 			String metodoDePago, String direccion) {
 		super(nombre, telefono, comuna, clave, userName);
-		this.saldo = saldo;
+		this.setSaldo(saldo);
 		this.direccion = direccion;
 		this.setMetodoDePago(metodoDePago);
 		this.opciones.add(3);
@@ -66,7 +66,16 @@ public class Cliente extends Perfil {
 	}
 
 	public void setSaldo(long saldo) {
-		this.saldo = saldo;
+			this.saldo = saldo;
+	}
+	public static boolean revisarSaldo(long saldo) {
+		if (saldo>0) {
+			return true;
+		}
+		else{
+			System.out.println("El saldo no puede ser negativo");
+			return false;
+		}
 	}
 
 	public void agregarSaldo(long saldo) {
