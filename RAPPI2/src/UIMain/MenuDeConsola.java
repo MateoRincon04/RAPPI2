@@ -53,77 +53,106 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			}
 			break;
 		}
-		lanzarMenu();
+		try {
+			lanzarMenu((Tendero) Main.usuario);
+		}catch(Exception e) {
+			try {
+				lanzarMenu((Cliente) Main.usuario);
+			}catch(Exception e1) {
+				lanzarMenu((Administrador) Main.usuario);
+			}
+		}
+		
+	}
+	public static void lanzarMenu(Cliente usuario) {
+		boolean pri = true;
+		while (true) {
+			if (pri) {
+				for (int i = 0; i < usuario.opciones.size(); i++) {
+					System.out.println(i + 1 + ") " + menu.get(usuario.opciones.get(i)));
+				}
+				pri = false;
+			}
+			System.out.println(
+					"oprima el numero indicado, de la funcion que deseas realizar, usuario " + Main.usuario.getNombre());
+			String valor;
+			while (true) {
+				valor = Main.user.next();
+				try {
+					int opc = Integer.parseInt(valor);
+					if (opc > 0 && opc <= usuario.opciones.size()) {
+						menu.get(opc+2).ejecutar();
+						break;
+					} else {
+						System.out.println("Ingrese un numero valido");
+					}
+				} catch (Exception e) {
+					System.out.println("Ingrese un valor valido.");
+				}
+			}
+			break;
+		}
+	}
+	public static void lanzarMenu(Tendero usuario) {
+		boolean pri = true;
+		while (true) {
+			if (pri) {
+				for (int i = 0; i < usuario.opciones.size(); i++) {
+					System.out.println(i + 1 + ") " + menu.get(usuario.opciones.get(i)));
+				}
+				pri = false;
+			}
+			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
+					+ Main.usuario.getNombre());
+			System.out.println(
+					"oprima el numero indicado, de la funcion que deseas realizar, usuario " + Main.usuario.getNombre());
+			String valor;
+			while (true) {
+				valor = Main.user.next();
+				try {
+					int opc = Integer.parseInt(valor);
+					if (opc > 0 && opc <= usuario.opciones.size()) {
+						menu.get(opc+2).ejecutar();
+						break;
+					} else {
+						System.out.println("Ingrese un numero valido");
+					}
+				} catch (Exception e) {
+					System.out.println("Ingrese un valor valido.");
+				}
+
+			}
+			break;
+		}
 	}
 
-	public static void lanzarMenu(Perfil usuario) {
-
-		if (usuario instanceof Administrador) {
-			// no tenemos definidas funcionalidades del administrador aún
-
-		}
-
-		else if (usuario instanceof Cliente) {
-			boolean pri = true;
-			while (true) {
-				if (pri) {
-					for (int i = 3; i < 10; i++) {
-						System.out.println(i - 2 + ") " + menu.get(i));
-					}
-					pri = false;
+	public static void lanzarMenu(Administrador usuario) {
+		boolean pri = true;
+		while (true) {
+			if (pri) {
+				for (int i = 3; i < menu.size(); i++) {
+					System.out.println(i - 2 + ") " + menu.get(i));
 				}
-				System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
-						+ Main.usuario.getNombre());
-				String valor;
-				while (true) {
-					valor = Main.user.next();
-					try {
-						int opc = Integer.parseInt(valor);
-						if (opc > 0 && opc <= 7) {
-							menu.get(opc+2).ejecutar();
-							break;
-						} else {
-							System.out.println("Ingrese un numero valido");
-						}
-					} catch (Exception e) {
-						System.out.println("Ingrese un valor valido.");
-					}
-
-				}
-				break;
+				pri = false;
 			}
-		}
-
-		else if (usuario instanceof Tendero) {
-			boolean pri = true;
+			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
+					+ Main.usuario.getNombre());
+			String valor;
 			while (true) {
-				if (pri) {
-
-					System.out.println(1 + ") " + menu.get(10));
-
-					pri = false;
-				}
-				System.out.println("oprima el numero indicado, de la funcion que deseas realizar, tendero"
-						+ Main.usuario.getNombre());
-				String valor;
-				while (true) {
-					valor = Main.user.next();
-					try {
-						int opc = Integer.parseInt(valor);
-						if (opc == 1) {
-							menu.get(10).ejecutar();
-							break;
-						} else {
-							System.out.println("Ingrese un numero valido");
-						}
-					} catch (Exception e) {
-						System.out.println("Ingrese un valor valido.");
+				valor = Main.user.next();
+				try {
+					int opc = Integer.parseInt(valor);
+					if (opc > 0 && opc <= 7) {
+						menu.get(opc+2).ejecutar();
+						break;
+					} else {
+						System.out.println("Ingrese un numero valido");
 					}
-
+				} catch (Exception e) {
+					System.out.println("Ingrese un valor valido.");
 				}
 			}
-
+			break;
 		}
-
 	}
 }
