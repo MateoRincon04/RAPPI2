@@ -543,6 +543,23 @@ public class Data {
 		}
 		return restaurante;
 	}
+	/**
+	 * Metodo para buscar un usuario en la base de datos de restaurante usando el userName y la clave del restaurante
+	 * 
+	 * @see: {@link #traerDataBaseRestaurante()}
+	 */
+	public static Restaurante buscarRestaurante(String userName,String clave) {
+		Restaurante restaurante= null;
+		Gson gson = new Gson();
+		JsonArray dataBase =Data.traerDataBaseRestaurante();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if(userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
+				restaurante = gson.fromJson(obj, Restaurante.class) ;
+			}
+		}
+		return restaurante;
+	}
 	
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion

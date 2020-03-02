@@ -1,6 +1,8 @@
 package UIMain;
 
 import BaseDatos.Data;
+import Oferta.Restaurante;
+
 import java.io.IOException;
 import java.util.Scanner;
 import Administracion.*;
@@ -8,6 +10,7 @@ import Administracion.*;
 public class Main {
 
 	public static Perfil usuario;
+	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException{

@@ -3,6 +3,7 @@ package UIMain;
 import Administracion.*;
 import Interaccion.Cliente;
 import Interaccion.Tendero;
+import Oferta.Restaurante;
 import BaseDatos.Data;
 
 /**
@@ -19,19 +20,47 @@ public class login implements OpcionDeMenu {
 
 	public void ejecutar() {
 		Perfil usuario = null;
+		Restaurante usuarioRestaurante=null;
 		try {
 			System.out.println("Ingrese su usuario: ");
 			String userName = Main.user.next();
 			System.out.println("Ingrese su clave: ");
 			String clave = Main.user.next();
-			usuario = Data.buscarCliente(userName, clave);
-			if(usuario == null) {
-				usuario = Data.buscarAdministrador(userName, clave);
-			}
-			else if(usuario == null) {
-				usuario = Data.buscarTendero(userName, clave);
+			try {
+				if(Data.buscarCliente(userName, clave)!=null) {
+					usuario = Data.buscarCliente(userName, clave);
+				}else {
+					throw new Exception();
+				}
+			}catch(Exception e) {
+				try {
+					if(Data.buscarAdministrador(userName, clave)!=null) {
+						usuario = Data.buscarAdministrador(userName, clave);
+					}else {
+						throw new Exception();
+					}
+				}catch(Exception e1) {
+					try {
+						if(Data.buscarTendero(userName, clave)!=null) {
+							usuario = Data.buscarTendero(userName, clave);
+						}else {
+							throw new Exception();
+						}
+					}catch(Exception e2) {
+						try {
+							if(Data.buscarRestaurante(userName, clave)!=null) {
+								usuarioRestaurante = Data.buscarRestaurante(userName, clave);
+							}else {
+								throw new Exception();
+							}
+						}catch(Exception e3) {
+							System.out.println("Usuario no existente");
+						}
+					}
+				}
 			}
 			Main.usuario = usuario;
+			Main.usuarioRestaurante=usuarioRestaurante;
 			
 			System.out.println("Datos ingresados correctamente");
 		} catch (Exception e) {
