@@ -55,6 +55,7 @@ public class Registrarse implements OpcionDeMenu {
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseCliente(cliente); 
 			System.out.println("Usuario creado exitosamente ");
+			Main.usuario = cliente;
 		} else {
 			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
 			ejecutar();

@@ -16,7 +16,6 @@ import BaseDatos.Data;
  */
 
 public class login implements OpcionDeMenu {
-
 	public void ejecutar() {
 		Perfil usuario = null;
 		Restaurante usuarioRestaurante=null;
@@ -25,35 +24,20 @@ public class login implements OpcionDeMenu {
 			String userName = Main.user.next();
 			System.out.println("Ingrese su clave: ");
 			String clave = Main.user.next();
-			try {
 				if(Data.buscarCliente(userName, clave)!=null) {
 					usuario = Data.buscarCliente(userName, clave);
 				}else {
-					throw new Exception();
-				}
-			}catch(Exception e) {
-				try {
 					if(Data.buscarAdministrador(userName, clave)!=null) {
 						usuario = Data.buscarAdministrador(userName, clave);
 					}else {
-						throw new Exception();
-					}
-				}catch(Exception e1) {
-					try {
 						if(Data.buscarTendero(userName, clave)!=null) {
 							usuario = Data.buscarTendero(userName, clave);
 						}else {
-							throw new Exception();
-						}
-					}catch(Exception e2) {
-						try {
 							if(Data.buscarRestaurante(userName, clave)!=null) {
 								usuarioRestaurante = Data.buscarRestaurante(userName, clave);
 							}else {
-								throw new Exception();
+								System.out.println("Usuario no existente");
 							}
-						}catch(Exception e3) {
-							System.out.println("Usuario no existente");
 						}
 					}
 				}
@@ -61,7 +45,6 @@ public class login implements OpcionDeMenu {
 			Main.usuarioRestaurante=usuarioRestaurante;
 			
 			System.out.println("Datos ingresados correctamente");
-		} 
 		}catch (Exception e4) {
 			System.out.println("Error ingresando usuario, intente nuevamente");
 			ejecutar();
