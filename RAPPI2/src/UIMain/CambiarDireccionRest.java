@@ -15,6 +15,7 @@ public class CambiarDireccionRest implements OpcionDeMenu {
 			ejecutar();
 		}
 	}
+
 	public String toString() {
 		return "Cambiar Direccion Restaurante";
 	}
