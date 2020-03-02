@@ -13,7 +13,7 @@ import BaseDatos.Data;
  * funcionalidades de un usuario especifico.
  * 
  * 
- * @author: Mateo Rincon
+ * @author: Mateo Rincon, Guillermo Toloza, Andrea Taborda, Santiago Tamayo
  * @version:
  */
 

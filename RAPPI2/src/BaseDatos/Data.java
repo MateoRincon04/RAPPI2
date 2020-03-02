@@ -20,7 +20,7 @@ import com.google.gson.*;
  * Estructuras importantes:
  * @see: {@link #opciones}
  * 
- * @author: Santiago Tamayo
+ * @author: Santiago Tamayo, Andrea Taborda, Mateo Rincon, Guillermo Toloza
  * @version:
  */
 public class Data {
@@ -63,9 +63,9 @@ public class Data {
 	public static File cargarFileDataBaseCliente() throws IOException {
 		File DataBase = new File(filepathCliente);
 		if(Data.traerDataBaseCliente()!=null) {
-			System.out.println("La dataBasePerfil se ha cargado correctamente");
+			System.out.println("La dataBaseCliente se ha cargado correctamente");
 		}else {
-			System.out.println("La dataBasePerfil se ha creado correctamente");
+			System.out.println("La dataBaseCliente se ha creado correctamente");
 			JsonArray array = new JsonArray();
 			try(FileWriter fw = new FileWriter(filepathCliente) ){
 				fw.write(array.toString());
@@ -85,9 +85,9 @@ public class Data {
 	public static File cargarFileDataBaseTendero() throws IOException {
 		File DataBase = new File(filepathTendero);
 		if(Data.traerDataBaseTendero()!=null) {
-			System.out.println("La dataBasePerfil se ha cargado correctamente");
+			System.out.println("La dataBaseTendero se ha cargado correctamente");
 		}else {
-			System.out.println("La dataBasePerfil se ha creado correctamente");
+			System.out.println("La dataBaseTendero se ha creado correctamente");
 			JsonArray array = new JsonArray();
 			try(FileWriter fw = new FileWriter(filepathTendero) ){
 				fw.write(array.toString());
@@ -107,9 +107,9 @@ public class Data {
 	public static File cargarFileDataBaseAdministrador() throws IOException {
 		File DataBase = new File(filepathAdministrador);
 		if(Data.traerDataBaseAdministrador()!=null) {
-			System.out.println("La dataBasePerfil se ha cargado correctamente");
+			System.out.println("La dataBaseAdministrador se ha cargado correctamente");
 		}else {
-			System.out.println("La dataBasePerfil se ha creado correctamente");
+			System.out.println("La dataBaseAdministrador se ha creado correctamente");
 			JsonArray array = new JsonArray();
 			try(FileWriter fw = new FileWriter(filepathAdministrador) ){
 				fw.write(array.toString());

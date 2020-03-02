@@ -20,7 +20,7 @@ import BaseDatos.Data;
  * @see #calififcaciones
  * @see #historial
  * 
- * @author: Santiago Tamayo, Mateo Rinc�n
+ * @author: Santiago Tamayo, Mateo Rincon, Guillermo Toloza, Andrea Taborda
  * @version:
  *
  */
@@ -89,7 +89,7 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * M�todo que calcula la calificacion promedio que le han dado los tenderos a
+	 * Metodo que calcula la calificacion promedio que le han dado los tenderos a
 	 * este Cliente
 	 * 
 	 * @return La calificacion promedio que tiene el Cliente en escala de (0.0,5.0]
@@ -111,8 +111,9 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * M�todo que califica al Tendero que entrego la orden
+	 * Metodo que califica al Tendero que entrego la orden
 	 * 
+	 * @see: {@link Calificacion#Calificacion(Object, double, Object)}
 	 * @param puntuacion El parametro puntuacion define la calificacion del Tendero
 	 */
 	public void calificarTendero(double puntuacion) {
@@ -124,8 +125,9 @@ public class Cliente extends Perfil {
 	}
 
 	/**
-	 * M�todo que califica al Restaurante que preparo el pedido
+	 * Metodo que califica al Restaurante que preparo el pedido
 	 * 
+	 * @see: {@link Calificacion#Calificacion(Object, double, Object)}
 	 * @param puntuacion El parametro puntuacion define la calificacion del
 	 *                   Restaurante
 	 */
@@ -151,8 +153,10 @@ public class Cliente extends Perfil {
 	}
 	
 	/**
+	 * Metodo que consulta cual es el plato mas comprado por el cliente que esta preguntando.
 	 * 
-	 * @return
+	 * @see: {@link #historial}
+	 * @return String con el nombre del plato que mas compro el cliente
 	 */
 	public String platoMasComprado(){
 		int contador1 = 0;
@@ -171,6 +175,12 @@ public class Cliente extends Perfil {
 		}
 		return aux;
 	}
+	
+	/**
+	 * Metodo que me muestra cuanto dinero ha gastado el cliente a lo largo de su historia.
+	 * 
+	 * @return double que me da el valor total del gasto
+	 */
 	public double cuantoHeGastado() {
 		double valorGastado = 0;
 		for (Pedido pedido : this.getHistorial()) { // Por cada pedido en la lista de pedidos:

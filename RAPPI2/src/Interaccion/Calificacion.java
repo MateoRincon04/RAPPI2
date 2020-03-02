@@ -6,7 +6,7 @@ package Interaccion;
  * Esta clase tiene como finalidad hacer la conexion entre el calificado y el calificador
  * para saber cada dato de estos
  * 
- * @author: Santiago Tamayo, Mateo Rincón
+ * @author: Santiago Tamayo, Mateo Rincón, Andrea Taborda, Guillermo Toloza
  * @version:
  */
 
