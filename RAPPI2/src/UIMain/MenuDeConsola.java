@@ -1,8 +1,6 @@
 package UIMain;
 
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
 import Interaccion.*;
 import Administracion.*;
 import BaseDatos.Data;
@@ -12,10 +10,8 @@ import BaseDatos.Data;
  * requiere para este trabajo y asi tener una interfaz de interaccion para el
  * usuario
  * 
- * Estructuras revelantes ------------------
  * 
- * @author:Guillermo Toloza
- * @version:
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
  */
 
 public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu diferente. El tamano
@@ -25,6 +21,9 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 	public void AnadirOpcion(OpcionDeMenu OpcionMenu) {
 	}
 
+	/**
+	 * Metodo para lanzar el menu principal e incial
+	 */
 	public static void lanzarMenu() {
 		boolean pri = true;
 		while (1 + 1 == 2) {
@@ -64,6 +63,12 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 		}
 		
 	}
+	
+	/**
+	 * Metodo para lanzar el menu siendo ya registrado como Cliente
+	 * 
+	 * @param usuario El parametro usuario define el cliente que esta usando el menu
+	 */
 	public static void lanzarMenu(Cliente usuario) {
 		boolean pri = true;
 		while (true) {
@@ -93,6 +98,12 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			break;
 		}
 	}
+	
+	/**
+	 * Metodo para lanzar el menu siendo ya registrado como Tendero
+	 * 
+	 * @param usuario El parametro usuario define el cliente que esta usando el menu
+	 */
 	public static void lanzarMenu(Tendero usuario) {
 		boolean pri = true;
 		while (true) {
@@ -126,6 +137,11 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 		}
 	}
 
+	/**
+	 * Metodo para lanzar el menu siendo ya registrado como Administrador
+	 * 
+	 * @param usuario El parametro usuario define el cliente que esta usando el menu
+	 */
 	public static void lanzarMenu(Administrador usuario) {
 		boolean pri = true;
 		while (true) {

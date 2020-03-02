@@ -13,15 +13,9 @@ import Interaccion.Calificacion;
  * que plato desea comprar.
  * Estructuras de datos revelantes son
  * @see #modificaciones
- * @author: Paula A. Taborda, Mateo Rincon
- * @version:
+ * @author: Paula A. Taborda, Mateo Rincon, Santiago Tamayo, Guillermo Toloza
  */
-
-
-
-
 public class Plato {
-	//atributos de la clase
 	private String nombre;
 	private String descripcion;
 	private float precio;

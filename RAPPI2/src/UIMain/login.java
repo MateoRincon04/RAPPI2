@@ -6,13 +6,12 @@ import Interaccion.Tendero;
 import BaseDatos.Data;
 
 /**
- * Clase Registrarse
+ * Clase login
  * 
  * su finalidad es la implementacion de Loguearse en el sistema a partir de la
  * opcion del menu
  * 
- * @author: Guillermo Toloza
- * @version:
+ * @author: Guillermo Toloza, Paula A. Taborda, Mateo Rincon, Santiago Tamayo
  */
 
 public class login implements OpcionDeMenu {
@@ -25,10 +24,12 @@ public class login implements OpcionDeMenu {
 			System.out.println("Ingrese su clave: ");
 			String clave = Main.user.next();
 			usuario = Data.buscarCliente(userName, clave);
+			
 			if(usuario == null) {
 				usuario = Data.buscarAdministrador(userName, clave);
 			}
-			else if(usuario == null) {
+			
+			if(usuario == null) {
 				usuario = Data.buscarTendero(userName, clave);
 			}
 			Main.usuario = usuario;

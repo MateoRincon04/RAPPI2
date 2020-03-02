@@ -1,17 +1,11 @@
 package UIMain;
-import java.util.ArrayList;
-import Interaccion.Cliente;
 
 /**
- * Clase OpcionDeMenu
+ * Interfaz OpcionDeMenu
  * su finalidad es la implementacion de las diferentes interfaces dinamicas con sus
  * respectivas funcionalidades
- * 
- * Estructuras revelantes
- * --------------------------------------------------
- * 
- * @author: Guillermo Toloza
- * @version:
+
+ * @author: Guillermo Toloza, Paula A. Taborda, Santiago Tamayo, Mateo Rincon
  */
 
 public interface OpcionDeMenu {

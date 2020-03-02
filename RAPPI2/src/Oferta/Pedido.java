@@ -10,10 +10,7 @@ import Interaccion.Notificacion;
  * respectivos restaurante y tenderos para que puedan realizar cada tarea y asi suplir
  * la peticion del cliente.
  * 
- * @author: Santiago Tamayo, Mateo Rincón
- *
- * @version:
- * 
+ * @author: Santiago Tamayo, Mateo Rincón, Paula A. Taborda, Guillermo Toloza
  */
 
 public class Pedido {
@@ -34,7 +31,8 @@ public class Pedido {
 		this.cliente = cliente;
 		this.plato = plato;
 		this.restaurante = plato.restaurante;
-		Notificacion notificacion = new Notificacion(this);
+		this.restaurante.addHistorial(plato);
+		new Notificacion(this);
 	}
 	
 	public boolean getEntregado() {
@@ -77,6 +75,5 @@ public class Pedido {
 	public Plato getPlato() {
 		return this.plato;
 	}
-	//metodos para sumar a el historial del restaurante el plato pedido
 }
 

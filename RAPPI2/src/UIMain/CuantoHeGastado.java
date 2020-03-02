@@ -1,10 +1,12 @@
 package UIMain;
 
-import Administracion.Administrador;
-import Oferta.*;
-
 import Interaccion.Cliente;
 
+/**
+ * Clase CuantoHeGastado, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
+ * 
+ * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
+ */
 public class CuantoHeGastado implements OpcionDeMenu {
 	public void ejecutar() {
 		Cliente cliente = (Cliente) Main.usuario;

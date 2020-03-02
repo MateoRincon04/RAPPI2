@@ -1,16 +1,11 @@
 package Interaccion;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
+import java.util.Iterator;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
 import Oferta.Pedido;
 import Oferta.Restaurante;
-import Administracion.Administrador;
-import Administracion.Perfil;
 import BaseDatos.Data;
 
 /**
@@ -18,8 +13,7 @@ import BaseDatos.Data;
  * su finalidad es de notificar a los tenderos y al restaurante acerca de la creación del pedido
  * para que asi estos sepan que deben de hacer o recoger.
  * 
- * @author: Santiago Tamayo
- * @version: 
+ * @author: Santiago Tamayo, Paula A. Taborda, Guillermo Toloza, Mateo Rincon
  */
 public class Notificacion {
 	private Pedido pedido;
