@@ -89,9 +89,9 @@ public class Administrador extends Perfil {
 	 * @param celular   El parametro celular define el telefono celular que tendra
 	 *                  el Restaurante
 	 */
-	public boolean crearRestaurante(String nombre, String direccion, String celular) {
+	public boolean crearRestaurante(String nombre, String direccion, String celular,String clave) {
 		Gson gson = new Gson();
-		Restaurante restaurante = new Restaurante(nombre,direccion,celular);
+		Restaurante restaurante = new Restaurante(nombre,direccion,celular,clave);
 		String aux = gson.toJson(restaurante);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
