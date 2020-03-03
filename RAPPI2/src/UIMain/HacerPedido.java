@@ -15,7 +15,7 @@ import Interaccion.Notificacion;
 public class HacerPedido implements OpcionDeMenu {
 
 	public void ejecutar() {
-		/* se esta definiendo la forma como hace el pedido el usuario */
+		// se esta definiendo la forma como hace el pedido el usuario
 		Cliente usuarioCliente = (Cliente) (Main.usuario);
 
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
