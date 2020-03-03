@@ -19,6 +19,7 @@ public class CalificarTendero implements OpcionDeMenu {
 			if (calificacion >= 0 && calificacion <= 5) {
 				usuario.calificarTendero(calificacion);
 				System.out.println("Ha calificado al tendero correctamente.");
+				MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 			} else {
 				System.out.println("Ingrese una calificación valida.");
 			}

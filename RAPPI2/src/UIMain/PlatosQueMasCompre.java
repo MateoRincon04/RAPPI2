@@ -14,6 +14,7 @@ public class PlatosQueMasCompre implements OpcionDeMenu {
 		Cliente usuarioUno = (Cliente) Main.usuario;
 		String nomPlato = usuarioUno.platoMasComprado();
 		System.out.println("El plato más comprado es: " + nomPlato);
+		MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 	}
 
 	public String toString() {

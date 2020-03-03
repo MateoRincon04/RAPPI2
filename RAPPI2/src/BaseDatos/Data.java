@@ -58,10 +58,10 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathCliente = "temp\\clientesGuardados.json";
-	private static final String filepathTendero = "temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
+	private static final String filepathCliente = "clientesGuardados.json";
+	private static final String filepathTendero = "tenderosGuardados.json";
+	private static final String filepathAdministrador = "administradoresGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de

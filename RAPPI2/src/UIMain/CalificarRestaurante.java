@@ -18,6 +18,7 @@ public class CalificarRestaurante implements OpcionDeMenu {
 			if (calificacion >= 0 && calificacion <= 5) {
 				usuario.calificarRestaurante(calificacion);
 				System.out.println("Ha calificado al restaurante correctamente.");
+				MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 			} else {
 				System.out.println("Ingrese una calificación valida.");
 

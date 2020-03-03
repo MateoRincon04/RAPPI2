@@ -1,6 +1,8 @@
 package UIMain;
 
 import BaseDatos.Data;
+import Interaccion.Cliente;
+
 import java.util.ArrayList;
 
 import Oferta.Restaurante;
@@ -18,6 +20,7 @@ public class MejorRestauranteCal implements OpcionDeMenu {
 		for (int i = 0; i < lista.size(); i++) {
 			System.out.println(i + " . " + lista.get(i).getNombre());
 		}
+		MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 	}
 	public String toString() {
 		return "Mejor restaurante";
