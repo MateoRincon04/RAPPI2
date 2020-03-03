@@ -13,6 +13,7 @@ public class CuantosPedidosHeEntregado implements OpcionDeMenu {
 		Tendero usuario = (Tendero) Main.usuario;
 		int aux = usuario.cantidadDePedidosEntregados();
 		System.out.println("Usted ha entregado: " + aux + " pedidos.");
+		MenuDeConsola.lanzarMenu((Tendero) Main.usuario);
 	}
 	public String toString() {
 		return "¿Cuántos pedidos he entregado?";

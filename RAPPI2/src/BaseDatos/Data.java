@@ -28,7 +28,7 @@ public class Data {
 	private static ArrayList<OpcionDeMenu> opciones = new ArrayList<>();
 
 	/**
-	 * Método en el se cargan todas las opciones de menu generales.
+	 * Mï¿½todo en el se cargan todas las opciones de menu generales.
 	 */
 	public static final void CargarOpciones() {
 		opciones.add(new Registrarse());//0
