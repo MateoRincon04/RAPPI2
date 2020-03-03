@@ -31,6 +31,7 @@ public class CrearTendero implements OpcionDeMenu {
 			ejecutar();
 
 		}
+		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}
 	public String toString() {
 		return "Crear Tendero";

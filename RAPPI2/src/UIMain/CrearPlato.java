@@ -18,6 +18,7 @@ public class CrearPlato implements OpcionDeMenu {
 		if (!valor) {
 			ejecutar();
 		}
+		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}
 	public String toString() {
 		return "Crear Plato Restaurante";

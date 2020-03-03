@@ -31,26 +31,25 @@ public class Data {
 	 * Método en el se cargan todas las opciones de menu generales.
 	 */
 	public static final void CargarOpciones() {
-		opciones.add(new Registrarse());//0
-		opciones.add(new login());//1
-		opciones.add(new Invitado());//2
-		opciones.add(new HacerPedido());//3 cliente
-		opciones.add(new CalificarTendero());//4 cliente
-		opciones.add(new CalificarRestaurante()); //5 cliente
-		opciones.add(new CuantoHeGastado()); //6 cliente
-		opciones.add(new MejorRestauranteCal()); //7 cliente
-		opciones.add(new PlatosQueMasCompre()); //8 cliente
-		opciones.add(new CuantosPedidosHeEntregado()); //9 tendero
-		opciones.add(new EnCualesDirecciones()); //10 restaurante
-		opciones.add(new CrearPlato()); //11 restaurante
-		opciones.add(new AgregarDireccionRest()); //12 restaurante
-		opciones.add(new CambiarPlato()); //13 restaurante
-		opciones.add(new EliminarDireccionRest());//14 restaurante
-		opciones.add(new CrearAdministrador()); //15 Admin
-		opciones.add(new CrearRestaurante()); //16 admin
-		opciones.add(new CrearTendero()); //17 admin
-		//opciones.add(new TenderoReparteMas()); //18 admin
-		
+		opciones.add(new Registrarse());// 0
+		opciones.add(new login());// 1
+		opciones.add(new Invitado());// 2
+		opciones.add(new HacerPedido());// 3 cliente
+		opciones.add(new CalificarTendero());// 4 cliente
+		opciones.add(new CalificarRestaurante()); // 5 cliente
+		opciones.add(new CuantoHeGastado()); // 6 cliente
+		opciones.add(new MejorRestauranteCal()); // 7 cliente
+		opciones.add(new PlatosQueMasCompre()); // 8 cliente
+		opciones.add(new CuantosPedidosHeEntregado()); // 9 tendero
+		opciones.add(new EnCualesDirecciones()); // 10 restaurante
+		opciones.add(new CrearPlato()); // 11 restaurante
+		opciones.add(new AgregarDireccionRest()); // 12 restaurante
+		opciones.add(new CambiarPlato()); // 13 restaurante
+		opciones.add(new EliminarDireccionRest());// 14 restaurante
+		opciones.add(new CrearAdministrador()); // 15 Admin
+		opciones.add(new CrearRestaurante()); // 16 admin
+		opciones.add(new CrearTendero()); // 17 admin
+		// opciones.add(new TenderoReparteMas()); //18 admin
 
 	}
 

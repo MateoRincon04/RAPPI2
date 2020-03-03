@@ -23,6 +23,7 @@ public class EnCualesDirecciones implements OpcionDeMenu {
 		for (int i = 0; i < direccionesDisponibles.size(); i++) {
 			System.out.println(direccionesDisponibles.get(i));
 		}
+		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}
 	public String toString() {
 		return "¿En cuáles direcciones?";

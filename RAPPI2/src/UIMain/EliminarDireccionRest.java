@@ -11,7 +11,7 @@ public class EliminarDireccionRest implements OpcionDeMenu {
 		if (!valor) {
 			ejecutar();
 		}
-		
+		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}
 	
 	public String toString() {

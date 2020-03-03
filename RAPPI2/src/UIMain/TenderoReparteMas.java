@@ -19,8 +19,9 @@ public class TenderoReparteMas implements OpcionDeMenu {
 				.println("El tendero que más pedidos ha entregado al restaurante " + restaurante.getNombre() + " es: ");
 		Tendero tendero = restaurante.tenderoQueMasMeEntrega();
 		System.out.println(tendero.getNombre());
-
+		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}
+
 	public String toString() {
 		return "El tendero que mas reparte";
 	}
