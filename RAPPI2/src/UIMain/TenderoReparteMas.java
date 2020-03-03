@@ -21,4 +21,7 @@ public class TenderoReparteMas implements OpcionDeMenu {
 		System.out.println(tendero.getNombre());
 
 	}
+	public String toString() {
+		return "El tendero que mas reparte";
+	}
 }
