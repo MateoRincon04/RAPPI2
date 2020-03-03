@@ -557,7 +557,7 @@ public class Data {
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
 		for (JsonElement jsonElement : dataBase) {
 			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString())) {
+			if (userName.equals(obj.get("nombre").getAsString())) {
 				restaurante = gson.fromJson(obj, Restaurante.class);
 			}
 		}

@@ -15,7 +15,7 @@ import Administracion.*;
 public class Main {
 
 	public static Perfil usuario = null;
-	public static Restaurante usuarioRestaurante;
+	public static Restaurante usuarioRestaurante = null;
 	public static Scanner user = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException{
@@ -24,7 +24,7 @@ public class Main {
 		Data.cargarFileDataBaseCliente();
 		Data.cargarFileDataBaseTendero();
 		Data.cargarFileDataBaseRestaurante();
-		Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
+		//Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
 		MenuDeConsola.lanzarMenu();
 		user.close();
 		

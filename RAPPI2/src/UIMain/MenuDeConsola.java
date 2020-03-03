@@ -60,9 +60,14 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				lanzarMenu((Cliente) Main.usuario);
 			}catch(Exception e1) {
 				try {
-					lanzarMenu((Administrador) Main.usuario);
+					lanzarMenu((Restaurante) Main.usuarioRestaurante);
 				}catch(Exception e2) {
-					lanzarMenu(Main.usuarioRestaurante);
+					try {
+						lanzarMenu((Administrador) Main.usuario);
+					}catch(Exception e3) {
+						e3.printStackTrace();
+					}
+					
 				}
 				
 			}
@@ -119,7 +124,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
+			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario "
 					+ Main.usuario.getNombre());
 			System.out.println(
 					"oprima el numero indicado, de la funcion que deseas realizar, usuario " + Main.usuario.getNombre());
@@ -157,7 +162,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
+			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario "
 					+ Main.usuario.getNombre());
 			String valor;
 			while (true) {
@@ -177,17 +182,15 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			break;
 		}
 	}
-	public static void lanzarMenu(Restaurante usuario) {
+	public static void lanzarMenu(Restaurante usuarioR) {
 		boolean pri = true;
 		while (true) {
 			if (pri) {
-				for (int i = 0; i < usuario.opciones.size(); i++) {
-					System.out.println(i + 1 + ") " + menu.get(usuario.opciones.get(i)));
+				for (int i = 0; i < usuarioR.opciones.size(); i++) {
+					System.out.println(i + 1 + ") " + menu.get(usuarioR.opciones.get(i)));
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
-					+ Main.usuarioRestaurante.getNombre());
 			System.out.println(
 					"oprima el numero indicado, de la funcion que deseas realizar, usuario " + Main.usuarioRestaurante.getNombre());
 			String valor;
@@ -195,16 +198,17 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				valor = Main.user.next();
 				try {
 					int opc = Integer.parseInt(valor);
-					if (opc > 0 && opc <= usuario.opciones.size()) {
-						menu.get(opc+2).ejecutar();
+					if (opc > 0 && opc <= usuarioR.opciones.size()) {
+						menu.get(opc+9).ejecutar();
 						break;
 					} else {
 						System.out.println("Ingrese un numero valido");
+						lanzarMenu(usuarioR);
 					}
 				} catch (Exception e) {
 					System.out.println("Ingrese un valor valido.");
+					lanzarMenu(usuarioR);
 				}
-
 			}
 			break;
 		}

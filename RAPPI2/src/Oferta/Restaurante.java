@@ -11,7 +11,7 @@ import Interaccion.Tendero;
 /**
  * Clase Restaurante En esta clase, el restaurante es aquel que prepara los
  * platos tiene datos propios como el nombre de restaurante, celular de
- * contacto, direcci�nes de sus sucursales, un booleano que define si el
+ * contacto, direcciones de sus sucursales, un booleano que define si el
  * pedido esta listo para ser despachado o no y su menu
  * 
  * Estructuras revelantes
