@@ -9,8 +9,6 @@ import UIMain.*;
 import Interaccion.Cliente;
 import Interaccion.Tendero;
 import Administracion.Administrador;
-import Oferta.Gson;
-import Oferta.JsonArray;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
 import com.google.gson.*;
@@ -33,25 +31,26 @@ public class Data {
 	 * Método en el se cargan todas las opciones de menu generales.
 	 */
 	public static final void CargarOpciones() {
-		opciones.add(new Registrarse());
-		opciones.add(new login());
-		opciones.add(new Invitado());
-		opciones.add(new HacerPedido());// cliente
-		opciones.add(new CalificarTendero());// cliente
-		opciones.add(new CalificarRestaurante()); // cliente
-		opciones.add(new CuantoHeGastado()); // cliente
-		opciones.add(new MejorRestauranteCal()); // cliente
-		opciones.add(new PlatosQueMasCompre()); // cliente
-	//	opciones.add(new EnCualesDirecciones()); // restaurante
-	//	opciones.add(new CrearPlato()); // restaurante
-	//	opciones.add(new AgregarDireccionRest()); // restaurante
-	//	opciones.add(new CambiarPlato()); // restaurante
-	//	opciones.add(new EliminarDireccionRest());//restaurante
-	//	opciones.add(new CrearAdministrador()); // Admin
-	//	opciones.add(new CrearRestaurante()); // admin
-	//	opciones.add(new CrearTendero()); // admin
-	//	opciones.add(new TenderoReparteMas()); admin
-		opciones.add(new CuantosPedidosHeEntregado()); // tendero
+		opciones.add(new Registrarse());//0
+		opciones.add(new login());//1
+		opciones.add(new Invitado());//2
+		opciones.add(new HacerPedido());//3 cliente
+		opciones.add(new CalificarTendero());//4 cliente
+		opciones.add(new CalificarRestaurante()); //5 cliente
+		opciones.add(new CuantoHeGastado()); //6 cliente
+		opciones.add(new MejorRestauranteCal()); //7 cliente
+		opciones.add(new PlatosQueMasCompre()); //8 cliente
+		opciones.add(new CuantosPedidosHeEntregado()); //9 tendero
+		opciones.add(new EnCualesDirecciones()); //10 restaurante
+		opciones.add(new CrearPlato()); //11 restaurante
+		opciones.add(new AgregarDireccionRest()); //12 restaurante
+		opciones.add(new CambiarPlato()); //13 restaurante
+		opciones.add(new EliminarDireccionRest());//14 restaurante
+		opciones.add(new CrearAdministrador()); //15 Admin
+		opciones.add(new CrearRestaurante()); //16 admin
+		opciones.add(new CrearTendero()); //17 admin
+		//opciones.add(new TenderoReparteMas()); //18 admin
+		
 
 	}
 
@@ -59,10 +58,10 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathCliente = "clientesGuardados.json";
-	private static final String filepathTendero = "tenderosGuardados.json";
-	private static final String filepathAdministrador = "administradoresGuardados.json";
-	private static final String filepathRestaurantes = "restaurantesGuardados.json";
+	private static final String filepathCliente = "temp\\clientesGuardados.json";
+	private static final String filepathTendero = "temp\\tenderosGuardados.json";
+	private static final String filepathAdministrador = "temp\\administradoresGuardados.json";
+	private static final String filepathRestaurantes = "temp\\restaurantesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -577,7 +576,7 @@ public class Data {
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
 		for (JsonElement jsonElement : dataBase) {
 			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
+			if (userName.equals(obj.get("nombre").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
 				restaurante = gson.fromJson(obj, Restaurante.class);
 			}
 		}
@@ -608,14 +607,15 @@ public class Data {
 		}
 		return best;
 	}
+
 	public static void imprimirRestaurantes() {
 		Gson gson = new Gson();
 		JsonArray historial = Data.traerDataBaseRestaurante();
-		for(int i = 0; i < historial.size(); i++) {
+		for (int i = 0; i < historial.size(); i++) {
 			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
-			System.out.println(i+") "+aux1.getNombre());
-			
-			
-	}
+			System.out.println(i + ") " + aux1.getNombre());
 
+		}
+
+	}
 }

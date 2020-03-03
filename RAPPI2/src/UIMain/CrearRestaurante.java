@@ -1,14 +1,6 @@
 package UIMain;
 
-import Oferta.Restaurante;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-
 import Administracion.Administrador;
-import BaseDatos.Data;
-import Oferta.Restaurante;
 
 public class CrearRestaurante implements OpcionDeMenu {
 	public void ejecutar() { // funcion unica del Admin
@@ -26,6 +18,7 @@ public class CrearRestaurante implements OpcionDeMenu {
 		if (!valor) {
 			ejecutar();
 		}
+		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}
 	public String toString() {
 		return "Crear Restaurante";

@@ -11,5 +11,10 @@ public class EliminarDireccionRest implements OpcionDeMenu {
 		if (!valor) {
 			ejecutar();
 		}
+		
+	}
+	
+	public String toString() {
+		return "Eliminar direccion restaurante";
 	}
 }

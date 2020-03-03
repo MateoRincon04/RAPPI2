@@ -164,7 +164,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				valor = Main.user.next();
 				try {
 					int opc = Integer.parseInt(valor);
-					if (opc > 0 && opc <= 7) {
+					if (opc > 0 && opc <= 15) {
 						menu.get(opc+2).ejecutar();
 						break;
 					} else {
@@ -178,6 +178,35 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 		}
 	}
 	public static void lanzarMenu(Restaurante usuario) {
-		
+		boolean pri = true;
+		while (true) {
+			if (pri) {
+				for (int i = 0; i < usuario.opciones.size(); i++) {
+					System.out.println(i + 1 + ") " + menu.get(usuario.opciones.get(i)));
+				}
+				pri = false;
+			}
+			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario"
+					+ Main.usuarioRestaurante.getNombre());
+			System.out.println(
+					"oprima el numero indicado, de la funcion que deseas realizar, usuario " + Main.usuarioRestaurante.getNombre());
+			String valor;
+			while (true) {
+				valor = Main.user.next();
+				try {
+					int opc = Integer.parseInt(valor);
+					if (opc > 0 && opc <= usuario.opciones.size()) {
+						menu.get(opc+2).ejecutar();
+						break;
+					} else {
+						System.out.println("Ingrese un numero valido");
+					}
+				} catch (Exception e) {
+					System.out.println("Ingrese un valor valido.");
+				}
+
+			}
+			break;
+		}
 	}
 }

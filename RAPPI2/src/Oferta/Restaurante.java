@@ -30,6 +30,7 @@ public class Restaurante {
 	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	private List<String> direcciones = new ArrayList<String>();
+	public List<Integer> opciones = new ArrayList<Integer>();
 	private String celular;
 	private List<Plato> menu = new ArrayList<Plato>();
 	private List<Plato> historial = new ArrayList<Plato>();
@@ -47,6 +48,11 @@ public class Restaurante {
 	 */
 	public Restaurante(String nombre, String direccion, String celular, String clave) {
 		this.nombre = nombre;
+		opciones.add(10);
+		opciones.add(11);
+		opciones.add(12);
+		opciones.add(13);
+		opciones.add(14);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;

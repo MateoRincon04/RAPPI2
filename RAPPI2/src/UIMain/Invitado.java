@@ -1,5 +1,7 @@
 package UIMain;
 
+import BaseDatos.Data;
+
 /**
  * Clase Invitado, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 
  * 
@@ -7,8 +9,10 @@ package UIMain;
  */
 public class Invitado implements OpcionDeMenu {
 	public void ejecutar() {
-
-		//	F :(
+		for(int i = 3; i < 9; i++) {
+			System.out.println(Data.getOpciones().get(i));
+		}
+		MenuDeConsola.lanzarMenu();
 	}
 	public String toString() {
 		return "Invitado";
