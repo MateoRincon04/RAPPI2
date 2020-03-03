@@ -14,7 +14,7 @@ import Administracion.*;
  */
 public class Main {
 
-	public static Perfil usuario;
+	public static Perfil usuario = null;
 	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
 
