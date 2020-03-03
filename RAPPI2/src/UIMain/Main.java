@@ -14,8 +14,8 @@ import Administracion.*;
  */
 public class Main {
 
-	public static Perfil usuario = null;
-	public static Restaurante usuarioRestaurante = null;
+	public static Perfil usuario;
+	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException{

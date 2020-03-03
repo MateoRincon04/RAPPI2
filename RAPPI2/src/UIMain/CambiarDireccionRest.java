@@ -14,6 +14,7 @@ public class CambiarDireccionRest implements OpcionDeMenu {
 		if (!valor) {
 			ejecutar();
 		}
+		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}
 
 	public String toString() {
