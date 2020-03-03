@@ -22,7 +22,6 @@ public class Notificacion {
 	public Notificacion(Pedido pedido) {
 	this.pedido= pedido;
 	this.notificar();
-	
 	}
 	
 	public void setTomarPedido() {
@@ -56,7 +55,6 @@ public class Notificacion {
 						break;
 					}
 				}
-			
 			break;
 		}
 	}

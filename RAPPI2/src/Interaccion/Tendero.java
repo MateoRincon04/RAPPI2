@@ -111,5 +111,4 @@ public class Tendero extends Perfil {
 	public int cantidadDePedidosEntregados() {
 		return this.getCalificaciones().size();
 	}
-
 }
