@@ -1,4 +1,4 @@
-package Oferta;
+	package Oferta;
 
 import Interaccion.Cliente;
 import Interaccion.Tendero;

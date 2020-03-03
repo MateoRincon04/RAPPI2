@@ -9,6 +9,8 @@ import UIMain.*;
 import Interaccion.Cliente;
 import Interaccion.Tendero;
 import Administracion.Administrador;
+import Oferta.Gson;
+import Oferta.JsonArray;
 import Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
 import com.google.gson.*;
@@ -48,6 +50,7 @@ public class Data {
 	//	opciones.add(new CrearAdministrador()); // Admin
 	//	opciones.add(new CrearRestaurante()); // admin
 	//	opciones.add(new CrearTendero()); // admin
+	//	opciones.add(new TenderoReparteMas()); admin
 		opciones.add(new CuantosPedidosHeEntregado()); // tendero
 
 	}
@@ -604,6 +607,15 @@ public class Data {
 			}
 		}
 		return best;
+	}
+	public static void imprimirRestaurantes() {
+		Gson gson = new Gson();
+		JsonArray historial = Data.traerDataBaseRestaurante();
+		for(int i = 0; i < historial.size(); i++) {
+			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
+			System.out.println(i+") "+aux1.getNombre());
+			
+			
 	}
 
 }

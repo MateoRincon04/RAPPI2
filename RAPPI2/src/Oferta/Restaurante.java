@@ -6,6 +6,7 @@ import java.util.List;
 
 import Interaccion.Calificacion;
 import Interaccion.Notificacion;
+import Interaccion.Tendero;
 
 /**
  * Clase Restaurante En esta clase, el restaurante es aquel que prepara los
@@ -64,7 +65,7 @@ public class Restaurante {
 			this.direcciones.set(this.direcciones.indexOf(direccion), nueva);
 			System.out.println("Se ha cambiado la direccion correctamente.");
 			return true;
-		}else {
+		} else {
 			System.out.println("No se encuentra la direccion a cambiar. Intente nuevamente.");
 			return false;
 		}
@@ -87,7 +88,7 @@ public class Restaurante {
 			this.direcciones.remove(direccion);
 			System.out.println("La direccion se ha eliminado correctamente.");
 			return true;
-		}else {
+		} else {
 			System.out.println("la direccion no se encuentra en el directorio.");
 			return false;
 		}
@@ -135,7 +136,7 @@ public class Restaurante {
 			this.menu.set(this.menu.indexOf(plato), nuevo);
 			System.out.println("Su plato se ha cambiado correctamente");
 			return true;
-		}else {
+		} else {
 			System.out.println("No se encuentra el plato para el cambio. Intente nuevamente.");
 			return false;
 		}
@@ -146,11 +147,11 @@ public class Restaurante {
 			this.menu.remove(plato);
 			System.out.println("Su plato se ha removido correctamente. ");
 			return true;
-		}else {
+		} else {
 			System.out.println("Error borrando el plato. Intente nuevamente.");
 			return false;
 		}
-		
+
 	}
 
 	public List<Plato> getMenu() {
@@ -188,7 +189,29 @@ public class Restaurante {
 
 	}
 
+	public Tendero tenderoQueMasMeEntrega() {
+		Tendero nuevo = null;
+		int numero = 0;
+		for (int i = 0; i < this.notificaciones.size(); i++) {
+			int f = 0;
+			for (int j = 0; j < notificaciones.size(); j++) {
+				if (notificaciones.get(i).getPedido().getTendero()
+						.equals(notificaciones.get(j).getPedido().getTendero())) {
+					f++;
+				}
+
+			}
+			if (f > numero) {
+				numero = f;
+				nuevo = notificaciones.get(i).getPedido().getTendero();
+			}
+		}
+		System.out.println("con "+numero+" pedidos: ");
+		return nuevo;
+	}
+
 	void addHistorial(Plato plato) {
 		this.historial.add(plato);
 	}
+	
 }
