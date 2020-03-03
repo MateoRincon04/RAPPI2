@@ -61,6 +61,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			}catch(Exception e1) {
 				try {
 					lanzarMenu((Administrador) Main.usuario);
+					System.out.println("Llegaste muy lejos");
 				}catch(Exception e2) {
 					lanzarMenu(Main.usuarioRestaurante);
 				}
@@ -152,7 +153,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 		boolean pri = true;
 		while (true) {
 			if (pri) {
-				for (int i = 3; i < menu.size(); i++) {
+				for (int i = 15; i < menu.size(); i++) {
 					System.out.println(i - 2 + ") " + menu.get(i));
 				}
 				pri = false;

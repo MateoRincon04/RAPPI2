@@ -14,7 +14,7 @@ import Administracion.*;
  */
 public class Main {
 
-	public static Perfil usuario = null;
+	public static Perfil usuario;
 	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
 
@@ -24,7 +24,7 @@ public class Main {
 		Data.cargarFileDataBaseCliente();
 		Data.cargarFileDataBaseTendero();
 		Data.cargarFileDataBaseRestaurante();
-		Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
+		//Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
 		MenuDeConsola.lanzarMenu();
 		user.close();
 		

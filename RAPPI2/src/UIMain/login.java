@@ -59,6 +59,7 @@ public class login implements OpcionDeMenu {
 			usuario = (Administrador) Main.usuario;
 			System.out.println("Bienvenido Administrador " + usuario.getNombre());
 		} else if (usuarioRestaurante != null) {
+			Main.usuario = null;
 			usuarioRestaurante = (Restaurante) Main.usuarioRestaurante;
 			System.out.println("Bienvenido Restaurante " + usuarioRestaurante.getNombre());
 		}
