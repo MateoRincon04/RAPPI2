@@ -13,7 +13,7 @@ import Oferta.Restaurante;
  */
 public class EnCualesDirecciones implements OpcionDeMenu {
 	public void ejecutar() {
-		Restaurante restauranteElegido = Data.buscarRestaurante(Main.usuarioRestaurante.getNombre());
+		Restaurante restauranteElegido = Main.usuarioRestaurante;
 		List<String> direccionesDisponibles = restauranteElegido.getDireccion();
 		System.out.println("Estas son las direcciones disponibles para el restaurante: " + restauranteElegido.getNombre());
 		for (int i = 0; i < direccionesDisponibles.size(); i++) {
