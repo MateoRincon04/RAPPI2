@@ -91,7 +91,8 @@ public class Restaurante {
 
 	public boolean eliminarDireccion(String direccion) {
 		if (this.direcciones.contains(direccion)) {
-			this.direcciones.remove(direccion);
+			int index = this.direcciones.indexOf(direccion);
+			this.direcciones.remove(index);
 			System.out.println("La direccion se ha eliminado correctamente.");
 			return true;
 		} else {
@@ -161,7 +162,7 @@ public class Restaurante {
 	}
 
 	public List<Plato> getMenu() {
-		return menu;
+		return this.menu;
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {

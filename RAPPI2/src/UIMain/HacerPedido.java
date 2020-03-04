@@ -19,20 +19,20 @@ public class HacerPedido implements OpcionDeMenu {
 		Cliente usuarioCliente = (Cliente) (Main.usuario);
 
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
-		String nombre = Main.user.nextLine();
+		String nombre = Main.user.next();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
 		Plato platoEscogido = escogerPlato(restauranteElegido);
 		boolean valor = usuarioCliente.hacerPedido(platoEscogido);
 		if (valor) {
 			Pedido pedidoUltimo = usuarioCliente.getHistorial().get(usuarioCliente.getHistorial().size() - 1);
 			Notificacion notificacion = new Notificacion(pedidoUltimo); // notifico una vez hecho el pedido
-			
-			MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
-			
+
+			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
+
 		} else {
 			ejecutar();
 		}
-		
+
 	}
 
 	/**
@@ -45,10 +45,11 @@ public class HacerPedido implements OpcionDeMenu {
 	 * @return El plato que fue seleccionado
 	 */
 	private Plato escogerPlato(Restaurante restauranteElegido) {
-		List<Plato> listaPlatos = restauranteElegido.getMenu();
-		System.out.println("Este es el menú de platos del restaurante elegido: ");
-		for (int i = 0; i < listaPlatos.size(); i++) {
-			System.out.println(i + ") " + listaPlatos.get(i).getNombre());
+
+		System.out.println("Este es el menú de platos que cuenta el restaurante.");
+
+		for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
+			System.out.println((i + 1) + ") " + restauranteElegido.getMenu().get(i).getNombre());
 		}
 		System.out.println("Por favor, escriba el número del plato que quiere escoger del restaurante "
 				+ restauranteElegido.getNombre());
