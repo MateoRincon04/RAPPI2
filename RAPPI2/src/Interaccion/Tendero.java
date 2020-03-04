@@ -22,7 +22,7 @@ import Oferta.Pedido;
 public class Tendero extends Perfil {
 	private Pedido pedido;
 	private boolean estaDisponible;
-	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
+	private static List<Notificacion> notificaciones = new ArrayList<Notificacion>();
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	public List<Integer> opciones = new ArrayList<Integer>();
 
@@ -68,7 +68,7 @@ public class Tendero extends Perfil {
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {
-		this.notificaciones.add(notificacion);
+		notificaciones.add(notificacion);
 	}
 
 	public void agregarCalificacion(Calificacion calificacion) {

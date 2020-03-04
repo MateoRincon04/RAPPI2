@@ -21,7 +21,7 @@ import Interaccion.Tendero;
  * @see #historial
  * @see #notificaciones
  * 
- * @author: Guillermo Toloza, Mateo Rincon
+ * @author: Guillermo Toloza, Mateo Rincon, Paula A. Taborda, Santiago Tamayo
  * @version:
  * 
  */
@@ -202,23 +202,24 @@ public class Restaurante {
 		for (int i = 0; i < this.notificaciones.size(); i++) {
 			int f = 0;
 			for (int j = 0; j < notificaciones.size(); j++) {
-				if (notificaciones.get(i).getPedido().getTendero()
-						.equals(notificaciones.get(j).getPedido().getTendero())) {
+				if (notificaciones.get(i).getPedido().getTendero().equals(notificaciones.get(j).getPedido().getTendero())) {
 					f++;
 				}
-
 			}
 			if (f > numero) {
 				numero = f;
 				nuevo = notificaciones.get(i).getPedido().getTendero();
 			}
 		}
-		System.out.println("con "+numero+" pedidos: ");
 		return nuevo;
 	}
 
 	void addHistorial(Plato plato) {
 		this.historial.add(plato);
+	}
+
+	public String getClave() {
+		return clave;
 	}
 	
 }

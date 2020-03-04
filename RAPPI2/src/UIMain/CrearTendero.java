@@ -1,10 +1,5 @@
 package UIMain;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import BaseDatos.Data;
-import Interaccion.Tendero;
 import Administracion.Administrador;
 
 public class CrearTendero implements OpcionDeMenu {

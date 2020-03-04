@@ -11,15 +11,16 @@ import Interaccion.Calificacion;
  * Esta clase define objetos con la finalidad de ser el intermediario entre el restaurte
  * que es el que decide que platos tiene en su menu y el cliente que es el que ordena
  * que plato desea comprar.
+ * 
  * Estructuras de datos revelantes son
- * @see #modificaciones
+ * @see #calificaciones
+ * 
  * @author: Paula A. Taborda, Mateo Rincon, Santiago Tamayo, Guillermo Toloza
  */
 public class Plato {
 	private String nombre;
 	private String descripcion;
 	private float precio;
-	private List<String> modificaciones = new ArrayList<String>();
 	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	public Restaurante restaurante;
 	public int restriccionDeEdad;

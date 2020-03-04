@@ -22,8 +22,8 @@ public class Calificacion {
 	 */
 	
 	public Calificacion(Object calificado,double puntuacion,Object calificador) {
-		this.calificado = calificado;
-		this.calificador = calificador;
+		this.setCalificado(calificado);
+		this.setCalificador(calificador);
 		this.puntuacion = puntuacion;
 	}
 	
@@ -33,6 +33,22 @@ public class Calificacion {
 	
 	public void setPuntuacion(float puntuacion) {
 		this.puntuacion = puntuacion;
+	}
+
+	public Object getCalificado() {
+		return calificado;
+	}
+
+	public void setCalificado(Object calificado) {
+		this.calificado = calificado;
+	}
+
+	public Object getCalificador() {
+		return calificador;
+	}
+
+	public void setCalificador(Object calificador) {
+		this.calificador = calificador;
 	}
 	
 }
