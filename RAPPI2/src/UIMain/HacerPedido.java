@@ -26,7 +26,9 @@ public class HacerPedido implements OpcionDeMenu {
 		if (valor) {
 			Pedido pedidoUltimo = usuarioCliente.getHistorial().get(usuarioCliente.getHistorial().size() - 1);
 			Notificacion notificacion = new Notificacion(pedidoUltimo); // notifico una vez hecho el pedido
+			
 			MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
+			
 		} else {
 			ejecutar();
 		}

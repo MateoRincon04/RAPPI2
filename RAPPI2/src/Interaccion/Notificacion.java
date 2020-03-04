@@ -57,6 +57,14 @@ public class Notificacion {
 				}
 			break;
 		}
+		Iterator<JsonElement> iterator2 = Data.traerDataBaseTendero().iterator();
+		Gson gson2 = new Gson();
+		while(iterator2.hasNext()) {
+			Tendero tenderoAtiende = gson2.fromJson(iterator.next(), Tendero.class);
+			if(tenderoAtiende.aceptarPedido()== true) {			
+				break;
+			}
+		}
 	}
 
 }

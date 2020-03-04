@@ -78,10 +78,15 @@ public class Tendero extends Perfil {
 	 * Metodo por el cual el Tendero podra encargarse de un Pedido para su
 	 * transportaci�n
 	 */
-	public void aceptarPedido() {
-		Notificacion Aux = notificaciones.get(notificaciones.size() - 1);
-		if (!Aux.getPedido().getEntregado()) {
+	public boolean aceptarPedido() {
+		 Notificacion Aux = notificaciones.get(notificaciones.size() - 1);
+		if (!Aux.getPedido().getEntregado() && (Aux.getPedido().getTendero()==null)) {
 			Aux.setTomarPedido();
+			System.out.println("Usted tiene a su cargo el pedido: " + Aux.getPedido().getPlato());
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
