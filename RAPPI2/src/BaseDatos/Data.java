@@ -50,6 +50,7 @@ public class Data {
 		opciones.add(new CrearRestaurante()); //16 admin
 		opciones.add(new CrearTendero()); //17 admin
 		opciones.add(new TenderoReparteMas()); //18 admin
+		opciones.add(new Salir()); //19 todos
 		
 
 	}

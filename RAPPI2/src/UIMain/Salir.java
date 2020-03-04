@@ -8,7 +8,6 @@ package UIMain;
  */
 public class Salir implements OpcionDeMenu {
 	public void ejecutar() {
-		boolean salir=false;
 	}
 	public String toString() {
 		return "Salir";

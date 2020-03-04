@@ -38,6 +38,7 @@ public class Tendero extends Perfil {
 	public Tendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.opciones.add(9);
+		this.opciones.add(19);
 		this.salario = salario;
 		this.estaDisponible = true;
 	}
