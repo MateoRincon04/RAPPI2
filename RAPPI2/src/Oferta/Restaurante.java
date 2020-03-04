@@ -53,6 +53,7 @@ public class Restaurante {
 		opciones.add(12);
 		opciones.add(13);
 		opciones.add(14);
+		opciones.add(19);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;

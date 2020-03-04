@@ -97,7 +97,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				try {
 					int opc = Integer.parseInt(valor);
 					if (opc > 0 && opc <= usuario.opciones.size()) {
-						menu.get(opc+2).ejecutar();
+						menu.get(usuario.opciones.get(opc-1)).ejecutar();
 						break;
 					} else {
 						System.out.println("Ingrese un numero valido");
@@ -134,7 +134,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				try {
 					int opc = Integer.parseInt(valor);
 					if (opc > 0 && opc <= usuario.opciones.size()) {
-						menu.get(opc+2).ejecutar();
+						menu.get(usuario.opciones.get(opc-1)).ejecutar();
 						break;
 					} else {
 						System.out.println("Ingrese un numero valido");
@@ -169,7 +169,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				valor = Main.user.next();
 				try {
 					int opc = Integer.parseInt(valor);
-					if (opc > 0 && opc <= 15) {
+					if (opc > 0 && opc <= menu.size()-2) {
 						menu.get(opc+2).ejecutar();
 						break;
 					} else {
@@ -199,7 +199,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				try {
 					int opc = Integer.parseInt(valor);
 					if (opc > 0 && opc <= usuarioR.opciones.size()) {
-						menu.get(opc+9).ejecutar();
+						menu.get(usuarioR.opciones.get(opc-1)).ejecutar();
 						break;
 					} else {
 						System.out.println("Ingrese un numero valido");
