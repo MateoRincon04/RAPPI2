@@ -11,10 +11,11 @@ public class CambiarPlato implements OpcionDeMenu {
 		Restaurante restaurante = Main.usuarioRestaurante;
 		List<Plato> menuPlatos = restaurante.getMenu();
 		System.out.println("Este es el menú de platos que cuenta el restaurante.");
-		System.out.println("Por favor, escriba el numero del plato el cual desea cambiar: ");
+		
 		for (int i = 0; i < menuPlatos.size(); i++) {
 			System.out.println((i + 1) + ") " + menuPlatos.get(i).getNombre());
 		}
+		System.out.println("Por favor, escriba el numero del plato el cual desea cambiar: ");
 		int numero = Main.user.nextInt() - 1;
 		Plato platoBase = restaurante.elegirPlatoMenu(numero);
 		System.out.println("Ingrese los datos del nuevo plato: ");

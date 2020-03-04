@@ -20,6 +20,7 @@ public class CrearPlato implements OpcionDeMenu {
 		}
 		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}
+
 	public String toString() {
 		return "Crear Plato Restaurante";
 	}
