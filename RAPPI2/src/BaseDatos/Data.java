@@ -270,6 +270,50 @@ public class Data {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
+	
+	 /**
+	  * El metodo actualiza en la base de datos el cliente
+	  * 
+	  * @param cliente El parametro define el cliente que va a ser actualizado
+	  */
+	public static void actualizarDataBaseCliente(Cliente cliente) {
+		Cliente aux = cliente;
+		Data.eliminarObjetoDataBaseCliente(cliente);
+		Data.agregarObjetoDataBaseCliente(aux);
+	}
+	
+	 /**
+	  * El metodo actualiza en la base de datos el tendero
+	  * 
+	  * @param tendero El parametro define el tendero que va a ser actualizado
+	  */
+	public static void actualizarDataBaseTendero(Tendero tendero) {
+		Tendero aux = tendero;
+		Data.eliminarObjetoDataBaseTendero(tendero);
+		Data.agregarObjetoDataBaseTendero(aux);
+	}
+	
+	 /**
+	  * El metodo actualiza en la base de datos el administrador
+	  * 
+	  * @param administrador El parametro define el administrador que va a ser actualizado
+	  */
+	public static void actualizarDataBaseAdministrador(Administrador administrador) {
+		Administrador aux = administrador;
+		Data.eliminarObjetoDataBaseAdministrador(administrador);
+		Data.agregarObjetoDataBaseAdministrador(aux);
+	}
+	
+	 /**
+	  * El metodo actualiza en la base de datos el restaurante
+	  * 
+	  * @param restaurante El parametro define el cliente que va a ser actualizado
+	  */
+	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
+		Restaurante aux = restaurante;
+		Data.eliminarObjetoDataBaseRestaurante(restaurante);
+		Data.agregarObjetoDataBaseRestaurante(aux);
+	}
 
 	/**
 	 * Metodo que se usa para agregar objetos a la base de datos de clientes,

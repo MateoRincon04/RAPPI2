@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import BaseDatos.Data;
 import Interaccion.Calificacion;
 import Interaccion.Notificacion;
 import Interaccion.Tendero;
+import UIMain.Main;
 
 /**
  * Clase Restaurante En esta clase, el restaurante es aquel que prepara los
@@ -94,6 +96,7 @@ public class Restaurante {
 		if (this.direcciones.contains(direccion)) {
 			int index = this.direcciones.indexOf(direccion);
 			this.direcciones.remove(index);
+			Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
 			System.out.println("La direccion se ha eliminado correctamente.");
 			return true;
 		} else {
