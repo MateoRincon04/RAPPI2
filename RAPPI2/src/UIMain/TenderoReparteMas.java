@@ -16,7 +16,12 @@ public class TenderoReparteMas implements OpcionDeMenu {
 		Restaurante restaurante = Data.buscarRestaurante(nombre);
 		System.out.println("El tendero que más pedidos ha entregado al restaurante " + restaurante.getNombre() + " es: ");
 		Tendero tendero = restaurante.tenderoQueMasMeEntrega();
-		System.out.println(tendero.getNombre());
+		if(tendero != null) {
+			System.out.println(tendero.getNombre());
+		} else {
+			System.out.println("Aun no hay tendero que haya entregado pedidos del restaurante");
+		}
+		
 		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}
 

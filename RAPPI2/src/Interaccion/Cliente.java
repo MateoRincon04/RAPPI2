@@ -94,11 +94,12 @@ public class Cliente extends Perfil {
 		if (this.getSaldo() >= plato.getPrecio()) {
 			Pedido pedido = new Pedido(this, plato);
 			this.agregarAlHistorial(pedido);
+			this.pedido = pedido;
 			System.out.println("Su pedido se ha realizado correctamente.");
 			return true;
 		} else {
+			
 			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
-
 			return false;
 		}
 	}
@@ -221,6 +222,10 @@ public class Cliente extends Perfil {
 
 	public void setDireccion(String dir) {
 		this.direccion = dir;
+	}
+	
+	public Pedido getPedido() {
+		return this.pedido;
 	}
 
 }
