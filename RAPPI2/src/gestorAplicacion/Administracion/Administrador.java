@@ -70,10 +70,10 @@ public class Administrador extends Perfil {
 		JsonArray dataBase = Data.traerDataBaseTendero();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseTendero(tendero);
-			System.out.println("Tendero creado exitosamente ");
+
 			return true;
 		} else {
-			System.out.println("Tendero ya existente, por favor ingrese de nuevo ");
+
 			return false;
 		}
 	}
@@ -87,10 +87,10 @@ public class Administrador extends Perfil {
 		JsonArray dataBase = Data.traerDataBaseAdministrador();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseAdministrador(administrador);
-			System.out.println("Administrador creado exitosamente ");
+
 			return true;
 		} else {
-			System.out.println("Administrador	 ya existente, por favor ingrese de nuevo ");
+
 			return false;
 		}
 	}
@@ -113,15 +113,16 @@ public class Administrador extends Perfil {
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseRestaurante(restaurante);
-			System.out.println("Restaurante creado exitosamente ");
+
 			return true;
 		} else {
-			System.out.println("Restaurante ya existente, por favor ingrese de nuevo ");
+
 			return false;
 		}
 	}
 
-	public void setOpciones(int posicion) {
+	public boolean setOpciones(int posicion) {
+
 		Perfil usuario = null;
 		posicion = posicion - 1;
 		while (true) {
@@ -132,17 +133,22 @@ public class Administrador extends Perfil {
 								| posicion == 8 | posicion == 9) {
 							usuario = (Cliente) Main.usuario;
 							((Cliente) usuario).opciones.add(posicion);
+							return true;
 						} else {
-							System.out.println("Ingresa un numero valido");
+							// System.out.println("Ingresa un numero valido");
+							return false;
 						}
+
 					}
 				} else if (usuario instanceof Tendero) {
 					while (true) {
 						if (posicion == 10) {
 							usuario = (Tendero) Main.usuario;
 							((Tendero) usuario).opciones.add(posicion);
+							return true;
 						} else {
-							System.out.println("Ingrese un numero valido");
+							// System.out.println("Ingrese un numero valido");
+							return false;
 						}
 					}
 				}

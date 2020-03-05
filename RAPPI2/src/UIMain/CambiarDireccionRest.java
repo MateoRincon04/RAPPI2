@@ -12,7 +12,10 @@ public class CambiarDireccionRest implements OpcionDeMenu {
 		Restaurante restaurante = Main.usuarioRestaurante;
 		boolean valor = restaurante.cambiarDireccion(direccion, direccionNueva);
 		if (!valor) {
+			System.out.println("No se encuentra la direccion a cambiar. Intente nuevamente.");
 			ejecutar();
+		}else {
+			System.out.println("Se ha cambiado la direccion correctamente.");
 		}
 		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}

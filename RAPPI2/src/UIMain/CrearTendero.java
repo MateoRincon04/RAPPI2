@@ -23,11 +23,15 @@ public class CrearTendero implements OpcionDeMenu {
 		Administrador admin = (Administrador) Main.usuario;
 		boolean valor = admin.crearTendero(nombre, telefono, comuna, clave, username, salario);
 		if (!valor) {
+			System.out.println("Tendero ya existente, por favor ingrese de nuevo ");
 			ejecutar();
 
+		} else {
+			System.out.println("Tendero creado exitosamente ");
 		}
 		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}
+
 	public String toString() {
 		return "Crear Tendero";
 	}

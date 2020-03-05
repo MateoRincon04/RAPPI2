@@ -54,17 +54,20 @@ public class Restaurante {
 	 */
 	public Restaurante(String nombre, String direccion, String celular, String clave) {
 		this.nombre = nombre;
-		opciones.add(11);
-		opciones.add(12);
-		opciones.add(13);
-		opciones.add(14);
-		opciones.add(15);
-		opciones.add(20);
+		this.opciones.add(11);
+		this.opciones.add(12);
+		this.opciones.add(13);
+		this.opciones.add(14);
+		this.opciones.add(15);
+		this.opciones.add(16);
+		this.opciones.add(23);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;
 	}
-
+	public List<Integer> getOpciones() {
+		return opciones;
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -76,10 +79,8 @@ public class Restaurante {
 	public boolean cambiarDireccion(String direccion, String nueva) {
 		if (this.direcciones.contains(direccion)) {
 			this.direcciones.set(this.direcciones.indexOf(direccion), nueva);
-			System.out.println("Se ha cambiado la direccion correctamente.");
 			return true;
 		} else {
-			System.out.println("No se encuentra la direccion a cambiar. Intente nuevamente.");
 			return false;
 		}
 	}
@@ -87,10 +88,10 @@ public class Restaurante {
 	public boolean agregarDireccion(String direccion) {
 		if (!this.direcciones.contains(direccion)) {
 			this.direcciones.add(direccion);
-			System.out.println("La direccion ha sido agregada correctamente.");
+			
 			return true;
 		} else {
-			System.out.println("La direccion ya existe. Intente nuevamente");
+			
 			return false;
 		}
 
@@ -103,7 +104,7 @@ public class Restaurante {
 			System.out.println("La direccion se ha eliminado correctamente.");
 			return true;
 		} else {
-			System.out.println("la direccion no se encuentra en el directorio.");
+			
 			return false;
 		}
 	}
@@ -121,7 +122,7 @@ public class Restaurante {
 	}
 
 	/**
-	 * Metodo que le permite a el restaurante crear un plato para su añadirlo a su
+	 * Metodo que le permite a el restaurante crear un plato para su aï¿½adirlo a su
 	 * menu
 	 * 
 	 * @param nombre      El parametro nombre define el nombre que tendra este nuevo
@@ -142,7 +143,7 @@ public class Restaurante {
 			System.out.println("Su plato se ha creado correctamente.");
 			return true;
 		} else {
-			System.out.println("Ese plato ya existe. Por favor, intente de nuevo.");
+			
 			return false;
 		}
 	}
@@ -155,7 +156,7 @@ public class Restaurante {
 			System.out.println("Su plato se ha cambiado correctamente");
 			return true;
 		} else {
-			System.out.println("No se encuentra el plato para el cambio. Intente nuevamente.");
+			
 			return false;
 		}
 	}
@@ -168,7 +169,7 @@ public class Restaurante {
 			System.out.println("Su plato se ha removido correctamente. ");
 			return true;
 		} else {
-			System.out.println("Error borrando el plato. Intente nuevamente.");
+			
 			return false;
 		}
 

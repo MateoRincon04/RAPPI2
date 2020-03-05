@@ -5,14 +5,19 @@ import gestorAplicacion.Interaccion.Tendero;
 public class AceptarPedido implements OpcionDeMenu {
 	public void ejecutar() {
 		Tendero tendero = (Tendero) Main.usuario;
-		if (tendero.getNotificaciones().size()>0) {
+		if (tendero.getNotificaciones().size() > 0) {
 			System.out.println("Tiene un pedido nuevo. ¿Desea aceptarlo?");
 			System.out.println("Presione (1) para sí, (2) para no");
 			int opcion = Main.user.nextInt();
 			if (opcion == 1 | opcion == 2) {
 				if (opcion == 1) {
 
-					tendero.aceptarPedido();
+					boolean valor = tendero.aceptarPedido();
+					if (valor) {
+						System.out.println("Usted tiene a su cargo el pedido: " + tendero.getNotificaciones()
+								.get(tendero.getNotificaciones().size() - 1).getPedido().getPlato());
+
+					}
 				} else {
 					System.out.println("No ha aceptado el pedido. ");
 				}
