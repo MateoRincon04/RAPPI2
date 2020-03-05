@@ -9,8 +9,10 @@ public class AgregarDireccionRest implements OpcionDeMenu {
 		Restaurante restaurante = Main.usuarioRestaurante;
 		boolean valor = restaurante.agregarDireccion(direccion);
 		if (!valor) {
+			System.out.println("La direccion ya existe. Intente nuevamente");
 			ejecutar();
 		} else {
+			System.out.println("La direccion ha sido agregada correctamente.");
 			MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 		}
 	}

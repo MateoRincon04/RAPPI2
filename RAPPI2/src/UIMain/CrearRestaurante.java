@@ -16,7 +16,10 @@ public class CrearRestaurante implements OpcionDeMenu {
 		Administrador admin = (Administrador) Main.usuario;
 		boolean valor = admin.crearRestaurante(nombre, direccion, celular, clave);
 		if (!valor) {
+			System.out.println("Restaurante ya existente, por favor ingrese de nuevo ");
 			ejecutar();
+		}else {
+			System.out.println("Restaurante creado exitosamente ");
 		}
 		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}

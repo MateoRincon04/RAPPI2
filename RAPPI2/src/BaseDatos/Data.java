@@ -47,11 +47,12 @@ public class Data {
 		opciones.add(new AgregarDireccionRest()); //13 restaurante
 		opciones.add(new CambiarPlato()); //14 restaurante
 		opciones.add(new EliminarDireccionRest());//15 restaurante
-		opciones.add(new CrearAdministrador()); //16 Admin
-		opciones.add(new CrearRestaurante()); //17 admin
-		opciones.add(new CrearTendero()); //18 admin
-		opciones.add(new TenderoReparteMas()); //19 admin
-		opciones.add(new Salir()); //20 todos
+		opciones.add(new EliminarPlato()); //16 restaurante
+		opciones.add(new CrearAdministrador()); //17 Admin
+		opciones.add(new CrearRestaurante()); //18 admin
+		opciones.add(new CrearTendero()); //19 admin
+		opciones.add(new TenderoReparteMas()); //20 admin
+		opciones.add(new Salir()); //21 todos
 		
 	}
 

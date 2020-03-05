@@ -20,8 +20,11 @@ public class CrearAdministrador implements OpcionDeMenu {
 		Administrador admin = (Administrador) Main.usuario;
 		boolean valor = admin.crearAdministrador(nombre, telefono, comuna, clave, username, salario);
 		if (!valor) {
+			System.out.println("Administrador ya existente, por favor ingrese de nuevo ");
 			ejecutar();
 
+		}else {
+			System.out.println("Administrador creado exitosamente ");
 		}
 		MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 	}

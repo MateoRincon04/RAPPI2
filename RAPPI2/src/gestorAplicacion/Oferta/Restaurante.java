@@ -55,7 +55,8 @@ public class Restaurante {
 		opciones.add(13);
 		opciones.add(14);
 		opciones.add(15);
-		opciones.add(20);
+		opciones.add(16);
+		opciones.add(21);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;
@@ -72,10 +73,8 @@ public class Restaurante {
 	public boolean cambiarDireccion(String direccion, String nueva) {
 		if (this.direcciones.contains(direccion)) {
 			this.direcciones.set(this.direcciones.indexOf(direccion), nueva);
-			System.out.println("Se ha cambiado la direccion correctamente.");
 			return true;
 		} else {
-			System.out.println("No se encuentra la direccion a cambiar. Intente nuevamente.");
 			return false;
 		}
 	}
@@ -83,10 +82,10 @@ public class Restaurante {
 	public boolean agregarDireccion(String direccion) {
 		if (!this.direcciones.contains(direccion)) {
 			this.direcciones.add(direccion);
-			System.out.println("La direccion ha sido agregada correctamente.");
+			
 			return true;
 		} else {
-			System.out.println("La direccion ya existe. Intente nuevamente");
+			
 			return false;
 		}
 
@@ -97,10 +96,10 @@ public class Restaurante {
 			int index = this.direcciones.indexOf(direccion);
 			this.direcciones.remove(index);
 			Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
-			System.out.println("La direccion se ha eliminado correctamente.");
+			
 			return true;
 		} else {
-			System.out.println("la direccion no se encuentra en el directorio.");
+			
 			return false;
 		}
 	}
@@ -134,10 +133,10 @@ public class Restaurante {
 		Plato plato = new Plato(nombre, descripcion, precio, restriccion, this);
 		if (!this.menu.contains(plato)) {
 			this.menu.add(plato);
-			System.out.println("Su plato se ha creado correctamente.");
+			
 			return true;
 		} else {
-			System.out.println("Ese plato ya existe. Por favor, intente de nuevo.");
+			
 			return false;
 		}
 	}
@@ -146,10 +145,10 @@ public class Restaurante {
 		
 		if (this.menu.contains(plato)) {
 			this.menu.set(this.menu.indexOf(plato), nuevo);
-			System.out.println("Su plato se ha cambiado correctamente");
+			
 			return true;
 		} else {
-			System.out.println("No se encuentra el plato para el cambio. Intente nuevamente.");
+			
 			return false;
 		}
 	}
@@ -157,10 +156,10 @@ public class Restaurante {
 	public boolean eliminarPlato(Plato plato) {
 		if (this.menu.contains(plato)) {
 			this.menu.remove(plato);
-			System.out.println("Su plato se ha removido correctamente. ");
+			
 			return true;
 		} else {
-			System.out.println("Error borrando el plato. Intente nuevamente.");
+			
 			return false;
 		}
 

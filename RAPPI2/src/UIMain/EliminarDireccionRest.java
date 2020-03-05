@@ -13,7 +13,10 @@ public class EliminarDireccionRest implements OpcionDeMenu {
 		Restaurante restaurante = Main.usuarioRestaurante;
 		boolean valor = restaurante.eliminarDireccion(direccion);
 		if (!valor) {
+			System.out.println("la direccion no se encuentra en el directorio.");
 			ejecutar();
+		}else {
+			System.out.println("La direccion se ha eliminado correctamente.");
 		}
 		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}

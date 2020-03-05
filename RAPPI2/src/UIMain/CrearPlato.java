@@ -16,7 +16,10 @@ public class CrearPlato implements OpcionDeMenu {
 		Restaurante restaurante = Main.usuarioRestaurante;
 		boolean valor = restaurante.crearPlato(nombre, descripcion, precio, restriccion);
 		if (!valor) {
+			System.out.println("Ese plato ya existe. Por favor, intente de nuevo.");
 			ejecutar();
+		} else {
+			System.out.println("Su plato se ha creado correctamente.");
 		}
 		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}

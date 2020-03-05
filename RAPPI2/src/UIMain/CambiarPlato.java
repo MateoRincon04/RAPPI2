@@ -10,7 +10,7 @@ public class CambiarPlato implements OpcionDeMenu {
 		Restaurante restaurante = Main.usuarioRestaurante;
 		List<Plato> menuPlatos = restaurante.getMenu();
 		System.out.println("Este es el menú de platos que cuenta el restaurante.");
-		
+
 		for (int i = 0; i < menuPlatos.size(); i++) {
 			System.out.println((i + 1) + ") " + menuPlatos.get(i).getNombre());
 		}
@@ -29,7 +29,10 @@ public class CambiarPlato implements OpcionDeMenu {
 		Plato platoCambio = new Plato(nombre, descripcion, precio, restriccion, restaurante);
 		boolean valor = restaurante.cambiarPlato(platoBase, platoCambio);
 		if (!valor) {
+			System.out.println("No se encuentra el plato para el cambio. Intente nuevamente.");
 			ejecutar();
+		} else {
+			System.out.println("Su plato se ha cambiado correctamente");
 		}
 		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}

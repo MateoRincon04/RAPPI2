@@ -55,7 +55,7 @@ public class Cliente extends Perfil {
 		this.opciones.add(6);
 		this.opciones.add(7);
 		this.opciones.add(8);
-		this.opciones.add(20);
+		this.opciones.add(21);
 	}
 
 	public List<Integer> getOpciones() {
@@ -74,7 +74,7 @@ public class Cliente extends Perfil {
 			return true;
 		}
 		else{
-			System.out.println("El saldo no puede ser negativo");
+			
 			return false;
 		}
 	}
@@ -95,11 +95,9 @@ public class Cliente extends Perfil {
 			Pedido pedido = new Pedido(this, plato);
 			this.agregarAlHistorial(pedido);
 			this.pedido = pedido;
-			System.out.println("Su pedido se ha realizado correctamente.");
 			return true;
 		} else {
 			
-			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
 			return false;
 		}
 	}

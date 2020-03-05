@@ -24,12 +24,15 @@ public class HacerPedido implements OpcionDeMenu {
 			Plato platoEscogido = escogerPlato(restauranteElegido);
 			if (platoEscogido != null) {
 				valor = usuarioCliente.hacerPedido(platoEscogido);
+				System.out.println("Su pedido se ha realizado correctamente.");
+				
 			}
 		} else {
 			System.out.println("No se encontro restaurante con este nombre");
 		}
 
 		if (valor) {
+			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
 			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
 		} else {
 			System.out.println("Desea volver a intentar realizar un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
