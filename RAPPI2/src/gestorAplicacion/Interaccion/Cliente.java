@@ -55,7 +55,7 @@ public class Cliente extends Perfil implements Interfaz {
 		this.opciones.add(6);
 		this.opciones.add(7);
 		this.opciones.add(8);
-		this.opciones.add(21);
+		this.opciones.add(23);
 	}
 
 	public List<Integer> getOpciones() {

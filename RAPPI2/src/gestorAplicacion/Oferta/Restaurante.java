@@ -50,18 +50,20 @@ public class Restaurante {
 	 */
 	public Restaurante(String nombre, String direccion, String celular, String clave) {
 		this.nombre = nombre;
-		opciones.add(11);
-		opciones.add(12);
-		opciones.add(13);
-		opciones.add(14);
-		opciones.add(15);
-		opciones.add(16);
-		opciones.add(21);
+		this.opciones.add(11);
+		this.opciones.add(12);
+		this.opciones.add(13);
+		this.opciones.add(14);
+		this.opciones.add(15);
+		this.opciones.add(16);
+		this.opciones.add(23);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;
 	}
-
+	public List<Integer> getOpciones() {
+		return opciones;
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

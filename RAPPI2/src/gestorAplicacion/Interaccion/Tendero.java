@@ -39,7 +39,7 @@ public class Tendero extends Perfil {
 		super(nombre, telefono, comuna, clave, userName);
 		this.opciones.add(9);
 		this.opciones.add(10);
-		this.opciones.add(21);
+		this.opciones.add(23);
 		this.salario = salario;
 		this.estaDisponible = true;
 	}

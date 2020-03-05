@@ -70,10 +70,10 @@ public class Administrador extends Perfil {
 		JsonArray dataBase = Data.traerDataBaseTendero();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseTendero(tendero);
-			
+
 			return true;
 		} else {
-			
+
 			return false;
 		}
 	}
@@ -87,10 +87,10 @@ public class Administrador extends Perfil {
 		JsonArray dataBase = Data.traerDataBaseAdministrador();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseAdministrador(administrador);
-			
+
 			return true;
 		} else {
-			
+
 			return false;
 		}
 	}
@@ -113,15 +113,16 @@ public class Administrador extends Perfil {
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseRestaurante(restaurante);
-			
+
 			return true;
 		} else {
-			
+
 			return false;
 		}
 	}
 
 	public boolean setOpciones(int posicion) {
+
 		Perfil usuario = null;
 		posicion = posicion - 1;
 		while (true) {
@@ -134,10 +135,10 @@ public class Administrador extends Perfil {
 							((Cliente) usuario).opciones.add(posicion);
 							return true;
 						} else {
-							//System.out.println("Ingresa un numero valido");
+							// System.out.println("Ingresa un numero valido");
 							return false;
 						}
-						
+
 					}
 				} else if (usuario instanceof Tendero) {
 					while (true) {
@@ -146,7 +147,7 @@ public class Administrador extends Perfil {
 							((Tendero) usuario).opciones.add(posicion);
 							return true;
 						} else {
-							//System.out.println("Ingrese un numero valido");
+							// System.out.println("Ingrese un numero valido");
 							return false;
 						}
 					}
