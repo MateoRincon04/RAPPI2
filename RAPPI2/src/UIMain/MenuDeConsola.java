@@ -69,20 +69,10 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 
 					} catch (NullPointerException e3) {
 						e3.printStackTrace();
-<<<<<<< HEAD
 					}
-
 				}
-
 			}
 		}
-
-=======
-					}	
-				}				
-			}
-		}		
->>>>>>> 125e83bebe2d8ce9102a594bbf322a8171749923
 	}
 
 	/**
