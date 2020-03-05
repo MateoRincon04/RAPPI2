@@ -1,10 +1,8 @@
 package UIMain;
 
-import java.util.List;
 import Interaccion.Cliente;
 import BaseDatos.Data;
 import Oferta.*;
-import Interaccion.Notificacion;
 
 /**
  * Clase HacerPedido, su finalidad es la de ser aquella clase que permita la
@@ -17,20 +15,31 @@ public class HacerPedido implements OpcionDeMenu {
 	public void ejecutar() {
 		// se esta definiendo la forma como hace el pedido el usuario
 		Cliente usuarioCliente = (Cliente) (Main.usuario);
+		boolean valor = false;
 
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
 		String nombre = Main.user.next();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
-		Plato platoEscogido = escogerPlato(restauranteElegido);
-		boolean valor = usuarioCliente.hacerPedido(platoEscogido);
-		if (valor) {
-			Pedido pedidoUltimo = usuarioCliente.getHistorial().get(usuarioCliente.getHistorial().size() - 1);
-			Notificacion notificacion = new Notificacion(pedidoUltimo); // notifico una vez hecho el pedido
-			
-			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
-
+		if (restauranteElegido != null) {
+			Plato platoEscogido = escogerPlato(restauranteElegido);
+			if (platoEscogido != null) {
+				valor = usuarioCliente.hacerPedido(platoEscogido);
+			}
 		} else {
-			ejecutar();
+			System.out.println("No se encontro restaurante con este nombre");
+		}
+
+		if (valor) {
+			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
+		} else {
+			System.out.println("Desea volver a intentar realizar un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
+			int opc = Main.user.nextInt();
+			if(opc == 2) {
+				MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
+			}else {
+				ejecutar();
+			}
+			
 		}
 
 	}
@@ -46,20 +55,24 @@ public class HacerPedido implements OpcionDeMenu {
 	 */
 	private Plato escogerPlato(Restaurante restauranteElegido) {
 
-		System.out.println("Este es el menú de platos que cuenta el restaurante.");
-
-		for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
-			System.out.println((i + 1) + ") " + restauranteElegido.getMenu().get(i).getNombre());
-		}
-		System.out.println("Por favor, escriba el número del plato que quiere escoger del restaurante "
-				+ restauranteElegido.getNombre());
-		while (true) {
-			try {
+		System.out.println("Este es el menï¿½ de platos que cuenta el restaurante.");
+		if (restauranteElegido.getMenu().size() <= 0) {
+			System.out.println("Este restaurante no posee platos disponibles");
+			return null;
+		} else {
+			for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
+				System.out.println((i + 1) + ") " + restauranteElegido.getMenu().get(i).getNombre());
+			}
+			System.out.println("Por favor, escriba el nï¿½mero del plato que quiere escoger del restaurante "
+					+ restauranteElegido.getNombre());
+			while (true) {
 				int numero = Main.user.nextInt();
 				Plato platoEscogido = restauranteElegido.elegirPlatoMenu(numero);
-				return platoEscogido;
-			} catch (Exception e) {
-				System.out.println("Por favor, intente nuevamente.");
+				if (platoEscogido != null) {
+					return platoEscogido;
+				} else {
+					System.out.println("No se encontro plato con este nombre, intente de nuevo ");
+				}
 			}
 		}
 	}

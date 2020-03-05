@@ -38,9 +38,14 @@ public class Tendero extends Perfil {
 	public Tendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.opciones.add(9);
+		this.opciones.add(20);
 		this.opciones.add(19);
 		this.salario = salario;
 		this.estaDisponible = true;
+	}
+
+	public List<Notificacion> getNotificaciones() {
+		return notificaciones;
 	}
 
 	public List<Calificacion> getCalificaciones() {
@@ -83,8 +88,8 @@ public class Tendero extends Perfil {
 		Notificacion Aux = notificaciones.get(notificaciones.size() - 1);
 		if (!Aux.getPedido().getEntregado() && (Aux.getPedido().getTendero() == null)) {
 			Aux.setTomarPedido();
-			notificaciones.remove(notificaciones.size() - 1);
 			System.out.println("Usted tiene a su cargo el pedido: " + Aux.getPedido().getPlato());
+			notificaciones.remove(notificaciones.size() - 1);
 			return true;
 		} else {
 			return false;
