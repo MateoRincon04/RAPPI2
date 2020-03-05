@@ -55,7 +55,7 @@ public class Cliente extends Perfil {
 		this.opciones.add(6);
 		this.opciones.add(7);
 		this.opciones.add(8);
-		this.opciones.add(19);
+		this.opciones.add(20);
 	}
 
 	public List<Integer> getOpciones() {

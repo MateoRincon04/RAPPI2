@@ -41,18 +41,18 @@ public class Data {
 		opciones.add(new MejorRestauranteCal()); //7 cliente
 		opciones.add(new PlatosQueMasCompre()); //8 cliente
 		opciones.add(new CuantosPedidosHeEntregado()); //9 tendero
-		opciones.add(new EnCualesDirecciones()); //10 restaurante
-		opciones.add(new CrearPlato()); //11 restaurante
-		opciones.add(new AgregarDireccionRest()); //12 restaurante
-		opciones.add(new CambiarPlato()); //13 restaurante
-		opciones.add(new EliminarDireccionRest());//14 restaurante
-		opciones.add(new CrearAdministrador()); //15 Admin
-		opciones.add(new CrearRestaurante()); //16 admin
-		opciones.add(new CrearTendero()); //17 admin
-		opciones.add(new TenderoReparteMas()); //18 admin
-		opciones.add(new Salir()); //19 todos
-		opciones.add(new AceptarPedido()); //20 tendero
-
+		opciones.add(new AceptarPedido()); //10 tendero
+		opciones.add(new EnCualesDirecciones()); //11 restaurante
+		opciones.add(new CrearPlato()); //12 restaurante
+		opciones.add(new AgregarDireccionRest()); //13 restaurante
+		opciones.add(new CambiarPlato()); //14 restaurante
+		opciones.add(new EliminarDireccionRest());//15 restaurante
+		opciones.add(new CrearAdministrador()); //16 Admin
+		opciones.add(new CrearRestaurante()); //17 admin
+		opciones.add(new CrearTendero()); //18 admin
+		opciones.add(new TenderoReparteMas()); //19 admin
+		opciones.add(new Salir()); //20 todos
+		
 	}
 
 	public static final ArrayList<OpcionDeMenu> getOpciones() {

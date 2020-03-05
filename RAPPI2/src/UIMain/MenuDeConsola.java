@@ -166,8 +166,8 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				System.out.println("");
 				System.out.println("");
 
-				for (int i = 15; i < menu.size(); i++) {
-					System.out.println(i - 14 + ") " + menu.get(i));
+				for (int i = 16; i < menu.size(); i++) {
+					System.out.println(i - 15 + ") " + menu.get(i));
 				}
 				pri = false;
 			}
@@ -176,17 +176,17 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 			String valor;
 			while (true) {
 				valor = Main.user.next();
-				try {
+				//try {
 					int opc = Integer.parseInt(valor);
-					if (opc > 0 && opc <= menu.size() - 14) {
-						menu.get(opc + 14).ejecutar();
+					if (opc > 0 && opc <= menu.size() - 15) {
+						menu.get(opc + 15).ejecutar();
 						break;
 					} else {
 						System.out.println("Ingrese un numero valido");
 					}
-				} catch (Exception e) {
-					System.out.println("Ingrese un valor valido.");
-				}
+				//} catch (Exception e) {
+			//		System.out.println("Ingrese un valor valido.");
+				//}
 			}
 			break;
 		}

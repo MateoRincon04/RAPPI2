@@ -50,12 +50,12 @@ public class Restaurante {
 	 */
 	public Restaurante(String nombre, String direccion, String celular, String clave) {
 		this.nombre = nombre;
-		opciones.add(10);
 		opciones.add(11);
 		opciones.add(12);
 		opciones.add(13);
 		opciones.add(14);
-		opciones.add(19);
+		opciones.add(15);
+		opciones.add(20);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;

@@ -7,7 +7,7 @@ public class AceptarPedido implements OpcionDeMenu {
 		Tendero tendero = (Tendero) Main.usuario;
 		if (tendero.getNotificaciones() != null) {
 			System.out.println("Tiene un pedido nuevo. ¿Desea aceptarlo?");
-			System.out.println("Presione 1 para sí, 2 para no");
+			System.out.println("Presione (1) para sí, (2) para no");
 			int opcion = Main.user.nextInt();
 			if (opcion == 1 | opcion == 2) {
 				if (opcion == 1) {
@@ -20,9 +20,13 @@ public class AceptarPedido implements OpcionDeMenu {
 				System.out.println("Ingrese un valor válido: ");
 				ejecutar();
 			}
-		}else {
+		} else {
 			System.out.println("No se han realizado pedidos. ");
 		}
 		MenuDeConsola.lanzarMenu((Tendero) Main.usuario);
+	}
+
+	public String toString() {
+		return "Aceptar pedido";
 	}
 }
