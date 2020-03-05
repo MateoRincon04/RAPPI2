@@ -63,8 +63,10 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 					lanzarMenu((Restaurante) Main.usuarioRestaurante);
 				}catch(Exception e2) {
 					try {
-						lanzarMenu((Administrador) Main.usuario);
-					}catch(Exception e3) {
+						lanzarMenu((Administrador) Main.usuario); //entra a esta opción, no se por qué. Así sale en debug
+						//no se puede hacer ese casteo, tira error.
+						
+					}catch(NullPointerException e3) {
 						e3.printStackTrace();
 					}	
 				}				

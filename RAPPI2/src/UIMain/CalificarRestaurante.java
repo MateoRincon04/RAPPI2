@@ -14,16 +14,20 @@ public class CalificarRestaurante implements OpcionDeMenu {
 		Cliente usuario = (Cliente) Main.usuario;
 		System.out.println("Ingrese una calificacion del 0 al 5 al restaurante que realizó su pedido: ");
 		Double calificacion = Main.user.nextDouble();
-		while (true) {
-			if (calificacion >= 0 && calificacion <= 5) {
-				usuario.calificarRestaurante(calificacion);
-				System.out.println("Ha calificado al restaurante correctamente.");
-				
-			} else {
-				System.out.println("Ingrese una calificación valida.");
+		Boolean valor = false;
+		if (calificacion >= 0 && calificacion <= 5) {
+			usuario.calificarRestaurante(calificacion);
+			System.out.println("Ha calificado al restaurante correctamente.");
+			valor = true;
 
-			}
-			MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
+		} else {
+			System.out.println("Ingrese una calificación valida.");
+			valor = false;
+		}
+		if (valor) {
+			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
+		} else {
+			ejecutar();
 		}
 	}
 

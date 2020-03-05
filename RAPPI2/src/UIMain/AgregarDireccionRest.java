@@ -10,9 +10,9 @@ public class AgregarDireccionRest implements OpcionDeMenu {
 		boolean valor = restaurante.agregarDireccion(direccion);
 		if (!valor) {
 			ejecutar();
+		} else {
+			MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 		}
-		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
-		
 	}
 
 	public String toString() {
