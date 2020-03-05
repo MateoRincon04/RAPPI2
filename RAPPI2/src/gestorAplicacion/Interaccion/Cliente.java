@@ -23,7 +23,7 @@ import BaseDatos.Data;
  * 
  * @author: Santiago Tamayo, Mateo Rincon, Guillermo Toloza, Paula A. Taborda
  */
-public class Cliente extends Perfil {
+public class Cliente extends Perfil implements Interfaz {
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	// private Carrito carrito;
 	private String metodoDePago;
