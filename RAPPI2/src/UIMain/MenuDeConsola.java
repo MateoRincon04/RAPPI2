@@ -152,7 +152,6 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 	 * @param usuario El parametro usuario define el cliente que esta usando el menu
 	 */
 	public static void lanzarMenu(Administrador usuario) {
-		System.out.println("Se metio aca");
 		boolean pri = true;
 		while (true) {
 

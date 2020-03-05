@@ -1,6 +1,7 @@
 package UIMain;
 
 import BaseDatos.Data;
+import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
@@ -31,14 +32,17 @@ public class AgregarFuncionalidades implements OpcionDeMenu {
 			int numerito = Main.user.nextInt() + 2;
 			if (cliente.getOpciones().contains(numerito)) {
 				System.out.println("La funcionalidad ya existe. Intente nuevamente.");
-				ejecutar();
+				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 			} else {
 				cliente.getOpciones().add(numerito);
+				Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(username));
+				Data.agregarObjetoDataBaseCliente(cliente);
 				System.out.println("Se ha agregado correctamente la funcionalidad.");
+				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 			}
-
+			Data.actualizarDataBaseCliente(Data.buscarCliente(username));
 		}
-		if (opcion == 2) {
+		else if (opcion == 2) {
 			System.out.println("agregará una funcionalidad a algún Tendero.");
 			System.out.println("Ingrese el UserName del Tendero: ");
 			String username = Main.user.next();
@@ -57,14 +61,18 @@ public class AgregarFuncionalidades implements OpcionDeMenu {
 			int numerito = Main.user.nextInt() + 8;
 			if (tendero.getOpciones().contains(numerito)) {
 				System.out.println("La funcionalidad ya existe. Intente nuevamente.");
-				ejecutar();
+				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 			} else {
 				tendero.getOpciones().add(numerito);
+				Data.eliminarObjetoDataBaseTendero(Data.buscarTendero(username));
+				Data.agregarObjetoDataBaseTendero(tendero);
 				System.out.println("Se ha agregado correctamente la funcionalidad.");
+				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 			}
+			Data.actualizarDataBaseTendero(Data.buscarTendero(username));
 		}
 
-		if (opcion == 3) {
+		else if (opcion == 3) {
 			System.out.println("agregará una funcionalidad a algún Restaurante.");
 			System.out.println("Ingrese el UserName del Restaurante: ");
 			String username = Main.user.next();
@@ -83,12 +91,15 @@ public class AgregarFuncionalidades implements OpcionDeMenu {
 			int numerito = Main.user.nextInt() + 10;
 			if (restaurante.getOpciones().contains(numerito)) {
 				System.out.println("La funcionalidad ya existe. Intente nuevamente.");
-				ejecutar();
+				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 			} else {
 				restaurante.getOpciones().add(numerito);
+				Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(username));
+				Data.agregarObjetoDataBaseRestaurante(restaurante);
 				System.out.println("Se ha agregado correctamente la funcionalidad.");
+				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
 			}
-
+			Data.actualizarDataBaseRestaurante(Data.buscarRestaurante(username));
 		}
 
 	}

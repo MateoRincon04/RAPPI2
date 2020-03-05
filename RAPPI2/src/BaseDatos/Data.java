@@ -63,11 +63,10 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathCliente = "RAPPI2\\src\\\\BaseDatos\\temp\\clientesGuardados.json";
+	private static final String filepathCliente = "RAPPI2\\src\\BaseDatos\\temp\\clientesGuardados.json";
 	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json\"";
+	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
-	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platosGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -170,23 +169,7 @@ public class Data {
 	 * 
 	 * @see: {@link #traerDataBasePlato()}
 	 */
-	public static File cargarFileDataBasePlato() throws IOException {
-		Gson gson = new Gson();
-		File DataBase = new File(filepathPlato);
-		if (Data.traerDataBaseRestaurante() != null) {
-			System.out.println("La dataBaseRestaurantes se ha cargado correctamente");
-		} else {
-			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
-			Restaurante[] aux = new Restaurante[0];
-			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
-			try (FileWriter fw = new FileWriter(filepathPlato)) {
-				fw.write(array.toString());
-				fw.flush();
-			} catch (IOException e) {
-			}
-		}
-		return DataBase;
-	}
+
 
 	/**
 	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
@@ -252,21 +235,6 @@ public class Data {
 		}
 	}
 	
-	/**
-	 * Metodo que lee la base de datos de platos desde su file para asi
-	 * obtener aquellos objetos creados previamente
-	 */
-	public static JsonArray traerDataBasePlato() {
-		JsonParser jp = new JsonParser();
-		try (FileReader fr = new FileReader(filepathPlato)) {
-			Object obj = jp.parse(fr);
-			JsonArray array = (JsonArray) obj;
-			return array;
-		} catch (Exception ex) {
-			System.out.println("No se puede traer la dataBaseRestaurantes correctamente");
-			return null;
-		}
-	}
 
 	/**
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
@@ -322,20 +290,7 @@ public class Data {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
-	
-	/**
-	 * Metodo que se usa para actualizar las bases de datos de restaurantes,
-	 * escribiendo aquellos nuevos restaurantes que se vayan a tener en cuenta en la
-	 * oferta
-	 */
-	public static void actualizarDataBasePlato(JsonArray array) {
-		try (FileWriter fw = new FileWriter(filepathPlato)) {
-			fw.write(array.toString());
-			fw.flush();
-		} catch (IOException ex) {
-			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
-		}
-	}
+
 	
 	 /**
 	  * El metodo actualiza en la base de datos el cliente
@@ -380,16 +335,6 @@ public class Data {
 		Restaurante aux = restaurante;
 		Data.eliminarObjetoDataBaseRestaurante(restaurante);
 		Data.agregarObjetoDataBaseRestaurante(aux);
-	}
-	 /**
-	  * El metodo actualiza en la base de datos el plato
-	  * 
-	  * @param plato El parametro define el plato que va a ser actualizado
-	  */
-	public static void actualizarDataPlato(Plato plato) {
-		Plato aux = plato;
-		Data.eliminarObjetoDataBasePlato(plato);
-		Data.agregarObjetoDataBasePlato(aux);
 	}
 
 	/**
@@ -476,26 +421,6 @@ public class Data {
 		}
 	}
 	
-	/**
-	 * Metodo se usa para agregar objetos a la base de datos de plato,
-	 * conviritiendo estos objetos en los JsonElements para asi insertarlos a su
-	 * respectivo archivo
-	 * 
-	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
-	 * @see: {@link #traerDataBasePlato()}
-	 */
-	public static void agregarObjetoDataBasePlato(Plato obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
-			Data.actualizarDataBaseRestaurante(dataBase);
-		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
-		}
-	}
 
 	/**
 	 * Metodo que elimina cierto objeto de la dataBaseCliente
@@ -579,31 +504,6 @@ public class Data {
 		}
 	}
 	
-	/**
-	 * Metodo para eliminar cierto objeto de la dataBasePlato
-	 * 
-	 * @see: {@link #traerDataBasePlato()}
-	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
-	 */
-	public static void eliminarObjetoDataBasePlato(Plato obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePlato();
-		for(int i =0;i< dataBase.size();i++) {
-			JsonObject jo = dataBase.get(i).getAsJsonObject();
-			if(obj.getNombre().equals(jo.get("nombre").getAsString())) {
-				dataBase.remove(i);
-			}
-		}
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
-			Data.actualizarDataBasePlato(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
-		}
-	}
-
 	/**
 	 * Metodo para buscar un usuario en la base de datos de cliente usando solo el
 	 * userName
@@ -756,23 +656,6 @@ public class Data {
 		}
 		return restaurante;
 	}
-	
-	/**
-	 * Metodo para buscar un plato en la base de datos de plato
-	 */
-
-	public static Plato buscarPlato(String userName) {
-		Plato plato = null;
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBasePlato();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("nombre").getAsString())) {
-				plato = gson.fromJson(obj, Plato.class);
-			}
-		}
-		return plato;
-	}	
 
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
