@@ -55,7 +55,7 @@ public class HacerPedido implements OpcionDeMenu {
 	 */
 	private Plato escogerPlato(Restaurante restauranteElegido) {
 
-		System.out.println("Este es el menú de platos que cuenta el restaurante.");
+		System.out.println("Este es el menï¿½ de platos que cuenta el restaurante.");
 		if (restauranteElegido.getMenu().size() <= 0) {
 			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
@@ -63,7 +63,7 @@ public class HacerPedido implements OpcionDeMenu {
 			for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
 				System.out.println((i + 1) + ") " + restauranteElegido.getMenu().get(i).getNombre());
 			}
-			System.out.println("Por favor, escriba el número del plato que quiere escoger del restaurante "
+			System.out.println("Por favor, escriba el nï¿½mero del plato que quiere escoger del restaurante "
 					+ restauranteElegido.getNombre());
 			while (true) {
 				int numero = Main.user.nextInt();
