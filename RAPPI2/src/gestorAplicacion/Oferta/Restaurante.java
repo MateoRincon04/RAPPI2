@@ -1,5 +1,6 @@
 package gestorAplicacion.Oferta;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,7 @@ import gestorAplicacion.Interaccion.Tendero;
  * @version:
  * 
  */
-public class Restaurante {
+public class Restaurante implements Serializable {
 	private String nombre;
 	private JsonArray notificaciones = new JsonArray();
 	private JsonArray calificaciones = new JsonArray();

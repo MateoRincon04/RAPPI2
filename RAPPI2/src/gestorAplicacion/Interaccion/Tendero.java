@@ -1,5 +1,6 @@
 package gestorAplicacion.Interaccion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import gestorAplicacion.Administracion.Perfil;
@@ -19,7 +20,7 @@ import gestorAplicacion.Oferta.Pedido;
  * @author Guillermo Toloza, Mateo Rincon, Santiago Tamayo, Paula A. Taborda
  */
 
-public class Tendero extends Perfil {
+public class Tendero extends Perfil implements Serializable {
 	private Pedido pedido;
 	private boolean estaDisponible;
 	private static List<Notificacion> notificaciones = new ArrayList<Notificacion>();
