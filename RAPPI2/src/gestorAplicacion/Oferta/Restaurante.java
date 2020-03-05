@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+
 import BaseDatos.Data;
 import gestorAplicacion.Interaccion.Calificacion;
 import gestorAplicacion.Interaccion.Notificacion;
@@ -29,12 +33,12 @@ import UIMain.Main;
  */
 public class Restaurante {
 	private String nombre;
-	private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
-	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	private JsonArray notificaciones = new JsonArray();
+	private JsonArray calificaciones = new JsonArray();
 	private List<String> direcciones = new ArrayList<String>();
 	public List<Integer> opciones = new ArrayList<Integer>();
 	private String celular;
-	private List<Plato> menu = new ArrayList<Plato>();
+	private JsonArray menu = new JsonArray();
 	private List<Plato> historial = new ArrayList<Plato>();
 	private String clave;
 
@@ -96,7 +100,6 @@ public class Restaurante {
 		if (this.direcciones.contains(direccion)) {
 			int index = this.direcciones.indexOf(direccion);
 			this.direcciones.remove(index);
-			Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
 			System.out.println("La direccion se ha eliminado correctamente.");
 			return true;
 		} else {
@@ -131,9 +134,11 @@ public class Restaurante {
 	 *                    cierta edad del cliente
 	 */
 	public boolean crearPlato(String nombre, String descripcion, float precio, int restriccion) {
+		Gson gson = new Gson();
 		Plato plato = new Plato(nombre, descripcion, precio, restriccion, this);
-		if (!this.menu.contains(plato)) {
-			this.menu.add(plato);
+		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
+		if (!this.menu.contains(aux)) {
+			this.menu.add(gson.toJson(plato));
 			System.out.println("Su plato se ha creado correctamente.");
 			return true;
 		} else {
@@ -143,9 +148,10 @@ public class Restaurante {
 	}
 
 	public boolean cambiarPlato(Plato plato, Plato nuevo) {
-		
-		if (this.menu.contains(plato)) {
-			this.menu.set(this.menu.indexOf(plato), nuevo);
+		Gson gson = new Gson();
+		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
+		if (this.menu.contains(aux)) {
+			//this.menu.set(this.menu.indexOf(plato), nuevo);
 			System.out.println("Su plato se ha cambiado correctamente");
 			return true;
 		} else {
@@ -155,8 +161,10 @@ public class Restaurante {
 	}
 
 	public boolean eliminarPlato(Plato plato) {
-		if (this.menu.contains(plato)) {
-			this.menu.remove(plato);
+		Gson gson = new Gson();
+		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
+		if (this.menu.contains(aux)) {
+			this.menu.remove(aux);
 			System.out.println("Su plato se ha removido correctamente. ");
 			return true;
 		} else {
@@ -166,16 +174,20 @@ public class Restaurante {
 
 	}
 
-	public List<Plato> getMenu() {
+	public JsonArray getMenu() {
 		return this.menu;
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {
-		notificaciones.add(notificacion);
+		Gson gson = new Gson();
+		JsonElement aux = gson.fromJson(gson.toJson(notificacion), JsonElement.class);
+		notificaciones.add(aux);
 	}
 
 	public void agregarCalificacion(Calificacion calificacion) {
-		this.calificaciones.add(calificacion);
+		Gson gson = new Gson();
+		JsonElement aux = gson.fromJson(gson.toJson(calificacion), JsonElement.class);
+		this.calificaciones.add(aux);
 	}
 
 	public void setEstaListo(Pedido pedido) {
@@ -183,7 +195,9 @@ public class Restaurante {
 	}
 
 	public Plato elegirPlatoMenu(int indice) {
-		return (this.menu.get(indice));
+		Gson gson = new Gson();
+		Plato aux = gson.fromJson(this.menu.get(indice), Plato.class);
+		return aux;
 	}
 
 	/**
@@ -191,10 +205,12 @@ public class Restaurante {
 	 */
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
-		if (!this.calificaciones.isEmpty()) {
-			Iterator<Calificacion> iterator = this.calificaciones.iterator();
+		if (!this.calificaciones.isJsonArray()) {
+			Iterator<JsonElement> iterator = this.calificaciones.iterator();
 			while (iterator.hasNext()) {
-				contadorAux += iterator.next().getPuntuacion();
+				Gson gson = new Gson();
+				Calificacion aux = gson.fromJson(iterator.next(), Calificacion.class);
+				contadorAux += aux.getPuntuacion();
 			}
 		}
 		return contadorAux / this.calificaciones.size();
@@ -205,15 +221,18 @@ public class Restaurante {
 		Tendero nuevo = null;
 		int numero = 0;
 		for (int i = 0; i < this.notificaciones.size(); i++) {
+			Gson gson = new Gson();
+			Notificacion aux = gson.fromJson(notificaciones.get(i), Notificacion.class);
 			int f = 0;
 			for (int j = 0; j < notificaciones.size(); j++) {
-				if (notificaciones.get(i).getPedido().getTendero().equals(notificaciones.get(j).getPedido().getTendero())) {
+				Notificacion aux1 = gson.fromJson(notificaciones.get(j), Notificacion.class);
+				if (aux.getPedido().getTendero().equals(aux1.getPedido().getTendero())) {
 					f++;
 				}
 			}
 			if (f > numero) {
 				numero = f;
-				nuevo = notificaciones.get(i).getPedido().getTendero();
+				nuevo = aux.getPedido().getTendero();
 			}
 		}
 		return nuevo;

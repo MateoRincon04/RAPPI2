@@ -59,10 +59,10 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathCliente = "src\\BaseDatos\\temp\\clientesGuardados.json";
-	private static final String filepathTendero = "src\\\\BaseDatos\\\\temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "src\\BaseDatos\\temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = "src\\BaseDatos\\temp\\restaurantesGuardados.json";
+	private static final String filepathCliente = "clientesGuardados.json";
+	private static final String filepathTendero = "tenderosGuardados.json";
+	private static final String filepathAdministrador = "administradoresGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -71,12 +71,14 @@ public class Data {
 	 * @see: {@link #traerDataBaseCliente()}
 	 */
 	public static File cargarFileDataBaseCliente() throws IOException {
+		Gson gson = new Gson();
 		File DataBase = new File(filepathCliente);
 		if (Data.traerDataBaseCliente() != null) {
 			System.out.println("La dataBaseCliente se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBaseCliente se ha creado correctamente");
-			JsonArray array = new JsonArray();
+			Cliente[] aux = new Cliente[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
 			try (FileWriter fw = new FileWriter(filepathCliente)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -93,12 +95,14 @@ public class Data {
 	 * @see: {@link #traerDataBaseTendero()}
 	 */
 	public static File cargarFileDataBaseTendero() throws IOException {
+		Gson gson = new Gson();
 		File DataBase = new File(filepathTendero);
 		if (Data.traerDataBaseTendero() != null) {
 			System.out.println("La dataBaseTendero se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBaseTendero se ha creado correctamente");
-			JsonArray array = new JsonArray();
+			Tendero[] aux = new Tendero[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
 			try (FileWriter fw = new FileWriter(filepathTendero)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -115,12 +119,14 @@ public class Data {
 	 * @see: {@link #traerDataBaseAdministrador()}
 	 */
 	public static File cargarFileDataBaseAdministrador() throws IOException {
+		Gson gson = new Gson();
 		File DataBase = new File(filepathAdministrador);
 		if (Data.traerDataBaseAdministrador() != null) {
 			System.out.println("La dataBaseAdministrador se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBaseAdministrador se ha creado correctamente");
-			JsonArray array = new JsonArray();
+			Administrador[] aux = new Administrador[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
 			try (FileWriter fw = new FileWriter(filepathAdministrador)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -137,12 +143,14 @@ public class Data {
 	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
 	public static File cargarFileDataBaseRestaurante() throws IOException {
+		Gson gson = new Gson();
 		File DataBase = new File(filepathRestaurantes);
 		if (Data.traerDataBaseRestaurante() != null) {
 			System.out.println("La dataBaseRestaurantes se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
-			JsonArray array = new JsonArray();
+			Restaurante[] aux = new Restaurante[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
 			try (FileWriter fw = new FileWriter(filepathRestaurantes)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -464,15 +472,21 @@ public class Data {
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		//String aux = gson.toJson(obj);
+//		/JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		if (dataBase.contains(je)) {
+		for(int i =0;i< dataBase.size();i++) {
+			JsonObject jo = dataBase.get(i).getAsJsonObject();
+			if(obj.getNombre().equals(jo.get("nombre").getAsString())) {
+				dataBase.remove(i);
+			}
+		}
+		/*if (dataBase.contains(je)) {
 			dataBase.remove(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
-		}
+		}*/
 	}
 
 	/**

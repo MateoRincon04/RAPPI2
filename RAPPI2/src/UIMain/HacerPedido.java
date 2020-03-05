@@ -1,6 +1,9 @@
 package UIMain;
 
 import gestorAplicacion.Interaccion.Cliente;
+
+import com.google.gson.Gson;
+
 import BaseDatos.Data;
 import gestorAplicacion.Oferta.*;
 
@@ -61,7 +64,9 @@ public class HacerPedido implements OpcionDeMenu {
 			return null;
 		} else {
 			for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
-				System.out.println((i + 1) + ") " + restauranteElegido.getMenu().get(i).getNombre());
+				Gson gson = new Gson();
+				Plato aux = gson.fromJson(restauranteElegido.getMenu().get(i), Plato.class);
+				System.out.println((i + 1) + ") " + aux.getNombre());
 			}
 			System.out.println("Por favor, escriba el n�mero del plato que quiere escoger del restaurante "
 					+ restauranteElegido.getNombre());
