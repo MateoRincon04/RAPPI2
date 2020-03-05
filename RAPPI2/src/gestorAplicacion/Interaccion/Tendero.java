@@ -1,9 +1,9 @@
-package Interaccion;
+package gestorAplicacion.Interaccion;
 
 import java.util.ArrayList;
 import java.util.List;
-import Administracion.Perfil;
-import Oferta.Pedido;
+import gestorAplicacion.Administracion.Perfil;
+import gestorAplicacion.Oferta.Pedido;
 
 /**
  * Clase Tendero La finalidad de esta clase es de crear los objetos de tipo
@@ -108,7 +108,7 @@ public class Tendero extends Perfil {
 	 */
 	public void calificarCliente(double puntuacion) {
 		if (pedido.getEntregado()) {
-			Interaccion.Cliente calificando = this.pedido.getCliente();
+			gestorAplicacion.Interaccion.Cliente calificando = this.pedido.getCliente();
 			Calificacion calificacionCliente = new Calificacion(this, puntuacion, calificando);
 			calificando.agregarCalificacion(calificacionCliente);
 		}

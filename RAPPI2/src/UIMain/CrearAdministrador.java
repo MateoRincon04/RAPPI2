@@ -1,6 +1,6 @@
 package UIMain;
 
-import Administracion.Administrador;
+import gestorAplicacion.Administracion.Administrador;
 
 public class CrearAdministrador implements OpcionDeMenu {
 	public void ejecutar() {

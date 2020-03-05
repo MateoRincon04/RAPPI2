@@ -1,6 +1,6 @@
 package UIMain;
 
-import Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Cliente;
 
 /**
  * Clase CalificarRestaurante, su finalidad es la de ser aquella clase que

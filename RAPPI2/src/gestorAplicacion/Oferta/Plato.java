@@ -1,10 +1,9 @@
-package Oferta;
+package gestorAplicacion.Oferta;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import Interaccion.Calificacion;
+import gestorAplicacion.Interaccion.Calificacion;
 
 /**
  * Clase Plato

@@ -1,11 +1,11 @@
 package UIMain;
 
 import BaseDatos.Data;
-import Oferta.Restaurante;
+import gestorAplicacion.Oferta.Restaurante;
 
 import java.io.IOException;
 import java.util.Scanner;
-import Administracion.*;
+import gestorAplicacion.Administracion.*;
 
 /**
  * Clase Main, su finalidad es la de ejecutar el codigo entero

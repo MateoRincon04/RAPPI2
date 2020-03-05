@@ -1,11 +1,9 @@
 package UIMain;
 
 import BaseDatos.Data;
-import Interaccion.Cliente;
-
+import gestorAplicacion.Interaccion.Cliente;
 import java.util.ArrayList;
-
-import Oferta.Restaurante;
+import gestorAplicacion.Oferta.Restaurante;
 
 /**
  * Clase MejorRestauranteCal, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 

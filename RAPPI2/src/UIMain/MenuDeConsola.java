@@ -1,9 +1,9 @@
 package UIMain;
 
 import java.util.ArrayList;
-import Interaccion.*;
-import Oferta.Restaurante;
-import Administracion.*;
+import gestorAplicacion.Interaccion.*;
+import gestorAplicacion.Oferta.Restaurante;
+import gestorAplicacion.Administracion.*;
 import BaseDatos.Data;
 
 /**

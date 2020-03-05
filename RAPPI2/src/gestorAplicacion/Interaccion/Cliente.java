@@ -1,4 +1,4 @@
-package Interaccion;
+package gestorAplicacion.Interaccion;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.google.gson.JsonArray;
 
-import Administracion.*;
-import Oferta.*;
+import gestorAplicacion.Administracion.*;
+import gestorAplicacion.Oferta.*;
 import BaseDatos.Data;
 
 /**
@@ -142,7 +142,7 @@ public class Cliente extends Perfil {
 	 */
 	public void calificarTendero(double puntuacion) {
 		if (pedido.getEntregado()) {
-			Interaccion.Tendero calificando = this.pedido.getTendero();
+			gestorAplicacion.Interaccion.Tendero calificando = this.pedido.getTendero();
 			Calificacion calificacionTendero = new Calificacion(this, puntuacion, calificando);
 			calificando.agregarCalificacion(calificacionTendero);
 		}
@@ -157,7 +157,7 @@ public class Cliente extends Perfil {
 	 */
 	public void calificarRestaurante(double puntuacion) {
 		if (pedido.getEntregado()) {
-			Oferta.Restaurante calificando = this.pedido.getRestaurante();
+			gestorAplicacion.Oferta.Restaurante calificando = this.pedido.getRestaurante();
 			Calificacion calificacionRestaurante = new Calificacion(this, puntuacion, calificando);
 			calificando.agregarCalificacion(calificacionRestaurante);
 		}

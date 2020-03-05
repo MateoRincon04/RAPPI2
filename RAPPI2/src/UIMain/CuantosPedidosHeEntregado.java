@@ -1,6 +1,6 @@
 package UIMain;
 
-import Interaccion.Tendero;
+import gestorAplicacion.Interaccion.Tendero;
 
 /**
  * Clase CuantosPedidoHeEntrgado, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 

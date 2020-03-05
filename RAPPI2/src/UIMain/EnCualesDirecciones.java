@@ -4,7 +4,7 @@ package UIMain;
 import java.util.List;
 import UIMain.Main;
 import BaseDatos.Data;
-import Oferta.Restaurante;
+import gestorAplicacion.Oferta.Restaurante;
 
 /**
  * Clase EnCualesDirecciones, su finalidad es la de ser aquella clase que permita la implementacion de opcionDeMenu y ejecute cierta funcionalidad 

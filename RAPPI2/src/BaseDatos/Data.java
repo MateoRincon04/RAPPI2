@@ -6,10 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import UIMain.*;
-import Interaccion.Cliente;
-import Interaccion.Tendero;
-import Administracion.Administrador;
-import Oferta.Restaurante;
+import gestorAplicacion.Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Tendero;
+import gestorAplicacion.Administracion.Administrador;
+import gestorAplicacion.Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
 import com.google.gson.*;
 

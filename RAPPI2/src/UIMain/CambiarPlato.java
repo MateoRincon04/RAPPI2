@@ -1,9 +1,8 @@
 package UIMain;
 
 import java.util.List;
-
-import Oferta.Plato;
-import Oferta.Restaurante;
+import gestorAplicacion.Oferta.Plato;
+import gestorAplicacion.Oferta.Restaurante;
 
 public class CambiarPlato implements OpcionDeMenu {
 	public void ejecutar() {

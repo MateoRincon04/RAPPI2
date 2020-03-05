@@ -1,13 +1,13 @@
-package Oferta;
+package gestorAplicacion.Oferta;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import BaseDatos.Data;
-import Interaccion.Calificacion;
-import Interaccion.Notificacion;
-import Interaccion.Tendero;
+import gestorAplicacion.Interaccion.Calificacion;
+import gestorAplicacion.Interaccion.Notificacion;
+import gestorAplicacion.Interaccion.Tendero;
 import UIMain.Main;
 
 /**

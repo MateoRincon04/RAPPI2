@@ -1,6 +1,6 @@
 package UIMain;
 
-import Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Cliente;
 
 /**
  * Clase CuantoHeGastado, su finalidad es la de ser aquella clase que permita la

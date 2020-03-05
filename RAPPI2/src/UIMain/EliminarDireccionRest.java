@@ -1,6 +1,6 @@
 package UIMain;
 
-import Oferta.Restaurante;
+import gestorAplicacion.Oferta.Restaurante;
 
 public class EliminarDireccionRest implements OpcionDeMenu {
 	public void ejecutar() {

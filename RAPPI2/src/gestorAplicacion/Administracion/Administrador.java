@@ -1,10 +1,9 @@
-package Administracion;
+package gestorAplicacion.Administracion;
 
-import Interaccion.Tendero;
-import Oferta.Restaurante;
+import gestorAplicacion.Interaccion.Tendero;
+import gestorAplicacion.Oferta.Restaurante;
 import UIMain.Main;
-import Interaccion.Cliente;
-
+import gestorAplicacion.Interaccion.Cliente;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

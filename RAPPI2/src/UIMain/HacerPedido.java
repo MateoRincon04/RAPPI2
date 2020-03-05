@@ -1,8 +1,8 @@
 package UIMain;
 
-import Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Cliente;
 import BaseDatos.Data;
-import Oferta.*;
+import gestorAplicacion.Oferta.*;
 
 /**
  * Clase HacerPedido, su finalidad es la de ser aquella clase que permita la

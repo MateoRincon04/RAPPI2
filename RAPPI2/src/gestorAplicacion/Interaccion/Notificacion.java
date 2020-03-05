@@ -1,11 +1,11 @@
-package Interaccion;
+package gestorAplicacion.Interaccion;
 
 
 import java.util.Iterator;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import Oferta.Pedido;
-import Oferta.Restaurante;
+import gestorAplicacion.Oferta.Pedido;
+import gestorAplicacion.Oferta.Restaurante;
 import BaseDatos.Data;
 
 /**

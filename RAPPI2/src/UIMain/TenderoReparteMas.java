@@ -1,9 +1,9 @@
 package UIMain;
 
-import Administracion.Administrador;
+import gestorAplicacion.Administracion.Administrador;
 import BaseDatos.Data;
-import Interaccion.Tendero;
-import Oferta.Restaurante;
+import gestorAplicacion.Interaccion.Tendero;
+import gestorAplicacion.Oferta.Restaurante;
 
 public class TenderoReparteMas implements OpcionDeMenu {
 	public void ejecutar() {

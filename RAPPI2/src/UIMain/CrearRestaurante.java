@@ -1,6 +1,6 @@
 package UIMain;
 
-import Administracion.Administrador;
+import gestorAplicacion.Administracion.Administrador;
 
 public class CrearRestaurante implements OpcionDeMenu {
 	public void ejecutar() { // funcion unica del Admin

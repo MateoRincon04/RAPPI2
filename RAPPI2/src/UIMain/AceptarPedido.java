@@ -1,6 +1,6 @@
 package UIMain;
 
-import Interaccion.Tendero;
+import gestorAplicacion.Interaccion.Tendero;
 
 public class AceptarPedido implements OpcionDeMenu {
 	public void ejecutar() {

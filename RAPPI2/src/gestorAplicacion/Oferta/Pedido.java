@@ -1,8 +1,8 @@
-	package Oferta;
+package gestorAplicacion.Oferta;
 
-import Interaccion.Cliente;
-import Interaccion.Tendero;
-import Interaccion.Notificacion;
+import gestorAplicacion.Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Tendero;
+import gestorAplicacion.Interaccion.Notificacion;
 
 /**
  * Clase Pedido, su finalidad es poder tener un formato mas amigable para el cliente poder

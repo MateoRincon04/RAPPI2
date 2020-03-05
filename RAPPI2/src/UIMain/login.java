@@ -1,9 +1,9 @@
 package UIMain;
 
-import Administracion.*;
-import Interaccion.Cliente;
-import Interaccion.Tendero;
-import Oferta.Restaurante;
+import gestorAplicacion.Administracion.*;
+import gestorAplicacion.Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Tendero;
+import gestorAplicacion.Oferta.Restaurante;
 import BaseDatos.Data;
 
 /**

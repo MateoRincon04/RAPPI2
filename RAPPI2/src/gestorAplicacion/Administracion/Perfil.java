@@ -1,4 +1,4 @@
-package Administracion;
+package gestorAplicacion.Administracion;
 
 
 /**
