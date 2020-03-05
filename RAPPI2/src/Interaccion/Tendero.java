@@ -80,13 +80,13 @@ public class Tendero extends Perfil {
 	 * transportaci�n
 	 */
 	public boolean aceptarPedido() {
-		 Notificacion Aux = notificaciones.get(notificaciones.size() - 1);
-		if (!Aux.getPedido().getEntregado() && (Aux.getPedido().getTendero()==null)) {
+		Notificacion Aux = notificaciones.get(notificaciones.size() - 1);
+		if (!Aux.getPedido().getEntregado() && (Aux.getPedido().getTendero() == null)) {
 			Aux.setTomarPedido();
+			notificaciones.remove(notificaciones.size() - 1);
 			System.out.println("Usted tiene a su cargo el pedido: " + Aux.getPedido().getPlato());
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
