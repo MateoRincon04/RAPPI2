@@ -7,12 +7,9 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-
-import BaseDatos.Data;
 import gestorAplicacion.Interaccion.Calificacion;
 import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
-import UIMain.Main;
 
 /**
  * Clase Restaurante En esta clase, el restaurante es aquel que prepara los
@@ -140,7 +137,6 @@ public class Restaurante {
 		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
 		if (!this.menu.contains(aux)) {
 			this.menu.add(gson.toJson(plato));
-			System.out.println("Su plato se ha creado correctamente.");
 			return true;
 		} else {
 			

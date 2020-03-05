@@ -28,7 +28,7 @@ public class HacerPedido implements OpcionDeMenu {
 			if (platoEscogido != null) {
 				valor = usuarioCliente.hacerPedido(platoEscogido);
 				System.out.println("Su pedido se ha realizado correctamente.");
-				
+
 			}
 		} else {
 			System.out.println("No se encontro restaurante con este nombre");
@@ -38,14 +38,15 @@ public class HacerPedido implements OpcionDeMenu {
 			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
 			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
 		} else {
-			System.out.println("Desea volver a intentar realizar un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
+			System.out.println(
+					"Desea volver a intentar realizar un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
 			int opc = Main.user.nextInt();
-			if(opc == 2) {
+			if (opc == 2) {
 				MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
-			}else {
+			} else {
 				ejecutar();
 			}
-			
+
 		}
 
 	}
@@ -61,7 +62,7 @@ public class HacerPedido implements OpcionDeMenu {
 	 */
 	private Plato escogerPlato(Restaurante restauranteElegido) {
 
-		System.out.println("Este es el men� de platos que cuenta el restaurante.");
+		System.out.println("Este es el menu de platos con el que cuenta el restaurante.");
 		if (restauranteElegido.getMenu().size() <= 0) {
 			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
@@ -71,7 +72,7 @@ public class HacerPedido implements OpcionDeMenu {
 				Plato aux = gson.fromJson(restauranteElegido.getMenu().get(i), Plato.class);
 				System.out.println((i + 1) + ") " + aux.getNombre());
 			}
-			System.out.println("Por favor, escriba el n�mero del plato que quiere escoger del restaurante "
+			System.out.println("Por favor, escriba el numero del plato que quiere escoger del restaurante "
 					+ restauranteElegido.getNombre());
 			while (true) {
 				int numero = Main.user.nextInt();

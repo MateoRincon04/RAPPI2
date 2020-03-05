@@ -12,9 +12,12 @@ import BaseDatos.Data;
  */
 public class Salir implements OpcionDeMenu {
 	public void ejecutar() {
-		Gson gson = new Gson();
-		System.out.println(gson.toJson(Main.usuarioRestaurante));
-		Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
+		if(Main.usuarioRestaurante != null) {
+			Gson gson = new Gson();
+			//System.out.println(gson.toJson(Main.usuarioRestaurante));
+			Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
+		}
+
 	}
 	public String toString() {
 		return "Salir";

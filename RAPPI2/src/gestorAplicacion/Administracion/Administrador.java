@@ -33,7 +33,7 @@ public class Administrador extends Perfil {
 	public Administrador(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		super(nombre, telefono, comuna, clave, userName);
 		this.salario = salario;
-	}// Cierre del constructor
+	}
 
 	public long getSalario() {
 		return this.salario;

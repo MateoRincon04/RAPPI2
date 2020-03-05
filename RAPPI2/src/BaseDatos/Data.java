@@ -62,10 +62,10 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathCliente = "clientesGuardados.json";
-	private static final String filepathTendero = "tenderosGuardados.json";
-	private static final String filepathAdministrador = "administradoresGuardados.json";
-	private static final String filepathRestaurantes = "restaurantesGuardados.json";
+	private static final String filepathCliente = "src\\BaseDatos\\temp\\clientesGuardados.json";
+	private static final String filepathTendero = "src\\BaseDatos\\temp\\tenderosGuardados.json";
+	private static final String filepathAdministrador = "src\\BaseDatos\\temp\\administradoresGuardados.json";
+	private static final String filepathRestaurantes = "src\\BaseDatos\\temp\\restaurantesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -475,8 +475,8 @@ public class Data {
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
 		Gson gson = new Gson();
-		//String aux = gson.toJson(obj);
-//		/JsonElement je = gson.fromJson(aux, JsonElement.class);
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
 		for(int i =0;i< dataBase.size();i++) {
 			JsonObject jo = dataBase.get(i).getAsJsonObject();
@@ -484,12 +484,12 @@ public class Data {
 				dataBase.remove(i);
 			}
 		}
-		/*if (dataBase.contains(je)) {
+		if (dataBase.contains(je)) {
 			dataBase.remove(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
-		}*/
+		}
 	}
 
 	/**

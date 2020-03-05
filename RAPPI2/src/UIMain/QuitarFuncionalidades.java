@@ -1,14 +1,12 @@
 package UIMain;
 
 import BaseDatos.Data;
-import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
 
 public class QuitarFuncionalidades implements OpcionDeMenu {
 	public void ejecutar() {
-		Administrador admin = (Administrador) Main.usuario;
 		System.out.println("¿A qué tipo de usuario desea eliminar las funcionalidades? Ingrese el número: ");
 		System.out.println("1) Cliente");
 		System.out.println("2) Tendero");
@@ -57,5 +55,8 @@ public class QuitarFuncionalidades implements OpcionDeMenu {
 			restaurante.getOpciones().remove(eliminar - 1);
 			System.out.println("La funcionalidad se ha eliminado correctamente.");
 		}
+	}
+	public String toString() {
+		return "Quitar Funcionalidades de alguien";
 	}
 }
