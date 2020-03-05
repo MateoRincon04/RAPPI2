@@ -4,6 +4,9 @@ import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
 import UIMain.Main;
 import gestorAplicacion.Interaccion.Cliente;
+
+import java.io.Serializable;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -20,7 +23,7 @@ import BaseDatos.Data;
  * @author: Mateo Rincon, Guillermo Toloza, Paula A. Taborda, Santiago Tamayo
  */
 
-public class Administrador extends Perfil {
+public class Administrador extends Perfil implements Serializable{
 	private long salario;
 
 	/**

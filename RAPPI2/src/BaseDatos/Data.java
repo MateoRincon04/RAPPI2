@@ -32,31 +32,31 @@ public class Data {
 	 * M�todo en el se cargan todas las opciones de menu generales.
 	 */
 	public static final void CargarOpciones() {
-		opciones.add(new Registrarse());//0
-		opciones.add(new login());//1
-		opciones.add(new Invitado());//2
-		opciones.add(new HacerPedido());//3 cliente
-		opciones.add(new CalificarTendero());//4 cliente
-		opciones.add(new CalificarRestaurante()); //5 cliente
-		opciones.add(new CuantoHeGastado()); //6 cliente
-		opciones.add(new MejorRestauranteCal()); //7 cliente
-		opciones.add(new PlatosQueMasCompre()); //8 cliente
-		opciones.add(new CuantosPedidosHeEntregado()); //9 tendero
-		opciones.add(new AceptarPedido()); //10 tendero
-		opciones.add(new EnCualesDirecciones()); //11 restaurante
-		opciones.add(new CrearPlato()); //12 restaurante
-		opciones.add(new AgregarDireccionRest()); //13 restaurante
-		opciones.add(new CambiarPlato()); //14 restaurante
-		opciones.add(new EliminarDireccionRest());//15 restaurante
-		opciones.add(new EliminarPlato()); //16 restaurante
-		opciones.add(new CrearAdministrador()); //17 Admin
-		opciones.add(new CrearRestaurante()); //18 admin
-		opciones.add(new CrearTendero()); //19 admin
-		opciones.add(new TenderoReparteMas()); //20 admin
-		opciones.add(new QuitarFuncionalidades()); //21 admin
-		opciones.add(new AgregarFuncionalidades()); //22 admin
-		opciones.add(new Salir()); //23 todos
-		
+		opciones.add(new Registrarse());// 0
+		opciones.add(new login());// 1
+		opciones.add(new Invitado());// 2
+		opciones.add(new HacerPedido());// 3 cliente
+		opciones.add(new CalificarTendero());// 4 cliente
+		opciones.add(new CalificarRestaurante()); // 5 cliente
+		opciones.add(new CuantoHeGastado()); // 6 cliente
+		opciones.add(new MejorRestauranteCal()); // 7 cliente
+		opciones.add(new PlatosQueMasCompre()); // 8 cliente
+		opciones.add(new CuantosPedidosHeEntregado()); // 9 tendero
+		opciones.add(new AceptarPedido()); // 10 tendero
+		opciones.add(new EnCualesDirecciones()); // 11 restaurante
+		opciones.add(new CrearPlato()); // 12 restaurante
+		opciones.add(new AgregarDireccionRest()); // 13 restaurante
+		opciones.add(new CambiarPlato()); // 14 restaurante
+		opciones.add(new EliminarDireccionRest());// 15 restaurante
+		opciones.add(new EliminarPlato()); // 16 restaurante
+		opciones.add(new CrearAdministrador()); // 17 Admin
+		opciones.add(new CrearRestaurante()); // 18 admin
+		opciones.add(new CrearTendero()); // 19 admin
+		opciones.add(new TenderoReparteMas()); // 20 admin
+		opciones.add(new QuitarFuncionalidades()); // 21 admin
+		opciones.add(new AgregarFuncionalidades()); // 22 admin
+		opciones.add(new Salir()); // 23 todos
+
 	}
 
 	public static final ArrayList<OpcionDeMenu> getOpciones() {
@@ -83,7 +83,7 @@ public class Data {
 		} else {
 			System.out.println("La dataBaseCliente se ha creado correctamente");
 			Cliente[] aux = new Cliente[0];
-			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathCliente)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -107,7 +107,7 @@ public class Data {
 		} else {
 			System.out.println("La dataBaseTendero se ha creado correctamente");
 			Tendero[] aux = new Tendero[0];
-			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathTendero)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -131,7 +131,7 @@ public class Data {
 		} else {
 			System.out.println("La dataBaseAdministrador se ha creado correctamente");
 			Administrador[] aux = new Administrador[0];
-			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathAdministrador)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -155,7 +155,7 @@ public class Data {
 		} else {
 			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
 			Restaurante[] aux = new Restaurante[0];
-			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathRestaurantes)) {
 				fw.write(array.toString());
 				fw.flush();
@@ -347,23 +347,24 @@ public class Data {
 		Data.eliminarObjetoDataBaseCliente(cliente);
 		Data.agregarObjetoDataBaseCliente(aux);
 	}
-	
-	 /**
-	  * El metodo actualiza en la base de datos el tendero
-	  * 
-	  * @param tendero El parametro define el tendero que va a ser actualizado
-	  */
+
+	/**
+	 * El metodo actualiza en la base de datos el tendero
+	 * 
+	 * @param tendero El parametro define el tendero que va a ser actualizado
+	 */
 	public static void actualizarDataBaseTendero(Tendero tendero) {
 		Tendero aux = tendero;
 		Data.eliminarObjetoDataBaseTendero(tendero);
 		Data.agregarObjetoDataBaseTendero(aux);
 	}
-	
-	 /**
-	  * El metodo actualiza en la base de datos el administrador
-	  * 
-	  * @param administrador El parametro define el administrador que va a ser actualizado
-	  */
+
+	/**
+	 * El metodo actualiza en la base de datos el administrador
+	 * 
+	 * @param administrador El parametro define el administrador que va a ser
+	 *                      actualizado
+	 */
 	public static void actualizarDataBaseAdministrador(Administrador administrador) {
 		Administrador aux = administrador;
 		Data.eliminarObjetoDataBaseAdministrador(administrador);
@@ -564,9 +565,9 @@ public class Data {
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		for(int i =0;i< dataBase.size();i++) {
+		for (int i = 0; i < dataBase.size(); i++) {
 			JsonObject jo = dataBase.get(i).getAsJsonObject();
-			if(obj.getNombre().equals(jo.get("nombre").getAsString())) {
+			if (obj.getNombre().equals(jo.get("nombre").getAsString())) {
 				dataBase.remove(i);
 			}
 		}

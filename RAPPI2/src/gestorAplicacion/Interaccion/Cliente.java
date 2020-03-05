@@ -1,5 +1,6 @@
 package gestorAplicacion.Interaccion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +24,7 @@ import BaseDatos.Data;
  * 
  * @author: Santiago Tamayo, Mateo Rincon, Guillermo Toloza, Paula A. Taborda
  */
-public class Cliente extends Perfil implements Interfaz {
+public class Cliente extends Perfil implements Interfaz, Serializable {
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	// private Carrito carrito;
 	private String metodoDePago;
