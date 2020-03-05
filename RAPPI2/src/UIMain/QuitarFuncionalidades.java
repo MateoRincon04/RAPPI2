@@ -19,7 +19,7 @@ public class QuitarFuncionalidades implements OpcionDeMenu {
 			Cliente cliente = Data.buscarCliente(username);
 			System.out.println("Estas son las funcionalidades del cliente " + cliente.getNombre() + " :");
 			for (int i = 0; i < cliente.getOpciones().size(); i++) {
-				System.out.println((i + 1) + ") " + cliente.getOpciones().get(i));
+				System.out.println((i + 1) + ") " + cliente.getOpciones().get(i).toString());
 
 			}
 			System.out.println("Escriba el numero de la funcionalidad que desea eliminar: ");
@@ -39,7 +39,7 @@ public class QuitarFuncionalidades implements OpcionDeMenu {
 			Tendero tendero = Data.buscarTendero(username);
 			System.out.println("Estas son las funcionalidades del tendero" + tendero.getNombre() + " :");
 			for (int i = 0; i < tendero.getOpciones().size(); i++) {
-				System.out.println((i + 1) + ") " + tendero.getOpciones().get(i));
+				System.out.println((i + 1) + ") " + tendero.getOpciones().get(i).toString());
 
 			}
 			System.out.println("Escriba el numero de la funcionalidad que desea eliminar: ");
@@ -59,7 +59,7 @@ public class QuitarFuncionalidades implements OpcionDeMenu {
 			Restaurante restaurante = Data.buscarRestaurante(username);
 			System.out.println("Estas son las funcionalidades del restaurante" + restaurante.getNombre() + " :");
 			for (int i = 0; i < restaurante.getOpciones().size(); i++) {
-				System.out.println((i + 1) + ") " + restaurante.getOpciones().get(i));
+				System.out.println((i + 1) + ") " + restaurante.getOpciones().get(i).toString());
 
 			}
 			System.out.println("Escriba el numero de la funcionalidad que desea eliminar: ");
