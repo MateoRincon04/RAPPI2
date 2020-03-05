@@ -66,13 +66,10 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 						lanzarMenu((Administrador) Main.usuario);
 					}catch(Exception e3) {
 						e3.printStackTrace();
-					}
-					
-				}
-				
+					}	
+				}				
 			}
-		}
-		
+		}		
 	}
 	
 	/**

@@ -143,6 +143,7 @@ public class Restaurante {
 	}
 
 	public boolean cambiarPlato(Plato plato, Plato nuevo) {
+		
 		if (this.menu.contains(plato)) {
 			this.menu.set(this.menu.indexOf(plato), nuevo);
 			System.out.println("Su plato se ha cambiado correctamente");
