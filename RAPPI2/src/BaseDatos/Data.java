@@ -9,6 +9,7 @@ import UIMain.*;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Administracion.Administrador;
+import gestorAplicacion.Oferta.Plato;
 import gestorAplicacion.Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
 import com.google.gson.*;
@@ -66,6 +67,7 @@ public class Data {
 	private static final String filepathTendero = "src\\BaseDatos\\temp\\tenderosGuardados.json";
 	private static final String filepathAdministrador = "src\\BaseDatos\\temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "src\\BaseDatos\\temp\\restaurantesGuardados.json";
+	private static final String filepathPlato = "src\\BaseDatos\\temp\\platosGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -162,6 +164,29 @@ public class Data {
 		}
 		return DataBase;
 	}
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de
+	 * datos de platos
+	 * 
+	 * @see: {@link #traerDataBasePlato()}
+	 */
+	public static File cargarFileDataBasePlato() throws IOException {
+		Gson gson = new Gson();
+		File DataBase = new File(filepathPlato);
+		if (Data.traerDataBaseRestaurante() != null) {
+			System.out.println("La dataBaseRestaurantes se ha cargado correctamente");
+		} else {
+			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
+			Restaurante[] aux = new Restaurante[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
+			try (FileWriter fw = new FileWriter(filepathPlato)) {
+				fw.write(array.toString());
+				fw.flush();
+			} catch (IOException e) {
+			}
+		}
+		return DataBase;
+	}
 
 	/**
 	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
@@ -226,6 +251,22 @@ public class Data {
 			return null;
 		}
 	}
+	
+	/**
+	 * Metodo que lee la base de datos de platos desde su file para asi
+	 * obtener aquellos objetos creados previamente
+	 */
+	public static JsonArray traerDataBasePlato() {
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathPlato)) {
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		} catch (Exception ex) {
+			System.out.println("No se puede traer la dataBaseRestaurantes correctamente");
+			return null;
+		}
+	}
 
 	/**
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
@@ -282,6 +323,20 @@ public class Data {
 		}
 	}
 	
+	/**
+	 * Metodo que se usa para actualizar las bases de datos de restaurantes,
+	 * escribiendo aquellos nuevos restaurantes que se vayan a tener en cuenta en la
+	 * oferta
+	 */
+	public static void actualizarDataBasePlato(JsonArray array) {
+		try (FileWriter fw = new FileWriter(filepathPlato)) {
+			fw.write(array.toString());
+			fw.flush();
+		} catch (IOException ex) {
+			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
+		}
+	}
+	
 	 /**
 	  * El metodo actualiza en la base de datos el cliente
 	  * 
@@ -318,12 +373,22 @@ public class Data {
 	 /**
 	  * El metodo actualiza en la base de datos el restaurante
 	  * 
-	  * @param restaurante El parametro define el cliente que va a ser actualizado
+	  * @param restaurante El parametro define el restaurante que va a ser actualizado
 	  */
 	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
 		Restaurante aux = restaurante;
 		Data.eliminarObjetoDataBaseRestaurante(restaurante);
 		Data.agregarObjetoDataBaseRestaurante(aux);
+	}
+	 /**
+	  * El metodo actualiza en la base de datos el plato
+	  * 
+	  * @param plato El parametro define el plato que va a ser actualizado
+	  */
+	public static void actualizarDataPlato(Plato plato) {
+		Plato aux = plato;
+		Data.eliminarObjetoDataBasePlato(plato);
+		Data.agregarObjetoDataBasePlato(aux);
 	}
 
 	/**
@@ -398,6 +463,27 @@ public class Data {
 	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
 	public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseRestaurante();
+		if (!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBaseRestaurante(dataBase);
+		} else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+	
+	/**
+	 * Metodo se usa para agregar objetos a la base de datos de plato,
+	 * conviritiendo estos objetos en los JsonElements para asi insertarlos a su
+	 * respectivo archivo
+	 * 
+	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
+	 * @see: {@link #traerDataBasePlato()}
+	 */
+	public static void agregarObjetoDataBasePlato(Plato obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
@@ -487,6 +573,31 @@ public class Data {
 		if (dataBase.contains(je)) {
 			dataBase.remove(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
+		} else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	
+	/**
+	 * Metodo para eliminar cierto objeto de la dataBasePlato
+	 * 
+	 * @see: {@link #traerDataBasePlato()}
+	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
+	 */
+	public static void eliminarObjetoDataBasePlato(Plato obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePlato();
+		for(int i =0;i< dataBase.size();i++) {
+			JsonObject jo = dataBase.get(i).getAsJsonObject();
+			if(obj.getNombre().equals(jo.get("nombre").getAsString())) {
+				dataBase.remove(i);
+			}
+		}
+		if (dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBasePlato(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
@@ -644,6 +755,23 @@ public class Data {
 		}
 		return restaurante;
 	}
+	
+	/**
+	 * Metodo para buscar un plato en la base de datos de plato
+	 */
+
+	public static Plato buscarPlato(String userName) {
+		Plato plato = null;
+		Gson gson = new Gson();
+		JsonArray dataBase = Data.traerDataBasePlato();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if (userName.equals(obj.get("nombre").getAsString())) {
+				plato = gson.fromJson(obj, Plato.class);
+			}
+		}
+		return plato;
+	}	
 
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion

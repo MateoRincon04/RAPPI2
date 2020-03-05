@@ -2,7 +2,12 @@ package UIMain;
 
 import gestorAplicacion.Interaccion.Cliente;
 
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import BaseDatos.Data;
 import gestorAplicacion.Oferta.*;
@@ -63,20 +68,49 @@ public class HacerPedido implements OpcionDeMenu {
 	private Plato escogerPlato(Restaurante restauranteElegido) {
 
 		System.out.println("Este es el menu de platos con el que cuenta el restaurante.");
-		if (restauranteElegido.getMenu().size() <= 0) {
+		if (restauranteElegido.getMenu() == null) {
 			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
 		} else {
-			for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
+			ArrayList<Plato> men = new ArrayList<Plato>();
+			Gson gson = new Gson();
+			JsonArray dataBase = Data.traerDataBaseRestaurante();
+			for (JsonElement jsonElement : dataBase) {
+				JsonObject obj = jsonElement.getAsJsonObject();
+				if (restauranteElegido.getNombre().equals(obj.get("nombre").getAsString())) {
+					for(JsonElement json : restauranteElegido.getMenu()) {
+						try{
+							String j = json.toString();
+							Plato plat = gson.fromJson(j, Plato.class);
+							men.add(plat);
+							System.out.println("A");
+							System.out.println(plat);
+						}
+						catch(Exception e) {
+							e.getStackTrace();
+						}
+						
+					}
+				}
+			}
+			
+			/*for (int i = 0; i < restauranteElegido.getMenu().size(); i++) {
 				Gson gson = new Gson();
 				Plato aux = gson.fromJson(restauranteElegido.getMenu().get(i), Plato.class);
 				System.out.println((i + 1) + ") " + aux.getNombre());
-			}
-			System.out.println("Por favor, escriba el numero del plato que quiere escoger del restaurante "
+			}*/
+			
+			System.out.println("Por favor, escriba el nombre del plato que quiere escoger del restaurante "
 					+ restauranteElegido.getNombre());
 			while (true) {
-				int numero = Main.user.nextInt();
-				Plato platoEscogido = restauranteElegido.elegirPlatoMenu(numero);
+				Plato platoEscogido = null;
+				String nom = Main.user.next();
+				for(int j = 0; j<men.size(); j++) {
+					if(men.get(j).getNombre().equals(nom)) {
+						platoEscogido = men.get(j);
+					}
+				}
+				
 				if (platoEscogido != null) {
 					return platoEscogido;
 				} else {

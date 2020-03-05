@@ -3,6 +3,9 @@ package UIMain;
 import com.google.gson.Gson;
 
 import BaseDatos.Data;
+import gestorAplicacion.Administracion.Administrador;
+import gestorAplicacion.Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Tendero;
 
 /**
  * Clase Salir, su finalidad es la de ser aquella clase que permita la
@@ -16,6 +19,16 @@ public class Salir implements OpcionDeMenu {
 			Gson gson = new Gson();
 			//System.out.println(gson.toJson(Main.usuarioRestaurante));
 			Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
+		}
+		else {
+			if(Main.usuario instanceof Cliente) {
+				Data.actualizarDataBaseCliente((Cliente) Main.usuario);
+			}else if(Main.usuario instanceof Tendero) {
+				Data.actualizarDataBaseTendero((Tendero) Main.usuario);
+			}else {
+				Data.actualizarDataBaseAdministrador((Administrador) Main.usuario);
+			}
+			
 		}
 
 	}
