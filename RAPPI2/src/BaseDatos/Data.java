@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import UIMain.*;
+import gestorAplicacion.Interaccion.Calificacion;
 import gestorAplicacion.Interaccion.Cliente;
+import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Oferta.Plato;
@@ -41,7 +43,7 @@ public class Data {
 		opciones.add(new CuantoHeGastado()); // 6 cliente
 		opciones.add(new MejorRestauranteCal()); // 7 cliente
 		opciones.add(new PlatosQueMasCompre()); // 8 cliente
-		opciones.add(new AgregarSaldo());//9 cliente
+		opciones.add(new AgregarSaldo());// 9 cliente
 		opciones.add(new CuantosPedidosHeEntregado()); // 10 tendero
 		opciones.add(new AceptarPedido()); // 11 tendero
 		opciones.add(new EnCualesDirecciones()); // 12 restaurante
@@ -68,6 +70,192 @@ public class Data {
 	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
 	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
+	private static final String filepathNotificacion = "RAPPI2\\src\\BaseDatos\\temp\\NotificacionesGuardados.json";
+	private static final String filepathCalificacion = "RAPPI2\\src\\BaseDatos\\temp\\CalificacionesGuardados.json";
+
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de
+	 * datos de Notificaciones
+	 * 
+	 * @see: {@link #traerDataBaseNotificacion()}
+	 */
+	public static File cargarFileDataNotificacion() throws IOException {
+		Gson gson = new Gson();
+		File DataBase = new File(filepathNotificacion);
+		if (Data.traerDataBaseNotificacion() != null) {
+			System.out.println("La dataBaseNotificacion se ha cargado correctamente");
+		} else {
+			System.out.println("La dataBaseNotificacion se ha creado correctamente");
+			Notificacion[] aux = new Notificacion[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
+			try (FileWriter fw = new FileWriter(filepathNotificacion)) {
+				fw.write(array.toString());
+				fw.flush();
+			} catch (IOException e) {
+			}
+		}
+		return DataBase;
+	}
+
+	public static JsonArray traerDataBaseNotificacion() {
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathNotificacion)) {
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		} catch (Exception ex) {
+			System.out.println("No se puede traer la dataBaseNotificacion correctamente");
+			return null;
+		}
+	}
+
+	public static void actualizarDataBaseNotificacion(JsonArray array) {
+		try (FileWriter fw = new FileWriter(filepathNotificacion)) {
+			fw.write(array.toString());
+			fw.flush();
+		} catch (IOException e) {
+			System.out.println("No se puede actualizar la dataBaseNotificacion correctamente");
+		}
+	}
+
+	public static void actualizarDataBaseNotificacion(Notificacion notificacion) { ////////////////////
+		Notificacion aux = notificacion;
+		Data.eliminarObjetoDataBaseNotificacion(Data.buscarNotificacion(notificacion.getID()));
+		Data.agregarObjetoDataBaseNotificacion(aux);
+	}
+
+	public static void agregarObjetoDataBaseNotificacion(Notificacion obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseNotificacion();
+		if (!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBaseNotificacion(dataBase);
+		} else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+
+	public static void eliminarObjetoDataBaseNotificacion(Notificacion obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseNotificacion();
+		if (dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBaseNotificacion(dataBase);
+		} else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+
+	public static Notificacion buscarNotificacion(int ID) {
+		Gson gson = new Gson();
+		Notificacion notificacion = null;
+		String x = String.valueOf(ID);
+		JsonArray dataBase = Data.traerDataBaseNotificacion();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if (x.equals(obj.get("ID").getAsString())) {
+				notificacion = gson.fromJson(obj, Notificacion.class);
+			}
+		}
+		return notificacion;
+	}
+
+
+
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de
+	 * datos de Calificaciones
+	 * 
+	 * @see: {@link #traerDataBaseCalificacion()}
+	 */
+	public static File cargarFileDataCalificacion() throws IOException {
+		Gson gson = new Gson();
+		File DataBase = new File(filepathCalificacion);
+		if (Data.traerDataBaseCalificacion() != null) {
+			System.out.println("La dataBaseCalificacion se ha cargado correctamente");
+		} else {
+			System.out.println("La dataBaseCalificacion se ha creado correctamente");
+			Calificacion[] aux = new Calificacion[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
+			try (FileWriter fw = new FileWriter(filepathCalificacion)) {
+				fw.write(array.toString());
+				fw.flush();
+			} catch (IOException e) {
+			}
+		}
+		return DataBase;
+	}
+
+	public static JsonArray traerDataBaseCalificacion() {
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathCalificacion)) {
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		} catch (Exception ex) {
+			System.out.println("No se puede traer la dataBaseCalificacion correctamente");
+			return null;
+		}
+	}
+
+	public static void actualizarDataBaseCalificacion(JsonArray array) {
+		try (FileWriter fw = new FileWriter(filepathCalificacion)) {
+			fw.write(array.toString());
+			fw.flush();
+		} catch (IOException e) {
+			System.out.println("No se puede actualizar la dataBaseCalificacion correctamente");
+		}
+	}
+
+	public static void actualizarDataBaseCalificacion(Calificacion calificacion) { /////////////////////
+		Calificacion aux = calificacion;
+		Data.eliminarObjetoDataBaseCalificacion(Data.buscarCalificacion(calificacion.getID()));
+		Data.agregarObjetoDataBaseCalificacion(aux);
+	}
+
+	public static void agregarObjetoDataBaseCalificacion(Calificacion obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseCalificacion();
+		if (!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBaseCalificacion(dataBase);
+		} else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+
+	public static void eliminarObjetoDataBaseCalificacion(Calificacion obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBaseCalificacion();
+		if (dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBaseCalificacion(dataBase);
+		} else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	public static Calificacion buscarCalificacion(int ID) {
+		Gson gson = new Gson();
+		Calificacion calificacion = null;
+		String x = String.valueOf(ID);
+		JsonArray dataBase = Data.traerDataBaseCalificacion();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if (x.equals(obj.get("ID").getAsString())) {
+				calificacion = gson.fromJson(obj, Calificacion.class);
+			}
+		}
+		return calificacion;
+	}
+
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -164,13 +352,13 @@ public class Data {
 		}
 		return DataBase;
 	}
+
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
 	 * datos de platos
 	 * 
 	 * @see: {@link #traerDataBasePlato()}
 	 */
-
 
 	/**
 	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
@@ -235,7 +423,6 @@ public class Data {
 			return null;
 		}
 	}
-	
 
 	/**
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
@@ -292,12 +479,11 @@ public class Data {
 		}
 	}
 
-	
-	 /**
-	  * El metodo actualiza en la base de datos el cliente
-	  * 
-	  * @param cliente El parametro define el cliente que va a ser actualizado
-	  */
+	/**
+	 * El metodo actualiza en la base de datos el cliente
+	 * 
+	 * @param cliente El parametro define el cliente que va a ser actualizado
+	 */
 	public static void actualizarDataBaseCliente(Cliente cliente) {
 		Cliente aux = cliente;
 		Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(cliente.getUserName()));
@@ -323,15 +509,16 @@ public class Data {
 	 */
 	public static void actualizarDataBaseAdministrador(Administrador administrador) {
 		Administrador aux = administrador;
-		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()t));
+		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()));
 		Data.agregarObjetoDataBaseAdministrador(aux);
 	}
-	
-	 /**
-	  * El metodo actualiza en la base de datos el restaurante
-	  * 
-	  * @param restaurante El parametro define el restaurante que va a ser actualizado
-	  */
+
+	/**
+	 * El metodo actualiza en la base de datos el restaurante
+	 * 
+	 * @param restaurante El parametro define el restaurante que va a ser
+	 *                    actualizado
+	 */
 	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
 		Restaurante aux = restaurante;
 		Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(restaurante.getNombre()));
@@ -421,7 +608,6 @@ public class Data {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}
 	}
-	
 
 	/**
 	 * Metodo que elimina cierto objeto de la dataBaseCliente
@@ -504,7 +690,7 @@ public class Data {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
-	
+
 	/**
 	 * Metodo para buscar un usuario en la base de datos de cliente usando solo el
 	 * userName
