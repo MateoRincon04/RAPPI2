@@ -34,7 +34,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar");
+			System.out.println("Oprima el numero indicado, de la funcion que deseas realizar");
 			String valor;
 			while (true) {
 				valor = Main.user.next();
@@ -89,7 +89,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario "
+			System.out.println("Oprima el numero indicado, de la funcion que deseas realizar, usuario "
 					+ Main.usuario.getNombre());
 			String valor;
 			while (true) {
@@ -124,7 +124,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario "
+			System.out.println("Oprima el numero indicado, de la funcion que deseas realizar, usuario "
 					+ Main.usuario.getNombre());
 			String valor;
 			while (true) {
@@ -170,7 +170,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario "
+			System.out.println("Oprima el numero indicado, de la funcion que deseas realizar, usuario "
 					+ Main.usuario.getNombre());
 			String valor;
 			while (true) {
@@ -200,7 +200,7 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				}
 				pri = false;
 			}
-			System.out.println("oprima el numero indicado, de la funcion que deseas realizar, usuario "
+			System.out.println("Oprima el numero indicado, de la funcion que deseas realizar, usuario "
 					+ Main.usuarioRestaurante.getNombre());
 			String valor;
 			while (true) {

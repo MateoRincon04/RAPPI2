@@ -72,7 +72,7 @@ public class Data {
 	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
 	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
-	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platoGuardados.json";
+	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platosGuardados.json";
 	private static final String filepathNotificacion = "RAPPI2\\src\\BaseDatos\\temp\\NotificacionesGuardados.json";
 	private static final String filepathCalificacion = "RAPPI2\\src\\BaseDatos\\temp\\CalificacionesGuardados.json";
 

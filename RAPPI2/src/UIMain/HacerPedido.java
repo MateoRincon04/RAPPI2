@@ -44,7 +44,7 @@ public class HacerPedido implements OpcionDeMenu {
 			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
 		} else {
 			System.out.println(
-					"Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
+					"¿Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
 			int opc = Main.user.nextInt();
 			if (opc == 2) {
 				MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
