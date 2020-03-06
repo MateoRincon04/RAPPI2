@@ -67,14 +67,14 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathPedido = "RAPPI2\\src\\BaseDatos\\temp\\pedidoGuardados.json";
-	private static final String filepathCliente = "RAPPI2\\src\\BaseDatos\\temp\\clientesGuardados.json";
-	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
-	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platosGuardados.json";
-	private static final String filepathNotificacion = "RAPPI2\\src\\BaseDatos\\temp\\NotificacionesGuardados.json";
-	private static final String filepathCalificacion = "RAPPI2\\src\\BaseDatos\\temp\\CalificacionesGuardados.json";
+	private static final String filepathPedido = "src\\BaseDatos\\temp\\pedidoGuardados.json";
+	private static final String filepathCliente = "src\\BaseDatos\\temp\\clientesGuardados.json";
+	private static final String filepathTendero = "src\\BaseDatos\\temp\\tenderosGuardados.json";
+	private static final String filepathAdministrador = "src\\BaseDatos\\temp\\administradoresGuardados.json";
+	private static final String filepathRestaurantes = "src\\BaseDatos\\temp\\restaurantesGuardados.json";
+	private static final String filepathPlato = "src\\BaseDatos\\temp\\platosGuardados.json";
+	private static final String filepathNotificacion = "src\\BaseDatos\\temp\\NotificacionesGuardados.json";
+	private static final String filepathCalificacion = "src\\BaseDatos\\temp\\CalificacionesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -1085,7 +1085,7 @@ public class Data {
 		JsonArray historial = Data.traerDataBaseRestaurante();
 		for (int i = 0; i < historial.size(); i++) {
 			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
-			System.out.println(i + ") " + aux1.getNombre());
+			System.out.println(i+1 + ") " + aux1.getNombre());
 
 		}
 	}
