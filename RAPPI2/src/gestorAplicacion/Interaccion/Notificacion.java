@@ -47,7 +47,7 @@ public class Notificacion {
 	 * realizara el Plato ordenado.
 	 */
 	public void notificar() {
-		Restaurante notif = pedido.getPlato().restaurante;
+		Restaurante notif =Data.buscarRestaurante(Data.buscarPlato( Data.buscarPedido(pedido.getId()).getPlato()).getRestaurante());
 		notif.agregarNotificacion(this);
 		Iterator<JsonElement> iterator = Data.traerDataBaseTendero().iterator();
 		Gson gson = new Gson();

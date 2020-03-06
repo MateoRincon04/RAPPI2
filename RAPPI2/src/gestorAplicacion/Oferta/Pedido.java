@@ -1,5 +1,6 @@
 package gestorAplicacion.Oferta;
 
+import BaseDatos.Data;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Interaccion.Notificacion;
@@ -15,8 +16,8 @@ import gestorAplicacion.Interaccion.Notificacion;
 
 public class Pedido {
 	private static int ID =0;
-	private Cliente cliente;
-	private Plato plato;
+	private String cliente;
+	private String plato;
 	private Restaurante restaurante;
 	private boolean entregado;
 	private boolean estaListo;
@@ -29,9 +30,9 @@ public class Pedido {
 	 * @param plato, El parametro plato define el plato que desea el cliente
 	 */
 	public Pedido(Cliente cliente, Plato plato) {
-		this.cliente = cliente;
-		this.plato = plato;
-		this.restaurante = plato.restaurante;
+		this.cliente = cliente.getUserName();
+		this.plato = plato.getNombre();
+		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante());
 		this.ID++;
 	}
 	
@@ -72,14 +73,14 @@ public class Pedido {
 	}
 	
 	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+		this.cliente = cliente.getUserName();
 	}
 	
-	public Cliente getCliente() {
+	public String getCliente() {
 		return this.cliente;
 	}
 	
-	public Plato getPlato() {
+	public String getPlato() {
 		return this.plato;
 	}
 }
