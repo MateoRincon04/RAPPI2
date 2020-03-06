@@ -338,7 +338,7 @@ public class Data {
 	  */
 	public static void actualizarDataBaseCliente(Cliente cliente) {
 		Cliente aux = cliente;
-		Data.eliminarObjetoDataBaseCliente(cliente);
+		Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(cliente.getUserName()));
 		Data.agregarObjetoDataBaseCliente(aux);
 	}
 
@@ -349,7 +349,7 @@ public class Data {
 	 */
 	public static void actualizarDataBaseTendero(Tendero tendero) {
 		Tendero aux = tendero;
-		Data.eliminarObjetoDataBaseTendero(tendero);
+		Data.eliminarObjetoDataBaseTendero(Data.buscarTendero(tendero.getUserName()));
 		Data.agregarObjetoDataBaseTendero(aux);
 	}
 
@@ -361,7 +361,7 @@ public class Data {
 	 */
 	public static void actualizarDataBaseAdministrador(Administrador administrador) {
 		Administrador aux = administrador;
-		Data.eliminarObjetoDataBaseAdministrador(administrador);
+		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()t));
 		Data.agregarObjetoDataBaseAdministrador(aux);
 	}
 	
@@ -372,7 +372,7 @@ public class Data {
 	  */
 	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
 		Restaurante aux = restaurante;
-		Data.eliminarObjetoDataBaseRestaurante(restaurante);
+		Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(restaurante.getNombre()));
 		Data.agregarObjetoDataBaseRestaurante(aux);
 	}
 	
