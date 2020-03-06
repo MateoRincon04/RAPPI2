@@ -9,6 +9,7 @@ import UIMain.*;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Administracion.Administrador;
+import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Plato;
 import gestorAplicacion.Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
@@ -41,33 +42,33 @@ public class Data {
 		opciones.add(new CuantoHeGastado()); // 6 cliente
 		opciones.add(new MejorRestauranteCal()); // 7 cliente
 		opciones.add(new PlatosQueMasCompre()); // 8 cliente
-		opciones.add(new CuantosPedidosHeEntregado()); // 9 tendero
-		opciones.add(new AceptarPedido()); // 10 tendero
-		opciones.add(new EnCualesDirecciones()); // 11 restaurante
-		opciones.add(new CrearPlato()); // 12 restaurante
-		opciones.add(new AgregarDireccionRest()); // 13 restaurante
-		opciones.add(new CambiarPlato()); // 14 restaurante
-		opciones.add(new EliminarDireccionRest());// 15 restaurante
-		opciones.add(new EliminarPlato()); // 16 restaurante
-		opciones.add(new CrearAdministrador()); // 17 Admin
-		opciones.add(new CrearRestaurante()); // 18 admin
-		opciones.add(new CrearTendero()); // 19 admin
-		opciones.add(new TenderoReparteMas()); // 20 admin
-		opciones.add(new QuitarFuncionalidades()); // 21 admin
-		opciones.add(new AgregarFuncionalidades()); // 22 admin
-		opciones.add(new Salir()); // 23 todos
+		opciones.add(new AgregarSaldo());//9 cliente
+		opciones.add(new CuantosPedidosHeEntregado()); // 10 tendero
+		opciones.add(new AceptarPedido()); // 11 tendero
+		opciones.add(new EnCualesDirecciones()); // 12 restaurante
+		opciones.add(new CrearPlato()); // 13 restaurante
+		opciones.add(new AgregarDireccionRest()); // 14 restaurante
+		opciones.add(new CambiarPlato()); // 15 restaurante
+		opciones.add(new EliminarDireccionRest());// 16 restaurante
+		opciones.add(new EliminarPlato()); // 17 restaurante
+		opciones.add(new CrearAdministrador()); // 18 Admin
+		opciones.add(new CrearRestaurante()); // 19 admin
+		opciones.add(new CrearTendero()); // 20 admin
+		opciones.add(new TenderoReparteMas()); // 21 admin
+		opciones.add(new QuitarFuncionalidades()); // 22 admin
+		opciones.add(new AgregarFuncionalidades()); // 23 admin
+		opciones.add(new Salir()); // 24 todos
 
 	}
 
 	public static final ArrayList<OpcionDeMenu> getOpciones() {
 		return opciones;
 	}
-
-	private static final String filepathCliente = "src\\BaseDatos\\temp\\clientesGuardados.json";
-	private static final String filepathTendero = "src\\BaseDatos\\temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "src\\BaseDatos\\temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = "src\\BaseDatos\\temp\\restaurantesGuardados.json";
-	private static final String filepathPlato = "src\\BaseDatos\\temp\\platosGuardados.json";
+	private static final String filepathPedido = "RAPPI2\\src\\BaseDatos\\temp\\pedidoGuardados.json";
+	private static final String filepathCliente = "RAPPI2\\src\\BaseDatos\\temp\\clientesGuardados.json";
+	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
+	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
+	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -164,22 +165,17 @@ public class Data {
 		}
 		return DataBase;
 	}
-	/**
-	 * Metodo que se usa al principio del Main para cargar el file con la base de
-	 * datos de platos
-	 * 
-	 * @see: {@link #traerDataBasePlato()}
-	 */
-	public static File cargarFileDataBasePlato() throws IOException {
+	
+	public static File cargarFileDataBasePedido() throws IOException {
 		Gson gson = new Gson();
-		File DataBase = new File(filepathPlato);
-		if (Data.traerDataBasePlato() != null) {
-			System.out.println("La dataBasePlato se ha cargado correctamente");
+		File DataBase = new File(filepathPedido);
+		if (Data.traerDataBasePedido() != null) {
+			System.out.println("La dataBaseCliente se ha cargado correctamente");
 		} else {
-			System.out.println("La dataBasePlato se ha creado correctamente");
-			Plato[] aux = new Plato[0];
-			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
-			try (FileWriter fw = new FileWriter(filepathPlato)) {
+			System.out.println("La dataBaseCliente se ha creado correctamente");
+			Cliente[] aux = new Cliente[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
+			try (FileWriter fw = new FileWriter(filepathPedido)) {
 				fw.write(array.toString());
 				fw.flush();
 			} catch (IOException e) {
@@ -187,6 +183,13 @@ public class Data {
 		}
 		return DataBase;
 	}
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de
+	 * datos de platos
+	 * 
+	 * @see: {@link #traerDataBasePlato()}
+	 */
+
 
 	/**
 	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
@@ -251,19 +254,14 @@ public class Data {
 			return null;
 		}
 	}
-	
-	/**
-	 * Metodo que lee la base de datos de platos desde su file para asi
-	 * obtener aquellos objetos creados previamente
-	 */
-	public static JsonArray traerDataBasePlato() {
+	public static JsonArray traerDataBasePedido() {
 		JsonParser jp = new JsonParser();
-		try (FileReader fr = new FileReader(filepathPlato)) {
+		try (FileReader fr = new FileReader(filepathPedido)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
 			return array;
 		} catch (Exception ex) {
-			System.out.println("No se puede traer la dataBasePlato correctamente");
+			System.out.println("No se puede traer la dataBasePedido correctamente");
 			return null;
 		}
 	}
@@ -323,19 +321,15 @@ public class Data {
 		}
 	}
 	
-	/**
-	 * Metodo que se usa para actualizar las bases de datos de restaurantes,
-	 * escribiendo aquellos nuevos restaurantes que se vayan a tener en cuenta en la
-	 * oferta
-	 */
-	public static void actualizarDataBasePlato(JsonArray array) {
-		try (FileWriter fw = new FileWriter(filepathPlato)) {
+	public static void actualizarDataBasePedido(JsonArray array) {
+		try (FileWriter fw = new FileWriter(filepathPedido)) {
 			fw.write(array.toString());
 			fw.flush();
-		} catch (IOException ex) {
-			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
+		} catch (IOException e) {
+			System.out.println("No se puede actualizar la dataBasePedido correctamente");
 		}
 	}
+
 	
 	 /**
 	  * El metodo actualiza en la base de datos el cliente
@@ -344,7 +338,7 @@ public class Data {
 	  */
 	public static void actualizarDataBaseCliente(Cliente cliente) {
 		Cliente aux = cliente;
-		Data.eliminarObjetoDataBaseCliente(cliente);
+		Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(cliente.getUserName()));
 		Data.agregarObjetoDataBaseCliente(aux);
 	}
 
@@ -355,7 +349,7 @@ public class Data {
 	 */
 	public static void actualizarDataBaseTendero(Tendero tendero) {
 		Tendero aux = tendero;
-		Data.eliminarObjetoDataBaseTendero(tendero);
+		Data.eliminarObjetoDataBaseTendero(Data.buscarTendero(tendero.getUserName()));
 		Data.agregarObjetoDataBaseTendero(aux);
 	}
 
@@ -367,7 +361,7 @@ public class Data {
 	 */
 	public static void actualizarDataBaseAdministrador(Administrador administrador) {
 		Administrador aux = administrador;
-		Data.eliminarObjetoDataBaseAdministrador(administrador);
+		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()t));
 		Data.agregarObjetoDataBaseAdministrador(aux);
 	}
 	
@@ -378,18 +372,14 @@ public class Data {
 	  */
 	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
 		Restaurante aux = restaurante;
-		Data.eliminarObjetoDataBaseRestaurante(restaurante);
+		Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(restaurante.getNombre()));
 		Data.agregarObjetoDataBaseRestaurante(aux);
 	}
-	 /**
-	  * El metodo actualiza en la base de datos el plato
-	  * 
-	  * @param plato El parametro define el plato que va a ser actualizado
-	  */
-	public static void actualizarDataPlato(Plato plato) {
-		Plato aux = plato;
-		Data.eliminarObjetoDataBasePlato(plato);
-		Data.agregarObjetoDataBasePlato(aux);
+	
+	public static void actualizarDataBasePedido(Pedido pedido) {
+		Pedido aux = pedido;
+		Data.eliminarObjetoDataBasePedido(pedido);
+		Data.agregarObjetoDataBasePedido(pedido);
 	}
 
 	/**
@@ -476,22 +466,14 @@ public class Data {
 		}
 	}
 	
-	/**
-	 * Metodo se usa para agregar objetos a la base de datos de plato,
-	 * conviritiendo estos objetos en los JsonElements para asi insertarlos a su
-	 * respectivo archivo
-	 * 
-	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
-	 * @see: {@link #traerDataBasePlato()}
-	 */
-	public static void agregarObjetoDataBasePlato(Plato obj) {
+	public static void agregarObjetoDataBasePedido(Pedido obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePlato();
+		JsonArray dataBase = Data.traerDataBasePedido();
 		if (!dataBase.contains(je)) {
 			dataBase.add(je);
-			Data.actualizarDataBasePlato(dataBase);
+			Data.actualizarDataBasePedido(dataBase);
 		} else {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}
@@ -579,31 +561,19 @@ public class Data {
 		}
 	}
 	
-	/**
-	 * Metodo para eliminar cierto objeto de la dataBasePlato
-	 * 
-	 * @see: {@link #traerDataBasePlato()}
-	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
-	 */
-	public static void eliminarObjetoDataBasePlato(Plato obj) {
+	public static void eliminarObjetoDataBasePedido(Pedido obj) {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePlato();
-		for(int i =0;i< dataBase.size();i++) {
-			JsonObject jo = dataBase.get(i).getAsJsonObject();
-			if(obj.getNombre().equals(jo.get("nombre").getAsString())) {
-				dataBase.remove(i);
-			}
-		}
+		JsonArray dataBase = Data.traerDataBasePedido();
 		if (dataBase.contains(je)) {
 			dataBase.remove(je);
-			Data.actualizarDataBasePlato(dataBase);
+			Data.actualizarDataBasePedido(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
-
+	
 	/**
 	 * Metodo para buscar un usuario en la base de datos de cliente usando solo el
 	 * userName
@@ -757,22 +727,19 @@ public class Data {
 		return restaurante;
 	}
 	
-	/**
-	 * Metodo para buscar un plato en la base de datos de plato
-	 */
-
-	public static Plato buscarPlato(String userName) {
-		Plato plato = null;
+	public static Pedido buscarPedido(int ID) {
+		Pedido pedido = null;
+		String x = String.valueOf(ID);
 		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBasePlato();
+		JsonArray dataBase = Data.traerDataBasePedido();
 		for (JsonElement jsonElement : dataBase) {
 			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("nombre").getAsString())) {
-				plato = gson.fromJson(obj, Plato.class);
+			if (x.equals(obj.get("ID").getAsString())) {
+				pedido = gson.fromJson(obj, Pedido.class);
 			}
 		}
-		return plato;
-	}	
+		return pedido;
+	}
 
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
@@ -807,6 +774,5 @@ public class Data {
 			System.out.println(i + ") " + aux1.getNombre());
 
 		}
-
 	}
 }

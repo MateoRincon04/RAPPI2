@@ -152,7 +152,6 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 	 * @param usuario El parametro usuario define el cliente que esta usando el menu
 	 */
 	public static void lanzarMenu(Administrador usuario) {
-		System.out.println("Se metio aca");
 		boolean pri = true;
 		while (true) {
 
@@ -166,8 +165,8 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				System.out.println("");
 				System.out.println("");
 
-				for (int i = 18; i < menu.size(); i++) {
-					System.out.println(i - 17 + ") " + menu.get(i));
+				for (int i = 19; i < menu.size(); i++) {
+					System.out.println(i - 18 + ") " + menu.get(i));
 				}
 				pri = false;
 			}
@@ -178,8 +177,8 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				valor = Main.user.next();
 				//try {
 					int opc = Integer.parseInt(valor);
-					if (opc > 0 && opc <= menu.size() - 17) {
-						menu.get(opc + 17).ejecutar();
+					if (opc > 0 && opc <= menu.size() - 18) {
+						menu.get(opc + 18).ejecutar();
 						break;
 					} else {
 						System.out.println("Ingrese un numero valido");
