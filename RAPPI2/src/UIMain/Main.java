@@ -25,6 +25,9 @@ public class Main {
 		Data.cargarFileDataBaseTendero();
 		Data.cargarFileDataBaseRestaurante();
 		Data.cargarFileDataBasePlato();
+		Data.cargarFileDataBasePedido();
+		Data.cargarFileDataCalificacion();
+		Data.cargarFileDataNotificacion();
 		Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
 		MenuDeConsola.lanzarMenu();
 		user.close();
