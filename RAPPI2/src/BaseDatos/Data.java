@@ -9,6 +9,7 @@ import UIMain.*;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Administracion.Administrador;
+import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Plato;
 import gestorAplicacion.Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
@@ -63,7 +64,7 @@ public class Data {
 	public static final ArrayList<OpcionDeMenu> getOpciones() {
 		return opciones;
 	}
-
+	private static final String filepathPedido = "RAPPI2\\src\\BaseDatos\\temp\\pedidoGuardados.json";
 	private static final String filepathCliente = "RAPPI2\\src\\BaseDatos\\temp\\clientesGuardados.json";
 	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
 	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
@@ -164,6 +165,24 @@ public class Data {
 		}
 		return DataBase;
 	}
+	
+	public static File cargarFileDataBasePedido() throws IOException {
+		Gson gson = new Gson();
+		File DataBase = new File(filepathPedido);
+		if (Data.traerDataBasePedido() != null) {
+			System.out.println("La dataBaseCliente se ha cargado correctamente");
+		} else {
+			System.out.println("La dataBaseCliente se ha creado correctamente");
+			Cliente[] aux = new Cliente[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
+			try (FileWriter fw = new FileWriter(filepathPedido)) {
+				fw.write(array.toString());
+				fw.flush();
+			} catch (IOException e) {
+			}
+		}
+		return DataBase;
+	}
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
 	 * datos de platos
@@ -235,7 +254,17 @@ public class Data {
 			return null;
 		}
 	}
-	
+	public static JsonArray traerDataBasePedido() {
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathPedido)) {
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		} catch (Exception ex) {
+			System.out.println("No se puede traer la dataBasePedido correctamente");
+			return null;
+		}
+	}
 
 	/**
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
@@ -291,6 +320,15 @@ public class Data {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
+	
+	public static void actualizarDataBasePedido(JsonArray array) {
+		try (FileWriter fw = new FileWriter(filepathPedido)) {
+			fw.write(array.toString());
+			fw.flush();
+		} catch (IOException e) {
+			System.out.println("No se puede actualizar la dataBasePedido correctamente");
+		}
+	}
 
 	
 	 /**
@@ -336,6 +374,12 @@ public class Data {
 		Restaurante aux = restaurante;
 		Data.eliminarObjetoDataBaseRestaurante(restaurante);
 		Data.agregarObjetoDataBaseRestaurante(aux);
+	}
+	
+	public static void actualizarDataBasePedido(Pedido pedido) {
+		Pedido aux = pedido;
+		Data.eliminarObjetoDataBasePedido(pedido);
+		Data.agregarObjetoDataBasePedido(pedido);
 	}
 
 	/**
@@ -422,6 +466,18 @@ public class Data {
 		}
 	}
 	
+	public static void agregarObjetoDataBasePedido(Pedido obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePedido();
+		if (!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBasePedido(dataBase);
+		} else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
 
 	/**
 	 * Metodo que elimina cierto objeto de la dataBaseCliente
@@ -500,6 +556,19 @@ public class Data {
 		if (dataBase.contains(je)) {
 			dataBase.remove(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
+		} else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	
+	public static void eliminarObjetoDataBasePedido(Pedido obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePedido();
+		if (dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBasePedido(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
@@ -657,6 +726,20 @@ public class Data {
 		}
 		return restaurante;
 	}
+	
+	public static Pedido buscarPedido(int ID) {
+		Pedido pedido = null;
+		String x = String.valueOf(ID);
+		Gson gson = new Gson();
+		JsonArray dataBase = Data.traerDataBasePedido();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if (x.equals(obj.get("ID").getAsString())) {
+				pedido = gson.fromJson(obj, Pedido.class);
+			}
+		}
+		return pedido;
+	}
 
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
@@ -691,6 +774,5 @@ public class Data {
 			System.out.println(i + ") " + aux1.getNombre());
 
 		}
-
 	}
 }
