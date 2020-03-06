@@ -269,7 +269,7 @@ public class Data {
 	public static File cargarFileDataBasePlato() throws IOException {
 		Gson gson = new Gson();
 		File DataBase = new File(filepathPlato);
-		if (Data.traerDataBaseCliente() != null) {
+		if (Data.traerDataBasePlato() != null) {
 			System.out.println("La dataBasePlato se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBasePlato se ha creado correctamente");
@@ -384,9 +384,9 @@ public class Data {
 		Gson gson = new Gson();
 		File DataBase = new File(filepathPedido);
 		if (Data.traerDataBasePedido() != null) {
-			System.out.println("La dataBaseCliente se ha cargado correctamente");
+			System.out.println("La dataBasePedido se ha cargado correctamente");
 		} else {
-			System.out.println("La dataBaseCliente se ha creado correctamente");
+			System.out.println("La dataBasePedido se ha creado correctamente");
 			Pedido[] aux = new Pedido[0];
 			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathPedido)) {
