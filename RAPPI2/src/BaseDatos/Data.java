@@ -173,11 +173,11 @@ public class Data {
 	public static File cargarFileDataBasePlato() throws IOException {
 		Gson gson = new Gson();
 		File DataBase = new File(filepathPlato);
-		if (Data.traerDataBaseRestaurante() != null) {
-			System.out.println("La dataBaseRestaurantes se ha cargado correctamente");
+		if (Data.traerDataBasePlato() != null) {
+			System.out.println("La dataBasePlato se ha cargado correctamente");
 		} else {
-			System.out.println("La dataBaseRestaurantes se ha creado correctamente");
-			Restaurante[] aux = new Restaurante[0];
+			System.out.println("La dataBasePlato se ha creado correctamente");
+			Plato[] aux = new Plato[0];
 			JsonArray array = gson.fromJson(gson.toJson(aux),JsonArray.class );
 			try (FileWriter fw = new FileWriter(filepathPlato)) {
 				fw.write(array.toString());
@@ -215,7 +215,7 @@ public class Data {
 			JsonArray array = (JsonArray) obj;
 			return array;
 		} catch (Exception ex) {
-			System.out.println("No se puede traer la dataBasePerfil correctamente");
+			System.out.println("No se puede traer la dataBaseTendero correctamente");
 			return null;
 		}
 	}
@@ -231,7 +231,7 @@ public class Data {
 			JsonArray array = (JsonArray) obj;
 			return array;
 		} catch (Exception ex) {
-			System.out.println("No se puede traer la dataBasePerfil correctamente");
+			System.out.println("No se puede traer la dataBaseAdministrador correctamente");
 			return null;
 		}
 	}
@@ -263,7 +263,7 @@ public class Data {
 			JsonArray array = (JsonArray) obj;
 			return array;
 		} catch (Exception ex) {
-			System.out.println("No se puede traer la dataBaseRestaurantes correctamente");
+			System.out.println("No se puede traer la dataBasePlato correctamente");
 			return null;
 		}
 	}
@@ -488,10 +488,10 @@ public class Data {
 		Gson gson = new Gson();
 		String aux = gson.toJson(obj);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
+		JsonArray dataBase = Data.traerDataBasePlato();
 		if (!dataBase.contains(je)) {
 			dataBase.add(je);
-			Data.actualizarDataBaseRestaurante(dataBase);
+			Data.actualizarDataBasePlato(dataBase);
 		} else {
 			System.out.println("no se puede agregar el elemento a la base de datos");
 		}

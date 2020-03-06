@@ -7,7 +7,7 @@ import gestorAplicacion.Oferta.Restaurante;
 
 public class EliminarPlato implements OpcionDeMenu {
 	public void ejecutar() {
-		System.out.println("Eliminará un plato del menú. ");
+		/*System.out.println("Eliminará un plato del menú. ");
 		Restaurante restaurante = Main.usuarioRestaurante;
 		JsonArray menuPlatos = restaurante.getMenu();
 		System.out.println("Este es el menú de platos que cuenta el restaurante.");
@@ -28,7 +28,7 @@ public class EliminarPlato implements OpcionDeMenu {
 		} else {
 			System.out.println("Su plato se ha removido correctamente. ");
 		}
-		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
+		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);*/
 	}
 
 	public String toString() {

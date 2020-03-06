@@ -8,6 +8,9 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import BaseDatos.Data;
 import gestorAplicacion.Interaccion.Calificacion;
 import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
@@ -36,8 +39,7 @@ public class Restaurante implements Serializable {
 	private List<String> direcciones = new ArrayList<String>();
 	public List<Integer> opciones = new ArrayList<Integer>();
 	private String celular;
-	private JsonArray menu = new JsonArray();
-	private List<Plato> historial = new ArrayList<Plato>();
+	private String menu = "";
 	private String clave;
 
 	/**
@@ -133,23 +135,17 @@ public class Restaurante implements Serializable {
 	 *                    cierta edad del cliente
 	 */
 	public boolean crearPlato(String nombre, String descripcion, float precio, int restriccion) {
-		Gson gson = new Gson();
-		Plato plato = new Plato(nombre, descripcion, precio, restriccion, this);
-		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
-		if (!this.menu.contains(aux)) {
-			this.menu.add(gson.toJson(plato));
-			return true;
-		} else {
-			
-			return false;
-		}
+		Gson gson =new Gson();
+		Plato plato= new Plato(nombre, descripcion, precio, restriccion, this);
+		Data.agregarObjetoDataBasePlato(plato);
+		this.menu=nombre;
+		return true;	
 	}
 
-	public boolean cambiarPlato(Plato plato, Plato nuevo) {
-		Gson gson = new Gson();
-		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
-		if (this.menu.contains(aux)) {
-			//this.menu.set(this.menu.indexOf(plato), nuevo);
+	public boolean cambiarPlato( Plato platoCambio) {
+		if (Data.buscarPlato(platoCambio.getNombre())==null) {
+			this.menu=platoCambio.getNombre();
+			Data.actualizarDataPlato(platoCambio);
 			System.out.println("Su plato se ha cambiado correctamente");
 			return true;
 		} else {
@@ -157,22 +153,8 @@ public class Restaurante implements Serializable {
 			return false;
 		}
 	}
-
-	public boolean eliminarPlato(Plato plato) {
-		Gson gson = new Gson();
-		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
-		if (this.menu.contains(aux)) {
-			this.menu.remove(aux);
-			System.out.println("Su plato se ha removido correctamente. ");
-			return true;
-		} else {
-			
-			return false;
-		}
-
-	}
-
-	public JsonArray getMenu() {
+	
+	public String getMenu() {
 		return this.menu;
 	}
 
@@ -192,10 +174,8 @@ public class Restaurante implements Serializable {
 		pedido.setEstaListo(true);
 	}
 
-	public Plato elegirPlatoMenu(int indice) {
-		Gson gson = new Gson();
-		Plato aux = gson.fromJson(this.menu.get(indice), Plato.class);
-		return aux;
+	public String elegirPlatoMenu(int indice) {
+		return this.getMenu();
 	}
 
 	/**
@@ -236,9 +216,6 @@ public class Restaurante implements Serializable {
 		return nuevo;
 	}
 
-	void addHistorial(Plato plato) {
-		this.historial.add(plato);
-	}
 
 	public String getClave() {
 		return clave;
