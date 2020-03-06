@@ -11,14 +11,14 @@ import gestorAplicacion.Interaccion.Notificacion;
  * respectivos restaurante y tenderos para que puedan realizar cada tarea y asi suplir
  * la peticion del cliente.
  * 
- * @author: Santiago Tamayo, Mateo Rincón, Paula A. Taborda, Guillermo Toloza
+ * @author: Santiago Tamayo, Mateo Rincï¿½n, Paula A. Taborda, Guillermo Toloza
  */
 
 public class Pedido {
 	private static int ID =0;
 	private String cliente;
 	private String plato;
-	private Restaurante restaurante;
+	private String restaurante;
 	private boolean entregado;
 	private boolean estaListo;
 	private String tendero;
@@ -32,12 +32,12 @@ public class Pedido {
 	public Pedido(Cliente cliente, Plato plato) {
 		this.cliente = cliente.getUserName();
 		this.plato = plato.getNombre();
-		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante());
-		this.ID++;
+		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
+		ID++;
 	}
 	
 	public int getId(){
-		return this.ID;
+		return ID;
 	}
 	public void crearNotificacion(Pedido pedido) {
 		Notificacion n =new Notificacion(pedido);
@@ -60,7 +60,7 @@ public class Pedido {
 		return this.tendero;
 	}
 
-	public Restaurante getRestaurante() {
+	public String getRestaurante() {
 		return this.restaurante;
 	}
 	

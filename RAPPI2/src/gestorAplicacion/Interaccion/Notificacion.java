@@ -9,7 +9,7 @@ import BaseDatos.Data;
 
 /**
  * Clase Notificacion su finalidad es de notificar a los tenderos y al
- * restaurante acerca de la creación del pedido para que asi estos sepan que
+ * restaurante acerca de la creaciï¿½n del pedido para que asi estos sepan que
  * deben de hacer o recoger.
  * 
  * @author: Santiago Tamayo, Paula A. Taborda, Guillermo Toloza, Mateo Rincon
@@ -26,7 +26,7 @@ public class Notificacion {
 	}
 
 	public int getID() {
-		return this.ID;
+		return ID;
 	}
 
 	public void setTomarPedido() {
@@ -42,7 +42,7 @@ public class Notificacion {
 	}
 
 	/**
-	 * El método notificar me permite notificar a los tenderos acerca del nuevo
+	 * El mï¿½todo notificar me permite notificar a los tenderos acerca del nuevo
 	 * pedido creado y le avisa tambien a el Restaurante asignado a el Pedido que
 	 * realizara el Plato ordenado.
 	 */
@@ -57,7 +57,7 @@ public class Notificacion {
 				notificado.agregarNotificacion(this);
 				if (tomarPedido) {
 					notificado.setEstaDisponible();
-					Data.buscarPedido(pedido).setTendero(notificado);
+					Data.buscarPedido(pedido).setTendero(notificado.getNombre());
 					break;
 				}
 			}
