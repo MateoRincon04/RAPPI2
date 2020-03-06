@@ -3,10 +3,8 @@ package gestorAplicacion.Interaccion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import BaseDatos.Data;
 import gestorAplicacion.Administracion.Perfil;
-import gestorAplicacion.Oferta.Pedido;
 
 /**
  * Clase Tendero La finalidad de esta clase es de crear los objetos de tipo
@@ -91,7 +89,8 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		if (!Aux.getPedido().getEntregado() && (Aux.getPedido().getTendero() == null)) {
+		
+		if (!Data.buscarPedido(Data.buscarNotificacion(Aux.getID()).getPedido()).getEntregado() && (Data.buscarTendero(Data.buscarPedido(Aux.getPedido()).getTendero()) == null)) {
 			Aux.setTomarPedido();
 			notificaciones.remove(notificaciones.size() - 1);
 			return true;

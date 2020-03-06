@@ -15,25 +15,25 @@ import BaseDatos.Data;
  * @author: Santiago Tamayo, Paula A. Taborda, Guillermo Toloza, Mateo Rincon
  */
 public class Notificacion {
-	private Pedido pedido;
+	private int pedido;
 	private static int ID = 0;
 	private boolean tomarPedido;
 
-	public Notificacion(Pedido pedido) {
+	public Notificacion(int pedido) {
 		this.pedido = pedido;
-		this.ID++;
+		ID++;
 		this.notificar();
 	}
 
 	public int getID() {
-		return this.ID;
+		return ID;
 	}
 
 	public void setTomarPedido() {
 		this.tomarPedido = !this.tomarPedido;
 	}
 
-	public Pedido getPedido() {
+	public int getPedido() {
 		return pedido;
 	}
 
@@ -47,7 +47,7 @@ public class Notificacion {
 	 * realizara el Plato ordenado.
 	 */
 	public void notificar() {
-		Restaurante notif = Data.buscarRestaurante(Data.buscarPlato( Data.buscarPedido(pedido.getId()).getPlato()).getRestaurante());
+		Restaurante notif = Data.buscarRestaurante(Data.buscarPlato( Data.buscarPedido(pedido).getPlato()).getRestaurante());
 		notif.agregarNotificacion(this);
 		Iterator<JsonElement> iterator = Data.traerDataBaseTendero().iterator();
 		Gson gson = new Gson();
@@ -57,7 +57,7 @@ public class Notificacion {
 				notificado.agregarNotificacion(this);
 				if (tomarPedido) {
 					notificado.setEstaDisponible();
-					this.pedido.setTendero(notificado);
+					Data.buscarPedido(pedido).setTendero(notificado.getNombre());
 					break;
 				}
 			}

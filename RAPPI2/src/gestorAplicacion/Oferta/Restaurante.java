@@ -199,13 +199,13 @@ public class Restaurante implements Serializable {
 			int f = 0;
 			for (int j = 0; j < notificaciones.size(); j++) {
 				Notificacion aux1 = Data.buscarNotificacion(notificaciones.get(j));
-				if (aux.getPedido().getTendero().equals(aux1.getPedido().getTendero())) {
+				if (Data.buscarTendero(Data.buscarPedido(aux.getPedido()).getTendero()).equals(Data.buscarTendero(Data.buscarPedido(aux1.getPedido()).getTendero()))) {
 					f++;
 				}
 			}
 			if (f > numero) {
 				numero = f;
-				nuevo = aux.getPedido().getTendero();
+				nuevo = Data.buscarTendero(Data.buscarPedido(aux.getPedido()).getTendero());
 			}
 		}
 		return nuevo;

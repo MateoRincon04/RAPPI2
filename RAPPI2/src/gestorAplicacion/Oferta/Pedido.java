@@ -18,10 +18,10 @@ public class Pedido {
 	private static int ID =0;
 	private String cliente;
 	private String plato;
-	private Restaurante restaurante;
+	private String restaurante;
 	private boolean entregado;
 	private boolean estaListo;
-	private Tendero tendero;
+	private String tendero;
 	
 	/**
 	 * Constructor de Pedido
@@ -32,14 +32,14 @@ public class Pedido {
 	public Pedido(Cliente cliente, Plato plato) {
 		this.cliente = cliente.getUserName();
 		this.plato = plato.getNombre();
-		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante());
-		this.ID++;
+		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
+		ID++;
 	}
 	
 	public int getId(){
-		return this.ID;
+		return ID;
 	}
-	public void crearNotificacion(Pedido pedido) {
+	public void crearNotificacion(int pedido) {
 		new Notificacion(pedido);
 	}
 	
@@ -52,15 +52,15 @@ public class Pedido {
 		
 	}
 	
-	public void setTendero(Tendero tendero) {
+	public void setTendero(String tendero) {
 		this.tendero = tendero;
 	}
 	
-	public Tendero getTendero() {
+	public String getTendero() {
 		return this.tendero;
 	}
 
-	public Restaurante getRestaurante() {
+	public String getRestaurante() {
 		return this.restaurante;
 	}
 	
