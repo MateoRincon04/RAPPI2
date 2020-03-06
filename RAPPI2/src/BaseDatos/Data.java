@@ -387,7 +387,7 @@ public class Data {
 			System.out.println("La dataBaseCliente se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBaseCliente se ha creado correctamente");
-			Cliente[] aux = new Cliente[0];
+			Pedido[] aux = new Pedido[0];
 			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathPedido)) {
 				fw.write(array.toString());
