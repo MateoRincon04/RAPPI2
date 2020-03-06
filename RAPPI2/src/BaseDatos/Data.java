@@ -69,7 +69,33 @@ public class Data {
 	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
 	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
+	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platoGuardados.json";
 
+	/**
+	 * Metodo que se usa al principio del Main para cargar el file con la base de
+	 * datos de plato
+	 * 
+	 * @see: {@link #traerDataBasePlato()}
+	 */
+	public static File cargarFileDataBasePlato() throws IOException {
+		Gson gson = new Gson();
+		File DataBase = new File(filepathPlato);
+		if (Data.traerDataBaseCliente() != null) {
+			System.out.println("La dataBasePlato se ha cargado correctamente");
+		} else {
+			System.out.println("La dataBasePlato se ha creado correctamente");
+			Plato[] aux = new Plato[0];
+			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
+			try (FileWriter fw = new FileWriter(filepathPlato)) {
+				fw.write(array.toString());
+				fw.flush();
+			} catch (IOException e) {
+			}
+		}
+		return DataBase;
+	}
+
+	
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
 	 * datos de clientes
@@ -208,6 +234,23 @@ public class Data {
 	}
 
 	/**
+	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
+	 * objetos alli guardados
+	 */
+	public static JsonArray traerDataBasePlato() {
+		JsonParser jp = new JsonParser();
+		try (FileReader fr = new FileReader(filepathPlato)) {
+			Object obj = jp.parse(fr);
+			JsonArray array = (JsonArray) obj;
+			return array;
+		} catch (Exception ex) {
+			System.out.println("No se puede traer la dataBasePlato correctamente");
+			return null;
+		}
+	}
+
+	
+	/**
 	 * Metodo que lee la base de datos de tenderos desde su file y obtiene los
 	 * objetos alli guardados
 	 */
@@ -266,6 +309,20 @@ public class Data {
 		}
 	}
 
+	/**
+	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
+	 * los nuevos objetos que se necesiten guardar
+	 */
+	public static void actualizarDataBasePlato(JsonArray array) {
+		try (FileWriter fw = new FileWriter(filepathPlato)) {
+			fw.write(array.toString());
+			fw.flush();
+		} catch (IOException e) {
+			System.out.println("No se puede actualizar la dataBasePlato correctamente");
+		}
+	}
+
+	
 	/**
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
 	 * los nuevos objetos que se necesiten guardar
@@ -342,6 +399,16 @@ public class Data {
 		Data.agregarObjetoDataBaseCliente(aux);
 	}
 
+	 /**
+	  * El metodo actualiza en la base de datos el plato
+	  * 
+	  * @param plato El parametro define el cliente que va a ser actualizado
+	  */
+	public static void actualizarDataBasePlato(Plato plato) {;
+		Data.eliminarObjetoDataBasePlato(Data.buscarPlato(plato.getNombre()));
+		Data.agregarObjetoDataBasePlato(plato);
+	}
+	
 	/**
 	 * El metodo actualiza en la base de datos el tendero
 	 * 
@@ -361,7 +428,7 @@ public class Data {
 	 */
 	public static void actualizarDataBaseAdministrador(Administrador administrador) {
 		Administrador aux = administrador;
-		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()t));
+		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()));
 		Data.agregarObjetoDataBaseAdministrador(aux);
 	}
 	
@@ -377,11 +444,31 @@ public class Data {
 	}
 	
 	public static void actualizarDataBasePedido(Pedido pedido) {
-		Pedido aux = pedido;
-		Data.eliminarObjetoDataBasePedido(pedido);
+		Data.eliminarObjetoDataBasePedido(Data.buscarPedido(pedido.getId()));
 		Data.agregarObjetoDataBasePedido(pedido);
 	}
 
+	/**
+	 * Metodo que se usa para agregar objetos a la base de datos de plato,
+	 * convirtiendo asi el objeto a guardar en un JsonElement para poder insertarlo
+	 * en el archivo respectivo
+	 * 
+	 * @see: {@link #traerDataBasePlato()}
+	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
+	 */
+	public static void agregarObjetoDataBasePlato(Plato obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePlato();
+		if (!dataBase.contains(je)) {
+			dataBase.add(je);
+			Data.actualizarDataBasePlato(dataBase);
+		} else {
+			System.out.println("no se puede agregar el elemento a la base de datos");
+		}
+	}
+	
 	/**
 	 * Metodo que se usa para agregar objetos a la base de datos de clientes,
 	 * convirtiendo asi el objeto a guardar en un JsonElement para poder insertarlo
@@ -480,6 +567,25 @@ public class Data {
 	}
 
 	/**
+	 * Metodo que elimina cierto objeto de la dataBasePlato
+	 * 
+	 * @see: {@link #traerDataBasePlato()}
+	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
+	 */
+	public static void eliminarObjetoDataBasePlato(Plato obj) {
+		Gson gson = new Gson();
+		String aux = gson.toJson(obj);
+		JsonElement je = gson.fromJson(aux, JsonElement.class);
+		JsonArray dataBase = Data.traerDataBasePlato();
+		if (dataBase.contains(je)) {
+			dataBase.remove(je);
+			Data.actualizarDataBasePlato(dataBase);
+		} else {
+			System.out.println("no se puede eliminar el elemento a la base de datos");
+		}
+	}
+	
+	/**
 	 * Metodo que elimina cierto objeto de la dataBaseCliente
 	 * 
 	 * @see: {@link #traerDataBaseCliente()}
@@ -572,6 +678,26 @@ public class Data {
 		} else {
 			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
+	}
+	
+	/**
+	 * Metodo para buscar un usuario en la base de datos de platos usando solo el
+	 * userName
+	 * 
+	 * @see: {@link #traerDataBasepPlato()}
+	 */
+
+	public static Plato buscarPlato(String userName) {
+		Gson gson = new Gson();
+		Plato plato = null;
+		JsonArray dataBase = Data.traerDataBasePlato();
+		for (JsonElement jsonElement : dataBase) {
+			JsonObject obj = jsonElement.getAsJsonObject();
+			if (userName.equals(obj.get("nombre").getAsString())) {
+				plato = gson.fromJson(obj, Plato.class);
+			}
+		}
+		return plato;
 	}
 	
 	/**
