@@ -1,5 +1,6 @@
 package UIMain;
 
+import BaseDatos.Data;
 import gestorAplicacion.Interaccion.Cliente;
 
 public class AgregarSaldo implements OpcionDeMenu {
@@ -10,6 +11,8 @@ public class AgregarSaldo implements OpcionDeMenu {
 		long numero = Main.user.nextInt();
 		if (numero >= 0) {
 			cliente.agregarSaldo(numero);
+			Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(cliente.getUserName()));
+			Data.agregarObjetoDataBaseCliente(cliente);
 			System.out.println("Ha agregado el saldo nuevo correctamente.");
 		} else {
 			System.out.println("Ingrese un saldo positivo. Intente nuevamente.");
