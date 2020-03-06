@@ -1,5 +1,6 @@
 package UIMain;
 
+import BaseDatos.Data;
 import gestorAplicacion.Interaccion.Tendero;
 
 public class AceptarPedido implements OpcionDeMenu {
@@ -14,8 +15,7 @@ public class AceptarPedido implements OpcionDeMenu {
 
 					boolean valor = tendero.aceptarPedido();
 					if (valor) {
-						System.out.println("Usted tiene a su cargo el pedido: " + tendero.getNotificaciones()
-								.get(tendero.getNotificaciones().size() - 1).getPedido().getPlato());
+						System.out.println("Usted tiene a su cargo el pedido: " + Data.buscarPlato(Data.buscarPedido(tendero.getNotificaciones().size() - 1).getPlato()));
 
 					}
 				} else {
