@@ -41,6 +41,7 @@ public class Pedido {
 	}
 	public void crearNotificacion(int i) {
 		Notificacion n =new Notificacion(i);
+		n.notificar();
 	}
 	
 	public boolean getEntregado() {

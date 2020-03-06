@@ -2,8 +2,6 @@ package gestorAplicacion.Interaccion;
 
 import java.util.Iterator;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Restaurante;
 import BaseDatos.Data;
 
@@ -22,7 +20,6 @@ public class Notificacion {
 	public Notificacion(int pedido) {
 		this.pedido = pedido;
 		this.ID++;
-		this.notificar();
 	}
 
 	public int getID() {
