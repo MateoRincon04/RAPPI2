@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 import gestorAplicacion.Administracion.*;
 import gestorAplicacion.Oferta.*;
@@ -31,8 +33,8 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	private long saldo;
 	private Pedido pedido;
 	private String direccion;
-	private List<Pedido> historial = new ArrayList<Pedido>();
-	public List<Integer> opciones = new ArrayList<Integer>();
+	private ArrayList<Integer> historial = new ArrayList<Integer>();
+	public ArrayList<Integer> opciones = new ArrayList<Integer>();
 
 	/**
 	 * Constructor para los objetos de la clase Cliente
@@ -60,7 +62,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 		this.opciones.add(24);
 	}
 
-	public List<Integer> getOpciones() {
+	public ArrayList<Integer> getOpciones() {
 		return this.opciones;
 	}
 
@@ -94,8 +96,11 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 */
 	public boolean hacerPedido(Plato plato) {
 		if (this.getSaldo() >= plato.getPrecio()) {
+			Gson gson = new Gson();
 			Pedido pedido = new Pedido(this, plato);
-			this.agregarAlHistorial(pedido);
+			pedido.crearNotificacion(pedido);
+			JsonElement pedidojson = gson.fromJson(gson.toJson(pedido), JsonElement.class);
+			this.agregarAlHistorial(pedido.getId());
 			this.pedido = pedido;
 			return true;
 		} else {
@@ -104,11 +109,11 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 		}
 	}
 
-	public void agregarAlHistorial(Pedido pedido) {
-		historial.add(pedido);
+	public void agregarAlHistorial(int id) {
+		this.historial.add(id);
 	}
 
-	public List<Pedido> getHistorial() {
+	public ArrayList<Integer> getHistorial() {
 		return this.historial;
 	}
 

@@ -14,6 +14,7 @@ import gestorAplicacion.Interaccion.Notificacion;
  */
 
 public class Pedido {
+	private static int ID =0;
 	private Cliente cliente;
 	private Plato plato;
 	private Restaurante restaurante;
@@ -31,8 +32,14 @@ public class Pedido {
 		this.cliente = cliente;
 		this.plato = plato;
 		this.restaurante = plato.restaurante;
-		this.restaurante.addHistorial(plato);
-		new Notificacion(this);
+		this.ID++;
+	}
+	
+	public int getId(){
+		return this.ID;
+	}
+	public void crearNotificacion(Pedido pedido) {
+		new Notificacion(pedido);
 	}
 	
 	public boolean getEntregado() {
