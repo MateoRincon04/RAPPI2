@@ -2,6 +2,8 @@ package gestorAplicacion.Interaccion;
 
 import java.util.Iterator;
 import com.google.gson.Gson;
+
+import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Restaurante;
 import BaseDatos.Data;
 
@@ -44,7 +46,8 @@ public class Notificacion {
 	 * realizara el Plato ordenado.
 	 */
 	public void notificar() {
-		Restaurante notif = Data.buscarRestaurante(Data.buscarPlato( Data.buscarPedido(pedido).getPlato()).getRestaurante());
+		//solucionar este casteo
+		Restaurante notif = Data.buscarRestaurante( Data.buscarPedido(pedido).getRestaurante());
 		notif.agregarNotificacion(this);
 		Iterator<String> iterator = Data.tenderos.iterator();
 		Gson gson = new Gson();

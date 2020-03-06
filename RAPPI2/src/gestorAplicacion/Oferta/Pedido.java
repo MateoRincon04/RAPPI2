@@ -15,7 +15,8 @@ import gestorAplicacion.Interaccion.Notificacion;
  */
 
 public class Pedido {
-	private static int ID =0;
+	private static int contador =0;
+	private int ID=0;
 	private String cliente;
 	private String plato;
 	private String restaurante;
@@ -33,7 +34,8 @@ public class Pedido {
 		this.cliente = cliente.getUserName();
 		this.plato = plato.getNombre();
 		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
-		ID++;
+		++this.contador;
+		this.ID= contador;
 	}
 	
 	public int getId(){

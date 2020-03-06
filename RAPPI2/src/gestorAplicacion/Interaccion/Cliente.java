@@ -97,8 +97,8 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	public boolean hacerPedido(Plato plato) {
 		if (this.getSaldo() >= plato.getPrecio()) {
 			Pedido pedido = new Pedido(this, plato);
-			pedido.crearNotificacion(pedido.getId());
 			Data.agregarObjetoDataBasePedido(pedido);
+			pedido.crearNotificacion(pedido.getId());
 			this.agregarAlHistorial(pedido.getId());
 			this.pedido = pedido.getId();
 			return true;
