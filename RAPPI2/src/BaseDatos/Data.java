@@ -67,14 +67,16 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathPedido = "RAPPI2\\src\\BaseDatos\\temp\\pedidoGuardados.json";
-	private static final String filepathCliente = "RAPPI2\\src\\BaseDatos\\temp\\clientesGuardados.json";
-	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
-	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platosGuardados.json";
-	private static final String filepathNotificacion = "RAPPI2\\src\\BaseDatos\\temp\\NotificacionesGuardados.json";
-	private static final String filepathCalificacion = "RAPPI2\\src\\BaseDatos\\temp\\CalificacionesGuardados.json";
+	private static final String filepathPedido = "pedidoGuardados.json";
+	private static final String filepathCliente = "clientesGuardados.json";
+	private static final String filepathTendero = "tenderosGuardados.json";
+	private static final String filepathAdministrador = "administradoresGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
+	private static final String filepathPlato = "platosGuardados.json";
+	static final String filepathNotificacion = "NotificacionesGuardados.json";
+	private static final String filepathCalificacion = "CalificacionesGuardados.json";
+	
+	
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -212,7 +214,7 @@ public class Data {
 		}
 	}
 
-	public static void actualizarDataBaseCalificacion(Calificacion calificacion) { /////////////////////
+	public static void actualizarDataBaseCalificacion(Calificacion calificacion) { 
 		Calificacion aux = calificacion;
 		Data.eliminarObjetoDataBaseCalificacion(Data.buscarCalificacion(calificacion.getID()));
 		Data.agregarObjetoDataBaseCalificacion(aux);

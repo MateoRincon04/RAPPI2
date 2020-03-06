@@ -31,7 +31,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	// private Carrito carrito;
 	private String metodoDePago;
 	private long saldo;
-	private Pedido pedido;
+	private int pedido;
 	private String direccion;
 	private ArrayList<Integer> historial = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
@@ -96,12 +96,11 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 */
 	public boolean hacerPedido(Plato plato) {
 		if (this.getSaldo() >= plato.getPrecio()) {
-			Gson gson = new Gson();
 			Pedido pedido = new Pedido(this, plato);
 			pedido.crearNotificacion(pedido);
-			JsonElement pedidojson = gson.fromJson(gson.toJson(pedido), JsonElement.class);
+			Data.agregarObjetoDataBasePedido(pedido);
 			this.agregarAlHistorial(pedido.getId());
-			this.pedido = pedido;
+			this.pedido = pedido.getId();
 			return true;
 		} else {
 			
