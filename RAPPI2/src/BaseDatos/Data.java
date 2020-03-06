@@ -30,6 +30,7 @@ import com.google.gson.*;
 public class Data {
 
 	private static ArrayList<OpcionDeMenu> opciones = new ArrayList<>();
+	public static ArrayList<String> tenderos= new ArrayList<>();
 
 	/**
 	 * M�todo en el se cargan todas las opciones de menu generales.

@@ -39,8 +39,8 @@ public class Pedido {
 	public int getId(){
 		return ID;
 	}
-	public void crearNotificacion(Pedido pedido) {
-		Notificacion n =new Notificacion(pedido);
+	public void crearNotificacion(int i) {
+		Notificacion n =new Notificacion(i);
 	}
 	
 	public boolean getEntregado() {

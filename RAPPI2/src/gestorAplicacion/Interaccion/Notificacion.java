@@ -19,8 +19,8 @@ public class Notificacion {
 	private static int ID = 0;
 	private boolean tomarPedido;
 
-	public Notificacion(Pedido pedido) {
-		this.pedido = pedido.getId();
+	public Notificacion(int pedido) {
+		this.pedido = pedido;
 		this.ID++;
 		this.notificar();
 	}
@@ -49,24 +49,24 @@ public class Notificacion {
 	public void notificar() {
 		Restaurante notif = Data.buscarRestaurante(Data.buscarPlato( Data.buscarPedido(pedido).getPlato()).getRestaurante());
 		notif.agregarNotificacion(this);
-		Iterator<String> iterator = Data.traerDataBaseTendero().iterator();
+		Iterator<String> iterator = Data.tenderos.iterator();
 		Gson gson = new Gson();
 		while (iterator.hasNext()) {
-			Tendero notificado = Data.buscarTendero();
+			Tendero notificado = Data.buscarTendero(iterator.next());
 			if (notificado.getEstaDisponible()) {
 				notificado.agregarNotificacion(this);
 				if (tomarPedido) {
 					notificado.setEstaDisponible();
-					Data.buscarPedido(pedido).setTendero(notificado.getNombre());
+					Data.buscarPedido(pedido).setTendero(notificado);
 					break;
 				}
 			}
 			break;
 		}
-		Iterator<JsonElement> iterator2 = Data.traerDataBaseTendero().iterator();
+		Iterator<String> iterator2 = Data.tenderos.iterator();
 		Gson gson2 = new Gson();
 		while (iterator2.hasNext()) {
-			Tendero tenderoAtiende = gson2.fromJson(iterator.next(), Tendero.class);
+			Tendero tenderoAtiende =  Data.buscarTendero(iterator2.next());
 			if (tenderoAtiende.aceptarPedido() == true) {
 				break;
 			}

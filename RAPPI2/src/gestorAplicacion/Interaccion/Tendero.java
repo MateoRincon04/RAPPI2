@@ -89,7 +89,6 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		
 		if (!Data.buscarPedido(Data.buscarNotificacion(Aux.getID()).getPedido()).getEntregado() && (Data.buscarTendero(Data.buscarPedido(Aux.getPedido()).getTendero()) == null)) {
 			Aux.setTomarPedido();
 			notificaciones.remove(notificaciones.size() - 1);
