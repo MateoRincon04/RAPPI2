@@ -75,8 +75,6 @@ public class Data {
 	private static final String filepathPlato = "platosGuardados.json";
 	static final String filepathNotificacion = "NotificacionesGuardados.json";
 	private static final String filepathCalificacion = "CalificacionesGuardados.json";
-	
-	
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -1087,7 +1085,7 @@ public class Data {
 		JsonArray historial = Data.traerDataBaseRestaurante();
 		for (int i = 0; i < historial.size(); i++) {
 			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
-			System.out.println(i + ") " + aux1.getNombre());
+			System.out.println(i+1 + ") " + aux1.getNombre());
 
 		}
 	}

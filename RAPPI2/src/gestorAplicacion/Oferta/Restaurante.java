@@ -196,16 +196,18 @@ public class Restaurante implements Serializable {
 		int numero = 0;
 		for (int i = 0; i < this.notificaciones.size(); i++) {
 			Notificacion aux = Data.buscarNotificacion(notificaciones.get(i));
+			Pedido p = Data.buscarPedido(aux.getPedido());
 			int f = 0;
 			for (int j = 0; j < notificaciones.size(); j++) {
 				Notificacion aux1 = Data.buscarNotificacion(notificaciones.get(j));
-				if (aux.getPedido().getTendero().equals(aux1.getPedido().getTendero())) {
+				Pedido p1 = Data.buscarPedido(aux1.getPedido());
+				if (p.getTendero().equals(p1.getTendero())) {
 					f++;
 				}
 			}
 			if (f > numero) {
 				numero = f;
-				nuevo = aux.getPedido().getTendero();
+				nuevo = Data.buscarTendero(p.getTendero());
 			}
 		}
 		return nuevo;

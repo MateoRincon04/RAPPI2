@@ -143,8 +143,8 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 * @param puntuacion El parametro puntuacion define la calificacion del Tendero
 	 */
 	public void calificarTendero(double puntuacion) {
-		if (pedido.getEntregado()) {
-			Tendero calificando = this.pedido.getTendero();
+		if (Data.buscarPedido(pedido).getEntregado()) {
+			Tendero calificando = Data.buscarTendero(Data.buscarPedido(pedido).getTendero());
 			Calificacion calificacionTendero = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
 			Data.agregarObjetoDataBaseCalificacion(calificacionTendero);
 			calificando.agregarCalificacion(calificacionTendero);
@@ -159,8 +159,8 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 *                   Restaurante
 	 */
 	public void calificarRestaurante(double puntuacion) {
-		if (pedido.getEntregado()) {
-			gestorAplicacion.Oferta.Restaurante calificando = this.pedido.getRestaurante();
+		if (Data.buscarPedido(pedido).getEntregado()) {
+			gestorAplicacion.Oferta.Restaurante calificando = Data.buscarPedido(pedido).getRestaurante();
 			Calificacion calificacionRestaurante = new Calificacion(this.getUserName(), puntuacion, calificando.getNombre());
 			Data.agregarObjetoDataBaseCalificacion(calificacionRestaurante);
 			calificando.agregarCalificacion(calificacionRestaurante);
@@ -228,7 +228,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 		this.direccion = dir;
 	}
 	
-	public Pedido getPedido() {
+	public int getPedido() {
 		return this.pedido;
 	}
 

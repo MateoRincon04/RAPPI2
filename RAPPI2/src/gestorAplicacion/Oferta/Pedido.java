@@ -21,7 +21,7 @@ public class Pedido {
 	private Restaurante restaurante;
 	private boolean entregado;
 	private boolean estaListo;
-	private Tendero tendero;
+	private String tendero;
 	
 	/**
 	 * Constructor de Pedido
@@ -40,7 +40,7 @@ public class Pedido {
 		return this.ID;
 	}
 	public void crearNotificacion(Pedido pedido) {
-		new Notificacion(pedido);
+		Notificacion n =new Notificacion(pedido);
 	}
 	
 	public boolean getEntregado() {
@@ -53,10 +53,10 @@ public class Pedido {
 	}
 	
 	public void setTendero(Tendero tendero) {
-		this.tendero = tendero;
+		this.tendero = tendero.getUserName();
 	}
 	
-	public Tendero getTendero() {
+	public String getTendero() {
 		return this.tendero;
 	}
 
