@@ -173,7 +173,7 @@ public class Data {
 			System.out.println("La dataBaseCliente se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBaseCliente se ha creado correctamente");
-			Cliente[] aux = new Cliente[0];
+			Pedido[] aux = new Pedido[0];
 			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathPedido)) {
 				fw.write(array.toString());
@@ -361,7 +361,7 @@ public class Data {
 	 */
 	public static void actualizarDataBaseAdministrador(Administrador administrador) {
 		Administrador aux = administrador;
-		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()t));
+		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()));
 		Data.agregarObjetoDataBaseAdministrador(aux);
 	}
 	
@@ -378,8 +378,8 @@ public class Data {
 	
 	public static void actualizarDataBasePedido(Pedido pedido) {
 		Pedido aux = pedido;
-		Data.eliminarObjetoDataBasePedido(pedido);
-		Data.agregarObjetoDataBasePedido(pedido);
+		Data.eliminarObjetoDataBasePedido(Data.buscarRestaurante(pedido.getID()));
+		Data.agregarObjetoDataBasePedido(aux);
 	}
 
 	/**
