@@ -68,7 +68,7 @@ public class Administrador extends Perfil implements Serializable{
 	public boolean crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		Gson gson = new Gson();
 		Tendero tendero = new Tendero(nombre, telefono, comuna, clave, userName, salario);
-		Data.tenderos.add(tendero.getUserName());
+		Main.tenderos.add(tendero.getUserName());
 		String aux = gson.toJson(tendero);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseTendero();

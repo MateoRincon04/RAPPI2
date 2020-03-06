@@ -33,7 +33,6 @@ public class HacerPedido implements OpcionDeMenu {
 			if (platoEscogido != null) {
 				valor = usuarioCliente.hacerPedido(platoEscogido);
 				System.out.println("Su pedido se ha realizado correctamente.");
-
 			}
 		} else {
 			System.out.println("No se encontro restaurante con este nombre");

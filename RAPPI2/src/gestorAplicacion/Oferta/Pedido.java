@@ -36,6 +36,7 @@ public class Pedido {
 		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
 		++this.contador;
 		this.ID= contador;
+		this.tendero ="";
 	}
 	
 	public int getId(){

@@ -4,6 +4,7 @@ import BaseDatos.Data;
 import gestorAplicacion.Oferta.Restaurante;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import gestorAplicacion.Administracion.*;
 
@@ -17,6 +18,7 @@ public class Main {
 	public static Perfil usuario;
 	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
+	public static ArrayList<String> tenderos= new ArrayList<>();
 
 	public static void main(String[] args) throws IOException{
 		Data.CargarOpciones();
@@ -28,7 +30,8 @@ public class Main {
 		Data.cargarFileDataBasePedido();
 		Data.cargarFileDataCalificacion();
 		Data.cargarFileDataNotificacion();
-		Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
+		Data.LlenarTenderos();
+		//Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
 		MenuDeConsola.lanzarMenu();
 		user.close();
 		

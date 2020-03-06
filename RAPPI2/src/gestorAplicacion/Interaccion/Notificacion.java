@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Restaurante;
 import BaseDatos.Data;
+import UIMain.Main;
 
 /**
  * Clase Notificacion su finalidad es de notificar a los tenderos y al
@@ -52,7 +53,7 @@ public class Notificacion {
 		Restaurante notif = Data.buscarRestaurante( Data.buscarPedido(pedido).getRestaurante());
 		notif.agregarNotificacion(this);
 		Data.actualizarDataBaseRestaurante(notif);
-		Iterator<String> iterator = Data.tenderos.iterator();
+		Iterator<String> iterator = Main.tenderos.iterator();
 		Gson gson = new Gson();
 		while (iterator.hasNext()) {
 			Tendero notificado = Data.buscarTendero(iterator.next());
@@ -67,7 +68,7 @@ public class Notificacion {
 			}
 			break;
 		}
-		Iterator<String> iterator2 = Data.tenderos.iterator();
+		Iterator<String> iterator2 = Main.tenderos.iterator();
 		Gson gson2 = new Gson();
 		while (iterator2.hasNext()) {
 			Tendero tenderoAtiende =  Data.buscarTendero(iterator2.next());

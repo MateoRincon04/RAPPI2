@@ -12,7 +12,6 @@ public class AceptarPedido implements OpcionDeMenu {
 			int opcion = Main.user.nextInt();
 			if (opcion == 1 | opcion == 2) {
 				if (opcion == 1) {
-
 					boolean valor = tendero.aceptarPedido();
 					if (valor) {
 						System.out.println("Usted tiene a su cargo el pedido: " + Data.buscarPlato(Data.buscarPedido(tendero.getNotificaciones().size() - 1).getPlato()));

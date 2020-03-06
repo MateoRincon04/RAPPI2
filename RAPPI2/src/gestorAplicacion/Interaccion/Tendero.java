@@ -23,7 +23,7 @@ import gestorAplicacion.Administracion.Perfil;
 public class Tendero extends Perfil implements Serializable {
 	private int pedido;
 	private boolean estaDisponible;
-	private static ArrayList<Integer> notificaciones = new ArrayList<Integer>();
+	private  ArrayList<Integer> notificaciones = new ArrayList<Integer>();
 	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
 
@@ -89,9 +89,8 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		if (!Data.buscarPedido(Data.buscarNotificacion(Aux.getID()).getPedido()).getEntregado() && (Data.buscarTendero(Data.buscarPedido(Aux.getPedido()).getTendero()) == null)) {
+		if (!(Data.buscarPedido(Aux.getPedido()).getEntregado()) && (Data.buscarTendero(Data.buscarPedido(Aux.getPedido()).getTendero()).equals(""))) {
 			Aux.setTomarPedido();
-			notificaciones.remove(notificaciones.size() - 1);
 			return true;
 		} else {
 			return false;

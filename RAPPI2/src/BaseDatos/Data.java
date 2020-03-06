@@ -30,7 +30,6 @@ import com.google.gson.*;
 public class Data {
 
 	private static ArrayList<OpcionDeMenu> opciones = new ArrayList<>();
-	public static ArrayList<String> tenderos= new ArrayList<>();
 
 	/**
 	 * M�todo en el se cargan todas las opciones de menu generales.
@@ -76,6 +75,13 @@ public class Data {
 	private static final String filepathPlato = "platosGuardados.json";
 	static final String filepathNotificacion = "NotificacionesGuardados.json";
 	private static final String filepathCalificacion = "CalificacionesGuardados.json";
+	
+	public static void LlenarTenderos() {
+		for(JsonElement je:Data.traerDataBaseTendero()) {
+			JsonObject obj = je.getAsJsonObject();
+			Main.tenderos.add(obj.get("userName").getAsString());
+		}
+	}
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
