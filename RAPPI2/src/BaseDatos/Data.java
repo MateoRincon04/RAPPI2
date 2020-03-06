@@ -76,6 +76,12 @@ public class Data {
 	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\NotificacionesGuardados.json";
 	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\CalificacionesGuardados.json";
 
+	public static void LlenarTenderos() {
+		for(JsonElement je : Data.traerDataBaseTendero()) {
+			JsonObject obj = je.getAsJsonObject();
+			Main.tenderos.add(obj.get("userName").getAsString());
+		}
+	}
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
 	 * datos de Notificaciones
