@@ -26,7 +26,6 @@ public class Tendero extends Perfil implements Serializable {
 	private static ArrayList<Integer> notificaciones = new ArrayList<Integer>();
 	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
-
 	private long salario;
 
 	/**
