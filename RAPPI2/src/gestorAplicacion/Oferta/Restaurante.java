@@ -15,8 +15,8 @@ import gestorAplicacion.Interaccion.Tendero;
 /**
  * Clase Restaurante En esta clase, el restaurante es aquel que prepara los
  * platos tiene datos propios como el nombre de restaurante, celular de
- * contacto, direcciones de sus sucursales, un booleano que define si el
- * pedido esta listo para ser despachado o no y su menu
+ * contacto, direcciones de sus sucursales, un booleano que define si el pedido
+ * esta listo para ser despachado o no y su menu
  * 
  * Estructuras revelantes
  * 
@@ -52,20 +52,22 @@ public class Restaurante implements Serializable {
 	 */
 	public Restaurante(String nombre, String direccion, String celular, String clave) {
 		this.nombre = nombre;
-		this.opciones.add(11);
 		this.opciones.add(12);
 		this.opciones.add(13);
 		this.opciones.add(14);
 		this.opciones.add(15);
 		this.opciones.add(16);
-		this.opciones.add(23);
+		this.opciones.add(17);
+		this.opciones.add(24);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;
 	}
+
 	public List<Integer> getOpciones() {
 		return opciones;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -86,10 +88,10 @@ public class Restaurante implements Serializable {
 	public boolean agregarDireccion(String direccion) {
 		if (!this.direcciones.contains(direccion)) {
 			this.direcciones.add(direccion);
-			
+
 			return true;
 		} else {
-			
+
 			return false;
 		}
 
@@ -99,10 +101,10 @@ public class Restaurante implements Serializable {
 		if (this.direcciones.contains(direccion)) {
 			int index = this.direcciones.indexOf(direccion);
 			this.direcciones.remove(index);
-			System.out.println("La direccion se ha eliminado correctamente.");
+
 			return true;
 		} else {
-			
+
 			return false;
 		}
 	}
@@ -140,7 +142,7 @@ public class Restaurante implements Serializable {
 			this.menu.add(gson.toJson(plato));
 			return true;
 		} else {
-			
+
 			return false;
 		}
 	}
@@ -149,11 +151,10 @@ public class Restaurante implements Serializable {
 		Gson gson = new Gson();
 		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
 		if (this.menu.contains(aux)) {
-			//this.menu.set(this.menu.indexOf(plato), nuevo);
-			System.out.println("Su plato se ha cambiado correctamente");
+			// this.menu.set(this.menu.indexOf(plato), nuevo);
 			return true;
 		} else {
-			
+
 			return false;
 		}
 	}
@@ -163,10 +164,10 @@ public class Restaurante implements Serializable {
 		JsonElement aux = gson.fromJson(gson.toJson(plato), JsonElement.class);
 		if (this.menu.contains(aux)) {
 			this.menu.remove(aux);
-			System.out.println("Su plato se ha removido correctamente. ");
+
 			return true;
 		} else {
-			
+
 			return false;
 		}
 
@@ -243,5 +244,5 @@ public class Restaurante implements Serializable {
 	public String getClave() {
 		return clave;
 	}
-	
+
 }

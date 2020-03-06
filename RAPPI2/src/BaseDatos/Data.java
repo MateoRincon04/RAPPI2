@@ -41,21 +41,22 @@ public class Data {
 		opciones.add(new CuantoHeGastado()); // 6 cliente
 		opciones.add(new MejorRestauranteCal()); // 7 cliente
 		opciones.add(new PlatosQueMasCompre()); // 8 cliente
-		opciones.add(new CuantosPedidosHeEntregado()); // 9 tendero
-		opciones.add(new AceptarPedido()); // 10 tendero
-		opciones.add(new EnCualesDirecciones()); // 11 restaurante
-		opciones.add(new CrearPlato()); // 12 restaurante
-		opciones.add(new AgregarDireccionRest()); // 13 restaurante
-		opciones.add(new CambiarPlato()); // 14 restaurante
-		opciones.add(new EliminarDireccionRest());// 15 restaurante
-		opciones.add(new EliminarPlato()); // 16 restaurante
-		opciones.add(new CrearAdministrador()); // 17 Admin
-		opciones.add(new CrearRestaurante()); // 18 admin
-		opciones.add(new CrearTendero()); // 19 admin
-		opciones.add(new TenderoReparteMas()); // 20 admin
-		opciones.add(new QuitarFuncionalidades()); // 21 admin
-		opciones.add(new AgregarFuncionalidades()); // 22 admin
-		opciones.add(new Salir()); // 23 todos
+		opciones.add(new AgregarSaldo());//9 cliente
+		opciones.add(new CuantosPedidosHeEntregado()); // 10 tendero
+		opciones.add(new AceptarPedido()); // 11 tendero
+		opciones.add(new EnCualesDirecciones()); // 12 restaurante
+		opciones.add(new CrearPlato()); // 13 restaurante
+		opciones.add(new AgregarDireccionRest()); // 14 restaurante
+		opciones.add(new CambiarPlato()); // 15 restaurante
+		opciones.add(new EliminarDireccionRest());// 16 restaurante
+		opciones.add(new EliminarPlato()); // 17 restaurante
+		opciones.add(new CrearAdministrador()); // 18 Admin
+		opciones.add(new CrearRestaurante()); // 19 admin
+		opciones.add(new CrearTendero()); // 20 admin
+		opciones.add(new TenderoReparteMas()); // 21 admin
+		opciones.add(new QuitarFuncionalidades()); // 22 admin
+		opciones.add(new AgregarFuncionalidades()); // 23 admin
+		opciones.add(new Salir()); // 24 todos
 
 	}
 
