@@ -33,7 +33,7 @@ public class Data {
 	public static ArrayList<String> tenderos= new ArrayList<>();
 
 	/**
-	 * M�todo en el se cargan todas las opciones de menu generales.
+	 * Metodo en el se cargan todas las opciones de menu generales.
 	 */
 	public static final void CargarOpciones() {
 		opciones.add(new Registrarse());// 0
@@ -68,14 +68,14 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathPedido = "pedidoGuardados.json";
-	private static final String filepathCliente = "clientesGuardados.json";
-	private static final String filepathTendero = "tenderosGuardados.json";
-	private static final String filepathAdministrador = "administradoresGuardados.json";
-	private static final String filepathRestaurantes = "restaurantesGuardados.json";
-	private static final String filepathPlato = "platosGuardados.json";
-	static final String filepathNotificacion = "NotificacionesGuardados.json";
-	private static final String filepathCalificacion = "CalificacionesGuardados.json";
+	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\pedidoGuardados.json";
+	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\clientesGuardados.json";
+	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\tenderosGuardados.json";
+	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\administradoresGuardados.json";
+	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\restaurantesGuardados.json";
+	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\platosGuardados.json";
+	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\NotificacionesGuardados.json";
+	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\CalificacionesGuardados.json";
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
