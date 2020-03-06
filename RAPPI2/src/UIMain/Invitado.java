@@ -9,6 +9,7 @@ import BaseDatos.Data;
  */
 public class Invitado implements OpcionDeMenu {
 	public void ejecutar() {
+		System.out.println("Estas son las opciones que un cliente registrado puede hacer en nuestra plataforma");
 		for(int i = 3; i < 9; i++) {
 			System.out.println(Data.getOpciones().get(i));
 		}
