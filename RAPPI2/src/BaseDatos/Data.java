@@ -72,7 +72,7 @@ public class Data {
 	private static final String filepathTendero = "RAPPI2\\src\\BaseDatos\\temp\\tenderosGuardados.json";
 	private static final String filepathAdministrador = "RAPPI2\\src\\BaseDatos\\temp\\administradoresGuardados.json";
 	private static final String filepathRestaurantes = "RAPPI2\\src\\BaseDatos\\temp\\restaurantesGuardados.json";
-
+	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platoGuardados.json";
 	private static final String filepathNotificacion = "RAPPI2\\src\\BaseDatos\\temp\\NotificacionesGuardados.json";
 	private static final String filepathCalificacion = "RAPPI2\\src\\BaseDatos\\temp\\CalificacionesGuardados.json";
 
@@ -121,7 +121,7 @@ public class Data {
 		}
 	}
 
-	public static void actualizarDataBaseNotificacion(Notificacion notificacion) { ////////////////////
+	public static void actualizarDataBaseNotificacion(Notificacion notificacion) {
 		Notificacion aux = notificacion;
 		Data.eliminarObjetoDataBaseNotificacion(Data.buscarNotificacion(notificacion.getID()));
 		Data.agregarObjetoDataBaseNotificacion(aux);
@@ -258,7 +258,7 @@ public class Data {
 		return calificacion;
 	}
 
-	private static final String filepathPlato = "RAPPI2\\src\\BaseDatos\\temp\\platoGuardados.json";
+
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de

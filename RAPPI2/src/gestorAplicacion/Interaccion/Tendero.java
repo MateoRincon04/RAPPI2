@@ -3,6 +3,8 @@ package gestorAplicacion.Interaccion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import BaseDatos.Data;
 import gestorAplicacion.Administracion.Perfil;
 import gestorAplicacion.Oferta.Pedido;
 
@@ -109,7 +111,7 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public void calificarCliente(double puntuacion) {
 		if (pedido.getEntregado()) {
-			gestorAplicacion.Interaccion.Cliente calificando = this.pedido.getCliente();
+			gestorAplicacion.Interaccion.Cliente calificando = Data.buscarCliente(this.pedido.getCliente());
 			Calificacion calificacionCliente = new Calificacion(this, puntuacion, calificando);
 			calificando.agregarCalificacion(calificacionCliente);
 		}

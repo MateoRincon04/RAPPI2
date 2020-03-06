@@ -21,7 +21,7 @@ public class Plato {
 	private String descripcion;
 	private float precio;
 	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
-	public Restaurante restaurante;
+	public String restaurante;
 	public int restriccionDeEdad;
 	/**
 	 * Contructor para todo objeto de Plato
@@ -36,7 +36,7 @@ public class Plato {
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.restriccionDeEdad = restriccion;
-		this.restaurante = restaurante;
+		this.restaurante = restaurante.getNombre();
 	}
 	
 	void setNombre(String nombre) {
@@ -67,7 +67,7 @@ public class Plato {
 		return this.precio;
 	}
 	
-	public Restaurante getRestaurante() {
+	public String getRestaurante() {
 		return this.restaurante;
 	}
 	

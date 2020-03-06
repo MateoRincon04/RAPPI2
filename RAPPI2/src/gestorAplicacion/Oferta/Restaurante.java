@@ -147,7 +147,7 @@ public class Restaurante implements Serializable {
 	public boolean cambiarPlato( Plato platoCambio) {
 		if (Data.buscarPlato(platoCambio.getNombre())==null) {
 			this.menu=platoCambio.getNombre();
-			Data.actualizarDataPlato(platoCambio);
+			Data.actualizarDataBasePlato(platoCambio);
 			System.out.println("Su plato se ha cambiado correctamente");
 			return true;
 		} else {
