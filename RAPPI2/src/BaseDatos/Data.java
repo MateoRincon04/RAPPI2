@@ -73,8 +73,10 @@ public class Data {
 	private static final String filepathAdministrador = "administradoresGuardados.json";
 	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 	private static final String filepathPlato = "platosGuardados.json";
-	private static final String filepathNotificacion = "NotificacionesGuardados.json";
+	static final String filepathNotificacion = "NotificacionesGuardados.json";
 	private static final String filepathCalificacion = "CalificacionesGuardados.json";
+	
+	
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
