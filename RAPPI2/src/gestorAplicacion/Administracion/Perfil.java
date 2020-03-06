@@ -77,5 +77,8 @@ public abstract class Perfil {
 	public String getUserName() {
 		return this.userName;
 	}
+	public String toString() {
+		return "Perfil";
+	}
 	
 }

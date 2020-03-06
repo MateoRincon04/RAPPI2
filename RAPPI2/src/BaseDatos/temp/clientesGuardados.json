@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"calificaciones":[],"metodoDePago":"efectivo","saldo":1111111,"direccion":"12","historial":[],"opciones":[3,4,5,6,7,8,23],"nombre":"G","telefono":123,"comuna":12,"clave":"G","userName":"G"},{"calificaciones":[],"metodoDePago":"efectivo","saldo":2000000,"direccion":"ahi","historial":[],"opciones":[3,4,5,6,7,8,9,24],"nombre":"santi","telefono":1234,"comuna":12,"clave":"santi","userName":"santi"}]
-=======
-[{"calificaciones":[],"metodoDePago":"efectivo","saldo":1111111,"direccion":"12","historial":[],"opciones":[3,4,5,6,7,8,23],"nombre":"G","telefono":123,"comuna":12,"clave":"G","userName":"G"},{"calificaciones":[],"metodoDePago":"efectivo","saldo":10000000,"direccion":"calle12","historial":[],"opciones":[3,4,5,6,7,8,9,24],"nombre":"Paula","telefono":795904,"comuna":3,"clave":"12345","userName":"Paula"}]
->>>>>>> 843a6d0a26742a1ca8e55d9fde91ebe2e316e7c7
+[{"calificaciones":[],"metodoDePago":"efectivo","saldo":10000000,"pedido":0,"direccion":"Calle10","historial":[],"opciones":[3,4,5,6,7,8,9,24],"nombre":"Andre","telefono":5963267,"comuna":2,"clave":"Andre","userName":"Andre"}]
