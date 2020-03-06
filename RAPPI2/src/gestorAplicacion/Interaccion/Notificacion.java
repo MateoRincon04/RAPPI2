@@ -16,12 +16,14 @@ import BaseDatos.Data;
  */
 public class Notificacion {
 	private int pedido;
-	private static int ID = 0;
+	private static int contador = 0;
+	private int ID = 0;
 	private boolean tomarPedido;
 
 	public Notificacion(int pedido) {
 		this.pedido = pedido;
-		this.ID++;
+		++this.contador;
+		this.ID= contador;
 	}
 
 	public int getID() {
@@ -49,12 +51,14 @@ public class Notificacion {
 		//solucionar este casteo
 		Restaurante notif = Data.buscarRestaurante( Data.buscarPedido(pedido).getRestaurante());
 		notif.agregarNotificacion(this);
+		Data.actualizarDataBaseRestaurante(notif);
 		Iterator<String> iterator = Data.tenderos.iterator();
 		Gson gson = new Gson();
 		while (iterator.hasNext()) {
 			Tendero notificado = Data.buscarTendero(iterator.next());
 			if (notificado.getEstaDisponible()) {
 				notificado.agregarNotificacion(this);
+				Data.actualizarDataBaseTendero(notificado);
 				if (tomarPedido) {
 					notificado.setEstaDisponible();
 					Data.buscarPedido(pedido).setTendero(notificado);
