@@ -8,9 +8,9 @@ package gestorAplicacion.Interaccion;
  */
 
 public class Calificacion {
-	private Object calificado;
+	private String calificado;
 	private double puntuacion = 5.0;
-	private Object calificador;
+	private String calificador;
 	private static int ID = 0;
 
 	/**
@@ -24,7 +24,7 @@ public class Calificacion {
 	 *                    calificacion
 	 */
 
-	public Calificacion(Object calificado, double puntuacion, Object calificador) {
+	public Calificacion(String calificado, double puntuacion, String calificador) {
 		this.setCalificado(calificado);
 		this.setCalificador(calificador);
 		this.puntuacion = puntuacion;
@@ -47,7 +47,7 @@ public class Calificacion {
 		return calificado;
 	}
 
-	public void setCalificado(Object calificado) {
+	public void setCalificado(String calificado) {
 		this.calificado = calificado;
 	}
 
@@ -55,7 +55,7 @@ public class Calificacion {
 		return calificador;
 	}
 
-	public void setCalificador(Object calificador) {
+	public void setCalificador(String calificador) {
 		this.calificador = calificador;
 	}
 

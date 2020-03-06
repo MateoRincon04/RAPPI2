@@ -34,10 +34,10 @@ import gestorAplicacion.Interaccion.Tendero;
  */
 public class Restaurante implements Serializable {
 	private String nombre;
-	private JsonArray notificaciones = new JsonArray();
-	private JsonArray calificaciones = new JsonArray();
-	private List<String> direcciones = new ArrayList<String>();
-	public List<Integer> opciones = new ArrayList<Integer>();
+	private ArrayList<Integer> notificaciones = new ArrayList<Integer>();
+	private ArrayList<Integer>calificaciones = new ArrayList<Integer>();
+	private ArrayList<String> direcciones = new ArrayList<String>();
+	public ArrayList<Integer> opciones = new ArrayList<Integer>();
 	private String celular;
 	private String menu = "";
 	private String clave;
@@ -161,15 +161,13 @@ public class Restaurante implements Serializable {
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {
-		Gson gson = new Gson();
-		JsonElement aux = gson.fromJson(gson.toJson(notificacion), JsonElement.class);
-		notificaciones.add(aux);
+		Data.agregarObjetoDataBaseNotificacion(notificacion);
+		notificaciones.add(notificacion.getID());
 	}
 
 	public void agregarCalificacion(Calificacion calificacion) {
-		Gson gson = new Gson();
-		JsonElement aux = gson.fromJson(gson.toJson(calificacion), JsonElement.class);
-		this.calificaciones.add(aux);
+		Data.agregarObjetoDataBaseCalificacion(calificacion);
+		this.calificaciones.add(calificacion.getID());
 	}
 
 	public void setEstaListo(Pedido pedido) {
@@ -185,27 +183,22 @@ public class Restaurante implements Serializable {
 	 */
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
-		if (!this.calificaciones.isJsonArray()) {
-			Iterator<JsonElement> iterator = this.calificaciones.iterator();
-			while (iterator.hasNext()) {
-				Gson gson = new Gson();
-				Calificacion aux = gson.fromJson(iterator.next(), Calificacion.class);
-				contadorAux += aux.getPuntuacion();
+		if (!this.calificaciones.isEmpty()) {
+			for(int i=0;i< this.calificaciones.size();i++) {
+				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
 			}
 		}
 		return contadorAux / this.calificaciones.size();
-
 	}
 
 	public Tendero tenderoQueMasMeEntrega() {
 		Tendero nuevo = null;
 		int numero = 0;
 		for (int i = 0; i < this.notificaciones.size(); i++) {
-			Gson gson = new Gson();
-			Notificacion aux = gson.fromJson(notificaciones.get(i), Notificacion.class);
+			Notificacion aux = Data.buscarNotificacion(notificaciones.get(i));
 			int f = 0;
 			for (int j = 0; j < notificaciones.size(); j++) {
-				Notificacion aux1 = gson.fromJson(notificaciones.get(j), Notificacion.class);
+				Notificacion aux1 = Data.buscarNotificacion(notificaciones.get(j));
 				if (aux.getPedido().getTendero().equals(aux1.getPedido().getTendero())) {
 					f++;
 				}

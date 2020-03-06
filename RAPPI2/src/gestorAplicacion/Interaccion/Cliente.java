@@ -27,7 +27,7 @@ import BaseDatos.Data;
  * @author: Santiago Tamayo, Mateo Rincon, Guillermo Toloza, Paula A. Taborda
  */
 public class Cliente extends Perfil implements Interfaz, Serializable {
-	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	private List<Integer> calificaciones = new ArrayList<Integer>();
 	// private Carrito carrito;
 	private String metodoDePago;
 	private long saldo;
@@ -126,13 +126,11 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
 		if (!this.calificaciones.isEmpty()) {
-			Iterator<Calificacion> iterator = this.calificaciones.iterator();
-			while (iterator.hasNext()) {
-				contadorAux += iterator.next().getPuntuacion();
+			for(int i=0;i< this.calificaciones.size();i++) {
+				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
 			}
 		}
 		return contadorAux / this.calificaciones.size();
-
 	}
 
 	private void setMetodoDePago(String metodoDePago) {
@@ -147,8 +145,9 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 */
 	public void calificarTendero(double puntuacion) {
 		if (pedido.getEntregado()) {
-			gestorAplicacion.Interaccion.Tendero calificando = this.pedido.getTendero();
-			Calificacion calificacionTendero = new Calificacion(this, puntuacion, calificando);
+			Tendero calificando = this.pedido.getTendero();
+			Calificacion calificacionTendero = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
+			Data.agregarObjetoDataBaseCalificacion(calificacionTendero);
 			calificando.agregarCalificacion(calificacionTendero);
 		}
 	}
@@ -163,13 +162,14 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	public void calificarRestaurante(double puntuacion) {
 		if (pedido.getEntregado()) {
 			gestorAplicacion.Oferta.Restaurante calificando = this.pedido.getRestaurante();
-			Calificacion calificacionRestaurante = new Calificacion(this, puntuacion, calificando);
+			Calificacion calificacionRestaurante = new Calificacion(this.getUserName(), puntuacion, calificando.getNombre());
+			Data.agregarObjetoDataBaseCalificacion(calificacionRestaurante);
 			calificando.agregarCalificacion(calificacionRestaurante);
 		}
 	}
 
 	public void agregarCalificacion(Calificacion calificacion) {
-		this.calificaciones.add(calificacion);
+		this.calificaciones.add(calificacion.getID());
 	}
 
 	public String toString() {

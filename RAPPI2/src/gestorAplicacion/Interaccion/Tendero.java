@@ -23,11 +23,11 @@ import gestorAplicacion.Oferta.Pedido;
  */
 
 public class Tendero extends Perfil implements Serializable {
-	private Pedido pedido;
+	private int pedido;
 	private boolean estaDisponible;
-	private static List<Notificacion> notificaciones = new ArrayList<Notificacion>();
-	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
-	public List<Integer> opciones = new ArrayList<Integer>();
+	private static ArrayList<Integer> notificaciones = new ArrayList<Integer>();
+	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
+	public ArrayList<Integer> opciones = new ArrayList<Integer>();
 
 	private long salario;
 
@@ -47,11 +47,11 @@ public class Tendero extends Perfil implements Serializable {
 		this.estaDisponible = true;
 	}
 
-	public List<Notificacion> getNotificaciones() {
+	public ArrayList<Integer> getNotificaciones() {
 		return notificaciones;
 	}
 
-	public List<Calificacion> getCalificaciones() {
+	public ArrayList<Integer> getCalificaciones() {
 		return calificaciones;
 	}
 
@@ -76,11 +76,13 @@ public class Tendero extends Perfil implements Serializable {
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {
-		notificaciones.add(notificacion);
+		Data.agregarObjetoDataBaseNotificacion(notificacion);
+		notificaciones.add(notificacion.getID());
 	}
 
 	public void agregarCalificacion(Calificacion calificacion) {
-		this.calificaciones.add(calificacion);
+		Data.agregarObjetoDataBaseCalificacion(calificacion);
+		this.calificaciones.add(calificacion.getID());
 	}
 
 	/**
@@ -88,10 +90,9 @@ public class Tendero extends Perfil implements Serializable {
 	 * transportaci�n
 	 */
 	public boolean aceptarPedido() {
-		Notificacion Aux = notificaciones.get(notificaciones.size() - 1);
+		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
 		if (!Aux.getPedido().getEntregado() && (Aux.getPedido().getTendero() == null)) {
 			Aux.setTomarPedido();
-
 			notificaciones.remove(notificaciones.size() - 1);
 			return true;
 		} else {
@@ -110,9 +111,10 @@ public class Tendero extends Perfil implements Serializable {
 	 * @param puntuacion El parametro puntuacion define la calificacion del Cliente
 	 */
 	public void calificarCliente(double puntuacion) {
-		if (pedido.getEntregado()) {
-			gestorAplicacion.Interaccion.Cliente calificando = Data.buscarCliente(this.pedido.getCliente());
-			Calificacion calificacionCliente = new Calificacion(this, puntuacion, calificando);
+		if (Data.buscarPedido(pedido).getEntregado()) {
+			Cliente calificando = Data.buscarCliente(Data.buscarPedido(pedido).getCliente());
+			Calificacion calificacionCliente = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
+			Data.agregarObjetoDataBaseCalificacion(calificacionCliente);
 			calificando.agregarCalificacion(calificacionCliente);
 		}
 	}
@@ -124,5 +126,15 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public int cantidadDePedidosEntregados() {
 		return this.getCalificaciones().size();
+	}
+	
+	public double getCalificacionPromediada() {
+		double contadorAux = 0;
+		if (!this.calificaciones.isEmpty()) {
+			for(int i=0;i< this.calificaciones.size();i++) {
+				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
+			}
+		}
+		return contadorAux / this.calificaciones.size();
 	}
 }
