@@ -31,7 +31,7 @@ public class Main {
 		Data.cargarFileDataCalificacion();
 		Data.cargarFileDataNotificacion();
 		Data.LlenarTenderos();
-		//Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
+		Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
 		MenuDeConsola.lanzarMenu();
 		user.close();
 		

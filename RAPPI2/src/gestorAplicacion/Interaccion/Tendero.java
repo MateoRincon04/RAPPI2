@@ -22,7 +22,7 @@ import gestorAplicacion.Administracion.Perfil;
 
 public class Tendero extends Perfil implements Serializable {
 	private int pedido;
-	private boolean estaDisponible;
+	private String estaDisponible;
 	private  ArrayList<Integer> notificaciones = new ArrayList<Integer>();
 	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
@@ -41,7 +41,7 @@ public class Tendero extends Perfil implements Serializable {
 		this.opciones.add(11);
 		this.opciones.add(24);
 		this.salario = salario;
-		this.estaDisponible = true;
+		this.estaDisponible = "disponible";
 	}
 
 	public ArrayList<Integer> getNotificaciones() {
@@ -65,10 +65,15 @@ public class Tendero extends Perfil implements Serializable {
 	}
 
 	public void setEstaDisponible() {
-		this.estaDisponible = !this.estaDisponible;
+		if(estaDisponible.equals("disponible")) {
+			this.estaDisponible = "noDisponible";
+		}else {
+			this.estaDisponible = "disponible";
+		}
+		
 	}
 
-	public boolean getEstaDisponible() {
+	public String getEstaDisponible() {
 		return estaDisponible;
 	}
 
@@ -88,7 +93,8 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		if (!(Data.buscarPedido(Aux.getPedido()).getEntregado()) && (Data.buscarTendero(Data.buscarPedido(Aux.getPedido()).getTendero()).equals(""))) {
+		if (Data.buscarPedido(Aux.getPedido()).getEntregado()==false && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
+			//error en aux.setTomarPedido
 			Aux.setTomarPedido();
 			return true;
 		} else {

@@ -22,7 +22,7 @@ public class Pedido {
 	private String restaurante;
 	private boolean entregado;
 	private boolean estaListo;
-	private String tendero;
+	private String tendero="nadie";
 	
 	/**
 	 * Constructor de Pedido
@@ -34,9 +34,8 @@ public class Pedido {
 		this.cliente = cliente.getUserName();
 		this.plato = plato.getNombre();
 		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
-		++this.contador;
+		++Pedido.contador;
 		this.ID= contador;
-		this.tendero ="";
 	}
 	
 	public int getId(){

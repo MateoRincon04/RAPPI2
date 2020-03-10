@@ -67,19 +67,21 @@ public class Data {
 		return opciones;
 	}
 
-	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\pedidoGuardados.json";
-	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\clientesGuardados.json";
-	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\tenderosGuardados.json";
-	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\administradoresGuardados.json";
-	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\restaurantesGuardados.json";
-	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\platosGuardados.json";
-	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\NotificacionesGuardados.json";
-	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\baseDatos\\temp\\CalificacionesGuardados.json";
+	private static final String filepathPedido =  "pedidoGuardados.json";
+	private static final String filepathCliente = "clientesGuardados.json";
+	private static final String filepathTendero = "tenderosGuardados.json";
+	private static final String filepathAdministrador =  "administradoresGuardados.json";
+	private static final String filepathRestaurantes ="restaurantesGuardados.json";
+	private static final String filepathPlato =  "platosGuardados.json";
+	static final String filepathNotificacion = "NotificacionesGuardados.json";
+	private static final String filepathCalificacion = "CalificacionesGuardados.json";
 
 	public static void LlenarTenderos() {
 		for(JsonElement je : Data.traerDataBaseTendero()) {
-			JsonObject obj = je.getAsJsonObject();
-			Main.tenderos.add(obj.get("userName").getAsString());
+			if(je!=null) {
+				JsonObject obj = je.getAsJsonObject();
+				Main.tenderos.add(obj.get("userName").getAsString());
+			}
 		}
 	}
 	/**

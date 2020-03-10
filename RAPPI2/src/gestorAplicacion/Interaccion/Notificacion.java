@@ -19,11 +19,11 @@ public class Notificacion {
 	private int pedido;
 	private static int contador = 0;
 	private int ID = 0;
-	private boolean tomarPedido;
+	private String tomarPedido;
 
 	public Notificacion(int pedido) {
 		this.pedido = pedido;
-		++this.contador;
+		++Notificacion.contador;
 		this.ID= contador;
 	}
 
@@ -32,14 +32,18 @@ public class Notificacion {
 	}
 
 	public void setTomarPedido() {
-		this.tomarPedido = !this.tomarPedido;
+		if(tomarPedido.equals("dispinible")) {
+			this.tomarPedido = "noDisponible";
+		}else {
+			this.tomarPedido = "dispinible";
+		}
 	}
 
 	public int getPedido() {
 		return pedido;
 	}
 
-	public boolean getTomarPedido() {
+	public String getTomarPedido() {
 		return tomarPedido;
 	}
 
@@ -49,18 +53,16 @@ public class Notificacion {
 	 * realizara el Plato ordenado.
 	 */
 	public void notificar() {
-		//solucionar este casteo
 		Restaurante notif = Data.buscarRestaurante( Data.buscarPedido(pedido).getRestaurante());
 		notif.agregarNotificacion(this);
 		Data.actualizarDataBaseRestaurante(notif);
 		Iterator<String> iterator = Main.tenderos.iterator();
-		Gson gson = new Gson();
 		while (iterator.hasNext()) {
 			Tendero notificado = Data.buscarTendero(iterator.next());
-			if (notificado.getEstaDisponible()) {
+			if (notificado.getEstaDisponible().equals("disponible")) {
 				notificado.agregarNotificacion(this);
 				Data.actualizarDataBaseTendero(notificado);
-				if (tomarPedido) {
+				if (tomarPedido.equals("disponible")) {
 					notificado.setEstaDisponible();
 					Data.buscarPedido(pedido).setTendero(notificado);
 					break;
@@ -69,7 +71,6 @@ public class Notificacion {
 			break;
 		}
 		Iterator<String> iterator2 = Main.tenderos.iterator();
-		Gson gson2 = new Gson();
 		while (iterator2.hasNext()) {
 			Tendero tenderoAtiende =  Data.buscarTendero(iterator2.next());
 			if (tenderoAtiende.aceptarPedido() == true) {
