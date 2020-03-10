@@ -170,7 +170,7 @@ public class Restaurante implements Serializable {
 	}
 
 	public void setEstaListo(Pedido pedido) {
-		pedido.setEstaListo(true);
+		pedido.setEstaListo();
 	}
 
 	public String elegirPlatoMenu(int indice) {

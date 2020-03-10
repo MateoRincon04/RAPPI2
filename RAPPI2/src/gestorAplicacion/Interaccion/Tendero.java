@@ -93,7 +93,7 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		if (Data.buscarPedido(Aux.getPedido()).getEntregado()==false && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
+		if (Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado") && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
 			//error en aux.setTomarPedido
 			Aux.setTomarPedido();
 			return true;
@@ -113,7 +113,7 @@ public class Tendero extends Perfil implements Serializable {
 	 * @param puntuacion El parametro puntuacion define la calificacion del Cliente
 	 */
 	public void calificarCliente(double puntuacion) {
-		if (Data.buscarPedido(pedido).getEntregado()) {
+		if (Data.buscarPedido(pedido).getEntregado().equals("entregado")) {
 			Cliente calificando = Data.buscarCliente(Data.buscarPedido(pedido).getCliente());
 			Calificacion calificacionCliente = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
 			Data.agregarObjetoDataBaseCalificacion(calificacionCliente);

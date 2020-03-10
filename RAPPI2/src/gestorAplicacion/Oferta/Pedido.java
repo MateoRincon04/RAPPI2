@@ -20,8 +20,8 @@ public class Pedido {
 	private String cliente;
 	private String plato;
 	private String restaurante;
-	private boolean entregado;
-	private boolean estaListo;
+	private String entregado;
+	private String estaListo;
 	private String tendero="nadie";
 	
 	/**
@@ -46,13 +46,16 @@ public class Pedido {
 		n.notificar();
 	}
 	
-	public boolean getEntregado() {
+	public String getEntregado() {
 		return this.entregado;
 	}
 	
 	public void setEntregado() {
-		this.entregado= !this.entregado;
-		
+		if(this.entregado.equals("entregado")) {
+			this.entregado= "noEntregado";
+		}else {
+			this.entregado= "entregado";
+		}
 	}
 	
 	public void setTendero(Tendero tendero) {
@@ -67,12 +70,17 @@ public class Pedido {
 		return this.restaurante;
 	}
 	
-	public boolean getEstaListo() {
+	public String getEstaListo() {
 		return estaListo;
 	}
 	
-	public void setEstaListo(boolean estaListo) {
-		this.estaListo = estaListo;
+	public void setEstaListo() {
+		if(this.estaListo.equals("estaListo")) {
+			this.estaListo = "noEstaListo";
+		}
+		else {
+			this.estaListo = "estaListo";
+		}
 	}
 	
 	public void setCliente(Cliente cliente) {
