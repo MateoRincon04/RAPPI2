@@ -31,8 +31,9 @@ public class HacerPedido extends OpcionDeMenu {
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
 		String nombre = Main.user.next();
 		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
+		Plato platoEscogido = null;
 		if (restauranteElegido != null) {
-			Plato platoEscogido = escogerPlato(restauranteElegido);
+			platoEscogido = escogerPlato(restauranteElegido);
 			if (platoEscogido != null) {
 				valor = usuarioCliente.hacerPedido(platoEscogido);
 				System.out.println("Su pedido se ha realizado correctamente.");
@@ -41,7 +42,7 @@ public class HacerPedido extends OpcionDeMenu {
 			System.out.println("No se encontro restaurante con este nombre");
 		}
 
-		if (!valor) {
+		if (!valor && restauranteElegido != null && platoEscogido != null) {
 			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
 			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
 		} else {
@@ -71,12 +72,12 @@ public class HacerPedido extends OpcionDeMenu {
 		Plato plato =null;
 		System.out.println("Este es el menu de platos con el que cuenta el restaurante.");
 		System.out.println(restauranteElegido.getMenu());
-		if (restauranteElegido.getMenu() == null) {
+		if (restauranteElegido.getMenu().isBlank()) {
 			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
 		} else {
 			plato= Data.buscarPlato(restauranteElegido.getMenu());
-			System.out.println("bien hasta aca");
+			System.out.println("pedido en proceso");
 		}
 		return plato;
 	}

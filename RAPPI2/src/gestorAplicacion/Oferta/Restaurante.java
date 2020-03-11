@@ -11,6 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import BaseDatos.Data;
+import UIMain.Main;
 import gestorAplicacion.Interaccion.Calificacion;
 import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
@@ -35,7 +36,7 @@ import gestorAplicacion.Interaccion.Tendero;
 public class Restaurante implements Serializable {
 	private String nombre;
 	private ArrayList<Integer> notificaciones = new ArrayList<Integer>();
-	private ArrayList<Integer>calificaciones = new ArrayList<Integer>();
+	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	private ArrayList<String> direcciones = new ArrayList<String>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
 	private String celular;
@@ -59,8 +60,9 @@ public class Restaurante implements Serializable {
 		this.opciones.add(14);
 		this.opciones.add(15);
 		this.opciones.add(16);
+		this.opciones.add(17);
+		this.opciones.add(18);
 		this.opciones.add(25);
-		this.opciones.add(24);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;
@@ -137,25 +139,29 @@ public class Restaurante implements Serializable {
 	 *                    cierta edad del cliente
 	 */
 	public boolean crearPlato(String nombre, String descripcion, float precio, int restriccion) {
-		Gson gson =new Gson();
-		Plato plato= new Plato(nombre, descripcion, precio, restriccion, this);
+		Plato plato = new Plato(nombre, descripcion, precio, restriccion, this);
 		Data.agregarObjetoDataBasePlato(plato);
-		this.menu=nombre;
-		return true;	
+		this.menu = nombre;
+		return true;
+
 	}
 
-	public boolean cambiarPlato( Plato platoCambio) {
-		if (Data.buscarPlato(platoCambio.getNombre())==null) {
-			this.menu=platoCambio.getNombre();
+	public boolean cambiarPlato(Plato platoCambio) {
+		if(this.getMenu().equals("")) {
+			this.menu = platoCambio.getNombre();
 			Data.actualizarDataBasePlato(platoCambio);
-			System.out.println("Su plato se ha cambiado correctamente");
-			return true;
-		} else {
-
-			return false;
+			
 		}
+		else {
+			Data.eliminarObjetoDataBasePlato(Data.buscarPlato(this.getMenu()));
+			this.menu = platoCambio.getNombre();
+			Data.actualizarDataBasePlato(platoCambio);
+		}
+		
+		return true;
+
 	}
-	
+
 	public String getMenu() {
 		return this.menu;
 	}
@@ -184,7 +190,7 @@ public class Restaurante implements Serializable {
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
 		if (!this.calificaciones.isEmpty()) {
-			for(int i=0;i< this.calificaciones.size();i++) {
+			for (int i = 0; i < this.calificaciones.size(); i++) {
 				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
 			}
 		}
@@ -213,9 +219,12 @@ public class Restaurante implements Serializable {
 		return nuevo;
 	}
 
-
 	public String getClave() {
 		return clave;
+	}
+	
+	public void setMenu(String menu) {
+		this.menu = menu;
 	}
 
 }

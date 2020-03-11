@@ -1,36 +1,29 @@
 package UIMain.Restaurante;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-
+import BaseDatos.Data;
+import UIMain.Main;
+import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
-import gestorAplicacion.Oferta.Plato;
-import gestorAplicacion.Oferta.Restaurante;
 
 public class EliminarPlato extends OpcionDeMenu {
 	public void ejecutar() {
-		/*System.out.println("Eliminará un plato del menú. ");
-		Restaurante restaurante = Main.usuarioRestaurante;
-		JsonArray menuPlatos = restaurante.getMenu();
-		System.out.println("Este es el menú de platos que cuenta el restaurante.");
-
-		for (int i = 0; i < menuPlatos.size(); i++) {
-			Gson gson = new Gson();
-			Plato aux = gson.fromJson(menuPlatos.get(i), Plato.class);
-			System.out.println((i + 1) + ") " + aux.getNombre());
+		System.out.println("Eliminará su plato del menu");
+		System.out.println("Esta seguro que desea eliminarlo, ingrese 1 confirmando el borrado, o ingrese 0 para cancelar");
+		int opc = Main.user.nextInt();
+		if(opc == 1) {
+			if(!Main.usuarioRestaurante.getMenu().equals("")) {
+				Data.eliminarObjetoDataBasePlato(Data.buscarPlato(Main.usuarioRestaurante.getMenu()));
+				Main.usuarioRestaurante.setMenu("");
+				Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
+				System.out.println("Plato borrado");
+				MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
+			}
+			
 		}
-		System.out.println("Por favor, escriba el numero del plato el cual desea cambiar: ");
-		int numero = Main.user.nextInt() - 1;
-		Plato platoBorrar = restaurante.elegirPlatoMenu(numero);
-		boolean valor = restaurante.eliminarPlato(platoBorrar);
-		if (!valor) {
-			System.out.println("Error borrando el plato. Intente nuevamente.");
-			ejecutar();
-
-		} else {
-			System.out.println("Su plato se ha removido correctamente. ");
+		else {
+			System.out.println("Operacion cancelada");
+			MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 		}
-		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);*/
 	}
 
 	public String toString() {

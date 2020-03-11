@@ -58,14 +58,15 @@ public class Data {
 		opciones.add(new CambiarPlato()); // 15 restaurante
 		opciones.add(new EliminarDireccionRest());// 16 restaurante
 		opciones.add(new EliminarPlato()); // 17 restaurante
-		opciones.add(new CrearAdministrador()); // 18 Admin
-		opciones.add(new CrearRestaurante()); // 19 admin
-		opciones.add(new CrearTendero()); // 20 admin
-		opciones.add(new TenderoReparteMas()); // 21 admin
-		opciones.add(new QuitarFuncionalidades()); // 22 admin
-		opciones.add(new AgregarFuncionalidades()); // 23 admin
-		opciones.add(new Salir()); // 24 todos
-		opciones.add(new CambiarDireccionRest());//25 restaurante
+		opciones.add(new CambiarDireccionRest());//18 restaurante
+		opciones.add(new CrearAdministrador()); // 19 Admin
+		opciones.add(new CrearRestaurante()); // 20 admin
+		opciones.add(new CrearTendero()); // 21 admin
+		opciones.add(new TenderoReparteMas()); // 22 admin
+		opciones.add(new QuitarFuncionalidades()); // 23 admin
+		opciones.add(new AgregarFuncionalidades()); // 24 admin
+		opciones.add(new Salir()); // 25 todos
+		
 
 	}
 
@@ -609,8 +610,6 @@ public class Data {
 	 * @param plato El parametro define el cliente que va a ser actualizado
 	 */
 	public static void actualizarDataBasePlato(Plato plato) {
-		;
-		Data.eliminarObjetoDataBasePlato(Data.buscarPlato(plato.getNombre()));
 		Data.agregarObjetoDataBasePlato(plato);
 	}
 
@@ -855,21 +854,14 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseRestaurante();
 		for (int i = 0; i < dataBase.size(); i++) {
 			JsonObject jo = dataBase.get(i).getAsJsonObject();
 			if (obj.getNombre().equals(jo.get("nombre").getAsString())) {
 				dataBase.remove(i);
+				Data.actualizarDataBaseRestaurante(dataBase);
+				break;
 			}
-		}
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
-			Data.actualizarDataBaseRestaurante(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
 		}
 	}
 

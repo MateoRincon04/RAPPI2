@@ -1,10 +1,5 @@
 package UIMain.Restaurante;
 
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
@@ -29,8 +24,8 @@ public class CambiarPlato extends OpcionDeMenu {
 		Plato platoCambio = new Plato(nombre, descripcion, precio, restriccion, restaurante);
 		boolean valor = restaurante.cambiarPlato(platoCambio);
 		if (!valor) {
-			System.out.println("No se encuentra el plato para el cambio. Intente nuevamente.");
-			ejecutar();
+			System.out.println("No se pudo realizar el cambio");
+			MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 		} else {
 			System.out.println("Su plato se ha cambiado correctamente");
 		}
