@@ -80,5 +80,6 @@ public abstract class Perfil {
 	public String toString() {
 		return "Perfil";
 	}
+	public abstract String getTipo();
 	
 }

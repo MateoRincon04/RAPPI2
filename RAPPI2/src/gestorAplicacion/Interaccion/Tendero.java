@@ -139,4 +139,8 @@ public class Tendero extends Perfil implements Serializable {
 		}
 		return contadorAux / this.calificaciones.size();
 	}
+	
+	public String getTipo() {
+		return "Tendero";
+	}
 }

@@ -13,7 +13,7 @@ import gestorAplicacion.Interaccion.Tendero;
  * 
  * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
  */
-public class Salir implements OpcionDeMenu {
+public class Salir extends OpcionDeMenu {
 	public void ejecutar() {
 		if(Main.usuarioRestaurante != null) {
 			Gson gson = new Gson();

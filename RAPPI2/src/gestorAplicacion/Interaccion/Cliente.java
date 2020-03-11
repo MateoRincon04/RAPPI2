@@ -232,5 +232,9 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	public int getPedido() {
 		return this.pedido;
 	}
+	
+	public String getTipo() {
+		return "Cliente";
+	}
 
 }

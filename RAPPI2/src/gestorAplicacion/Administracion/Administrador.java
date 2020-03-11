@@ -159,4 +159,8 @@ public class Administrador extends Perfil implements Serializable{
 			}
 		}
 	}
+	
+	public String getTipo() {
+		return "Administrador";
+	}
 }

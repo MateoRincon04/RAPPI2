@@ -18,9 +18,9 @@ public class Main {
 	public static Perfil usuario;
 	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
-	public static ArrayList<String> tenderos= new ArrayList<>();
+	public static ArrayList<String> tenderos = new ArrayList<>();
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		Data.CargarOpciones();
 		Data.cargarFileDataBaseAdministrador();
 		Data.cargarFileDataBaseCliente();
@@ -34,6 +34,6 @@ public class Main {
 		Data.agregarObjetoDataBaseAdministrador(new Administrador("Admin", 1, 10, "Admin", "Admin", 5000));
 		MenuDeConsola.lanzarMenu();
 		user.close();
-		
+
 	}
 }
