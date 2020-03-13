@@ -15,13 +15,12 @@ import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Plato;
 import gestorAplicacion.Oferta.Restaurante;
 import UIMain.OpcionDeMenu;
+import com.google.gson.*;
 import UIMain.Administrador.*;
 import UIMain.Tendero.*;
 import UIMain.Cliente.*;
 import UIMain.Restaurante.*;
 import UIMain.Default.*;
-import com.google.gson.*;
-
 /**
  * La clase Data tiene como finalidad la obtencio y contencion de datos en
  * formato Json para el correcto funcionamiento de la aplicacion.
@@ -64,7 +63,7 @@ public class Data {
 		opciones.add(new CrearTendero()); // 21 admin
 		opciones.add(new TenderoReparteMas()); // 22 admin
 		opciones.add(new QuitarFuncionalidades()); // 23 admin
-		opciones.add(new AgregarFuncionalidades()); // 24 admin
+		opciones.add(new AgregarFuncionalidades()); // 24 admin*/
 		opciones.add(new Salir()); // 25 todos
 		
 
@@ -76,14 +75,23 @@ public class Data {
 
 	// Mateo temp; System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +
 
-	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"pedidoGuardados.json";
+	/*private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"pedidoGuardados.json";
 	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"clientesGuardados.json";
 	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"tenderosGuardados.json";
 	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"administradoresGuardados.json";
 	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"restaurantesGuardados.json";
 	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"platosGuardados.json";
 	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"NotificacionesGuardados.json";
-	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"CalificacionesGuardados.json";
+	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"CalificacionesGuardados.json";*/
+	
+	private static final String filepathPedido = "pedidoGuardados.json";
+	private static final String filepathCliente = "clientesGuardados.json";
+	private static final String filepathTendero = "tenderosGuardados.json";
+	private static final String filepathAdministrador = "administradoresGuardados.json";
+	private static final String filepathRestaurantes = "restaurantesGuardados.json";
+	private static final String filepathPlato = "platosGuardados.json";
+	static final String filepathNotificacion = "NotificacionesGuardados.json";
+	private static final String filepathCalificacion = "CalificacionesGuardados.json";
 
 	public static void LlenarTenderos() {
 		if (Data.traerDataBaseTendero().size() != 0) {
@@ -156,7 +164,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBaseNotificacion(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar la notificacion a la base de datos");
 		}
 	}
 
@@ -169,7 +177,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBaseNotificacion(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar la notificacion a la base de datos");
 		}
 	}
 
@@ -247,7 +255,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBaseCalificacion(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar la calificacion a la base de datos");
 		}
 	}
 
@@ -260,7 +268,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBaseCalificacion(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar la calificacion a la base de datos");
 		}
 	}
 
@@ -670,7 +678,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBasePlato(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar el plato a la base de datos");
 		}
 	}
 
@@ -691,7 +699,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBaseCliente(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar el cliente a la base de datos");
 		}
 	}
 
@@ -712,7 +720,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBaseTendero(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar el tendero a la base de datos");
 		}
 	}
 
@@ -733,7 +741,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBaseAdministrador(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar el administrador a la base de datos");
 		}
 	}
 
@@ -754,7 +762,7 @@ public class Data {
 			dataBase.add(je);
 			Data.actualizarDataBaseRestaurante(dataBase);
 		} else {
-			System.out.println("no se puede agregar el elemento a la base de datos");
+			System.out.println("no se puede agregar el restaurante a la base de datos");
 		}
 	}
 
@@ -786,7 +794,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBasePlato(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar el plato a la base de datos");
 		}
 	}
 
@@ -805,7 +813,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBaseCliente(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar el cliente a la base de datos");
 		}
 	}
 
@@ -824,7 +832,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBaseTendero(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar el tendero a la base de datos");
 		}
 	}
 
@@ -843,7 +851,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBaseAdministrador(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar el administrador a la base de datos");
 		}
 	}
 
@@ -874,7 +882,7 @@ public class Data {
 			dataBase.remove(je);
 			Data.actualizarDataBasePedido(dataBase);
 		} else {
-			System.out.println("no se puede eliminar el elemento a la base de datos");
+			System.out.println("no se puede eliminar el pedido a la base de datos");
 		}
 	}
 

@@ -18,7 +18,7 @@ public class CrearPlato extends OpcionDeMenu {
 		System.out.println("ingrese la restriccion de edad del plato: ");
 		int restriccion = Main.user.nextInt();
 		boolean valor = true;
-		if(restaurante.getMenu().equals("")) {
+		if(!restaurante.getMenu().equals("")) {
 			valor = false;
 		}else {
 			valor = restaurante.crearPlato(nombre, descripcion, precio, restriccion);

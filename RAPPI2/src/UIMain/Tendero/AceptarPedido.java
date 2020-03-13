@@ -4,7 +4,9 @@ import BaseDatos.Data;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
+import gestorAplicacion.Oferta.Pedido;
 
 public class AceptarPedido extends OpcionDeMenu {
 	public void ejecutar() {
@@ -17,7 +19,11 @@ public class AceptarPedido extends OpcionDeMenu {
 				if (opcion == 1) {
 					boolean valor = tendero.aceptarPedido();
 					if (valor) {
-						System.out.println("Usted tiene a su cargo el pedido: " + Data.buscarPlato(Data.buscarPedido(tendero.getNotificaciones().size() - 1).getPlato()));
+						Notificacion notificacion = Data.buscarNotificacion(tendero.getNotificaciones().get(tendero.getNotificaciones().size()-1));
+						Pedido pedido = Data.buscarPedido(notificacion.getPedido());
+						pedido.setTendero(tendero);
+						Data.actualizarDataBasePedido(pedido);
+						System.out.println("Usted tiene a su cargo el pedido: " + pedido.getPlato());
 
 					}
 				} else {
