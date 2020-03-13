@@ -19,12 +19,13 @@ public class Notificacion {
 	private int pedido;
 	private static int contador = 0;
 	private int ID = 0;
-	private String tomarPedido;
+	private String tomarPedido="disponible";
 
 	public Notificacion(int pedido) {
 		this.pedido = pedido;
 		++Notificacion.contador;
 		this.ID= contador;
+		this.tomarPedido= "disponible";
 	}
 
 	public int getID() {
@@ -32,10 +33,10 @@ public class Notificacion {
 	}
 
 	public void setTomarPedido() {
-		if(tomarPedido.equals("dispinible")) {
+		if(this.tomarPedido.equals("disponible")) {
 			this.tomarPedido = "noDisponible";
 		}else {
-			this.tomarPedido = "dispinible";
+			this.tomarPedido = "disponible";
 		}
 	}
 

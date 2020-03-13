@@ -78,7 +78,6 @@ public class Tendero extends Perfil implements Serializable {
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {
-		Data.agregarObjetoDataBaseNotificacion(notificacion);
 		notificaciones.add(notificacion.getID());
 	}
 
@@ -93,9 +92,9 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		if (Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado") && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
-			//error en aux.setTomarPedido
+		if (!Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado") && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
 			Aux.setTomarPedido();
+			Data.actualizarDataBaseNotificacion(Aux);
 			return true;
 		} else {
 			return false;

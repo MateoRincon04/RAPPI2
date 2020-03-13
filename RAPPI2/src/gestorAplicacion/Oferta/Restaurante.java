@@ -167,7 +167,6 @@ public class Restaurante implements Serializable {
 	}
 
 	public void agregarNotificacion(Notificacion notificacion) {
-		Data.agregarObjetoDataBaseNotificacion(notificacion);
 		notificaciones.add(notificacion.getID());
 	}
 

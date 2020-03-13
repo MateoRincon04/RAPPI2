@@ -1,14 +1,6 @@
 package UIMain.Cliente;
 
 import gestorAplicacion.Interaccion.Cliente;
-
-import java.util.ArrayList;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import BaseDatos.Data;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
@@ -72,7 +64,7 @@ public class HacerPedido extends OpcionDeMenu {
 		Plato plato =null;
 		System.out.println("Este es el menu de platos con el que cuenta el restaurante.");
 		System.out.println(restauranteElegido.getMenu());
-		if (restauranteElegido.getMenu().isBlank()) {
+		if (restauranteElegido.getMenu().equals("")) {        //.isBlank()
 			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
 		} else {

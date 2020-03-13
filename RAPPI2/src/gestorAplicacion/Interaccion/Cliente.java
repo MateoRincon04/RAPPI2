@@ -146,7 +146,6 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 		if ((Data.buscarPedido(pedido).getEntregado()).equals("entregado")) {
 			Tendero calificando = Data.buscarTendero(Data.buscarPedido(pedido).getTendero());
 			Calificacion calificacionTendero = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
-			Data.agregarObjetoDataBaseCalificacion(calificacionTendero);
 			calificando.agregarCalificacion(calificacionTendero);
 		}
 	}
@@ -162,7 +161,6 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 		if ((Data.buscarPedido(pedido).getEntregado()).equals("entregado")) {
 			gestorAplicacion.Oferta.Restaurante calificando = Data.buscarRestaurante(Data.buscarPedido(pedido).getRestaurante());
 			Calificacion calificacionRestaurante = new Calificacion(this.getUserName(), puntuacion, calificando.getNombre());
-			Data.agregarObjetoDataBaseCalificacion(calificacionRestaurante);
 			calificando.agregarCalificacion(calificacionRestaurante);
 		}	
 	}

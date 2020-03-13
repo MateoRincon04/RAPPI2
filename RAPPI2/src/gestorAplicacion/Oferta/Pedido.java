@@ -20,8 +20,8 @@ public class Pedido {
 	private String cliente;
 	private String plato;
 	private String restaurante;
-	private String entregado;
-	private String estaListo;
+	private String entregado = "noEntregado";
+	private String estaListo = "estaListo";
 	private String tendero="nadie";
 	
 	/**
@@ -43,6 +43,7 @@ public class Pedido {
 	}
 	public void crearNotificacion(int i) {
 		Notificacion n =new Notificacion(i);
+		Data.agregarObjetoDataBaseNotificacion(n);
 		n.notificar();
 	}
 	
