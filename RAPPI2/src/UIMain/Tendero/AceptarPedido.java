@@ -22,9 +22,11 @@ public class AceptarPedido extends OpcionDeMenu {
 						Notificacion notificacion = Data.buscarNotificacion(tendero.getNotificaciones().get(tendero.getNotificaciones().size()-1));
 						Pedido pedido = Data.buscarPedido(notificacion.getPedido());
 						pedido.setTendero(tendero);
+						pedido.setEntregado();
 						Data.actualizarDataBasePedido(pedido);
-						System.out.println("Usted tiene a su cargo el pedido: " + pedido.getPlato());
-
+						Data.actualizarDataBaseTendero((Tendero)Main.usuario);
+						System.out.println("Usted tiene a su cargo el pedido: " + pedido.getPlato() + " del restaurante " + pedido.getRestaurante());
+						
 					}
 				} else {
 					System.out.println("No ha aceptado el pedido. ");

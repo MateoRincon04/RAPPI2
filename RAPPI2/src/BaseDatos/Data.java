@@ -75,23 +75,23 @@ public class Data {
 
 	// Mateo temp; System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +
 
-	/*private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"pedidoGuardados.json";
+	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"pedidoGuardados.json";
 	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"clientesGuardados.json";
 	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"tenderosGuardados.json";
 	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"administradoresGuardados.json";
 	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"restaurantesGuardados.json";
 	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"platosGuardados.json";
 	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"NotificacionesGuardados.json";
-	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"CalificacionesGuardados.json";*/
+	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"CalificacionesGuardados.json";
 	
-	private static final String filepathPedido = "pedidoGuardados.json";
+	/*private static final String filepathPedido = "pedidoGuardados.json";
 	private static final String filepathCliente = "clientesGuardados.json";
 	private static final String filepathTendero = "tenderosGuardados.json";
 	private static final String filepathAdministrador = "administradoresGuardados.json";
 	private static final String filepathRestaurantes = "restaurantesGuardados.json";
 	private static final String filepathPlato = "platosGuardados.json";
 	static final String filepathNotificacion = "NotificacionesGuardados.json";
-	private static final String filepathCalificacion = "CalificacionesGuardados.json";
+	private static final String filepathCalificacion = "CalificacionesGuardados.json";*/
 
 	public static void LlenarTenderos() {
 		if (Data.traerDataBaseTendero().size() != 0) {

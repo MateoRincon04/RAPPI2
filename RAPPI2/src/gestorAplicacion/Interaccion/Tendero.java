@@ -23,6 +23,7 @@ import gestorAplicacion.Administracion.Perfil;
 public class Tendero extends Perfil implements Serializable {
 	private int pedido;
 	private String estaDisponible;
+	private int entregados = 0;
 	private  ArrayList<Integer> notificaciones = new ArrayList<Integer>();
 	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
@@ -95,6 +96,7 @@ public class Tendero extends Perfil implements Serializable {
 		if (!Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado") && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
 			Aux.setTomarPedido();
 			Data.actualizarDataBaseNotificacion(Aux);
+			this.setEntregados(this.getEntregados()+1);
 			return true;
 		} else {
 			return false;
@@ -126,7 +128,7 @@ public class Tendero extends Perfil implements Serializable {
 	 * entrega.
 	 */
 	public int cantidadDePedidosEntregados() {
-		return this.getCalificaciones().size();
+		return this.getEntregados();
 	}
 	
 	public double getCalificacionPromediada() {
@@ -141,5 +143,17 @@ public class Tendero extends Perfil implements Serializable {
 	
 	public String getTipo() {
 		return "Tendero";
+	}
+	
+	public void quitarNotificacion() {
+		notificaciones.remove(notificaciones.size()-1);
+	}
+
+	public int getEntregados() {
+		return entregados;
+	}
+
+	public void setEntregados(int entregados) {
+		this.entregados = entregados;
 	}
 }
