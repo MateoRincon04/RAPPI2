@@ -89,7 +89,7 @@ public class Tendero extends Perfil implements Serializable {
 
 	/**
 	 * Metodo por el cual el Tendero podra encargarse de un Pedido para su
-	 * transportaci�n
+	 * transportacion
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
