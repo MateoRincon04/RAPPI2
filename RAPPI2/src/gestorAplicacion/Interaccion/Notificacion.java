@@ -63,6 +63,7 @@ public class Notificacion {
 			if (notificado.getEstaDisponible().equals("disponible")) {
 				notificado.agregarNotificacion(this);
 				Data.actualizarDataBaseTendero(notificado);
+				System.out.println("hola");
 				if (tomarPedido.equals("disponible")) {
 					notificado.setEstaDisponible();
 					Data.buscarPedido(pedido).setTendero(notificado);
@@ -71,13 +72,13 @@ public class Notificacion {
 			}
 			break;
 		}
-		Iterator<String> iterator2 = Main.tenderos.iterator();
-		while (iterator2.hasNext()) {
-			Tendero tenderoAtiende =  Data.buscarTendero(iterator2.next());
-			if (tenderoAtiende.aceptarPedido() == true) {
-				break;
-			}
-		}
+		//Iterator<String> iterator2 = Main.tenderos.iterator();
+		//while (iterator2.hasNext()) {
+		//	Tendero tenderoAtiende =  Data.buscarTendero(iterator2.next());
+		//	if (tenderoAtiende.aceptarPedido() == true) {
+		//		break;
+		//	}
+		//}
 	}
 
 }
