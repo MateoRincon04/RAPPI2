@@ -26,7 +26,7 @@ public class AceptarPedido extends OpcionDeMenu {
 						Data.actualizarDataBasePedido(pedido);
 						Data.actualizarDataBaseTendero((Tendero)Main.usuario);
 						System.out.println("Usted tiene a su cargo el pedido: " + pedido.getPlato() + " del restaurante " + pedido.getRestaurante());
-						
+						tendero.quitarNotificacion();
 					}
 				} else {
 					System.out.println("No ha aceptado el pedido. ");
@@ -36,7 +36,7 @@ public class AceptarPedido extends OpcionDeMenu {
 				ejecutar();
 			}
 		} else {
-			System.out.println("No se han realizado pedidos. ");
+			System.out.println("No se han realizado pedidos nuevos. ");
 		}
 		MenuDeConsola.lanzarMenu((Tendero) Main.usuario);
 	}
