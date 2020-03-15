@@ -65,7 +65,6 @@ public class Tendero extends Perfil implements Serializable {
 		return salario;
 	}
 
-
 	public void setEstaDisponible() {
 		if(estaDisponible.equals("disponible")) {
 			this.estaDisponible = "noDisponible";
@@ -147,7 +146,7 @@ public class Tendero extends Perfil implements Serializable {
 	}
 	
 	public void quitarNotificacion() {
-		this.notificaciones.remove(this.notificaciones.size()-1);
+		notificaciones.remove(notificaciones.size()-1);
 	}
 
 	public int getEntregados() {
