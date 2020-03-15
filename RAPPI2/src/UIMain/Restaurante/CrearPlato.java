@@ -14,7 +14,7 @@ public class CrearPlato extends OpcionDeMenu {
 		System.out.println("Ingrese la descripción del plato: ");
 		String descripcion = Main.user.next();
 		System.out.println("Ingrese el precio: ");
-		float precio = Main.user.nextFloat();
+		int precio = Main.user.nextInt();
 		System.out.println("ingrese la restriccion de edad del plato: ");
 		int restriccion = Main.user.nextInt();
 		boolean valor = true;

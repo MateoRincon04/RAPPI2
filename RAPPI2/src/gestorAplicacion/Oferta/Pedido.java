@@ -15,7 +15,7 @@ import gestorAplicacion.Interaccion.Notificacion;
  */
 
 public class Pedido {
-	private static int contador =0;
+	private static int contador = 0;
 	private int ID=0;
 	private String cliente;
 	private String plato;

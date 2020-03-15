@@ -22,12 +22,12 @@ public class CalificarTendero extends OpcionDeMenu {
 			if (calificacion >= 0 && calificacion <= 5) {
 				usuario.calificarTendero(calificacion);
 				System.out.println("Ha calificado al tendero correctamente.");
-				
+				break;
 			} else {
 				System.out.println("Ingrese una calificación valida.");
 			}
-			MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 		}
+		MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 	}
 
 	public String toString() {

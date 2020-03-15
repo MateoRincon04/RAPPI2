@@ -97,6 +97,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 */
 	public boolean hacerPedido(Plato plato) {
 		if (this.getSaldo() >= plato.getPrecio()) {
+			this.setSaldo((long) (this.getSaldo()-plato.getPrecio()));
 			Pedido pedido = new Pedido(this, plato);
 			Data.agregarObjetoDataBasePedido(pedido);
 			pedido.crearNotificacion(pedido.getId());
@@ -145,10 +146,12 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 * @param puntuacion El parametro puntuacion define la calificacion del Tendero
 	 */
 	public void calificarTendero(double puntuacion) {
-		if ((Data.buscarPedido(pedido).getEntregado()).equals("entregado")) {
-			Tendero calificando = Data.buscarTendero(Data.buscarPedido(pedido).getTendero());
+		if ((Data.buscarPedido(historial.get(historial.size()-1)).getEntregado()).equals("entregado")) {
+			Tendero calificando = Data.buscarTendero(Data.buscarPedido(historial.get(historial.size()-1)).getTendero());
 			Calificacion calificacionTendero = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
 			calificando.agregarCalificacion(calificacionTendero);
+			Data.actualizarDataBaseTendero(calificando);
+			
 		}
 	}
 
@@ -160,10 +163,12 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 *                   Restaurante
 	 */
 	public void calificarRestaurante(double puntuacion) {
-		if ((Data.buscarPedido(pedido).getEntregado()).equals("entregado")) {
-			gestorAplicacion.Oferta.Restaurante calificando = Data.buscarRestaurante(Data.buscarPedido(pedido).getRestaurante());
+		if ((Data.buscarPedido(historial.get(historial.size()-1)).getEntregado()).equals("entregado")) {
+			gestorAplicacion.Oferta.Restaurante calificando = Data.buscarRestaurante(Data.buscarPedido(historial.get(historial.size()-1)).getRestaurante());
+			Data.eliminarObjetoDataBaseRestaurante(calificando);
 			Calificacion calificacionRestaurante = new Calificacion(this.getUserName(), puntuacion, calificando.getNombre());
 			calificando.agregarCalificacion(calificacionRestaurante);
+			Data.agregarObjetoDataBaseRestaurante(calificando);
 		}	
 	}
 
@@ -215,7 +220,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	public double cuantoHeGastado() {
 		double valorGastado = 0;
 		for (int i : historial) { // Por cada pedido en la lista de pedidos:
-			valorGastado += Data.buscarPlato(Data.buscarPedido(historial.get(i)).getPlato()).getPrecio();
+			valorGastado +=(double) Data.buscarPlato(Data.buscarPedido(i).getPlato()).getPrecio();
 		}
 		return valorGastado;
 

@@ -138,7 +138,7 @@ public class Restaurante implements Serializable {
 	 *                    tipo de sustancia, la cual para ser consumida necesita de
 	 *                    cierta edad del cliente
 	 */
-	public boolean crearPlato(String nombre, String descripcion, float precio, int restriccion) {
+	public boolean crearPlato(String nombre, String descripcion, int precio, int restriccion) {
 		Plato plato = new Plato(nombre, descripcion, precio, restriccion, this);
 		Data.agregarObjetoDataBasePlato(plato);
 		this.menu = nombre;
@@ -189,6 +189,7 @@ public class Restaurante implements Serializable {
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
 		if (!this.calificaciones.isEmpty()) {
+			System.out.println("qqqqqqqqqqqqqh");
 			for (int i = 0; i < this.calificaciones.size(); i++) {
 				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
 			}

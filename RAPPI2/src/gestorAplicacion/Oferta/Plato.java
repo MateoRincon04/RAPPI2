@@ -19,7 +19,7 @@ import gestorAplicacion.Interaccion.Calificacion;
 public class Plato {
 	private String nombre;
 	private String descripcion;
-	private float precio;
+	private int precio;
 	private List<Calificacion> calificaciones= new ArrayList<Calificacion>();
 	public String restaurante;
 	public int restriccionDeEdad;
@@ -31,7 +31,7 @@ public class Plato {
 	 * @param restriccion El parametro defil si el Plato posee algun tipo de impedimento con respecto a la edad del Cliente 
 	 * @param restaurante El parametro define a que Restaurante pertenece el Plato
 	 */
-	public Plato(String nombre,String descripcion, float precio, int restriccion, Restaurante restaurante) {
+	public Plato(String nombre,String descripcion, int precio, int restriccion, Restaurante restaurante) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -47,7 +47,7 @@ public class Plato {
 		this.descripcion = descripcion;
 	}
 	
-	void setPrecio(float precio) {
+	void setPrecio(int precio) {
 		this.precio = precio;
 	}
 	

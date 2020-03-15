@@ -21,6 +21,7 @@ import UIMain.Tendero.*;
 import UIMain.Cliente.*;
 import UIMain.Restaurante.*;
 import UIMain.Default.*;
+
 /**
  * La clase Data tiene como finalidad la obtencio y contencion de datos en
  * formato Json para el correcto funcionamiento de la aplicacion.
@@ -57,7 +58,7 @@ public class Data {
 		opciones.add(new CambiarPlato()); // 15 restaurante
 		opciones.add(new EliminarDireccionRest());// 16 restaurante
 		opciones.add(new EliminarPlato()); // 17 restaurante
-		opciones.add(new CambiarDireccionRest());//18 restaurante
+		opciones.add(new CambiarDireccionRest());// 18 restaurante
 		opciones.add(new CrearAdministrador()); // 19 Admin
 		opciones.add(new CrearRestaurante()); // 20 admin
 		opciones.add(new CrearTendero()); // 21 admin
@@ -65,7 +66,6 @@ public class Data {
 		opciones.add(new QuitarFuncionalidades()); // 23 admin
 		opciones.add(new AgregarFuncionalidades()); // 24 admin*/
 		opciones.add(new Salir()); // 25 todos
-		
 
 	}
 
@@ -75,23 +75,34 @@ public class Data {
 
 	// Mateo temp; System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +
 
-	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"pedidoGuardados.json";
-	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"clientesGuardados.json";
-	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"tenderosGuardados.json";
-	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"administradoresGuardados.json";
-	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"restaurantesGuardados.json";
-	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"platosGuardados.json";
-	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"NotificacionesGuardados.json";
-	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +"CalificacionesGuardados.json";
-	
-	/*private static final String filepathPedido = "pedidoGuardados.json";
-	private static final String filepathCliente = "clientesGuardados.json";
-	private static final String filepathTendero = "tenderosGuardados.json";
-	private static final String filepathAdministrador = "administradoresGuardados.json";
-	private static final String filepathRestaurantes = "restaurantesGuardados.json";
-	private static final String filepathPlato = "platosGuardados.json";
-	static final String filepathNotificacion = "NotificacionesGuardados.json";
-	private static final String filepathCalificacion = "CalificacionesGuardados.json";*/
+	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "pedidoGuardados.json";
+	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "clientesGuardados.json";
+	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "tenderosGuardados.json";
+	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "administradoresGuardados.json";
+	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "restaurantesGuardados.json";
+	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "platosGuardados.json";
+	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "NotificacionesGuardados.json";
+	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
+			+ "CalificacionesGuardados.json";
+
+	/*
+	 * private static final String filepathPedido = "pedidoGuardados.json"; private
+	 * static final String filepathCliente = "clientesGuardados.json"; private
+	 * static final String filepathTendero = "tenderosGuardados.json"; private
+	 * static final String filepathAdministrador = "administradoresGuardados.json";
+	 * private static final String filepathRestaurantes =
+	 * "restaurantesGuardados.json"; private static final String filepathPlato =
+	 * "platosGuardados.json"; static final String filepathNotificacion =
+	 * "NotificacionesGuardados.json"; private static final String
+	 * filepathCalificacion = "CalificacionesGuardados.json";
+	 */
 
 	public static void LlenarTenderos() {
 		if (Data.traerDataBaseTendero().size() != 0) {
@@ -477,7 +488,7 @@ public class Data {
 			System.out.println("No se puede traer la dataBaseTendero correctamente");
 			return null;
 		}
-		
+
 	}
 
 	/**
@@ -824,15 +835,14 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseTendero(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseTendero(Tendero obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
 		JsonArray dataBase = Data.traerDataBaseTendero();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
-			Data.actualizarDataBaseTendero(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el tendero a la base de datos");
+		for (int i = 0; i < dataBase.size(); i++) {
+			JsonObject jo = dataBase.get(i).getAsJsonObject();
+			if (obj.getNombre().equals(jo.get("nombre").getAsString())) {
+				dataBase.remove(i);
+				Data.actualizarDataBaseTendero(dataBase);
+				break;
+			}
 		}
 	}
 
@@ -1076,23 +1086,20 @@ public class Data {
 	/**
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
 	 */
-	public static ArrayList<Restaurante> OrganizarRestaurantesPorCalificacion() {
+	public static Restaurante OrganizarRestaurantesPorCalificacion() {
 		Gson gson = new Gson();
 		JsonArray historial = Data.traerDataBaseRestaurante();
-		ArrayList<Restaurante> best = new ArrayList<Restaurante>();
-		// bubble sort
-		boolean ordenado = false;
-		while (!ordenado) {
-			ordenado = true;
-			for (int i = 0; i < historial.size(); i++) {
-				Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
-				Restaurante aux2 = gson.fromJson(historial.get(i - 1), Restaurante.class);
-				if (aux1.getCalificacionPromediada() < aux2.getCalificacionPromediada()) {
-					Restaurante restauranteTemp = aux1;
-					best.add(i, aux1);
-					best.add(i - 1, restauranteTemp);
-					ordenado = false;
-				}
+		Restaurante best = null;
+		double max = 0;
+		for (int i = 0; i < historial.size(); i++) {
+			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
+			if (max < aux1.getCalificacionPromediada()) {
+				System.out.println("ah");
+				best = aux1;
+				max = aux1.getCalificacionPromediada();
+			}
+			else {
+				System.out.println("ohhhhhhhhhh");
 			}
 		}
 		return best;

@@ -16,11 +16,10 @@ import gestorAplicacion.Oferta.Restaurante;
 public class MejorRestauranteCal extends OpcionDeMenu {
 
 	public void ejecutar() {
-		ArrayList<Restaurante> lista = Data.OrganizarRestaurantesPorCalificacion();
-		System.out.println("Los restaurantes mejor calificados, del mejor al peor son: ");
-		for (int i = 0; i < lista.size(); i++) {
-			System.out.println(i + " . " + lista.get(i).getNombre());
-		}
+		System.out.println("El mejor restaurante por su calificacion es: ");
+		Restaurante res = Data.OrganizarRestaurantesPorCalificacion();
+		System.out.println(res.getNombre());
+		System.out.println("");
 		MenuDeConsola.lanzarMenu((Cliente)Main.usuario);
 	}
 	public String toString() {

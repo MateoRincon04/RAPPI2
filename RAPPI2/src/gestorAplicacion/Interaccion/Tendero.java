@@ -3,6 +3,11 @@ package gestorAplicacion.Interaccion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import BaseDatos.Data;
 import gestorAplicacion.Administracion.Perfil;
 
@@ -24,7 +29,7 @@ public class Tendero extends Perfil implements Serializable {
 	private int pedido;
 	private String estaDisponible;
 	private int entregados = 0;
-	private  ArrayList<Integer> notificaciones = new ArrayList<Integer>();
+	private ArrayList<Integer> notificaciones = new ArrayList<Integer>();
 	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
 	private long salario;
@@ -66,12 +71,12 @@ public class Tendero extends Perfil implements Serializable {
 	}
 
 	public void setEstaDisponible() {
-		if(estaDisponible.equals("disponible")) {
+		if (estaDisponible.equals("disponible")) {
 			this.estaDisponible = "noDisponible";
-		}else {
+		} else {
 			this.estaDisponible = "disponible";
 		}
-		
+
 	}
 
 	public String getEstaDisponible() {
@@ -93,10 +98,12 @@ public class Tendero extends Perfil implements Serializable {
 	 */
 	public boolean aceptarPedido() {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
-		if (!Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado") && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
+		if (!Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado")
+				&& (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
 			Aux.setTomarPedido();
+			this.setEstaDisponible();
 			Data.actualizarDataBaseNotificacion(Aux);
-			this.setEntregados(this.getEntregados()+1);
+			this.setEntregados(this.getEntregados() + 1);
 			return true;
 		} else {
 			return false;
@@ -116,7 +123,8 @@ public class Tendero extends Perfil implements Serializable {
 	public void calificarCliente(double puntuacion) {
 		if (Data.buscarPedido(pedido).getEntregado().equals("entregado")) {
 			Cliente calificando = Data.buscarCliente(Data.buscarPedido(pedido).getCliente());
-			Calificacion calificacionCliente = new Calificacion(this.getUserName(), puntuacion, calificando.getUserName());
+			Calificacion calificacionCliente = new Calificacion(this.getUserName(), puntuacion,
+					calificando.getUserName());
 			Data.agregarObjetoDataBaseCalificacion(calificacionCliente);
 			calificando.agregarCalificacion(calificacionCliente);
 		}
@@ -130,23 +138,23 @@ public class Tendero extends Perfil implements Serializable {
 	public int cantidadDePedidosEntregados() {
 		return this.getEntregados();
 	}
-	
+
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
 		if (!this.calificaciones.isEmpty()) {
-			for(int i=0;i< this.calificaciones.size();i++) {
+			for (int i = 0; i < this.calificaciones.size(); i++) {
 				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
 			}
 		}
 		return contadorAux / this.calificaciones.size();
 	}
-	
+
 	public String getTipo() {
 		return "Tendero";
 	}
-	
+
 	public void quitarNotificacion() {
-		notificaciones.remove(notificaciones.size()-1);
+		notificaciones.remove(notificaciones.size() - 1);
 	}
 
 	public int getEntregados() {
