@@ -1,19 +1,18 @@
 package gestorAplicacion.Administracion;
 
-
 /**
- * Clase perfil
- * su finalidad es poder optimizar la escritura de codigo, teniendo la herencia y el ser
- * clase abstracta como principios para esto, ya que tanto a la clase administrador, como a
- * cliente y tendero se les quiere guardar la informacion de estos atributos
+ * Clase perfil su finalidad es poder optimizar la escritura de codigo, teniendo
+ * la herencia y el ser clase abstracta como principios para esto, ya que tanto
+ * a la clase administrador, como a cliente y tendero se les quiere guardar la
+ * informacion de estos atributos
  * 
  * @author: Mateo Rincon, Paula A. Taborda, Guillermo Toloza, Santiago Tamayo
-*/
+ */
 public abstract class Perfil {
 	private String nombre;
 	private int telefono;
 	private int comuna;
-	private final String clave;
+	private String clave;
 	private String userName;
 
 	/**
@@ -65,9 +64,11 @@ public abstract class Perfil {
 		return this.comuna;
 	}
 
-
 	public String getClave() {
 		return this.clave;
+	}
+	public void setClave(String clave) {
+		this.clave=clave;
 	}
 
 	public void setUserName(String userName) {
@@ -77,9 +78,11 @@ public abstract class Perfil {
 	public String getUserName() {
 		return this.userName;
 	}
+
 	public String toString() {
 		return "Perfil";
 	}
+
 	public abstract String getTipo();
-	
+
 }

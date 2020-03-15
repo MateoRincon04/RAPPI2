@@ -55,14 +55,15 @@ public class Restaurante implements Serializable {
 	 */
 	public Restaurante(String nombre, String direccion, String celular, String clave) {
 		this.nombre = nombre;
-		this.opciones.add(12);
-		this.opciones.add(13);
 		this.opciones.add(14);
 		this.opciones.add(15);
 		this.opciones.add(16);
 		this.opciones.add(17);
 		this.opciones.add(18);
-		this.opciones.add(25);
+		this.opciones.add(19);
+		this.opciones.add(20);
+		this.opciones.add(21);
+		this.opciones.add(29);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;
@@ -220,6 +221,9 @@ public class Restaurante implements Serializable {
 
 	public String getClave() {
 		return clave;
+	}
+	public void setClave (String clave) {
+		this.clave=clave;
 	}
 	
 	public void setMenu(String menu) {
