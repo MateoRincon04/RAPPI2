@@ -189,9 +189,8 @@ public class Restaurante implements Serializable {
 	public double getCalificacionPromediada() {
 		double contadorAux = 0;
 		if (!this.calificaciones.isEmpty()) {
-			System.out.println("qqqqqqqqqqqqqh");
 			for (int i = 0; i < this.calificaciones.size(); i++) {
-				contadorAux += Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
+				contadorAux = contadorAux + Data.buscarCalificacion(this.calificaciones.get(i)).getPuntuacion();
 			}
 		}
 		return contadorAux / this.calificaciones.size();

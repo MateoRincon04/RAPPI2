@@ -1094,12 +1094,8 @@ public class Data {
 		for (int i = 0; i < historial.size(); i++) {
 			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
 			if (max < aux1.getCalificacionPromediada()) {
-				System.out.println("ah");
 				best = aux1;
 				max = aux1.getCalificacionPromediada();
-			}
-			else {
-				System.out.println("ohhhhhhhhhh");
 			}
 		}
 		return best;

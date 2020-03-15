@@ -11,7 +11,8 @@ public class Calificacion {
 	private String calificado;
 	private double puntuacion = 5.0;
 	private String calificador;
-	private static int ID = 0;
+	private static int contador = 0;
+	private int ID = 0;
 
 	/**
 	 * Constructor de los objetos de la clase Calificacion
@@ -28,7 +29,8 @@ public class Calificacion {
 		this.setCalificado(calificado);
 		this.setCalificador(calificador);
 		this.puntuacion = puntuacion;
-		this.ID++;
+		++Calificacion.contador;
+		this.ID = contador;
 	}
 
 	public int getID() {
