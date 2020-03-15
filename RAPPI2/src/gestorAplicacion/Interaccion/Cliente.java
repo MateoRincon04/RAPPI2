@@ -84,6 +84,9 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 			return false;
 		}
 	}
+	public String getMetodoDePago() {
+		return this.metodoDePago;
+	}
 
 	public void agregarSaldo(long saldo) {
 		this.saldo += saldo;
