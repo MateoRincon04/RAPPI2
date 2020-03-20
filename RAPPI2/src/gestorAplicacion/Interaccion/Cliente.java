@@ -29,7 +29,6 @@ import UIMain.Main;
  */
 public class Cliente extends Perfil implements Interfaz, Serializable {
 	private List<Integer> calificaciones = new ArrayList<Integer>();
-	// private Carrito carrito;
 	private String metodoDePago;
 	private long saldo;
 	private int pedido;
@@ -189,7 +188,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 				+ this.getUserName();
 	}
 
-	public JsonArray verListaDeRestaurantes() {
+	public ArrayList<Restaurante> verListaDeRestaurantes() {
 		return Data.traerDataBaseRestaurante();
 	}
 

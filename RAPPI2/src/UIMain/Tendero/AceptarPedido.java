@@ -1,8 +1,6 @@
 package UIMain.Tendero;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import java.util.ArrayList;
 
 import BaseDatos.Data;
 import UIMain.Main;
@@ -11,7 +9,6 @@ import UIMain.OpcionDeMenu;
 import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Pedido;
-import gestorAplicacion.Oferta.Restaurante;
 
 public class AceptarPedido extends OpcionDeMenu {
 	public void ejecutar() {
@@ -29,12 +26,10 @@ public class AceptarPedido extends OpcionDeMenu {
 						Pedido pedido = Data.buscarPedido(notificacion.getPedido());
 						pedido.setTendero(tendero);
 						pedido.setEntregado();
-						Gson gson = new Gson();
-						JsonArray historial = Data.traerDataBaseTendero();
+						ArrayList<Tendero> historial = Data.traerDataBaseTendero();
 						for (int i = 0; i < historial.size(); i++) {
-							Tendero aux1 = gson.fromJson(historial.get(i), Tendero.class);
-							aux1.quitarNotificacion();
-							Data.actualizarDataBaseTendero(aux1);
+							historial.get(i).quitarNotificacion();
+							Data.actualizarDataBaseTendero(historial.get(i));
 						}
 						Data.actualizarDataBasePedido(pedido);
 						Data.actualizarDataBaseTendero((Tendero) Main.usuario);

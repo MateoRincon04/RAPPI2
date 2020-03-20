@@ -1,6 +1,9 @@
 package UIMain.Default;
 
 import gestorAplicacion.Interaccion.Cliente;
+
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -61,7 +64,7 @@ public class Registrarse extends OpcionDeMenu {
 		Gson gson = new Gson();
 		String aux = gson.toJson(cliente);
 		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseCliente();
+		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
 		if (!dataBase.contains(je)) {
 			Data.agregarObjetoDataBaseCliente(cliente); 
 			System.out.println("Usuario creado exitosamente ");
