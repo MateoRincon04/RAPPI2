@@ -110,10 +110,9 @@ public class Data {
 
 	public static void LlenarTenderos() {
 		if (Data.traerDataBaseTendero().size() != 0) {
-			for (JsonElement je : Data.traerDataBaseTendero()) {
+			for (Tendero je : Data.traerDataBaseTendero()) {
 				if (je != null) {
-					JsonObject obj = je.getAsJsonObject();
-					Main.tenderos.add(obj.get("userName").getAsString());
+					Main.tenderos.add(je.getUserName());
 				}
 			}
 		}
@@ -143,21 +142,29 @@ public class Data {
 		return DataBase;
 	}
 
-	public static JsonArray traerDataBaseNotificacion() {
+	public static ArrayList<Notificacion> traerDataBaseNotificacion() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Notificacion> notificaciones = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathNotificacion)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				notificaciones.add(gson.fromJson(aux, Notificacion.class));
+			}
+			return notificaciones;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBaseNotificacion correctamente");
 			return null;
 		}
 	}
 
-	public static void actualizarDataBaseNotificacion(JsonArray array) {
+	public static void actualizarDataBaseNotificacion(ArrayList<Notificacion> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathNotificacion)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBaseNotificacion correctamente");
@@ -171,12 +178,9 @@ public class Data {
 	}
 
 	public static void agregarObjetoDataBaseNotificacion(Notificacion obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseNotificacion();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBaseNotificacion(dataBase);
 		} else {
 			System.out.println("no se puede agregar la notificacion a la base de datos");
@@ -184,12 +188,9 @@ public class Data {
 	}
 
 	public static void eliminarObjetoDataBaseNotificacion(Notificacion obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseNotificacion();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
+		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
+		if (dataBase.contains(obj)) {
+			dataBase.remove(obj);
 			Data.actualizarDataBaseNotificacion(dataBase);
 		} else {
 			System.out.println("no se puede eliminar la notificacion a la base de datos");
@@ -197,14 +198,11 @@ public class Data {
 	}
 
 	public static Notificacion buscarNotificacion(int ID) {
-		Gson gson = new Gson();
 		Notificacion notificacion = null;
-		String x = String.valueOf(ID);
-		JsonArray dataBase = Data.traerDataBaseNotificacion();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (x.equals(obj.get("ID").getAsString())) {
-				notificacion = gson.fromJson(obj, Notificacion.class);
+		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
+		for (Notificacion n : dataBase) {
+			if (n.getID()==ID) {
+				notificacion = n;
 			}
 		}
 		return notificacion;
@@ -234,21 +232,29 @@ public class Data {
 		return DataBase;
 	}
 
-	public static JsonArray traerDataBaseCalificacion() {
+	public static ArrayList<Calificacion> traerDataBaseCalificacion() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Calificacion> calificaciones = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathCalificacion)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				calificaciones.add(gson.fromJson(aux, Calificacion.class));
+			}
+			return calificaciones;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBaseCalificacion correctamente");
 			return null;
 		}
 	}
 
-	public static void actualizarDataBaseCalificacion(JsonArray array) {
+	public static void actualizarDataBaseCalificacion(ArrayList<Calificacion> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathCalificacion)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBaseCalificacion correctamente");
@@ -262,12 +268,9 @@ public class Data {
 	}
 
 	public static void agregarObjetoDataBaseCalificacion(Calificacion obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseCalificacion();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Calificacion> dataBase = Data.traerDataBaseCalificacion();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBaseCalificacion(dataBase);
 		} else {
 			System.out.println("no se puede agregar la calificacion a la base de datos");
@@ -275,12 +278,9 @@ public class Data {
 	}
 
 	public static void eliminarObjetoDataBaseCalificacion(Calificacion obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseCalificacion();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
+		ArrayList<Calificacion> dataBase = Data.traerDataBaseCalificacion();
+		if (dataBase.contains(obj)) {
+			dataBase.remove(obj);
 			Data.actualizarDataBaseCalificacion(dataBase);
 		} else {
 			System.out.println("no se puede eliminar la calificacion a la base de datos");
@@ -288,14 +288,11 @@ public class Data {
 	}
 
 	public static Calificacion buscarCalificacion(int ID) {
-		Gson gson = new Gson();
 		Calificacion calificacion = null;
-		String x = String.valueOf(ID);
-		JsonArray dataBase = Data.traerDataBaseCalificacion();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (x.equals(obj.get("ID").getAsString())) {
-				calificacion = gson.fromJson(obj, Calificacion.class);
+		ArrayList<Calificacion> dataBase = Data.traerDataBaseCalificacion();
+		for (Calificacion c : dataBase) {
+			if (c.getID()==ID) {
+				calificacion = c;
 			}
 		}
 		return calificacion;
@@ -450,12 +447,18 @@ public class Data {
 	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
 	 * objetos alli guardados
 	 */
-	public static JsonArray traerDataBaseCliente() {
+	public static ArrayList<Cliente> traerDataBaseCliente() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Cliente> clientes = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathCliente)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				clientes.add(gson.fromJson(aux, Cliente.class));
+			}
+			return clientes;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBaseCliente correctamente");
 			return null;
@@ -466,12 +469,18 @@ public class Data {
 	 * Metodo que lee la base de datos de clientes desde su file y obtiene los
 	 * objetos alli guardados
 	 */
-	public static JsonArray traerDataBasePlato() {
+	public static ArrayList<Plato> traerDataBasePlato() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Plato> platos = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathPlato)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				platos.add(gson.fromJson(aux, Plato.class));
+			}
+			return platos;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBasePlato correctamente");
 			return null;
@@ -482,12 +491,18 @@ public class Data {
 	 * Metodo que lee la base de datos de tenderos desde su file y obtiene los
 	 * objetos alli guardados
 	 */
-	public static JsonArray traerDataBaseTendero() {
+	public static ArrayList<Tendero> traerDataBaseTendero() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Tendero> tenderos = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathTendero)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				tenderos.add(gson.fromJson(aux, Tendero.class));
+			}
+			return tenderos;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBaseTendero correctamente");
 			return null;
@@ -499,12 +514,18 @@ public class Data {
 	 * Metodo que lee la base de datos de administradores desde su file y obtiene
 	 * los objetos alli guardados
 	 */
-	public static JsonArray traerDataBaseAdministrador() {
+	public static ArrayList<Administrador> traerDataBaseAdministrador() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Administrador> administradores = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathAdministrador)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				administradores.add(gson.fromJson(aux, Administrador.class));
+			}
+			return administradores;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBaseAdministrador correctamente");
 			return null;
@@ -515,24 +536,36 @@ public class Data {
 	 * Metodo que lee la base de datos de restaurantes desde su file para asi
 	 * obtener aquellos objetos creados previamente
 	 */
-	public static JsonArray traerDataBaseRestaurante() {
+	public static ArrayList<Restaurante>  traerDataBaseRestaurante() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Restaurante> restaurantes = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathRestaurantes)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				restaurantes.add(gson.fromJson(aux, Restaurante.class));
+			}
+			return restaurantes;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBaseRestaurantes correctamente");
 			return null;
 		}
 	}
 
-	public static JsonArray traerDataBasePedido() {
+	public static ArrayList<Pedido> traerDataBasePedido() {
+		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
+		ArrayList<Pedido> pedidos = new ArrayList<>();
 		try (FileReader fr = new FileReader(filepathPedido)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
-			return array;
+			for(JsonElement jsonElement : array){
+				JsonObject aux = jsonElement.getAsJsonObject();
+				pedidos.add(gson.fromJson(aux, Pedido.class));
+			}
+			return pedidos;
 		} catch (Exception ex) {
 			System.out.println("No se puede traer la dataBasePedido correctamente");
 			return null;
@@ -543,9 +576,11 @@ public class Data {
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
 	 * los nuevos objetos que se necesiten guardar
 	 */
-	public static void actualizarDataBasePlato(JsonArray array) {
+	public static void actualizarDataBasePlato(ArrayList<Plato> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathPlato)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBasePlato correctamente");
@@ -556,9 +591,11 @@ public class Data {
 	 * Metodo que se usa para actualizar las bases de datos de clientes, escribiendo
 	 * los nuevos objetos que se necesiten guardar
 	 */
-	public static void actualizarDataBaseCliente(JsonArray array) {
+	public static void actualizarDataBaseCliente(ArrayList<Cliente> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathCliente)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBaseCliente correctamente");
@@ -569,9 +606,11 @@ public class Data {
 	 * Metodo que se usa para actualizar las bases de datos de tenderos, escribiendo
 	 * los nuevos objetos que se necesiten guardar
 	 */
-	public static void actualizarDataBaseTendero(JsonArray array) {
+	public static void actualizarDataBaseTendero(ArrayList<Tendero> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathTendero)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBaseTendero correctamente");
@@ -583,9 +622,11 @@ public class Data {
 	 * Metodo que se usa para actualizar las bases de datos de administradores,
 	 * escribiendo los nuevos objetos que se necesiten guardar
 	 */
-	public static void actualizarDataBaseAdministrador(JsonArray array) {
+	public static void actualizarDataBaseAdministrador(ArrayList<Administrador> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathAdministrador)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBaseAdministrador correctamente");
@@ -598,18 +639,22 @@ public class Data {
 	 * escribiendo aquellos nuevos restaurantes que se vayan a tener en cuenta en la
 	 * oferta
 	 */
-	public static void actualizarDataBaseRestaurante(JsonArray array) {
+	public static void actualizarDataBaseRestaurante(ArrayList<Restaurante> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathRestaurantes)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException ex) {
 			System.out.println("No se puede actualizar la dataBaseRestaurante correctamente");
 		}
 	}
 
-	public static void actualizarDataBasePedido(JsonArray array) {
+	public static void actualizarDataBasePedido(ArrayList<Pedido> array) {
+		Gson gson = new Gson();
+		JsonArray aux = gson.fromJson(gson.toJson(array), JsonArray.class);
 		try (FileWriter fw = new FileWriter(filepathPedido)) {
-			fw.write(array.toString());
+			fw.write(aux.toString());
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("No se puede actualizar la dataBasePedido correctamente");
@@ -685,12 +730,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
 	 */
 	public static void agregarObjetoDataBasePlato(Plato obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePlato();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Plato> dataBase = Data.traerDataBasePlato();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBasePlato(dataBase);
 		} else {
 			System.out.println("no se puede agregar el plato a la base de datos");
@@ -706,12 +748,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseCliente(JsonArray)}
 	 */
 	public static void agregarObjetoDataBaseCliente(Cliente obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseCliente();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBaseCliente(dataBase);
 		} else {
 			System.out.println("no se puede agregar el cliente a la base de datos");
@@ -727,12 +766,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseTendero(JsonArray)}
 	 */
 	public static void agregarObjetoDataBaseTendero(Tendero obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseTendero();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBaseTendero(dataBase);
 		} else {
 			System.out.println("no se puede agregar el tendero a la base de datos");
@@ -748,12 +784,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
 	 */
 	public static void agregarObjetoDataBaseAdministrador(Administrador obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseAdministrador();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBaseAdministrador(dataBase);
 		} else {
 			System.out.println("no se puede agregar el administrador a la base de datos");
@@ -769,12 +802,9 @@ public class Data {
 	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
 	public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBaseRestaurante(dataBase);
 		} else {
 			System.out.println("no se puede agregar el restaurante a la base de datos");
@@ -782,12 +812,9 @@ public class Data {
 	}
 
 	public static void agregarObjetoDataBasePedido(Pedido obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePedido();
-		if (!dataBase.contains(je)) {
-			dataBase.add(je);
+		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
+		if (!dataBase.contains(obj)) {
+			dataBase.add(obj);
 			Data.actualizarDataBasePedido(dataBase);
 		} else {
 			System.out.println("no se puede agregar el pedido a la base de datos");
@@ -801,12 +828,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBasePlato(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBasePlato(Plato obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePlato();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
+		ArrayList<Plato> dataBase = Data.traerDataBasePlato();
+		if (dataBase.contains(obj)) {
+			dataBase.remove(obj);
 			Data.actualizarDataBasePlato(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el plato a la base de datos");
@@ -820,12 +844,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseCliente(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseCliente(Cliente obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseCliente();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
+		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
+		if (dataBase.contains(obj)) {
+			dataBase.remove(obj);
 			Data.actualizarDataBaseCliente(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el cliente a la base de datos");
@@ -839,10 +860,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseTendero(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseTendero(Tendero obj) {
-		JsonArray dataBase = Data.traerDataBaseTendero();
+		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
 		for (int i = 0; i < dataBase.size(); i++) {
-			JsonObject jo = dataBase.get(i).getAsJsonObject();
-			if (obj.getNombre().equals(jo.get("nombre").getAsString())) {
+			if (obj.getUserName().equals(dataBase.get(i).getUserName())) {
 				dataBase.remove(i);
 				Data.actualizarDataBaseTendero(dataBase);
 				break;
@@ -857,12 +877,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseAdministrador(Administrador obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseAdministrador();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
+		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
+		if (dataBase.contains(obj)) {
+			dataBase.remove(obj);
 			Data.actualizarDataBaseAdministrador(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el administrador a la base de datos");
@@ -876,10 +893,9 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
 		for (int i = 0; i < dataBase.size(); i++) {
-			JsonObject jo = dataBase.get(i).getAsJsonObject();
-			if (obj.getNombre().equals(jo.get("nombre").getAsString())) {
+			if (obj.getNombre().equals(dataBase.get(i).getNombre())) {
 				dataBase.remove(i);
 				Data.actualizarDataBaseRestaurante(dataBase);
 				break;
@@ -888,12 +904,9 @@ public class Data {
 	}
 
 	public static void eliminarObjetoDataBasePedido(Pedido obj) {
-		Gson gson = new Gson();
-		String aux = gson.toJson(obj);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBasePedido();
-		if (dataBase.contains(je)) {
-			dataBase.remove(je);
+		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
+		if (dataBase.contains(obj)) {
+			dataBase.remove(obj);
 			Data.actualizarDataBasePedido(dataBase);
 		} else {
 			System.out.println("no se puede eliminar el pedido a la base de datos");
@@ -908,13 +921,11 @@ public class Data {
 	 */
 
 	public static Plato buscarPlato(String userName) {
-		Gson gson = new Gson();
 		Plato plato = null;
-		JsonArray dataBase = Data.traerDataBasePlato();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("nombre").getAsString())) {
-				plato = gson.fromJson(obj, Plato.class);
+		ArrayList<Plato> dataBase = Data.traerDataBasePlato();
+		for (Plato p : dataBase) {
+			if (userName.equals(p.getNombre())) {
+				plato = p;
 			}
 		}
 		return plato;
@@ -928,13 +939,11 @@ public class Data {
 	 */
 
 	public static Cliente buscarCliente(String userName) {
-		Gson gson = new Gson();
 		Cliente cliente = null;
-		JsonArray dataBase = Data.traerDataBaseCliente();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString())) {
-				cliente = gson.fromJson(obj, Cliente.class);
+		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
+		for (Cliente c : dataBase) {
+			if (userName.equals(c.getUserName())) {
+				cliente = c;
 			}
 		}
 		return cliente;
@@ -948,12 +957,10 @@ public class Data {
 	 */
 	public static Cliente buscarCliente(String userName, String clave) {
 		Cliente cliente = null;
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBaseCliente();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
-				cliente = gson.fromJson(obj, Cliente.class);
+		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
+		for (Cliente c : dataBase) {
+			if (userName.equals(c.getUserName()) && clave.equals(c.getClave())) {
+				cliente = c;
 			}
 		}
 		return cliente;
@@ -967,13 +974,11 @@ public class Data {
 	 */
 
 	public static Tendero buscarTendero(String userName) {
-		Gson gson = new Gson();
 		Tendero tendero = null;
-		JsonArray dataBase = Data.traerDataBaseTendero();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString())) {
-				tendero = gson.fromJson(obj, Tendero.class);
+		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
+		for (Tendero t : dataBase) {
+			if (userName.equals(t.getUserName())) {
+				tendero = t;
 			}
 		}
 		return tendero;
@@ -987,12 +992,10 @@ public class Data {
 	 */
 	public static Tendero buscarTendero(String userName, String clave) {
 		Tendero tendero = null;
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBaseTendero();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
-				tendero = gson.fromJson(obj, Tendero.class);
+		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
+		for (Tendero t : dataBase) {
+			if (userName.equals(t.getUserName()) && clave.equals(t.getClave())) {
+				tendero = t;
 			}
 		}
 		return tendero;
@@ -1006,13 +1009,11 @@ public class Data {
 	 */
 
 	public static Administrador buscarAdministrador(String userName) {
-		Gson gson = new Gson();
 		Administrador administrador = null;
-		JsonArray dataBase = Data.traerDataBaseAdministrador();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString())) {
-				administrador = gson.fromJson(obj, Administrador.class);
+		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
+		for (Administrador a : dataBase) {
+			if (userName.equals(a.getUserName())) {
+				administrador = a;
 			}
 		}
 		return administrador;
@@ -1026,12 +1027,10 @@ public class Data {
 	 */
 	public static Administrador buscarAdministrador(String userName, String clave) {
 		Administrador administrador = null;
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBaseAdministrador();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("userName").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
-				administrador = gson.fromJson(obj, Administrador.class);
+		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
+		for (Administrador a : dataBase) {
+			if (userName.equals(a.getUserName()) && clave.equals(a.getClave())) {
+				administrador = a;
 			}
 		}
 		return administrador;
@@ -1043,12 +1042,10 @@ public class Data {
 
 	public static Restaurante buscarRestaurante(String userName) {
 		Restaurante restaurante = null;
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("nombre").getAsString())) {
-				restaurante = gson.fromJson(obj, Restaurante.class);
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		for (Restaurante r : dataBase) {
+			if (userName.equals(r.getNombre())) {
+				restaurante = r;
 			}
 		}
 		return restaurante;
@@ -1062,12 +1059,10 @@ public class Data {
 	 */
 	public static Restaurante buscarRestaurante(String userName, String clave) {
 		Restaurante restaurante = null;
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (userName.equals(obj.get("nombre").getAsString()) && clave.equals(obj.get("clave").getAsString())) {
-				restaurante = gson.fromJson(obj, Restaurante.class);
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		for (Restaurante r : dataBase) {
+			if (userName.equals(r.getNombre()) && clave.equals(r.getClave())) {
+				restaurante = r;
 			}
 		}
 		return restaurante;
@@ -1075,13 +1070,10 @@ public class Data {
 
 	public static Pedido buscarPedido(int ID) {
 		Pedido pedido = null;
-		String x = String.valueOf(ID);
-		Gson gson = new Gson();
-		JsonArray dataBase = Data.traerDataBasePedido();
-		for (JsonElement jsonElement : dataBase) {
-			JsonObject obj = jsonElement.getAsJsonObject();
-			if (x.equals(obj.get("ID").getAsString())) {
-				pedido = gson.fromJson(obj, Pedido.class);
+		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
+		for (Pedido p : dataBase) {
+			if (p.getId()==ID) {
+				pedido = p;
 			}
 		}
 		return pedido;
@@ -1091,26 +1083,22 @@ public class Data {
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
 	 */
 	public static Restaurante OrganizarRestaurantesPorCalificacion() {
-		Gson gson = new Gson();
-		JsonArray historial = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
 		Restaurante best = null;
 		double max = 0;
 		for (int i = 0; i < historial.size(); i++) {
-			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
-			if (max < aux1.getCalificacionPromediada()) {
-				best = aux1;
-				max = aux1.getCalificacionPromediada();
+			if (max < historial.get(i).getCalificacionPromediada()) {
+				best = historial.get(i);
+				max = historial.get(i).getCalificacionPromediada();
 			}
 		}
 		return best;
 	}
 
 	public static void imprimirRestaurantes() {
-		Gson gson = new Gson();
-		JsonArray historial = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
 		for (int i = 0; i < historial.size(); i++) {
-			Restaurante aux1 = gson.fromJson(historial.get(i), Restaurante.class);
-			System.out.println(i + 1 + ") " + aux1.getNombre());
+			System.out.println(i + 1 + ") " + historial.get(i).getNombre());
 
 		}
 	}
