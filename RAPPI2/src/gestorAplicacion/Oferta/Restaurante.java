@@ -116,6 +116,18 @@ public class Restaurante implements Serializable {
 	public List<String> getDireccion() {
 		return (direcciones);
 	}
+	
+	public void setDireccion(String dire) {
+		this.direcciones.clear();
+		String aux = "";
+		for(int i = 0; i<dire.length(); i++) {
+			if(String.valueOf(dire.charAt(i)).equals(",")) {
+				this.agregarDireccion(aux);
+			}else {
+				aux = aux + String.valueOf(dire.charAt(i));
+			}
+		}
+	}
 
 	public void setCelular(String celular) {
 		this.celular = celular;

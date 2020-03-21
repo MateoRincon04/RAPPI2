@@ -1,1 +1,1 @@
-[{"nombre":"kfc","notificaciones":[1],"calificaciones":[1],"direcciones":["dir"],"opciones":[12,13,14,15,16,17,18,25],"celular":"123","menu":"pollo","clave":"kfc"}]
+[{"nombre":"MC","notificaciones":[1,2],"calificaciones":[],"direcciones":["Calle10"],"opciones":[12,13,14,15,16,17,18,25],"celular":"2352123","menu":"Hamburguesa","clave":"MC"},{"nombre":"kfc","notificaciones":[1],"calificaciones":[],"direcciones":["calle3"],"opciones":[12,13,14,15,16,17,18,25],"celular":"12412513","menu":"pollo","clave":"kfc"}]
