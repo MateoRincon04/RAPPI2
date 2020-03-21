@@ -17,7 +17,10 @@ import BaseDatos.Data;
 
 public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu diferente. El tamano
 	// varia dependiendo de las opciones de cada menu.
-	static ArrayList<OpcionDeMenu> menu = Data.getOpciones();
+	private static ArrayList<OpcionDeMenu> menu = Data.getOpciones();
+	public static ArrayList<OpcionDeMenu> getMenu(){
+		return menu;
+	}
 
 	public void AnadirOpcion(OpcionDeMenu OpcionMenu) {
 	}

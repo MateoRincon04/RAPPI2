@@ -22,22 +22,14 @@ public class HacerPedido extends OpcionDeMenu {
 
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
 		String nombre = Main.user.next();
-		Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
-		Plato platoEscogido = null;
-		if (restauranteElegido != null) {
-			platoEscogido = escogerPlato(restauranteElegido);
-			if (platoEscogido != null) {
-				valor = usuarioCliente.hacerPedido(platoEscogido);
-				System.out.println("Su pedido se ha realizado correctamente.");
+		String restaurante = null;
+		for(int i : usuarioCliente.getHistorial()) {
+			if(Data.buscarPedido(i).getEntregado().equals("noEntegrado")) {
+				restaurante = Data.buscarPedido(i).getRestaurante();
 			}
-		} else {
-			System.out.println("No se encontro restaurante con este nombre");
 		}
-
-		if (!valor && restauranteElegido != null && platoEscogido != null) {
-			System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
-			MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
-		} else {
+		if(restaurante!=null) {
+			System.out.println("tiene un pedido en curso en "+ restaurante);
 			System.out.println(
 					"¿Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
 			int opc = Main.user.nextInt();
@@ -46,9 +38,33 @@ public class HacerPedido extends OpcionDeMenu {
 			} else {
 				ejecutar();
 			}
+		}else {
+			Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
+			Plato platoEscogido = null;
+			if (restauranteElegido != null) {
+				platoEscogido = escogerPlato(restauranteElegido);
+				if (platoEscogido != null) {
+					valor = usuarioCliente.hacerPedido(platoEscogido);
+					System.out.println("Su pedido se ha realizado correctamente.");
+				}
+			} else {
+				System.out.println("No se encontro restaurante con este nombre");
+			}
 
+			if (!valor && restauranteElegido != null && platoEscogido != null) {
+				System.out.println("Usted no cuenta con saldo suficiente para pedir este plato.");
+				MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
+			} else {
+				System.out.println(
+						"¿Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee.");
+				int opc = Main.user.nextInt();
+				if (opc == 2) {
+					MenuDeConsola.lanzarMenu((Cliente) Main.usuario);
+				} else {
+					ejecutar();
+				}
+			}
 		}
-
 	}
 
 	/**
@@ -64,7 +80,7 @@ public class HacerPedido extends OpcionDeMenu {
 		Plato plato =null;
 		System.out.println("Este es el menu de platos con el que cuenta el restaurante.");
 		System.out.println(restauranteElegido.getMenu());
-		if (restauranteElegido.getMenu().equals("")) {        //.isBlank()
+		if (restauranteElegido.getMenu().equals("")) {
 			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
 		} else {
