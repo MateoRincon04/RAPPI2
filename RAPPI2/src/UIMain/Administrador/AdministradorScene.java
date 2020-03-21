@@ -1,6 +1,7 @@
 package UIMain.Administrador;
 
 import BaseDatos.Data;
+import UIMain.FieldPanel;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -41,7 +42,13 @@ public class AdministradorScene extends Application{
 		
 		//se adiciona los elementos de Procesos y consultas
 		for (int i = 22; i < Data.getOpciones().size()-1; i++) {
-			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
+			MenuItem mi = new MenuItem(Data.getOpciones().get(i).toString());
+			mi.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					
+				}
+			});
+			menu1.getItems().add(mi);
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
 		//se adiciona los elementos de ayuda
@@ -55,67 +62,25 @@ public class AdministradorScene extends Application{
 		scene1 = new Scene(root,600,600);
 		
 		
+		//programa para Ayuda Acerca de
+		mi3.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String[] criterios = {"Nombre","Nombre","Nombre","Nombre"};
+				String[] valores = {"Mateo","Andrea", "Guillermo","Santiago"};
+				boolean[] habilitado = {false,false,false,false};
+				FieldPanel fp = new FieldPanel("Criterios",criterios,"Valores",valores,habilitado);
+				root.setCenter(fp);
+			}
+		});
+		
 		//programa para Archivo USUARIO
 		mi1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				//se crea la ventana con la informacion basica del Administrador
-				gp = new GridPane();
-				//crear los nodos del grid
-				Label lb1 = new Label("Nombre");
-				TextField t1 = new TextField(usuario.getNombre());
-				t1.setEditable(false);
-				Label lb2 = new Label("UserName");
-				TextField t2 = new TextField(usuario.getUserName());
-				t2.setEditable(false);
-				Label lb3 = new Label("Clave");
-				String claveAux ="";
-				for (int i =0;i<usuario.getClave().length();i++) {
-					claveAux =claveAux+"*";
-				}
-				TextField t3 = new TextField(claveAux);
-				t3.setEditable(false);
-				t3.setOnMouseEntered(new EventHandler<MouseEvent>(){
-					public void handle(MouseEvent mouseEvent) {
-						t3.setText(usuario.getClave());
-					}
-				});
-				t3.setOnMouseExited(new EventHandler<MouseEvent>(){
-					public void handle(MouseEvent mouseEvent) {
-						String claveAux ="";
-						for (int i =0;i<usuario.getClave().length();i++) {
-							claveAux =claveAux+"*";
-						}
-						t3.setText(claveAux);
-					}
-				});
-				Label lb4 = new Label("Telefono");
-				TextField t4 = new TextField(String.valueOf(usuario.getTelefono()));
-				t4.setEditable(false);
-				Label lb5 = new Label("Comuna");
-				TextField t5 = new TextField(String.valueOf(usuario.getComuna()));
-				t5.setEditable(false);
-				Label lb6 = new Label("Salario");
-				TextField t6 = new TextField(String.valueOf(usuario.getSalario()));
-				t6.setEditable(false);
-				//especificaciones del grip
-				gp.setHgap(5);
-				gp.setVgap(5);
-				gp.setAlignment(Pos.CENTER);
-				//agregar los nodos al grip
-				gp.add(lb1,0,0);
-				gp.add(t1,1,0);
-				gp.add(lb2,0,1);
-				gp.add(t2,1,1);
-				gp.add(lb3,0,2);
-				gp.add(t3,1,2);
-				gp.add(lb4,0,3);
-				gp.add(t4,1,3);
-				gp.add(lb5,0,4);
-				gp.add(t5,1,4);
-				gp.add(lb6,0,5);
-				gp.add(t6,1,5);
-				gp.setAlignment(Pos.CENTER);
-				root.setCenter(gp); 
+				String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Salario"};
+				String[] valores = {usuario.getNombre(),usuario.getUserName(), usuario.getClave(),String.valueOf(usuario.getTelefono()),String.valueOf(usuario.getComuna()),String.valueOf(usuario.getSalario())};
+				boolean[] habilitado = {true,false,false,true,true,false};
+				FieldPanel fp = new FieldPanel("Criterios",criterios,"Valores",valores,habilitado);
+				root.setCenter(fp);
 			}
 		});
 		
