@@ -18,11 +18,9 @@ public class FieldPanel extends Pane{
 		root.setHgap(5);
 		root.setVgap(5);
 		root.setAlignment(Pos.CENTER);
-		TextField tc = new TextField(tituloCriterios);
-		tc.setEditable(false);
+		Label tc = new Label(tituloCriterios);
 		root.add(tc, 0, 0);
-		TextField tv =new TextField(tituloValores);
-		tv.setEditable(false);
+		Label tv =new Label(tituloValores);
 		root.add(tv, 1, 0);
 		for(int i = 0; i<criterios.length; i++) {
 			root.add(new Label(criterios[i]), 0, i+1);
@@ -32,6 +30,7 @@ public class FieldPanel extends Pane{
 			}
 			root.add(taux, 1, i+1);
 		}
+		root.setAlignment(Pos.CENTER);
 		this.getChildren().add(root);
 	}
 }
