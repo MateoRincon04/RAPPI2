@@ -6,10 +6,7 @@ import UIMain.Main;
 import gestorAplicacion.Interaccion.Cliente;
 
 import java.io.Serializable;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+import java.util.ArrayList;
 
 import BaseDatos.Data;
 
@@ -66,13 +63,10 @@ public class Administrador extends Perfil implements Serializable{
 	 * @param salario  El parametro salario define el salario que tendra el Tendero
 	 */
 	public boolean crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
-		Gson gson = new Gson();
 		Tendero tendero = new Tendero(nombre, telefono, comuna, clave, userName, salario);
 		Main.tenderos.add(tendero.getUserName());
-		String aux = gson.toJson(tendero);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseTendero();
-		if (!dataBase.contains(je)) {
+		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
+		if (!dataBase.contains(tendero)) {
 			Data.agregarObjetoDataBaseTendero(tendero);
 
 			return true;
@@ -84,12 +78,9 @@ public class Administrador extends Perfil implements Serializable{
 
 	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName,
 			long salario) {
-		Gson gson = new Gson();
 		Administrador administrador = new Administrador(nombre, telefono, comuna, clave, userName, salario);
-		String aux = gson.toJson(administrador);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseAdministrador();
-		if (!dataBase.contains(je)) {
+		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
+		if (!dataBase.contains(administrador)) {
 			Data.agregarObjetoDataBaseAdministrador(administrador);
 
 			return true;
@@ -110,12 +101,9 @@ public class Administrador extends Perfil implements Serializable{
 	 *                  el Restaurante
 	 */
 	public boolean crearRestaurante(String nombre, String direccion, String celular, String clave) {
-		Gson gson = new Gson();
 		Restaurante restaurante = new Restaurante(nombre, direccion, celular, clave);
-		String aux = gson.toJson(restaurante);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		JsonArray dataBase = Data.traerDataBaseRestaurante();
-		if (!dataBase.contains(je)) {
+		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		if (!dataBase.contains(restaurante)) {
 			Data.agregarObjetoDataBaseRestaurante(restaurante);
 
 			return true;
