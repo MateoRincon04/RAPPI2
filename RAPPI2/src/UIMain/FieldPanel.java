@@ -43,6 +43,5 @@ public class FieldPanel extends Pane{
 			root.add(taux, 1, i+1);
 		}
 		this.getChildren().add(root);
-		//this.setAlignment(Pos.CENTER);
 	}
 }
