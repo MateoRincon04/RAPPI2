@@ -6,24 +6,14 @@ import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class AdministradorScene extends Application{
@@ -63,9 +53,10 @@ public class AdministradorScene extends Application{
 		menu2.getItems().add(mi3);
 		
 		//se adicion la barra de menu al pane1
-		VBox root = new VBox(barraMenu);
+		BorderPane root = new BorderPane();
+		root.setTop(barraMenu);
 		//creación de la Escena
-		scene1 = new Scene(root,600,600);
+		scene1 = new Scene(root,1200,600);
 		
 		
 		//programa para Ayuda Acerca de
@@ -75,7 +66,7 @@ public class AdministradorScene extends Application{
 				String[] valores = {"Mateo Rincon","Paula Andrea Taborda", "Guillermo Toloza","Santiago Tamayo"};
 				boolean[] habilitado = {false,false,false,false};
 				FieldPanel fp = new FieldPanel("CRITERIO",criterios,"VALOR",valores,habilitado);
-				root.getChildren().add(fp);
+				root.setCenter(fp);
 			}
 		});
 		
@@ -86,8 +77,7 @@ public class AdministradorScene extends Application{
 				String[] valores = {usuario.getNombre(),usuario.getUserName(), usuario.getClave(),String.valueOf(usuario.getTelefono()),String.valueOf(usuario.getComuna()),String.valueOf(usuario.getSalario())};
 				boolean[] habilitado = {true,false,false,true,true,false};
 				FieldPanel fp = new FieldPanel("CRITERIO",criterios,"VALOR",valores,habilitado);
-				
-				root.getChildren().add(fp);
+				root.setCenter(fp);
 			}
 		});
 		

@@ -1,7 +1,6 @@
 package UIMain;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
@@ -59,7 +58,6 @@ public class FieldPanel extends Pane {
 		}
 		root.setAlignment(Pos.CENTER);
 		this.getChildren().add(root);
-		// this.setAlignment(Pos.CENTER);
 	}
 
 	public String getValue(String criterio) {
