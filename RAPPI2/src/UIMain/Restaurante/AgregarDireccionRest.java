@@ -4,6 +4,7 @@ import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.ErrorCancelar;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -11,12 +12,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class AgregarDireccionRest extends OpcionDeMenu {
-	
+
 	private String tituloCriterios = "Criterio: ";
-	private String[] criterios = new String[] {"Direccion: "};
+	private String[] criterios = new String[] { "Direccion: " };
 	private String tituloValores = "Valor: ";
-	private String[] valores = new String[] {""};
-	private boolean[] habilitado = new boolean[] {true};
+	private String[] valores = new String[] { "" };
+	private boolean[] habilitado = new boolean[] { true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
 
 	public void ejecutar() {
@@ -44,20 +45,22 @@ public class AgregarDireccionRest extends OpcionDeMenu {
 	}
 
 	public void Aceptar() {
-		if (Main.usuarioRestaurante.getDireccion().contains(fp.getValue(fp.criterios[0]))) {
-			Alert a = new Alert(AlertType.ERROR);
-			a.setContentText(
-					"El restaurante ya cuenta con esta direccion");
-			a.show();
-			for (int i = 0; i < criterios.length; i++) {
-				fp.setValue(fp.criterios[i]);
-			}
+		try {
+			if (Main.usuarioRestaurante.getDireccion().contains(fp.getValue(fp.criterios[0]))) {
+				throw new ErrorCancelar();
 
-		} else {
-			String dir = fp.getValue(fp.criterios[0]);
-			Main.usuarioRestaurante.agregarDireccion(dir);
+			} else {
+				String dir = fp.getValue(fp.criterios[0]);
+				Main.usuarioRestaurante.agregarDireccion(dir);
+				this.Cancelar();
+			}
+		} catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
 			this.Cancelar();
 		}
+
 	}
 
 	public void Cancelar() {

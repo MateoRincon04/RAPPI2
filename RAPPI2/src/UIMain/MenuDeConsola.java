@@ -3,8 +3,11 @@ package UIMain;
 import java.util.ArrayList;
 import gestorAplicacion.Interaccion.*;
 import gestorAplicacion.Oferta.Restaurante;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import gestorAplicacion.Administracion.*;
 import BaseDatos.Data;
+import UIMain.Excepciones.AlertaConfirmacion;
 
 /**
  * Clase MenuDeConsola tiene como finalidad desplegar el menu de consola que se
@@ -181,7 +184,13 @@ public class MenuDeConsola { // Se desplega cada vez que se vaya a crear un menu
 				// try {
 				int opc = Integer.parseInt(valor);
 				if (opc > 0 && opc <= menu.size() - 21) {
-					menu.get(opc + 21).ejecutar();
+					try {
+						menu.get(opc + 21).ejecutar();
+					}catch(AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+					
 					break;
 				} else {
 					System.out.println("Ingrese un numero valido");

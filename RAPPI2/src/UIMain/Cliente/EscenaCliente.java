@@ -5,6 +5,7 @@ import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
+import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Oferta.Restaurante;
 import javafx.application.Application;
@@ -64,7 +65,13 @@ public class EscenaCliente extends Application {
 				conf.setContentText("¿Seguro que desea salir?");
 				Optional<ButtonType> result = conf.showAndWait();
 				if (result.get() == ButtonType.OK) {
-					Data.getOpciones().get(29).ejecutar();
+					try {
+						Data.getOpciones().get(29).ejecutar();
+					}catch(AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+					
 					System.exit(0);
 				} else {
 

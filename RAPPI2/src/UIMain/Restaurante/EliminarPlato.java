@@ -1,31 +1,102 @@
 package UIMain.Restaurante;
 
+import java.util.Optional;
+
 import BaseDatos.Data;
+import UIMain.FieldPanel;
 import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.ErrorCancelar;
+import UIMain.Excepciones.ErrorConfirmacion;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.GridPane;
 
 public class EliminarPlato extends OpcionDeMenu {
+	String[] criterios;
+	FieldPanel fp;
+
 	public void ejecutar() {
-		System.out.println("Eliminará su plato del menu");
-		System.out.println("Esta seguro que desea eliminarlo, ingrese 1 confirmando el borrado, o ingrese 0 para cancelar");
-		int opc = Main.user.nextInt();
-		if(opc == 1) {
-			if(!Main.usuarioRestaurante.getMenu().equals("")) {
-				Data.eliminarObjetoDataBasePlato(Data.buscarPlato(Main.usuarioRestaurante.getMenu()));
-				Main.usuarioRestaurante.setMenu("");
-				Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
-				System.out.println("Plato borrado");
-				MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
-			}
-			
+
+		String tituloCriterios = "Menu: ";
+		criterios = new String[1];
+		criterios[0] = "Plato: ";
+		String tituloValores = "Nombre del Plato: ";
+		String[] valores = new String[1];
+		valores[0] = Main.usuarioRestaurante.getMenu();
+		boolean[] habilitado = new boolean[1];
+		habilitado[0] = false;
+		
+
+		if (Main.usuarioRestaurante.getMenu().equals("")) {
+
+			Alert a = new Alert(AlertType.INFORMATION);
+			a.setContentText("Usted no tiene registrada un plato en su menu");
+			a.show();
 		}
-		else {
-			System.out.println("Operacion cancelada");
-			MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
+
+		fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
+		GridPane bonito = new GridPane();
+		Label desc = new Label("Funcionalidad para eliminar el plato que posee en su menu: ");
+		desc.setAlignment(Pos.CENTER);
+		Label nom = new Label(Data.getOpciones().get(19).toString());
+		nom.setAlignment(Pos.CENTER);
+		nom.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		bonito.add(new Label(
+				"                                                                                                                        "),
+				0, 0);
+		bonito.add(new Label(
+				"                                                                                                                        "),
+				0, 2);
+		bonito.add(new Label(
+				"                                                                                                                        "),
+				0, 1);
+		bonito.add(nom, 1, 0);
+		bonito.add(desc, 1, 1);
+		bonito.add(fp, 1, 2);
+		RestauranteEscena.root.setCenter(bonito);
+	}
+
+	public void Aceptar() {
+		try {
+			if (!Main.usuarioRestaurante.getMenu().equals("")) {
+
+				try {
+					Alert al = new Alert(AlertType.CONFIRMATION);
+					al.setContentText("Seguro que desea eliminar su plato");
+					Optional<ButtonType> res = al.showAndWait();
+					if (res.get() == ButtonType.OK) {
+						throw new ErrorConfirmacion();
+
+					} else {
+						this.Cancelar();
+					}
+				} catch (ErrorConfirmacion e) {
+					Main.usuarioRestaurante.setMenu("");
+					this.ejecutar();
+				}
+
+			} else {
+				throw new ErrorCancelar();
+			}
+
+		} catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+			this.Cancelar();
 		}
 	}
 
+	public void Cancelar() {
+		fp.setValue(criterios[0]);
+	}
+	
+	
 	public String toString() {
 		return "Eliminar plato";
 	}

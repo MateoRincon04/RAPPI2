@@ -4,9 +4,12 @@ import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.ErrorCancelar;
 import gestorAplicacion.Oferta.Plato;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
 public class CambiarPlato extends OpcionDeMenu {
@@ -21,7 +24,7 @@ public class CambiarPlato extends OpcionDeMenu {
 	public void ejecutar() {
 
 		GridPane bonito = new GridPane();
-		Label desc = new Label("Se va a cambiar el plato " +Main.usuarioRestaurante.getMenu() + " del restaurante: ");
+		Label desc = new Label("Se va a cambiar el plato " + Main.usuarioRestaurante.getMenu() + " del restaurante: ");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(17).toString());
 		nom.setAlignment(Pos.CENTER);
@@ -43,15 +46,28 @@ public class CambiarPlato extends OpcionDeMenu {
 	}
 
 	public void Aceptar() {
-		String nombre = fp.getValue(fp.criterios[0]);
-		String descripcion = fp.getValue(fp.criterios[1]);
-		String precio = fp.getValue(fp.criterios[2]);
-		String restriccion = fp.getValue(fp.criterios[3]);
-		int pr = Integer.valueOf(precio);
-		int res = Integer.valueOf(restriccion);
-		Plato cambio = new Plato(nombre, descripcion, pr, res, Main.usuarioRestaurante);
-		Main.usuarioRestaurante.cambiarPlato(cambio);
-		this.Cancelar();
+		try {
+			if (Main.usuarioRestaurante.getMenu().equals("")) {
+				throw new ErrorCancelar();
+			} else {
+				String nombre = fp.getValue(fp.criterios[0]);
+				String descripcion = fp.getValue(fp.criterios[1]);
+				String precio = fp.getValue(fp.criterios[2]);
+				String restriccion = fp.getValue(fp.criterios[3]);
+				int pr = Integer.valueOf(precio);
+				int res = Integer.valueOf(restriccion);
+				Plato cambio = new Plato(nombre, descripcion, pr, res, Main.usuarioRestaurante);
+				Main.usuarioRestaurante.cambiarPlato(cambio);
+				this.Cancelar();
+			}
+
+		} catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+			this.Cancelar();
+		}
+
 	}
 
 	public void Cancelar() {
