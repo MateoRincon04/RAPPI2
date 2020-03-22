@@ -26,10 +26,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class EscenaCliente extends Application {
-	Scene escenaCliente;
-	GridPane panel;
-	Cliente cliente = Data.buscarCliente("guille");
-	
+	private Scene escenaCliente;
+	private GridPane panel;
+	private Cliente cliente = Data.buscarCliente("guille");
+	static BorderPane root;
 
 	public void start(Stage stage) {
 		
@@ -42,7 +42,7 @@ public class EscenaCliente extends Application {
 		MenuItem mi2 = new MenuItem("Salir");
 		SeparatorMenuItem separator = new SeparatorMenuItem();
 		menu.getItems().addAll(mi1, separator, mi2);
-		for (int i = 3; i < 12; i++) {
+		for (int i = 3; i < 11; i++) {
 			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
@@ -52,7 +52,7 @@ public class EscenaCliente extends Application {
 		MenuItem mi3 = new MenuItem("Acerca de");
 		menu2.getItems().add(mi3);
 
-		BorderPane root = new BorderPane();
+		root = new BorderPane();
 		root.setTop(barraArriba);
 	
 		escenaCliente = new Scene(root, 1200, 600);
@@ -91,6 +91,20 @@ public class EscenaCliente extends Application {
 				FieldPanel fp = new FieldPanel("Acerca de",criterios,"los autores",valores,habilitado);
 				root.setCenter(fp);
 				root.setAlignment(fp, Pos.CENTER);
+			}
+		});
+		
+		
+		//funcionalidades
+		
+		menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Data.getOpciones().get(7).ejecutar();
+			}
+		});
+		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Data.getOpciones().get(6).ejecutar();
 			}
 		});
 		stage.setScene(escenaCliente);
