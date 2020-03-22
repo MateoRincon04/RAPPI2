@@ -48,7 +48,7 @@ public class Data {
 		opciones.add(new CalificarRestaurante()); // 5 cliente
 		opciones.add(new CuantoHeGastado()); // 6 cliente
 		opciones.add(new MejorRestauranteCal()); // 7 cliente
-		opciones.add(new PlatosQueMasCompre()); // 8 cliente				/19 admin
+		opciones.add(new PlatosQueMasCompre()); // 8 cliente	
 		opciones.add(new AgregarSaldo());// 9 cliente
 		opciones.add(new cambiarContraCliente()); //10 cliente
 		opciones.add(new CuantosPedidosHeEntregado()); // 11 tendero
@@ -67,7 +67,7 @@ public class Data {
 		opciones.add(new CrearTendero()); // 24 admin
 		opciones.add(new TenderoReparteMas()); // 25 admin
 		opciones.add(new QuitarFuncionalidades()); // 26 admin
-		opciones.add(new AgregarFuncionalidades()); // 27 admin*/
+		opciones.add(new AgregarFuncionalidades()); // 27 admin
 		opciones.add(new cambiarContraseñaAdmin()); //28 Admin
 		opciones.add(new Salir()); // 29 todos
 
@@ -79,21 +79,21 @@ public class Data {
 
 	// Mateo temp; System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" +
 
-	private static final String filepathPedido = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "pedidoGuardados.json";
-	private static final String filepathCliente = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "clientesGuardados.json";
-	private static final String filepathTendero = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "tenderosGuardados.json";
-	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathAdministrador = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "administradoresGuardados.json";
-	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathRestaurantes = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "restaurantesGuardados.json";
-	private static final String filepathPlato = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "platosGuardados.json";
-	static final String filepathNotificacion = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "NotificacionesGuardados.json";
-	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\RAPPI2\\src\\BaseDatos\\temp\\"
+	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\"
 			+ "CalificacionesGuardados.json";
 
 	/*

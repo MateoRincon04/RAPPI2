@@ -1,47 +1,34 @@
 package UIMain.Restaurante;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.swing.JComboBox;
-
 import BaseDatos.Data;
+import UIMain.FieldPanel;
 import UIMain.Main;
-import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Oferta.Restaurante;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class RestauranteEscena extends Application {
-	Scene sceneRes;
-	GridPane gp;
-	Restaurante usuario = Main.usuarioRestaurante;
+	private Scene sceneRes;
+	private GridPane gp;
+	static BorderPane root;
+	private Restaurante usuario = Main.usuarioRestaurante;
 
 	public void start(Stage stage) {
 
@@ -73,10 +60,10 @@ public class RestauranteEscena extends Application {
 		menu2.getItems().add(mi3);
 
 		// se adicion la barra de menu al pane1
-		BorderPane root = new BorderPane();
+		root = new BorderPane();
 		root.setTop(barraMenu);
 		// creación de la Escena
-		sceneRes = new Scene(root, 600, 600);
+		sceneRes = new Scene(root, 1200, 600);
 
 		// programa para Archivo SALIR
 		mi2.setOnAction(new EventHandler<ActionEvent>() {
@@ -98,8 +85,8 @@ public class RestauranteEscena extends Application {
 			public void handle(ActionEvent event) {
 				// informacion del restaurante por medio de el FieldPanel
 				String tituloCriterios = "Datos del Restaurante";
-				String[] criterios = new String[] { "Nombre", "Direcciones", "Celular", "Menu", "Clave" };
-				String tituloValores = "";
+				String[] criterios = new String[] { "Nombre: ", "Direcciones: ", "Celular: ", "Menu: ", "Clave: " };
+				String tituloValores = "valor";
 				String aux = "";
 				for (int in = 0; in < Main.usuarioRestaurante.getDireccion().size(); in++) {
 					if (in == 0) {
@@ -112,68 +99,22 @@ public class RestauranteEscena extends Application {
 				}
 				String[] valores = new String[] { usuario.getNombre(), aux, usuario.getCelular(), usuario.getMenu(),
 						usuario.getClave() };
-				boolean[] habilitado = new boolean[] { false, true, true, true, false };
+				boolean[] habilitado = new boolean[] { false, false, false, false, false };
 
-				// FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,habilitado);
-
-				// se crea la ventana con la informacion basica del Administrador
-				gp = new GridPane();
-				// crear los nodos del grid
-				Label lb1 = new Label("Nombre");
-				TextField t1 = new TextField(usuario.getNombre());
-				t1.setEditable(false);
-				Label lb2 = new Label("UserName");
-				TextField t2 = new TextField(usuario.getUserName());
-				t2.setEditable(false);
-				Label lb3 = new Label("Clave");
-				String claveAux = "";
-				for (int i = 0; i < usuario.getClave().length(); i++) {
-					claveAux = claveAux + "*";
-				}
-				TextField t3 = new TextField(claveAux);
-				t3.setEditable(false);
-				t3.setOnMouseEntered(new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent mouseEvent) {
-						t3.setText(usuario.getClave());
-					}
-				});
-				t3.setOnMouseExited(new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent mouseEvent) {
-						String claveAux = "";
-						for (int i = 0; i < usuario.getClave().length(); i++) {
-							claveAux = claveAux + "*";
-						}
-						t3.setText(claveAux);
-					}
-				});
-				Label lb4 = new Label("Telefono");
-				TextField t4 = new TextField(String.valueOf(usuario.getTelefono()));
-				t4.setEditable(false);
-				Label lb5 = new Label("Comuna");
-				TextField t5 = new TextField(String.valueOf(usuario.getComuna()));
-				t5.setEditable(false);
-				Label lb6 = new Label("Salario");
-				TextField t6 = new TextField(String.valueOf(usuario.getSalario()));
-				t6.setEditable(false);
-				// especificaciones del grip
-				gp.setHgap(5);
-				gp.setVgap(5);
-				gp.setAlignment(Pos.CENTER);
-				// agregar los nodos al grip
-				gp.add(lb1, 0, 0);
-				gp.add(t1, 1, 0);
-				gp.add(lb2, 0, 1);
-				gp.add(t2, 1, 1);
-				gp.add(lb3, 0, 2);
-				gp.add(t3, 1, 2);
-				gp.add(lb4, 0, 3);
-				gp.add(t4, 1, 3);
-				gp.add(lb5, 0, 4);
-				gp.add(t5, 1, 4);
-				gp.add(lb6, 0, 5);
-				gp.add(t6, 1, 5);
-				gp.setAlignment(Pos.CENTER);
-				root.setCenter(gp);
+				FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
+				GridPane bonito = new GridPane();
+				Label desc = new Label("Datos de el usuario: ");
+				desc.setAlignment(Pos.CENTER);
+				desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				bonito.add(new Label(
+						"                                                                                                                        "),
+						0, 0);
+				bonito.add(new Label(
+						"                                                                                                                        "),
+						0, 1);
+				bonito.add(desc, 1, 0);
+				bonito.add(fp, 1, 1);
+				root.setCenter(bonito);
 			}
 		});
 
@@ -181,25 +122,49 @@ public class RestauranteEscena extends Application {
 		// En cuales direcciones
 		menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String tituloCriterios = "Datos necesarios para la operacion";
-				String[] criterios = new String[] { "Nombre", "Direcciones", "Celular", "Menu", "Clave" };
-				String tituloValores = "";
-				String aux = "";
-				for (int in = 0; in < Main.usuarioRestaurante.getDireccion().size(); in++) {
-					if (in == 0) {
-						aux = usuario.getDireccion().get(0);
+				Data.getOpciones().get(14).ejecutar();
+			}
+		});
 
-					} else {
-						aux = aux + ", " + usuario.getDireccion().get(in);
+		// Crear platos
+		menu1.getItems().get(1).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Data.getOpciones().get(15).ejecutar();
+				
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						
+						
+						
 					}
+				});
 
-				}
-				String[] valores = new String[] { usuario.getNombre(), aux, usuario.getCelular(), usuario.getMenu(),
-						usuario.getClave() };
-				boolean[] habilitado = new boolean[] { false, true, true, true, false };
+				Button ca = new Button("Cancelar");
 
-				// FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,habilitado);
+			}
+		});
 
+		// programa para Ayuda Acerca de
+		mi3.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String[] criterios = { "Nombre: ", "Nombre: ", "Nombre: ", "Nombre: " };
+				String[] valores = { "Mateo Rincon", "Paula Andrea Taborda", "Guillermo Toloza", "Santiago Tamayo" };
+				boolean[] habilitado = { false, false, false, false };
+				FieldPanel fp = new FieldPanel("Lista", criterios, "Nombres", valores, habilitado);
+				GridPane bonito = new GridPane();
+				Label desc = new Label("Nombre de los autores: ");
+				desc.setAlignment(Pos.CENTER);
+				desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				bonito.add(new Label(
+						"                                                                                                                        "),
+						0, 0);
+				bonito.add(new Label(
+						"                                                                                                                        "),
+						0, 1);
+				bonito.add(desc, 1, 0);
+				bonito.add(fp, 1, 1);
+				root.setCenter(bonito);
 			}
 		});
 

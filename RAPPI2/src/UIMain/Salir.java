@@ -1,7 +1,5 @@
 package UIMain;
 
-import com.google.gson.Gson;
-
 import BaseDatos.Data;
 import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
@@ -16,7 +14,6 @@ import gestorAplicacion.Interaccion.Tendero;
 public class Salir extends OpcionDeMenu {
 	public void ejecutar() {
 		if(Main.usuarioRestaurante != null) {
-			Gson gson = new Gson();
 			//System.out.println(gson.toJson(Main.usuarioRestaurante));
 			Data.actualizarDataBaseRestaurante(Main.usuarioRestaurante);
 		}

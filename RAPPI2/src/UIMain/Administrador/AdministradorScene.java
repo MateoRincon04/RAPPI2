@@ -63,7 +63,7 @@ public class AdministradorScene extends Application{
 		mi3.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				String[] criterios = {"Nombre","Nombre","Nombre","Nombre"};
-				String[] valores = {"Mateo","Andrea", "Guillermo","Santiago"};
+				String[] valores = {"Mateo Rincon","Paula Andrea Taborda", "Guillermo Toloza","Santiago Tamayo"};
 				boolean[] habilitado = {false,false,false,false};
 				FieldPanel fp = new FieldPanel("CRITERIO",criterios,"VALOR",valores,habilitado);
 				root.setCenter(fp);
