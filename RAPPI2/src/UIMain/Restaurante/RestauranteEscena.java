@@ -22,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class RestauranteEscena extends Application {
@@ -127,13 +128,15 @@ public class RestauranteEscena extends Application {
 		});
 
 		// Crear platos
-		menu1.getItems().get(1).setOnAction(new EventHandler<ActionEvent>() {
+		
+		menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Data.getOpciones().get(15).ejecutar();
 				
 				Button ac = new Button("Aceptar");
 				ac.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
+						((CrearPlato)Data.getOpciones().get(15)).Aceptar();
 						
 						
 						
@@ -141,6 +144,18 @@ public class RestauranteEscena extends Application {
 				});
 
 				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CrearPlato)Data.getOpciones().get(15)).Cancelar();
+						
+						
+						
+					}
+				});
+				HBox hb = new HBox(ac,ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
 
 			}
 		});
