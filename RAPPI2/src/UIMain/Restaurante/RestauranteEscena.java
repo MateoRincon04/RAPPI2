@@ -22,11 +22,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class RestauranteEscena extends Application {
 	private Scene sceneRes;
-	private GridPane gp;
+	private HBox hb;
 	static BorderPane root;
 	private Restaurante usuario = Main.usuarioRestaurante;
 
@@ -115,6 +116,7 @@ public class RestauranteEscena extends Application {
 				bonito.add(desc, 1, 0);
 				bonito.add(fp, 1, 1);
 				root.setCenter(bonito);
+				root.getChildren().remove(hb);
 			}
 		});
 
@@ -127,20 +129,85 @@ public class RestauranteEscena extends Application {
 		});
 
 		// Crear platos
-		menu1.getItems().get(1).setOnAction(new EventHandler<ActionEvent>() {
+		menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Data.getOpciones().get(15).ejecutar();
 				
 				Button ac = new Button("Aceptar");
 				ac.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						
-						
+						((CrearPlato)Data.getOpciones().get(15)).Aceptar();
 						
 					}
 				});
 
 				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CrearPlato)Data.getOpciones().get(15)).Cancelar();
+						
+					}
+				});
+				hb = new HBox(ac,ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		
+		// Agregar direccion al resta
+		menu1.getItems().get(4).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Data.getOpciones().get(16).ejecutar();
+				
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((AgregarDireccionRest)Data.getOpciones().get(16)).Aceptar();
+						
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((AgregarDireccionRest)Data.getOpciones().get(16)).Cancelar();
+						
+					}
+				});
+				hb = new HBox(ac,ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		
+		// Cambiar plato 
+		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Data.getOpciones().get(17).ejecutar();
+				
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CambiarPlato)Data.getOpciones().get(17)).Aceptar();
+						
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CambiarPlato)Data.getOpciones().get(17)).Cancelar();
+						
+					}
+				});
+				hb = new HBox(ac,ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
 
 			}
 		});
@@ -165,6 +232,7 @@ public class RestauranteEscena extends Application {
 				bonito.add(desc, 1, 0);
 				bonito.add(fp, 1, 1);
 				root.setCenter(bonito);
+				root.getChildren().remove(hb);
 			}
 		});
 

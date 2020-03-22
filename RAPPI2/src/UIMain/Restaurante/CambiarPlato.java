@@ -1,35 +1,63 @@
 package UIMain.Restaurante;
 
+import BaseDatos.Data;
+import UIMain.FieldPanel;
 import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import gestorAplicacion.Oferta.Plato;
-import gestorAplicacion.Oferta.Restaurante;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 public class CambiarPlato extends OpcionDeMenu {
+
+	private String tituloCriterios = "Criterios: ";
+	private String[] criterios = new String[] { "Nombre: ", "Descripcion: ", "Precio: ", "Restriccion de edad: " };
+	private String tituloValores = "Valor: ";
+	private String[] valores = new String[] { "", "", "", "" };
+	private boolean[] habilitado = new boolean[] { true, true, true, true };
+	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
+
 	public void ejecutar() {
-		System.out.println("Cambiará un plato del menú. ");
-		Restaurante restaurante = Main.usuarioRestaurante;
-		System.out.println("Este es el menú de platos que cuenta el restaurante.");
-		System.out.println(restaurante.getMenu());
-		System.out.println("Ingrese los datos del nuevo plato: ");
-		System.out.println("Ingrese el nombre: ");
-		String nombre = Main.user.next();
-		System.out.println("Ingrese la descripción del plato: ");
-		String descripcion = Main.user.next();
-		System.out.println("Ingrese el precio: ");
-		int precio = Main.user.nextInt();
-		System.out.println("ingrese la restriccion de edad del plato: ");
-		int restriccion = Main.user.nextInt();
-		Plato platoCambio = new Plato(nombre, descripcion, precio, restriccion, restaurante);
-		boolean valor = restaurante.cambiarPlato(platoCambio);
-		if (!valor) {
-			System.out.println("No se pudo realizar el cambio");
-			MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
-		} else {
-			System.out.println("Su plato se ha cambiado correctamente");
+
+		GridPane bonito = new GridPane();
+		Label desc = new Label("Se va a cambiar el plato " +Main.usuarioRestaurante.getMenu() + " del restaurante: ");
+		desc.setAlignment(Pos.CENTER);
+		Label nom = new Label(Data.getOpciones().get(17).toString());
+		nom.setAlignment(Pos.CENTER);
+		nom.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		bonito.add(new Label(
+				"                                                                                                                        "),
+				0, 0);
+		bonito.add(new Label(
+				"                                                                                                                        "),
+				0, 2);
+		bonito.add(new Label(
+				"                                                                                                                        "),
+				0, 1);
+		bonito.add(nom, 1, 0);
+		bonito.add(desc, 1, 1);
+		bonito.add(fp, 1, 2);
+		RestauranteEscena.root.setCenter(bonito);
+	}
+
+	public void Aceptar() {
+		String nombre = fp.getValue(fp.criterios[0]);
+		String descripcion = fp.getValue(fp.criterios[1]);
+		String precio = fp.getValue(fp.criterios[2]);
+		String restriccion = fp.getValue(fp.criterios[3]);
+		int pr = Integer.valueOf(precio);
+		int res = Integer.valueOf(restriccion);
+		Plato cambio = new Plato(nombre, descripcion, pr, res, Main.usuarioRestaurante);
+		Main.usuarioRestaurante.cambiarPlato(cambio);
+		this.Cancelar();
+	}
+
+	public void Cancelar() {
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
 		}
-		MenuDeConsola.lanzarMenu(Main.usuarioRestaurante);
 	}
 
 	public String toString() {
