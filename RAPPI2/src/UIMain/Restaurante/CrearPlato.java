@@ -3,9 +3,7 @@ package UIMain.Restaurante;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
-import gestorAplicacion.Oferta.Restaurante;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -42,17 +40,6 @@ public class CrearPlato extends OpcionDeMenu {
 		bonito.add(desc, 1, 1);
 		bonito.add(fp, 1, 2);
 		RestauranteEscena.root.setCenter(bonito);
-
-		if (!Main.usuarioRestaurante.getMenu().equals("")) {
-
-			Alert a = new Alert(AlertType.ERROR);
-			a.setContentText(
-					"El restaurante ya cuenta con su plato, si desea cambiar de plato porfavor seleccione la opcion Cambiar Plato Restaurante");
-			for (int i = 0; i < criterios.length; i++) {
-				fp.setValue(criterios[i]);
-			}
-
-		}
 	}
 
 	public void Aceptar() {

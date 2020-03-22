@@ -2,16 +2,8 @@ package gestorAplicacion.Oferta;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import BaseDatos.Data;
-import UIMain.Main;
 import gestorAplicacion.Interaccion.Calificacion;
 import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
@@ -162,13 +154,13 @@ public class Restaurante implements Serializable {
 	public boolean cambiarPlato(Plato platoCambio) {
 		if(this.getMenu().equals("")) {
 			this.menu = platoCambio.getNombre();
-			Data.actualizarDataBasePlato(platoCambio);
+			Data.agregarObjetoDataBasePlato(platoCambio);
 			
 		}
 		else {
-			Data.eliminarObjetoDataBasePlato(Data.buscarPlato(this.getMenu()));
+			Data.eliminarObjetoDataBasePlato(Data.buscarPlato(menu));
 			this.menu = platoCambio.getNombre();
-			Data.actualizarDataBasePlato(platoCambio);
+			Data.agregarObjetoDataBasePlato(platoCambio);
 		}
 		
 		return true;
