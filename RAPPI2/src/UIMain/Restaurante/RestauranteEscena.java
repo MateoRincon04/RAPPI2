@@ -5,6 +5,7 @@ import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
+import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Oferta.Restaurante;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -74,7 +75,14 @@ public class RestauranteEscena extends Application {
 				conf.setContentText("¿Seguro que desea salir?");
 				Optional<ButtonType> result = conf.showAndWait();
 				if (result.get() == ButtonType.OK) {
-					Data.getOpciones().get(29).ejecutar();
+					try {
+						Data.getOpciones().get(29).ejecutar();
+					} catch (AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+					stage.close();
+
 				} else {
 					// nada
 				}
@@ -124,91 +132,266 @@ public class RestauranteEscena extends Application {
 		// En cuales direcciones
 		menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Data.getOpciones().get(14).ejecutar();
+				try {
+					Data.getOpciones().get(14).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
 			}
 		});
 
 		// Crear platos
 		menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Data.getOpciones().get(15).ejecutar();
-				
+				try {
+					Data.getOpciones().get(15).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
 				Button ac = new Button("Aceptar");
 				ac.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((CrearPlato)Data.getOpciones().get(15)).Aceptar();
-						
+						((CrearPlato) Data.getOpciones().get(15)).Aceptar();
+
 					}
 				});
 
 				Button ca = new Button("Cancelar");
 				ca.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((CrearPlato)Data.getOpciones().get(15)).Cancelar();
-						
+						((CrearPlato) Data.getOpciones().get(15)).Cancelar();
+
 					}
 				});
-				hb = new HBox(ac,ca);
+				hb = new HBox(ac, ca);
 				hb.setAlignment(Pos.TOP_CENTER);
 				hb.setMaxHeight(Double.MAX_VALUE);
 				root.setBottom(hb);
 
 			}
 		});
-		
+
 		// Agregar direccion al resta
 		menu1.getItems().get(4).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Data.getOpciones().get(16).ejecutar();
-				
+				try {
+					Data.getOpciones().get(16).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
 				Button ac = new Button("Aceptar");
 				ac.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((AgregarDireccionRest)Data.getOpciones().get(16)).Aceptar();
-						
+						((AgregarDireccionRest) Data.getOpciones().get(16)).Aceptar();
+
 					}
 				});
 
 				Button ca = new Button("Cancelar");
 				ca.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((AgregarDireccionRest)Data.getOpciones().get(16)).Cancelar();
-						
+						((AgregarDireccionRest) Data.getOpciones().get(16)).Cancelar();
+
 					}
 				});
-				hb = new HBox(ac,ca);
+				hb = new HBox(ac, ca);
 				hb.setAlignment(Pos.TOP_CENTER);
 				hb.setMaxHeight(Double.MAX_VALUE);
 				root.setBottom(hb);
 
 			}
 		});
-		
-		// Cambiar plato 
+
+		// Cambiar plato
 		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Data.getOpciones().get(17).ejecutar();
-				
+				try {
+					Data.getOpciones().get(17).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
 				Button ac = new Button("Aceptar");
 				ac.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((CambiarPlato)Data.getOpciones().get(17)).Aceptar();
-						
+						((CambiarPlato) Data.getOpciones().get(17)).Aceptar();
+
 					}
 				});
 
 				Button ca = new Button("Cancelar");
 				ca.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((CambiarPlato)Data.getOpciones().get(17)).Cancelar();
-						
+						((CambiarPlato) Data.getOpciones().get(17)).Cancelar();
+
 					}
 				});
-				hb = new HBox(ac,ca);
+				hb = new HBox(ac, ca);
 				hb.setAlignment(Pos.TOP_CENTER);
 				hb.setMaxHeight(Double.MAX_VALUE);
 				root.setBottom(hb);
 
+			}
+		});
+
+		// Eliminar direccion
+		menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(18).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((EliminarDireccionRest) Data.getOpciones().get(18)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((EliminarDireccionRest) Data.getOpciones().get(18)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+
+		// Eliminar plato
+		menu1.getItems().get(10).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(19).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((EliminarPlato) Data.getOpciones().get(19)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((EliminarPlato) Data.getOpciones().get(19)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+
+		// Cambiar direcciones
+		menu1.getItems().get(12).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(20).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CambiarDireccionRest) Data.getOpciones().get(20)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CambiarDireccionRest) Data.getOpciones().get(20)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+
+		// Cambiar contrasena rest
+		menu1.getItems().get(14).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(21).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((cambiarContraseñaRestaurante) Data.getOpciones().get(21)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((cambiarContraseñaRestaurante) Data.getOpciones().get(21)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+
+		// Salir
+		menu1.getItems().get(16).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Alert conf = new Alert(AlertType.CONFIRMATION);
+				conf.setTitle("Confirmacion de salida");
+				conf.setContentText("¿Seguro que desea salir?");
+				Optional<ButtonType> result = conf.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					try {
+						Data.getOpciones().get(29).ejecutar();
+					} catch (AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+					stage.close();
+
+				} else {
+					// nada
+				}
 			}
 		});
 

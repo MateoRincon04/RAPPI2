@@ -1,5 +1,7 @@
 package UIMain;
 
+import UIMain.Excepciones.AlertaConfirmacion;
+
 /**
  * Interfaz OpcionDeMenu su finalidad es la implementacion de las diferentes
  * interfaces dinamicas con sus respectivas funcionalidades
@@ -13,7 +15,7 @@ public abstract class OpcionDeMenu {
 	// posicion 0. guarda la funcionalidad "registrarse" si el usuario escoge esa,
 	// se ejecuta
 	// la funcionalidad.
-	abstract public void ejecutar();
+	abstract public void ejecutar() throws AlertaConfirmacion;
 
 }
 

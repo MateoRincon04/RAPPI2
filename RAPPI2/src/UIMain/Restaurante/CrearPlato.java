@@ -4,6 +4,7 @@ import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.ErrorCancelar;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -43,15 +44,9 @@ public class CrearPlato extends OpcionDeMenu {
 	}
 
 	public void Aceptar() {
-		if (!Main.usuarioRestaurante.getMenu().equals("")) {
-
-			Alert a = new Alert(AlertType.ERROR);
-			a.setContentText(
-					"El restaurante ya cuenta con su plato, si desea cambiar de plato porfavor seleccione la opcion Cambiar Plato Restaurante");
-			a.show();
-			for (int i = 0; i < criterios.length; i++) {
-				fp.setValue(fp.criterios[i]);
-			}
+		try {
+			if (!Main.usuarioRestaurante.getMenu().equals("")) {
+			throw new ErrorCancelar();
 
 		} else {
 			String nombre = fp.getValue(fp.criterios[0]);
@@ -63,6 +58,13 @@ public class CrearPlato extends OpcionDeMenu {
 			Main.usuarioRestaurante.crearPlato(nombre, descripcion, pr, res);
 			this.Cancelar();
 		}
+		} catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+			this.Cancelar();
+		}
+		
 	}
 
 	public void Cancelar() {
