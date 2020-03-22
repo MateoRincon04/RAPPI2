@@ -1,25 +1,41 @@
 package UIMain.Administrador;
 
+import java.util.Optional;
+
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class AdministradorScene extends Application{
 	Scene scene1;
+	static BorderPane root;
 	GridPane gp;
-	Administrador usuario = Data.buscarAdministrador("Admin");
+	static Administrador usuario = Data.buscarAdministrador("Admin");
 	public void start(Stage stage) {
 		Data.CargarOpciones();
 		// Manejo de la barra de menú de la vantana
@@ -53,11 +69,25 @@ public class AdministradorScene extends Application{
 		menu2.getItems().add(mi3);
 		
 		//se adicion la barra de menu al pane1
-		BorderPane root = new BorderPane();
+		root = new BorderPane();
+		root.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
 		root.setTop(barraMenu);
 		//creación de la Escena
 		scene1 = new Scene(root,1200,600);
 		
+		// programa para Archivo SALIR
+		mi2.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Alert conf = new Alert(AlertType.CONFIRMATION);
+				conf.setTitle("Confirmacion de salida");
+				conf.setContentText("¿Seguro que desea salir?");
+				Optional<ButtonType> result = conf.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					//cambia a la escena de bienvenida
+					stage.setScene(scene1);
+				} 
+			}
+		});
 		
 		//programa para Ayuda Acerca de
 		mi3.setOnAction(new EventHandler<ActionEvent>() {
@@ -65,8 +95,19 @@ public class AdministradorScene extends Application{
 				String[] criterios = {"Nombre","Nombre","Nombre","Nombre"};
 				String[] valores = {"Mateo Rincon","Paula Andrea Taborda", "Guillermo Toloza","Santiago Tamayo"};
 				boolean[] habilitado = {false,false,false,false};
-				FieldPanel fp = new FieldPanel("CRITERIO",criterios,"VALOR",valores,habilitado);
-				root.setCenter(fp);
+				FieldPanel fp = new FieldPanel("  CRITERIO  ",criterios,"  VALOR  ",valores,habilitado);
+				GridPane bonito = new GridPane();
+				bonito.setVgap(10);
+				bonito.setPadding(new Insets(50,300,10,370));
+				Label desc = new Label("Autores ");
+				desc.setFont(new Font("Arial",15));
+				desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+				desc.setAlignment(Pos.CENTER);
+				desc.setTextFill(Color.BLACK);
+				desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				bonito.add(desc, 0, 0);
+				bonito.add(fp, 0, 1);
+				root.setCenter(bonito);
 			}
 		});
 		
@@ -77,10 +118,27 @@ public class AdministradorScene extends Application{
 				String[] valores = {usuario.getNombre(),usuario.getUserName(), usuario.getClave(),String.valueOf(usuario.getTelefono()),String.valueOf(usuario.getComuna()),String.valueOf(usuario.getSalario())};
 				boolean[] habilitado = {true,false,false,true,true,false};
 				FieldPanel fp = new FieldPanel("CRITERIO",criterios,"VALOR",valores,habilitado);
-				root.setCenter(fp);
+				GridPane bonito = new GridPane();
+				bonito.setVgap(10);
+				bonito.setPadding(new Insets(50,300,10,370));
+				Label desc = new Label("Datos del usuario ");
+				desc.setFont(new Font("Arial",15));
+				desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+				desc.setAlignment(Pos.CENTER);
+				desc.setTextFill(Color.BLACK);
+				desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				bonito.add(desc, 0, 0);
+				bonito.add(fp, 0, 1);
+				root.setCenter(bonito);
 			}
 		});
 		
+		// Crear Administrador
+				menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						Data.getOpciones().get(22).ejecutar();
+					}
+				});
 		
 		//Display scene 1 at first
 		 stage.setScene(scene1);
