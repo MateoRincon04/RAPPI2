@@ -31,9 +31,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class QuitarFuncionalidades extends OpcionDeMenu {
-	TextField valor;
+	TextField valor,valor1;
 	GridPane fp;
-	ComboBox cbx1;
+	ComboBox cbx1,cbx2;
+	Administrador admin = AdministradorScene.usuario;
 	public void ejecutar() {
 		GridPane bonito = new GridPane();
 		Label descripcion = new Label("Podras quitarle funcionalidades al usuario que desees");
@@ -95,22 +96,20 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 						OpcionDeMenu aux = Data.getOpciones().get(c.opciones.get(i));
 						op.add(aux.toString());
 					}
-					ComboBox cbx1 = new ComboBox(FXCollections.observableArrayList(op));
-					cbx1.setPromptText("Funcionalidades");
-					fp.add(cbx1, 0, 2);
-					TextField valor1 = new TextField();
+					cbx2 = new ComboBox(FXCollections.observableArrayList(op));
+					cbx2.setPromptText("Funcionalidades");
+					fp.add(cbx2, 0, 2);
+					valor1 = new TextField();
 					fp.add(valor1, 1, 2);
-					cbx1.valueProperty().addListener(new ChangeListener<String>() {
+					cbx2.valueProperty().addListener(new ChangeListener<String>() {
 						public void changed(ObservableValue ov, String t, String t1) {
 							valor1.setText(t1);
 						}
 					});
-					//Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(valor.getText()));
-					//Data.agregarObjetoDataBaseCliente(c);
 				}
 			}
 			else if(cbx1.getValue().equals("Tendero")) {
-				if(Data.buscarCliente(valor.getText())==null) {
+				if(Data.buscarTendero(valor.getText())==null) {
 					throw new ErrorCancelar();
 				}else {
 					Tendero c = Data.buscarTendero(valor.getText());
@@ -119,18 +118,16 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 						OpcionDeMenu aux = Data.getOpciones().get(c.opciones.get(i));
 						op.add(aux.toString());
 					}
-					ComboBox cbx1 = new ComboBox(FXCollections.observableArrayList(op));
-					cbx1.setPromptText("Funcionalidades");
-					fp.add(cbx1, 0, 2);
-					TextField valor1 = new TextField();
+					cbx2 = new ComboBox(FXCollections.observableArrayList(op));
+					cbx2.setPromptText("Funcionalidades");
+					fp.add(cbx2, 0, 2);
+					valor1 = new TextField();
 					fp.add(valor1, 1, 2);
-					cbx1.valueProperty().addListener(new ChangeListener<String>() {
+					cbx2.valueProperty().addListener(new ChangeListener<String>() {
 						public void changed(ObservableValue ov, String t, String t1) {
 							valor1.setText(t1);
 						}
 					});
-					//Data.eliminarObjetoDataBaseTendero(Data.buscarTendero(valor.getText()));
-					//Data.agregarObjetoDataBaseTendero(c);
 				}
 			}else {
 				if(Data.buscarRestaurante(valor.getText())==null) {
@@ -142,18 +139,16 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 						OpcionDeMenu aux = Data.getOpciones().get(c.opciones.get(i));
 						op.add(aux.toString());
 					}
-					ComboBox cbx1 = new ComboBox(FXCollections.observableArrayList(op));
-					cbx1.setPromptText("Funcionalidades");
-					fp.add(cbx1, 0, 2);
-					TextField valor1 = new TextField();
+					cbx2 = new ComboBox(FXCollections.observableArrayList(op));
+					cbx2.setPromptText("Funcionalidades");
+					fp.add(cbx2, 0, 2);
+					valor1 = new TextField();
 					fp.add(valor1, 1, 2);
-					cbx1.valueProperty().addListener(new ChangeListener<String>() {
+					cbx2.valueProperty().addListener(new ChangeListener<String>() {
 						public void changed(ObservableValue ov, String t, String t1) {
 							valor1.setText(t1);
 						}
 					});
-					//Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(valor.getText()));
-					//Data.agregarObjetoDataBaseRestaurante(c);
 				}
 			}
 		} catch (ErrorCancelar e) {
@@ -163,6 +158,9 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 			this.Cancelar();
 		}
 		
+	}
+	public void AceptarS() {
+			admin.quitarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
 	}
 	
 	public void Cancelar() {

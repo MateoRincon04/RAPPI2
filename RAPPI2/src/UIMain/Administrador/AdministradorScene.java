@@ -276,6 +276,23 @@ public class AdministradorScene extends Application{
 						ac.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
 								((QuitarFuncionalidades) Data.getOpciones().get(26)).Aceptar();
+								Button ac1 = new Button("Aceptar");
+								ac1.setOnAction(new EventHandler<ActionEvent>() {
+									public void handle(ActionEvent event) {
+										((QuitarFuncionalidades) Data.getOpciones().get(26)).AceptarS();
+									}
+								});
+								Button ca = new Button("Cancelar");
+								ca.setOnAction(new EventHandler<ActionEvent>() {
+									public void handle(ActionEvent event) {
+										((QuitarFuncionalidades) Data.getOpciones().get(26)).Cancelar();
+
+									}
+								});
+								HBox hb1 = new HBox(ac1, ca);
+								hb1.setAlignment(Pos.TOP_CENTER);
+								hb1.setMaxHeight(Double.MAX_VALUE);
+								root.setBottom(hb1);
 
 							}
 						});
@@ -284,6 +301,53 @@ public class AdministradorScene extends Application{
 						ca.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
 								((QuitarFuncionalidades) Data.getOpciones().get(26)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
+				
+				//agregar funcionalidades
+				menu1.getItems().get(10).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(27).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((AgregarFuncionalidades) Data.getOpciones().get(27)).Aceptar();
+								Button ac1 = new Button("Aceptar");
+								ac1.setOnAction(new EventHandler<ActionEvent>() {
+									public void handle(ActionEvent event) {
+										((AgregarFuncionalidades) Data.getOpciones().get(27)).AceptarS();
+									}
+								});
+								Button ca = new Button("Cancelar");
+								ca.setOnAction(new EventHandler<ActionEvent>() {
+									public void handle(ActionEvent event) {
+										((AgregarFuncionalidades) Data.getOpciones().get(27)).Cancelar();
+
+									}
+								});
+								HBox hb1 = new HBox(ac1, ca);
+								hb1.setAlignment(Pos.TOP_CENTER);
+								hb1.setMaxHeight(Double.MAX_VALUE);
+								root.setBottom(hb1);
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((AgregarFuncionalidades) Data.getOpciones().get(27)).Cancelar();
 
 							}
 						});

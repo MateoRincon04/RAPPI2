@@ -147,6 +147,64 @@ public class Administrador extends Perfil implements Serializable{
 		}
 	}
 	
+	public void quitarFuncionalidad(String userName,String funcionalidad,String tipo) {
+		if(tipo.equals("Cliente")) {
+			Cliente c= Data.buscarCliente(userName);
+			for(int i =0 ;i<Data.getOpciones().size();i++) {
+				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+					c.opciones.remove(i-3);
+				}
+			}
+			Data.actualizarDataBaseCliente(c);
+		}
+		else if(tipo.equals("Tendero")) {
+			Tendero t = Data.buscarTendero(userName);
+			for(int i =0 ;i<Data.getOpciones().size();i++) {
+				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+					t.opciones.remove(i-9);
+				}
+			}
+			Data.actualizarDataBaseTendero(t);
+		}else {
+			Restaurante r = Data.buscarRestaurante(userName);
+			for(int i =0 ;i<Data.getOpciones().size();i++) {
+				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+					r.opciones.remove(i-11);
+				}
+			}
+			Data.actualizarDataBaseRestaurante(r);
+		}
+	}
+	
+	public void agregarFuncionalidad(String userName,String funcionalidad,String tipo) {
+		if(tipo.equals("Cliente")) {
+			Cliente c= Data.buscarCliente(userName);
+			for(int i =0 ;i<Data.getOpciones().size();i++) {
+				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+						c.opciones.add(i);
+				}
+			}
+			Data.actualizarDataBaseCliente(c);
+		}
+		else if(tipo.equals("Tendero")) {
+			Tendero t = Data.buscarTendero(userName);
+			for(int i =0 ;i<Data.getOpciones().size();i++) {
+				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+						t.opciones.add(i);
+				}
+			}
+			Data.actualizarDataBaseTendero(t);
+		}else {
+			Restaurante r = Data.buscarRestaurante(userName);
+			for(int i =0 ;i<Data.getOpciones().size();i++) {
+				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+						r.opciones.add(i);
+				}
+			}
+			Data.actualizarDataBaseRestaurante(r);
+		}
+	}
+	
 	public String getTipo() {
 		return "Administrador";
 	}
