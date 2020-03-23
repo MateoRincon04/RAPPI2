@@ -46,7 +46,6 @@ public class Tendero extends Perfil implements Serializable {
 		this.opciones.add(11);
 		this.opciones.add(12);
 		this.opciones.add(13);
-		this.opciones.add(29);
 		this.salario = salario;
 		this.estaDisponible = "disponible";
 	}

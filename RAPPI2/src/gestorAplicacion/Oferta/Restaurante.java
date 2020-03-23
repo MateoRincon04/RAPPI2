@@ -55,7 +55,6 @@ public class Restaurante implements Serializable {
 		this.opciones.add(19);
 		this.opciones.add(20);
 		this.opciones.add(21);
-		this.opciones.add(29);
 		this.celular = celular;
 		this.direcciones.add(direccion);
 		this.clave = clave;

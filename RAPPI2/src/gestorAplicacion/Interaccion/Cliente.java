@@ -60,7 +60,6 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 		this.opciones.add(8);
 		this.opciones.add(9);
 		this.opciones.add(10);
-		this.opciones.add(29);
 	}
 
 	public ArrayList<Integer> getOpciones() {

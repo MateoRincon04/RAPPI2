@@ -93,7 +93,7 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 				}else {
 					Cliente c = Data.buscarCliente(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
-					for (int i = 3; i < 9; i++) {
+					for (int i = 3; i < 11; i++) {
 						if(!c.opciones.contains(i)) {
 							OpcionDeMenu aux = Data.getOpciones().get(i);
 							op.add(aux.toString());
@@ -117,7 +117,7 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 				}else {
 					Tendero c = Data.buscarTendero(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
-					for (int i = 9; i < 11; i++) {
+					for (int i = 11; i < 14; i++) {
 						if(!c.opciones.contains(i)) {
 							OpcionDeMenu aux = Data.getOpciones().get(i);
 							op.add(aux.toString());
@@ -140,7 +140,7 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 				}else {
 					Restaurante c = Data.buscarRestaurante(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
-					for (int i = 11; i < 17; i++) {
+					for (int i = 14; i < 21; i++) {
 						if(!c.opciones.contains(i)) {
 							OpcionDeMenu aux = Data.getOpciones().get(i);
 							op.add(aux.toString());

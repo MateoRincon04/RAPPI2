@@ -169,7 +169,7 @@ public class Administrador extends Perfil implements Serializable{
 			Restaurante r = Data.buscarRestaurante(userName);
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
-					r.opciones.remove(i-11);
+					r.opciones.remove(i-12);
 				}
 			}
 			Data.actualizarDataBaseRestaurante(r);
@@ -181,7 +181,9 @@ public class Administrador extends Perfil implements Serializable{
 			Cliente c= Data.buscarCliente(userName);
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+					if(!c.opciones.contains(i)) {
 						c.opciones.add(i);
+					}
 				}
 			}
 			Data.actualizarDataBaseCliente(c);
@@ -190,7 +192,9 @@ public class Administrador extends Perfil implements Serializable{
 			Tendero t = Data.buscarTendero(userName);
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+					if(!t.opciones.contains(i)) {
 						t.opciones.add(i);
+					}
 				}
 			}
 			Data.actualizarDataBaseTendero(t);
@@ -198,7 +202,9 @@ public class Administrador extends Perfil implements Serializable{
 			Restaurante r = Data.buscarRestaurante(userName);
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
+					if(!r.opciones.contains(i)) {
 						r.opciones.add(i);
+					}
 				}
 			}
 			Data.actualizarDataBaseRestaurante(r);
