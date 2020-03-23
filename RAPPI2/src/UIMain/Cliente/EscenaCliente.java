@@ -6,6 +6,8 @@ import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.Excepciones.AlertaConfirmacion;
+import UIMain.Restaurante.CrearPlato;
+import UIMain.Restaurante.cambiarContraseñaRestaurante;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Oferta.Restaurante;
 import javafx.application.Application;
@@ -24,16 +26,17 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class EscenaCliente extends Application {
-	Scene escenaCliente;
-	GridPane panel;
-	Cliente cliente = Data.buscarCliente("guille");
-	
-
+	private Scene escenaCliente;
+	private GridPane panel;
+	private Cliente cliente = Data.buscarCliente("guille");
+	static BorderPane root;
+	private HBox hb;
 	public void start(Stage stage) {
-		
+
 		MenuBar barraArriba = new MenuBar();
 		Menu menu = new Menu("Archivo");
 		Menu menu1 = new Menu("Procesos y consultas");
@@ -43,7 +46,7 @@ public class EscenaCliente extends Application {
 		MenuItem mi2 = new MenuItem("Salir");
 		SeparatorMenuItem separator = new SeparatorMenuItem();
 		menu.getItems().addAll(mi1, separator, mi2);
-		for (int i = 3; i < 12; i++) {
+		for (int i = 3; i < 11; i++) {
 			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
@@ -53,9 +56,9 @@ public class EscenaCliente extends Application {
 		MenuItem mi3 = new MenuItem("Acerca de");
 		menu2.getItems().add(mi3);
 
-		BorderPane root = new BorderPane();
+		root = new BorderPane();
 		root.setTop(barraArriba);
-	
+
 		escenaCliente = new Scene(root, 1200, 600);
 
 		mi2.setOnAction(new EventHandler<ActionEvent>() {
@@ -67,11 +70,11 @@ public class EscenaCliente extends Application {
 				if (result.get() == ButtonType.OK) {
 					try {
 						Data.getOpciones().get(29).ejecutar();
-					}catch(AlertaConfirmacion al) {
+					} catch (AlertaConfirmacion al) {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					
+
 					System.exit(0);
 				} else {
 
@@ -81,32 +84,166 @@ public class EscenaCliente extends Application {
 
 		mi1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Saldo"};
-				String[] valores = {cliente.getNombre(),cliente.getUserName(), cliente.getClave(),String.valueOf(cliente.getTelefono()),String.valueOf(cliente.getComuna()),String.valueOf(cliente.getSaldo())};
-				boolean[] habilitado = {true,false,false,true,true,false};
-				FieldPanel fp = new FieldPanel("Criterios",criterios,"Valores",valores,habilitado);
-				
+				String[] criterios = { "Nombre", "UserName", "Clave", "Telefono", "Comuna", "Saldo" };
+				String[] valores = { cliente.getNombre(), cliente.getUserName(), cliente.getClave(),
+						String.valueOf(cliente.getTelefono()), String.valueOf(cliente.getComuna()),
+						String.valueOf(cliente.getSaldo()) };
+				boolean[] habilitado = { true, false, false, true, true, false };
+				FieldPanel fp = new FieldPanel("Criterios", criterios, "Valores", valores, habilitado);
+
 				root.setCenter(fp);
-			
+
 			}
 		});
 		mi3.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String[] criterios = {"Nombre","Nombre","Nombre","Nombre"};
-				String[] valores = {"Mateo Rincon","Paula Andrea Taborda", "Guillermo Toloza","Santiago Tamayo"};
-				boolean[] habilitado = {false,false,false,false};
-				FieldPanel fp = new FieldPanel("Acerca de",criterios,"los autores",valores,habilitado);
+				String[] criterios = { "Nombre", "Nombre", "Nombre", "Nombre" };
+				String[] valores = { "Mateo Rincon", "Paula Andrea Taborda", "Guillermo Toloza", "Santiago Tamayo" };
+				boolean[] habilitado = { false, false, false, false };
+				FieldPanel fp = new FieldPanel("Acerca de", criterios, "los autores", valores, habilitado);
 				root.setCenter(fp);
 				root.setAlignment(fp, Pos.CENTER);
 			}
 		});
+
+		// funcionalidades
+		//mejor restaurante calificado
+		menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(7).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+			}
+		});
+		//plato mas comprado
+		menu1.getItems().get(10).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(8).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+			}
+		
+		});
+		//cuanto he gastado
+		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(6).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+			}
+		
+		});
+		//cambiar contra cliente
+		menu1.getItems().get(14).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(10).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((cambiarContraCliente) Data.getOpciones().get(10)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((cambiarContraCliente) Data.getOpciones().get(10)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		//calificar restaurante
+		menu1.getItems().get(4).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(5).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CalificarRestaurante) Data.getOpciones().get(5)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CalificarRestaurante) Data.getOpciones().get(5)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		//calificar tendero
+		menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(4).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CalificarTendero) Data.getOpciones().get(4)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((CalificarTendero) Data.getOpciones().get(4)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+
 		stage.setScene(escenaCliente);
 		stage.setTitle("Usuario: " + cliente.getNombre());
 		stage.show();
 
 	}
-
-	
 
 	public static void main(String[] args) {
 		Data.CargarOpciones();

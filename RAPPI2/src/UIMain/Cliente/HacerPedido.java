@@ -17,7 +17,7 @@ public class HacerPedido extends OpcionDeMenu {
 
 	public void ejecutar() {
 		// se esta definiendo la forma como hace el pedido el usuario
-		Cliente usuarioCliente = (Cliente) (Main.usuario);
+		Cliente usuarioCliente = Data.buscarCliente("guille");
 		boolean valor = false;
 
 		System.out.println("Ingrese el nombre del restaurante a buscar: ");
