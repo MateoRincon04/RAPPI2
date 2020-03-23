@@ -31,7 +31,7 @@ public class cambiarContraseñaAdmin extends OpcionDeMenu {
 	String[] criterios = {"Contraseña actual: ","Nueva contraseña: ","Confirmar nueva contraseña: "};
 	String tituloValores = "Valor: ";
 	String[] valores = {"","",""};
-	Label descripcion = new Label("Usted ingresará un nuevo Tendero en el sistema.");
+	Label descripcion = new Label("Usted cambiara su contraseña");
 	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
 	Administrador admin = AdministradorScene.usuario;
 	public void ejecutar() throws AlertaConfirmacion {

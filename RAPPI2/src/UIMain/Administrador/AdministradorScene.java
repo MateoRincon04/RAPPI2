@@ -357,6 +357,37 @@ public class AdministradorScene extends Application{
 						root.setBottom(hb);
 					}
 				});
+				
+				//Cambiar contraseña 
+				menu1.getItems().get(12).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(28).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((cambiarContraseñaAdmin) Data.getOpciones().get(28)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((cambiarContraseñaAdmin) Data.getOpciones().get(28)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
 		
 		//Display scene 1 at first
 		 stage.setScene(scene1);
