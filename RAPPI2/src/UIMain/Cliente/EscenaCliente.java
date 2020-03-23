@@ -142,6 +142,72 @@ public class EscenaCliente extends Application {
 			}
 		
 		});
+		
+		//Agregar Saldo
+		menu1.getItems().get(12).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(9).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((AgregarSaldo) Data.getOpciones().get(9)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((AgregarSaldo) Data.getOpciones().get(9)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		//Hacer Pedido
+		menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(3).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((HacerPedido) Data.getOpciones().get(3)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((HacerPedido) Data.getOpciones().get(3)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		
 		//cambiar contra cliente
 		menu1.getItems().get(14).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
