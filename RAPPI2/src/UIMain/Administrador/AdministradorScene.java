@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import BaseDatos.Data;
 import UIMain.FieldPanel;
+import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -136,7 +137,13 @@ public class AdministradorScene extends Application{
 		// Crear Administrador
 				menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						Data.getOpciones().get(22).ejecutar();
+						try {
+							Data.getOpciones().get(22).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						
 					}
 				});
 		
