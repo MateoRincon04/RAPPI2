@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import BaseDatos.Data;
 import UIMain.FieldPanel;
+import UIMain.Excepciones.AlertaConfirmacion;
+import UIMain.Restaurante.CrearPlato;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -27,14 +29,16 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class AdministradorScene extends Application{
-	Scene scene1;
+	private Scene scene1;
+	private HBox hb;
 	static BorderPane root;
-	GridPane gp;
+	private GridPane gp;
 	static Administrador usuario = Data.buscarAdministrador("Admin");
 	public void start(Stage stage) {
 		Data.CargarOpciones();
@@ -98,7 +102,7 @@ public class AdministradorScene extends Application{
 				FieldPanel fp = new FieldPanel("  CRITERIO  ",criterios,"  VALOR  ",valores,habilitado);
 				GridPane bonito = new GridPane();
 				bonito.setVgap(10);
-				bonito.setPadding(new Insets(50,300,10,370));
+				bonito.setPadding(new Insets(50,10,10,370));
 				Label desc = new Label("Autores ");
 				desc.setFont(new Font("Arial",15));
 				desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
@@ -108,6 +112,7 @@ public class AdministradorScene extends Application{
 				bonito.add(desc, 0, 0);
 				bonito.add(fp, 0, 1);
 				root.setCenter(bonito);
+				root.getChildren().remove(hb);
 			}
 		});
 		
@@ -120,7 +125,7 @@ public class AdministradorScene extends Application{
 				FieldPanel fp = new FieldPanel("CRITERIO",criterios,"VALOR",valores,habilitado);
 				GridPane bonito = new GridPane();
 				bonito.setVgap(10);
-				bonito.setPadding(new Insets(50,300,10,370));
+				bonito.setPadding(new Insets(50,10,10,370));
 				Label desc = new Label("Datos del usuario ");
 				desc.setFont(new Font("Arial",15));
 				desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
@@ -130,13 +135,163 @@ public class AdministradorScene extends Application{
 				bonito.add(desc, 0, 0);
 				bonito.add(fp, 0, 1);
 				root.setCenter(bonito);
+				root.getChildren().remove(hb);
 			}
 		});
 		
+		// Programa para las funcionalidades
 		// Crear Administrador
 				menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						Data.getOpciones().get(22).ejecutar();
+						try {
+							Data.getOpciones().get(22).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((CrearAdministrador) Data.getOpciones().get(22)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((CrearAdministrador) Data.getOpciones().get(22)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
+				
+				// Crear Restaurante
+				menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(23).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((CrearRestaurante) Data.getOpciones().get(23)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((CrearRestaurante) Data.getOpciones().get(23)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
+				
+				// Crear Tendero
+				menu1.getItems().get(4).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(24).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((CrearTendero) Data.getOpciones().get(24)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((CrearTendero) Data.getOpciones().get(24)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
+				
+				//el tendero que mas reparte
+				menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(25).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((TenderoReparteMas) Data.getOpciones().get(25)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((TenderoReparteMas) Data.getOpciones().get(25)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
+				
+				//quitar funcionalidades
+				menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(26).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((QuitarFuncionalidades) Data.getOpciones().get(26)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((QuitarFuncionalidades) Data.getOpciones().get(26)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
 					}
 				});
 		

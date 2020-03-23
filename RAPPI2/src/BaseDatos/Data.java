@@ -1095,11 +1095,12 @@ public class Data {
 		return best;
 	}
 
-	public static void imprimirRestaurantes() {
+	public static ArrayList<String> imprimirRestaurantes() {
 		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
+		ArrayList<String> lista = new ArrayList<String>();
 		for (int i = 0; i < historial.size(); i++) {
-			System.out.println(i + 1 + ") " + historial.get(i).getNombre());
-
+			lista.add(historial.get(i).getNombre());
 		}
+		return lista;
 	}
 }

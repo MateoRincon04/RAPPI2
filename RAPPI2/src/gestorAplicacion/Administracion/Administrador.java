@@ -76,8 +76,7 @@ public class Administrador extends Perfil implements Serializable{
 		}
 	}
 
-	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName,
-			long salario) {
+	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName,long salario) {
 		Administrador administrador = new Administrador(nombre, telefono, comuna, clave, userName, salario);
 		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
 		if (!dataBase.contains(administrador)) {

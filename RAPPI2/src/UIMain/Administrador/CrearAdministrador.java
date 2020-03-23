@@ -3,15 +3,12 @@ package UIMain.Administrador;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.ErrorCancelar;
 import gestorAplicacion.Administracion.Administrador;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
@@ -24,46 +21,67 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class CrearAdministrador extends OpcionDeMenu {
+	String tituloCriterios = "Datos";
+	String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Salario"};
+	String tituloValores = "Valor: ";
+	String[] valores = {"","","","","",""};
+	Label descripcion = new Label("Usted ingresará un nuevo Administrador en el sistema.");
+	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
+	Administrador admin = AdministradorScene.usuario;
+	
 	public void ejecutar() {
-		String tituloCriterios = "Datos";
-		String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Salario"};
-		String tituloValores = "Valor: ";
-		String[] valores = {"Nombre","UserName","Clave","0","0","0"};
-		Label descripcion = new Label("Usted ingresará un nuevo Administrador en el sistema.");
-		FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
-		Button ac = new Button("Aceptar");
-		Button ca = new Button("Cancelar");
-		GridPane aux = (GridPane) fp.getChildren().get(0);
-		aux.add(ac, 0, 7);
-		aux.add(ca, 1, 7);
 		GridPane bonito = new GridPane();
-		bonito.setVgap(10);
-		bonito.setPadding(new Insets(50,300,10,370));
-		Label desc = new Label("Crear administrador ");
+		bonito.setVgap(20);
+		bonito.setPadding(new Insets(100,10,10,10));
+		Label desc = new Label("Crear Administrador ");
 		desc.setFont(new Font("Arial",15));
 		desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
 		desc.setAlignment(Pos.CENTER);
 		desc.setTextFill(Color.BLACK);
 		desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		descripcion.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		descripcion.setAlignment(Pos.CENTER);
+		descripcion.setTextFill(Color.BLACK);
+		descripcion.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		bonito.add(desc, 0, 0);
-		bonito.add(fp, 0, 1);
+		bonito.add(descripcion, 0, 1);
+		bonito.add(fp, 0, 2);
+		bonito.setAlignment(Pos.TOP_CENTER);
 		AdministradorScene.root.setCenter(bonito);
-		Administrador admin = AdministradorScene.usuario;
-		ac.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {	
-				Alert conf = new Alert(AlertType.NONE);
-				boolean valor = admin.crearAdministrador(fp.getValue("Nombre"), Integer.parseInt(fp.getValue("Telefono")), Integer.parseInt(fp.getValue("Comuna")), fp.getValue("Clave"), fp.getValue("UserName"), Long.parseLong(fp.getValue("Salario")));
-				if (!valor) {
-					conf.setAlertType(AlertType.ERROR);
-					conf.setContentText("Administrador ya existente, por favor ingrese de nuevo ");
-				}else {
-					conf.setAlertType(AlertType.CONFIRMATION);
-					conf.setContentText("Administrador creado exitosamente ");
-				}
-			}
-		});
 	}
-
+	
+	public void Aceptar() {
+		try {
+			if (Data.buscarAdministrador(fp.getValue(fp.criterios[1]))!=null) {
+			throw new ErrorCancelar();
+		} else {
+			String nombre = fp.getValue(fp.criterios[0]);
+			String userName = fp.getValue(fp.criterios[1]);
+			String clave = fp.getValue(fp.criterios[2]);
+			String telefono = fp.getValue(fp.criterios[3]);
+			String comuna = fp.getValue(fp.criterios[4]);
+			String salario = fp.getValue(fp.criterios[5]);
+			int tel = Integer.valueOf(telefono);
+			int com = Integer.valueOf(comuna);
+			int sal = Integer.valueOf(salario);
+			admin.crearAdministrador(nombre, tel, com, clave, userName, sal);
+			this.Cancelar();
+		}
+		} catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+			this.Cancelar();
+		}
+		
+	}
+	
+	public void Cancelar() {
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
+		}
+	}
+	
 	public String toString() {
 		return "Crear Administrador";
 	}

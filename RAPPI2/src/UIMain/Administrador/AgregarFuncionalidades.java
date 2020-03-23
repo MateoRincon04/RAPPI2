@@ -1,110 +1,173 @@
 package UIMain.Administrador;
 
+import java.util.ArrayList;
+
 import BaseDatos.Data;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.ErrorCancelar;
 import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class AgregarFuncionalidades extends OpcionDeMenu {
+	TextField valor;
+	GridPane fp;
+	ComboBox cbx1;
 	public void ejecutar() {
-		System.out.println("¿A qué tipo de usuario desea agregar las funcionalidades? Ingrese el número: ");
-		System.out.println("1) Cliente");
-		System.out.println("2) Tendero");
-		System.out.println("3) Restaurante");
-		int opcion = Main.user.nextInt();
-		if (opcion == 1) {
-			System.out.println("Agregará una funcionalidad a algún cliente.");
-			System.out.println("Ingrese el UserName del cliente: ");
-			String username = Main.user.next();
-			Cliente cliente = Data.buscarCliente(username);
-			System.out.println("Estas son las funcionalidades del cliente " + cliente.getNombre() + " :");
-			for (int i = 0; i < cliente.getOpciones().size(); i++) {
-				System.out.println((i + 1) + ") " + Data.getOpciones().get(cliente.getOpciones().get(i)));
+		GridPane bonito = new GridPane();
+		Label descripcion = new Label("Podras agregarle funcionalidades al usuario que desees");
+		bonito.setVgap(20);
+		bonito.setPadding(new Insets(100,10,10,10));
+		Label desc = new Label("Agregar Funcionalidades de alguien");
+		//creacion pane 
+		fp = new GridPane();
+		fp.setPadding(new Insets(10,100,10,100));
+		fp.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		fp.setHgap(40);
+		fp.setVgap(5);
+		Label tc = new Label("Tipo de Usuario");
+		tc.setTextFill(Color.BLUE);
+		tc.setPadding(new Insets(2,2,2,2));
+		tc.setBorder(new Border(new BorderStroke(Color.BLUE,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		tc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		tc.setAlignment(Pos.CENTER);
+		fp.add(tc, 0, 0);
+		Label tv = new Label("Nombre Usuario");
+		tv.setTextFill(Color.BLUE);
+		tv.setPadding(new Insets(2,2,2,2));
+		tv.setBorder(new Border(new BorderStroke(Color.BLUE,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		tv.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		tv.setAlignment(Pos.CENTER);
+		fp.add(tv, 1, 0);
+		String tipo[]= {"Cliente","Tendero","Restaurante"};
+		cbx1 = new ComboBox(FXCollections.observableArrayList(tipo)) ;
+		cbx1.setPromptText("Tipos de Usuarios");
+		fp.add(cbx1, 0, 1);
+		valor = new TextField();
+		fp.add(valor, 1, 1);
 
+		desc.setFont(new Font("Arial",15));
+		desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		desc.setAlignment(Pos.CENTER);
+		desc.setTextFill(Color.BLACK);
+		desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		descripcion.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		descripcion.setAlignment(Pos.CENTER);
+		descripcion.setTextFill(Color.BLACK);
+		descripcion.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		bonito.add(desc, 0, 0);
+		bonito.add(descripcion, 0, 1);
+		bonito.add(fp, 0, 2);
+		bonito.setAlignment(Pos.TOP_CENTER);
+		AdministradorScene.root.setCenter(bonito);
+	
+	}
+	
+	public void Aceptar() {
+		try {
+			if(cbx1.getValue().equals("Cliente")) {
+				if(Data.buscarCliente(valor.getText())==null) {
+					throw new ErrorCancelar();
+				}else {
+					Cliente c = Data.buscarCliente(valor.getText());
+					ArrayList<String> op = new ArrayList<String>();
+					for (int i = 3; i < 9; i++) {
+						OpcionDeMenu aux = Data.getOpciones().get(i);
+						op.add(aux.toString());
+					}
+					ComboBox cbx1 = new ComboBox(FXCollections.observableArrayList(op));
+					cbx1.setPromptText("Funcionalidades");
+					fp.add(cbx1, 0, 2);
+					TextField valor1 = new TextField();
+					fp.add(valor1, 1, 2);
+					cbx1.valueProperty().addListener(new ChangeListener<String>() {
+						public void changed(ObservableValue ov, String t, String t1) {
+							valor1.setText(t1);
+						}
+					});
+					//Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(valor.getText()));
+					//Data.agregarObjetoDataBaseCliente(c);
+				}
 			}
-			System.out.println("Estas son todas las funcionalidades para un cliente disponibles: ");
-			for (int i = 3; i < 9; i++) {
-				System.out.println((i - 2) + ") " + Data.getOpciones().get(i));
+			else if(cbx1.getValue().equals("Tendero")) {
+				if(Data.buscarCliente(valor.getText())==null) {
+					throw new ErrorCancelar();
+				}else {
+					Tendero c = Data.buscarTendero(valor.getText());
+					ArrayList<String> op = new ArrayList<String>();
+					for (int i = 9; i < 11; i++) {
+						OpcionDeMenu aux = Data.getOpciones().get(i);
+						op.add(aux.toString());
+					}
+					ComboBox cbx1 = new ComboBox(FXCollections.observableArrayList(op));
+					cbx1.setPromptText("Funcionalidades");
+					fp.add(cbx1, 0, 2);
+					TextField valor1 = new TextField();
+					fp.add(valor1, 1, 2);
+					cbx1.valueProperty().addListener(new ChangeListener<String>() {
+						public void changed(ObservableValue ov, String t, String t1) {
+							valor1.setText(t1);
+						}
+					});
+					//Data.eliminarObjetoDataBaseTendero(Data.buscarTendero(valor.getText()));
+					//Data.agregarObjetoDataBaseTendero(c);
+				}
+			}else {
+				if(Data.buscarRestaurante(valor.getText())==null) {
+					throw new ErrorCancelar();
+				}else {
+					Restaurante c = Data.buscarRestaurante(valor.getText());
+					ArrayList<String> op = new ArrayList<String>();
+					for (int i = 11; i < 17; i++) {
+						OpcionDeMenu aux = Data.getOpciones().get(i);
+						op.add(aux.toString());
+					}
+					ComboBox cbx1 = new ComboBox(FXCollections.observableArrayList(op));
+					cbx1.setPromptText("Funcionalidades");
+					fp.add(cbx1, 0, 2);
+					TextField valor1 = new TextField();
+					fp.add(valor1, 1, 2);
+					cbx1.valueProperty().addListener(new ChangeListener<String>() {
+						public void changed(ObservableValue ov, String t, String t1) {
+							valor1.setText(t1);
+						}
+					});
+					//Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(valor.getText()));
+					//Data.agregarObjetoDataBaseRestaurante(c);
+				}
 			}
-			System.out.println("Escoja el numero de la funcionalidad que desea agregarle al cliente "
-					+ cliente.getNombre() + " :");
-			int numerito = Main.user.nextInt() + 2;
-			if (cliente.getOpciones().contains(numerito)) {
-				System.out.println("La funcionalidad ya existe. Intente nuevamente.");
-				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
-			} else {
-				cliente.getOpciones().add(numerito);
-				Data.eliminarObjetoDataBaseCliente(Data.buscarCliente(username));
-				Data.agregarObjetoDataBaseCliente(cliente);
-				System.out.println("Se ha agregado correctamente la funcionalidad.");
-				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
-			}
-			Data.actualizarDataBaseCliente(Data.buscarCliente(username));
+		} catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+			this.Cancelar();
 		}
-		else if (opcion == 2) {
-			System.out.println("agregará una funcionalidad a algún Tendero.");
-			System.out.println("Ingrese el UserName del Tendero: ");
-			String username = Main.user.next();
-			Tendero tendero = Data.buscarTendero(username);
-			System.out.println("Estas son las funcionalidades del Tendero " + tendero.getNombre() + " :");
-			for (int i = 0; i < tendero.getOpciones().size(); i++) {
-				System.out.println((i + 1) + ") " + Data.getOpciones().get(tendero.getOpciones().get(i)));
-
-			}
-			System.out.println("Estas son todas las funcionalidades para un Tendero disponibles: ");
-			for (int i = 9; i < 11; i++) {
-				System.out.println((i - 8) + ") " + Data.getOpciones().get(i));
-			}
-			System.out.println("Escoja el numero de la funcionalidad que desea agregarle al Tendero "
-					+ tendero.getNombre() + " :");
-			int numerito = Main.user.nextInt() + 8;
-			if (tendero.getOpciones().contains(numerito)) {
-				System.out.println("La funcionalidad ya existe. Intente nuevamente.");
-				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
-			} else {
-				tendero.getOpciones().add(numerito);
-				Data.eliminarObjetoDataBaseTendero(Data.buscarTendero(username));
-				Data.agregarObjetoDataBaseTendero(tendero);
-				System.out.println("Se ha agregado correctamente la funcionalidad.");
-				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
-			}
-			Data.actualizarDataBaseTendero(Data.buscarTendero(username));
-		}
-
-		else if (opcion == 3) {
-			System.out.println("agregará una funcionalidad a algún Restaurante.");
-			System.out.println("Ingrese el UserName del Restaurante: ");
-			String username = Main.user.next();
-			Restaurante restaurante = Data.buscarRestaurante(username);
-			System.out.println("Estas son las funcionalidades del restaurante " + restaurante.getNombre() + " :");
-			for (int i = 0; i < restaurante.getOpciones().size(); i++) {
-				System.out.println((i + 1) + ") " + Data.getOpciones().get(restaurante.getOpciones().get(i)));
-
-			}
-			System.out.println("Estas son todas las funcionalidades para un Restaurante disponibles: ");
-			for (int i = 11; i < 17; i++) {
-				System.out.println((i - 10) + ") " + Data.getOpciones().get(i));
-			}
-			System.out.println("Escoja el numero de la funcionalidad que desea agregarle al Restaurante "
-					+ restaurante.getNombre() + " :");
-			int numerito = Main.user.nextInt() + 10;
-			if (restaurante.getOpciones().contains(numerito)) {
-				System.out.println("La funcionalidad ya existe. Intente nuevamente.");
-				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
-			} else {
-				restaurante.getOpciones().add(numerito);
-				Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(username));
-				Data.agregarObjetoDataBaseRestaurante(restaurante);
-				System.out.println("Se ha agregado correctamente la funcionalidad.");
-				MenuDeConsola.lanzarMenu((Administrador) Main.usuario);
-			}
-			Data.actualizarDataBaseRestaurante(Data.buscarRestaurante(username));
-		}
-
+		
+	}
+	
+	public void Cancelar() {
+		((TextField) fp.getChildren().get(3)).setText("");
 	}
 
 	public String toString() {
