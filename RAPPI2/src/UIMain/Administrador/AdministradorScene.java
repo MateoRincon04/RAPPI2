@@ -5,7 +5,6 @@ import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Excepciones.AlertaConfirmacion;
-import UIMain.Restaurante.CrearPlato;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -42,10 +41,10 @@ public class AdministradorScene extends Application{
 	static Administrador usuario = Data.buscarAdministrador("Admin");
 	public void start(Stage stage) {
 		Data.CargarOpciones();
-		// Manejo de la barra de menú de la vantana
+		// Manejo de la barra de menï¿½ de la vantana
 		MenuBar barraMenu = new MenuBar();
 		
-		// Definición de menú
+		// Definiciï¿½n de menï¿½
 		Menu menu = new Menu("Archivo");
 		Menu menu1 = new Menu("Procesos y consultas");
 		Menu menu2= new Menu("Ayuda");
@@ -76,7 +75,7 @@ public class AdministradorScene extends Application{
 		root = new BorderPane();
 		root.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
 		root.setTop(barraMenu);
-		//creación de la Escena
+		//creaciï¿½n de la Escena
 		scene1 = new Scene(root,1200,600);
 		
 		// programa para Archivo SALIR
@@ -84,7 +83,7 @@ public class AdministradorScene extends Application{
 			public void handle(ActionEvent event) {
 				Alert conf = new Alert(AlertType.CONFIRMATION);
 				conf.setTitle("Confirmacion de salida");
-				conf.setContentText("¿Seguro que desea salir?");
+				conf.setContentText("ï¿½Seguro que desea salir?");
 				Optional<ButtonType> result = conf.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					//cambia a la escena de bienvenida

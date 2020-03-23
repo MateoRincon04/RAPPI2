@@ -54,11 +54,17 @@ public class CambiarPlato extends OpcionDeMenu {
 				String descripcion = fp.getValue(fp.criterios[1]);
 				String precio = fp.getValue(fp.criterios[2]);
 				String restriccion = fp.getValue(fp.criterios[3]);
-				int pr = Integer.valueOf(precio);
-				int res = Integer.valueOf(restriccion);
-				Plato cambio = new Plato(nombre, descripcion, pr, res, Main.usuarioRestaurante);
-				Main.usuarioRestaurante.cambiarPlato(cambio);
-				this.Cancelar();
+				if (nombre.equals("") || descripcion.equals("") || precio.equals("") || restriccion.equals("")) {
+					throw new ErrorCancelar();
+					
+				} else {
+					int pr = Integer.valueOf(precio);
+					int res = Integer.valueOf(restriccion);
+					Plato cambio = new Plato(nombre, descripcion, pr, res, Main.usuarioRestaurante);
+					Main.usuarioRestaurante.cambiarPlato(cambio);
+					this.Cancelar();
+				}
+
 			}
 
 		} catch (ErrorCancelar e) {
