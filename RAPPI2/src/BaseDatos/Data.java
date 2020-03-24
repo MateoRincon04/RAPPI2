@@ -95,7 +95,141 @@ public class Data {
 			+ "NotificacionesGuardados.json";
 	private static final String filepathCalificacion = "RAPPI2\\src\\BaseDatos\\temp\\"
 			+ "CalificacionesGuardados.json";
+	
+	//Aca vamos a organizar el data para que todo se manede desde la ram como pide guzman 
+	private static ArrayList<Administrador> dbAdmin = new ArrayList<Administrador>();
+	private static ArrayList<Cliente> dbCliente = new ArrayList<Cliente>();
+	private static ArrayList<Tendero> dbTendero = new ArrayList<Tendero>();
+	private static ArrayList<Restaurante> dbRestaurante = new ArrayList<Restaurante>();
+	private static ArrayList<Notificacion> dbNotificacion = new ArrayList<Notificacion>();
+	private static ArrayList<Calificacion> dbCalificacion = new ArrayList<Calificacion>();
+	private static ArrayList<Pedido> dbPedido = new ArrayList<Pedido>();
+	private static ArrayList<Plato> dbPlato = new ArrayList<Plato>();
+	
+	//gets para las bases de datos
+	public static ArrayList<Administrador> getdbAdmin(){
+		return dbAdmin;
+	}
+	
+	//sin esto no podemos vivir asi que no tocar
+	public static void llenarDataBases() {
+		dbAdmin = Data.traerDataBaseAdministrador();
+		dbCliente = Data.traerDataBaseCliente();
+		dbTendero = Data.traerDataBaseTendero();
+		dbRestaurante = Data.traerDataBaseRestaurante();
+		dbNotificacion = Data.traerDataBaseNotificacion();
+		dbCalificacion = Data.traerDataBaseCalificacion();
+		dbPedido = Data.traerDataBasePedido();
+		dbPlato = Data.traerDataBasePlato();
+	}
+	
+	//si lo llenan mal tambien morimos
+	public static void actualizarDataBases() {
+		Data.actualizarDataBaseAdministrador(dbAdmin);
+		Data.actualizarDataBaseCliente(dbCliente);
+	}
+	
+	//metodos en RAM para Administrador
+	/**
+	 * Metodo que se usa para agregar objetos a la base de datos de administradores
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
+	 */
+	public static void agregarObjetoDataBaseAdministrador(Administrador obj) {
+		for(int i = 0; i<dbAdmin.size();i++) {
+			if(dbAdmin.get(i).getUserName().equals(obj.getUserName())) {
+				dbAdmin.add(obj);
+			}
+		}
+		Data.actualizarDataBaseAdministrador(dbAdmin);
+	}
+	/**
+	 * Metodo que elimina cierto objeto de la dataBaseAdministrador
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
+	 */
+	public static void eliminarObjetoDataBaseAdministrador(Administrador obj) {
+		String userName = obj.getUserName();
+		for(int i = 0;i<dbAdmin.size();i++) {
+			if(dbAdmin.get(i).getUserName().equals(userName)) {
+				dbAdmin.remove(i);
+			}
+		}
+		Data.actualizarDataBaseAdministrador(dbAdmin);
+	}
+	/**
+	 * Metodo para buscar un usuario en la base de datos de administrador usando
+	 * solo el userName
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	public static Administrador buscarAdministrador(String userName) {
+		Administrador administrador = null;
+		for (Administrador a : dbAdmin) {
+			if (userName.equals(a.getUserName())) {
+				administrador = a;
+			}
+		}
+		return administrador;
+	}
 
+	/**
+	 * Metodo para buscar un usuario en la base de datos de administrador usando el
+	 * userName y la clave del usuario
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	public static Administrador buscarAdministrador(String userName, String clave) {
+		Administrador administrador = null;
+		for (Administrador a : dbAdmin) {
+			if (userName.equals(a.getUserName()) && clave.equals(a.getClave())) {
+				administrador = a;
+			}
+		}
+		return administrador;
+	}
+	/**
+	 * El metodo actualiza en la base de datos el administrador
+	 * 
+	 * @param administrador El parametro define el administrador que va a ser
+	 *                      actualizado
+	 */
+	public static void actualizarDataBaseAdministrador(Administrador administrador) {
+		Administrador aux = administrador;
+		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()));
+		Data.agregarObjetoDataBaseAdministrador(aux);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void LlenarTenderos() {
 		if (Data.traerDataBaseTendero().size() != 0) {
 			for (Tendero je : Data.traerDataBaseTendero()) {
@@ -177,12 +311,13 @@ public class Data {
 
 	public static void eliminarObjetoDataBaseNotificacion(Notificacion obj) {
 		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
-		if (dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBaseNotificacion(dataBase);
-		} else {
-			System.out.println("no se puede eliminar la notificacion a la base de datos");
+		int id = obj.getID();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getID()==id) {
+				dataBase.remove(i);
+			}
 		}
+		Data.actualizarDataBaseNotificacion(dataBase);
 	}
 
 	public static Notificacion buscarNotificacion(int ID) {
@@ -267,12 +402,13 @@ public class Data {
 
 	public static void eliminarObjetoDataBaseCalificacion(Calificacion obj) {
 		ArrayList<Calificacion> dataBase = Data.traerDataBaseCalificacion();
-		if (dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBaseCalificacion(dataBase);
-		} else {
-			System.out.println("no se puede eliminar la calificacion a la base de datos");
+		int id = obj.getID();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getID()==id) {
+				dataBase.remove(i);
+			}
 		}
+		Data.actualizarDataBaseCalificacion(dataBase);
 	}
 
 	public static Calificacion buscarCalificacion(int ID) {
@@ -680,17 +816,7 @@ public class Data {
 		Data.agregarObjetoDataBaseTendero(aux);
 	}
 
-	/**
-	 * El metodo actualiza en la base de datos el administrador
-	 * 
-	 * @param administrador El parametro define el administrador que va a ser
-	 *                      actualizado
-	 */
-	public static void actualizarDataBaseAdministrador(Administrador administrador) {
-		Administrador aux = administrador;
-		Data.eliminarObjetoDataBaseAdministrador(Data.buscarAdministrador(administrador.getUserName()));
-		Data.agregarObjetoDataBaseAdministrador(aux);
-	}
+	
 
 	/**
 	 * El metodo actualiza en la base de datos el restaurante
@@ -763,23 +889,6 @@ public class Data {
 		}
 	}
 
-	/**
-	 * Metodo que se usa para agregar objetos a la base de datos de administradores,
-	 * convirtiendo asi el objeto a guardar en un JsonElement para poder insertarlo
-	 * en el archivo respectivo
-	 * 
-	 * @see: {@link #traerDataBaseAdministrador()}
-	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
-	 */
-	public static void agregarObjetoDataBaseAdministrador(Administrador obj) {
-		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
-		if (!dataBase.contains(obj)) {
-			dataBase.add(obj);
-			Data.actualizarDataBaseAdministrador(dataBase);
-		} else {
-			System.out.println("no se puede agregar el administrador a la base de datos");
-		}
-	}
 
 	/**
 	 * Metodo se usa para agregar objetos a la base de datos de restaurante,
@@ -817,12 +926,13 @@ public class Data {
 	 */
 	public static void eliminarObjetoDataBasePlato(Plato obj) {
 		ArrayList<Plato> dataBase = Data.traerDataBasePlato();
-		if (dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBasePlato(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el plato a la base de datos");
+		String userName = obj.getNombre();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getNombre().equals(userName)) {
+				dataBase.remove(i);
+			}
 		}
+		Data.actualizarDataBasePlato(dataBase);
 	}
 
 	/**
@@ -833,12 +943,13 @@ public class Data {
 	 */
 	public static void eliminarObjetoDataBaseCliente(Cliente obj) {
 		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
-		if (dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBaseCliente(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el cliente a la base de datos");
+		String userName = obj.getUserName();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getUserName().equals(userName)) {
+				dataBase.remove(i);
+			}
 		}
+		Data.actualizarDataBaseCliente(dataBase);
 	}
 
 	/**
@@ -849,29 +960,13 @@ public class Data {
 	 */
 	public static void eliminarObjetoDataBaseTendero(Tendero obj) {
 		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
-		for (int i = 0; i < dataBase.size(); i++) {
-			if (obj.getUserName().equals(dataBase.get(i).getUserName())) {
+		String userName = obj.getUserName();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getUserName().equals(userName)) {
 				dataBase.remove(i);
-				Data.actualizarDataBaseTendero(dataBase);
-				break;
 			}
 		}
-	}
-
-	/**
-	 * Metodo que elimina cierto objeto de la dataBaseAdministrador
-	 * 
-	 * @see: {@link #traerDataBaseAdministrador()}
-	 * @see: {@link #actualizarDataBaseAdministrador(JsonArray)}
-	 */
-	public static void eliminarObjetoDataBaseAdministrador(Administrador obj) {
-		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
-		if (dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBaseAdministrador(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el administrador a la base de datos");
-		}
+		Data.actualizarDataBaseTendero(dataBase);
 	}
 
 	/**
@@ -882,23 +977,24 @@ public class Data {
 	 */
 	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
 		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
-		for (int i = 0; i < dataBase.size(); i++) {
-			if (obj.getNombre().equals(dataBase.get(i).getNombre())) {
+		String userName = obj.getNombre();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getNombre().equals(userName)) {
 				dataBase.remove(i);
-				Data.actualizarDataBaseRestaurante(dataBase);
-				break;
 			}
 		}
+		Data.actualizarDataBaseRestaurante(dataBase);
 	}
 
 	public static void eliminarObjetoDataBasePedido(Pedido obj) {
 		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
-		if (dataBase.contains(obj)) {
-			dataBase.remove(obj);
-			Data.actualizarDataBasePedido(dataBase);
-		} else {
-			System.out.println("no se puede eliminar el pedido a la base de datos");
+		int id = obj.getId();
+		for(int i = 0;i<dataBase.size();i++) {
+			if(dataBase.get(i).getId()==id) {
+				dataBase.remove(i);
+			}
 		}
+		Data.actualizarDataBasePedido(dataBase);
 	}
 
 	/**
@@ -987,41 +1083,6 @@ public class Data {
 			}
 		}
 		return tendero;
-	}
-
-	/**
-	 * Metodo para buscar un usuario en la base de datos de administrador usando
-	 * solo el userName
-	 * 
-	 * @see: {@link #traerDataBaseAdministrador()}
-	 */
-
-	public static Administrador buscarAdministrador(String userName) {
-		Administrador administrador = null;
-		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
-		for (Administrador a : dataBase) {
-			if (userName.equals(a.getUserName())) {
-				administrador = a;
-			}
-		}
-		return administrador;
-	}
-
-	/**
-	 * Metodo para buscar un usuario en la base de datos de administrador usando el
-	 * userName y la clave del usuario
-	 * 
-	 * @see: {@link #traerDataBaseAdministrador()}
-	 */
-	public static Administrador buscarAdministrador(String userName, String clave) {
-		Administrador administrador = null;
-		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
-		for (Administrador a : dataBase) {
-			if (userName.equals(a.getUserName()) && clave.equals(a.getClave())) {
-				administrador = a;
-			}
-		}
-		return administrador;
 	}
 
 	/**

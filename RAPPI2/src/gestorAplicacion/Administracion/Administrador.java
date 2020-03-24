@@ -139,7 +139,6 @@ public class Administrador extends Perfil implements Serializable{
 							((Tendero) usuario).opciones.add(posicion);
 							return true;
 						} else {
-							// System.out.println("Ingrese un numero valido");
 							return false;
 						}
 					}

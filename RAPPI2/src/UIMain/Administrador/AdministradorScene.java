@@ -38,9 +38,11 @@ public class AdministradorScene extends Application{
 	private HBox hb;
 	static BorderPane root;
 	private GridPane gp;
-	static Administrador usuario = Data.buscarAdministrador("Admin");
+	static Administrador usuario = null;
 	public void start(Stage stage) {
 		Data.CargarOpciones();
+		Data.llenarDataBases();
+		usuario = Data.buscarAdministrador("Admin");
 		// Manejo de la barra de men� de la vantana
 		MenuBar barraMenu = new MenuBar();
 		
