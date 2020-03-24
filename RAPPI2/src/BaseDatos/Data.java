@@ -109,7 +109,27 @@ public class Data {
 	public static ArrayList<Administrador> getdbAdmin(){
 		return dbAdmin;
 	}
-	
+	public static ArrayList<Cliente> getdbCliente(){
+		return dbCliente;
+	}
+	public static ArrayList<Tendero> getdbTendero(){
+		return dbTendero;
+	}
+	public static ArrayList<Restaurante> getdbRestaurante(){
+		return dbRestaurante;
+	}
+	public static ArrayList<Notificacion> getdbNotificacion(){
+		return dbNotificacion;
+	}
+	public static ArrayList<Calificacion> getdbCalificacion(){
+		return dbCalificacion;
+	}
+	public static ArrayList<Pedido> getdbPedido(){
+		return dbPedido;
+	}
+	public static ArrayList<Plato> getdbPlato(){
+		return dbPlato;
+	}
 	//sin esto no podemos vivir asi que no tocar
 	public static void llenarDataBases() {
 		dbAdmin = Data.traerDataBaseAdministrador();
