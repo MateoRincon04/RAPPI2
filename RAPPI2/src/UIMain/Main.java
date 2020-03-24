@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import gestorAplicacion.Administracion.*;
+import gestorAplicacion.Interaccion.Tendero;
 
 /**
  * Clase Main, su finalidad es la de ejecutar el codigo entero
@@ -15,8 +16,8 @@ import gestorAplicacion.Administracion.*;
  */
 public class Main {
 
-	public static Perfil usuario;
-	public static Restaurante usuarioRestaurante = new Restaurante("MC","calle10","1243412","MC");
+	public static Perfil usuario = new Tendero("Guillermo", 1242354, 2, "Guille", "Guille", 236243611);
+	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
 	public static ArrayList<String> tenderos = new ArrayList<>();
 

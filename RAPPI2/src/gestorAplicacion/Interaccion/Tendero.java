@@ -28,7 +28,7 @@ import gestorAplicacion.Administracion.Perfil;
 public class Tendero extends Perfil implements Serializable {
 	private int pedido;
 	private String estaDisponible;
-	private int entregados = 0;
+	private int entregados;
 	private ArrayList<Integer> notificaciones = new ArrayList<Integer>();
 	private ArrayList<Integer> calificaciones = new ArrayList<Integer>();
 	public ArrayList<Integer> opciones = new ArrayList<Integer>();
@@ -47,6 +47,7 @@ public class Tendero extends Perfil implements Serializable {
 		this.opciones.add(12);
 		this.opciones.add(13);
 		this.salario = salario;
+		this.entregados = 0;
 		this.estaDisponible = "disponible";
 	}
 
