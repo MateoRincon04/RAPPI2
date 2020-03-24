@@ -31,7 +31,7 @@ public class HacerPedido extends OpcionDeMenu {
 	private String tituloCriterios = "Criterios: ";
 	private String[] criterios = new String[] { "El restaurante al cual hará un pedido: " };
 	private String tituloValores = "Nombre del restaurante:  ";
-	private String[] valores = new String[] { "", };
+	private String[] valores = new String[] { "" };
 	private boolean[] habilitado = new boolean[] { true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
 	Cliente usuarioCliente = Data.buscarCliente("guille");
@@ -66,45 +66,49 @@ public class HacerPedido extends OpcionDeMenu {
 			String nombre = fp.getValue(fp.criterios[0]);
 			Restaurante res = Data.buscarRestaurante(nombre);
 			if (res != null) {
-				Alert a = new Alert(AlertType.INFORMATION);
-				a.setContentText(res.getMenu());
-				a.setHeaderText("Este es el plato del menú");
-				a.show();
 				Alert b = new Alert(AlertType.CONFIRMATION);
 				b.setContentText("Está seguro de hacer el pedido al restaurante: " + res.getNombre() + " y el plato "
 						+ res.getMenu() + " ?");
-				Optional<ButtonType> but = a.showAndWait();
+				Optional<ButtonType> but = b.showAndWait(); // a.showAndWait();
 				if (but.get() == ButtonType.OK) {
 
 					Plato plato = escogerPlato(res);
 					if (plato != null) {
-						usuarioCliente.hacerPedido(plato);
-						Alert q = new Alert(AlertType.INFORMATION);
-						q.setContentText(res.getMenu());
-						q.setHeaderText("Su pedido se ha realizado correctamente");
-						q.setTitle("Pedido Exitoso");
-						q.show();
-						throw new ErrorConfirmacion();
+						boolean rea = usuarioCliente.hacerPedido(plato); // usuarioCliente.hacerPedido(plato);
+						if (rea) { //
+							Alert q = new Alert(AlertType.INFORMATION);
+							q.setContentText(res.getMenu());
+							q.setHeaderText("Su pedido se ha realizado correctamente");
+							q.setTitle("Pedido Exitoso");
+							q.show();
+							this.Cancelar();
+							throw new ErrorConfirmacion();
+						} else { //
+							Alert q = new Alert(AlertType.WARNING); //
+							q.setContentText("Usted no posee el dinero en su saldo para poder realizar este pedido");//
+							q.show();//
+						}
 
 					} else {
 						Alert q = new Alert(AlertType.INFORMATION);
 						q.setContentText(res.getMenu());
-						q.setHeaderText("Este restaurante no cuenta con platos que estén disponibles");
+						q.setHeaderText("Este restaurante no cuenta con platos aun");
 						q.setTitle("Problema al realizar su pedido");
 						q.show();
-						throw new ErrorCancelar();
+						this.Cancelar();// throw new ErrorCancelar();
 					}
 				} else {
 					this.Cancelar();
 				}
 
+			} else { //
+				/*Alert q = new Alert(AlertType.INFORMATION);
+				q.setContentText(res.getMenu());
+				q.setHeaderText("No existe un restaurante con esos datos.");
+				q.setTitle("Problema al realizar su pedido");
+				q.show();*/
+				throw new ErrorCancelar();
 			}
-			Alert q = new Alert(AlertType.INFORMATION);
-			q.setContentText(res.getMenu());
-			q.setHeaderText("No existe un restaurante con esos datos.");
-			q.setTitle("Problema al realizar su pedido");
-			q.show();
-			throw new ErrorCancelar();
 
 		} catch (ErrorCancelar e) {
 			Alert a = new Alert(AlertType.WARNING);
@@ -132,17 +136,10 @@ public class HacerPedido extends OpcionDeMenu {
 	 * boolean valor = false;
 	 * 
 	 * System.out.println("Ingrese el nombre del restaurante a buscar: "); String
-	 * nombre = Main.user.next(); String restaurante = null;for( int
-	 * i:usuarioCliente.getHistorial()) { if
-	 * (Data.buscarPedido(i).getEntregado().equals("noEntegrado")) { restaurante =
-	 * Data.buscarPedido(i).getRestaurante(); } }if(restaurante!=null) {
-	 * System.out.println("tiene un pedido en curso en " + restaurante);
-	 * System.out.println(
-	 * "¿Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee."
-	 * ); int opc = Main.user.nextInt(); if (opc == 2) {
-	 * MenuDeConsola.lanzarMenu((Cliente) Main.usuario); } else { ejecutar(); }
-	 * }else { Restaurante restauranteElegido = Data.buscarRestaurante(nombre);
-	 * Plato platoEscogido = null; if (restauranteElegido != null) { platoEscogido =
+	 * nombre = Main.user.next(); String restaurante = null;
+	 * 
+	 * Restaurante restauranteElegido = Data.buscarRestaurante(nombre); Plato
+	 * platoEscogido = null; if (restauranteElegido != null) { platoEscogido =
 	 * escogerPlato(restauranteElegido); if (platoEscogido != null) { valor =
 	 * usuarioCliente.hacerPedido(platoEscogido);
 	 * System.out.println("Su pedido se ha realizado correctamente."); } } else {
@@ -151,12 +148,10 @@ public class HacerPedido extends OpcionDeMenu {
 	 * if (!valor && restauranteElegido != null && platoEscogido != null) {
 	 * System.out.
 	 * println("Usted no cuenta con saldo suficiente para pedir este plato.");
-	 * MenuDeConsola.lanzarMenu((Cliente) Main.usuario); } else {
-	 * System.out.println(
-	 * "¿Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee."
+	 * MenuDeConsola.lanzarMenu((Cliente) Main.usuario); } else { System.out.
+	 * println("¿Desea volver a hacer un pedido (1) o volver a su menu (2)? Escriba el numero indicado para la opcion que desee."
 	 * ); int opc = Main.user.nextInt(); if (opc == 2) {
-	 * MenuDeConsola.lanzarMenu((Cliente) Main.usuario); } else { ejecutar(); } } }
-	 * }
+	 * MenuDeConsola.lanzarMenu((Cliente) Main.usuario); } else { ejecutar(); } }
 	 */
 	/**
 	 * Metodo que le permite al cliente escoger que plato desea pedir
@@ -169,14 +164,10 @@ public class HacerPedido extends OpcionDeMenu {
 	 */
 	private Plato escogerPlato(Restaurante restauranteElegido) {
 		Plato plato = null;
-		System.out.println("Este es el menu de platos con el que cuenta el restaurante.");
-		System.out.println(restauranteElegido.getMenu());
 		if (restauranteElegido.getMenu().equals("")) {
-			System.out.println("Este restaurante no posee platos disponibles");
 			return null;
 		} else {
 			plato = Data.buscarPlato(restauranteElegido.getMenu());
-			System.out.println("pedido en proceso");
 		}
 		return plato;
 	}

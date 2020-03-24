@@ -49,7 +49,7 @@ public class Notificacion {
 	}
 
 	/**
-	 * El m�todo notificar me permite notificar a los tenderos acerca del nuevo
+	 * El metodo notificar me permite notificar a los tenderos acerca del nuevo
 	 * pedido creado y le avisa tambien a el Restaurante asignado a el Pedido que
 	 * realizara el Plato ordenado.
 	 */
@@ -63,21 +63,22 @@ public class Notificacion {
 			if (notificado.getEstaDisponible().equals("disponible")) {
 				notificado.agregarNotificacion(this);
 				Data.actualizarDataBaseTendero(notificado);
-				if (tomarPedido.equals("disponible")) {
+				/*if (tomarPedido.equals("disponible")) {
 					notificado.setEstaDisponible();
 					Data.buscarPedido(pedido).setTendero(notificado);
 					break;
-				}
+				}*/
 			}
-			break;
+			//break;
 		}
+		/*
 		Iterator<String> iterator2 = Main.tenderos.iterator();
 		while (iterator2.hasNext()) {
 			Tendero tenderoAtiende =  Data.buscarTendero(iterator2.next());
 			if (tenderoAtiende.aceptarPedido() == true) {
 				break;
 			}
-		}
+		}*/
 	}
 
 }

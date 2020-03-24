@@ -33,7 +33,7 @@ public class Pedido {
 	public Pedido(Cliente cliente, Plato plato) {
 		this.cliente = cliente.getUserName();
 		this.plato = plato.getNombre();
-		this.restaurante = Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
+		this.restaurante = Data.buscarPlato(plato.getNombre()).getRestaurante(); //Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
 		++Pedido.contador;
 		this.ID= contador;
 	}
