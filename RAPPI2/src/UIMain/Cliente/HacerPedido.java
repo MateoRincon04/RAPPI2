@@ -81,7 +81,7 @@ public class HacerPedido extends OpcionDeMenu {
 							q.setHeaderText("Su pedido se ha realizado correctamente");
 							q.setTitle("Pedido Exitoso");
 							q.show();
-							this.Cancelar();
+							this.Cancelar();//
 							throw new ErrorConfirmacion();
 						} else { //
 							Alert q = new Alert(AlertType.WARNING); //
