@@ -1,12 +1,14 @@
 package UIMain.Administrador;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import BaseDatos.Data;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
+import UIMain.Excepciones.ErrorNoExiste;
 import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
@@ -17,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -87,9 +90,13 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 	
 	public void Aceptar() {
 		try {
-			if(cbx1.getValue().equals("Cliente")) {
+			if(valor.getText().equals("")) {
+				this.ejecutar();
+				throw new ErrorCancelar();
+			}
+			else if(cbx1.getValue().equals("Cliente")) {
 				if(Data.buscarCliente(valor.getText())==null) {
-					throw new ErrorCancelar();
+					throw new ErrorNoExiste("Cliente",valor.getText());
 				}else {
 					Cliente c = Data.buscarCliente(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
@@ -113,7 +120,7 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 			}
 			else if(cbx1.getValue().equals("Tendero")) {
 				if(Data.buscarTendero(valor.getText())==null) {
-					throw new ErrorCancelar();
+					throw new ErrorNoExiste("Tendero",valor.getText());
 				}else {
 					Tendero c = Data.buscarTendero(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
@@ -136,7 +143,7 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 				}
 			}else {
 				if(Data.buscarRestaurante(valor.getText())==null) {
-					throw new ErrorCancelar();
+					throw new ErrorNoExiste("Restaurante",valor.getText());
 				}else {
 					Restaurante c = Data.buscarRestaurante(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
@@ -163,11 +170,31 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 			a.setContentText(e.getMessage());
 			a.show();
 			this.Cancelar();
+		}catch(ErrorNoExiste e1) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e1.getMessage());
+			a.show();
+			this.Cancelar();
 		}
 		
 	}
 	public void AceptarS() {
-		admin.agregarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
+		try {
+			if(valor1.getText().equals("")) {
+				throw new ErrorCancelar();
+			}else {
+				Alert a = new Alert(AlertType.CONFIRMATION);
+				a.setContentText("seguro que quiere agregarle a "+valor.getText() + " la funcionalidad "+ valor1.getText()+" ?");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK) {
+				admin.agregarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
+				}
+			}
+		}catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+		}
 	}
 	
 	public void Cancelar() {

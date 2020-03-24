@@ -1,15 +1,19 @@
 package UIMain.Administrador;
 
+import java.util.Optional;
+
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
+import UIMain.Excepciones.ErrorExistente;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
@@ -53,16 +57,32 @@ public class CrearRestaurante extends OpcionDeMenu {
 	public void Aceptar() {
 		try {
 			if (Data.buscarRestaurante(fp.getValue(fp.criterios[0]))!=null) {
-			throw new ErrorCancelar();
+			throw new ErrorExistente();
 		} else {
 			String nombre = fp.getValue(fp.criterios[0]);
 			String clave = fp.getValue(fp.criterios[1]);
 			String direccion = fp.getValue(fp.criterios[2]);
 			String celular = fp.getValue(fp.criterios[3]);
-			admin.crearRestaurante(nombre, direccion, celular, clave);
+			if(nombre.equals("")||direccion.equals("")||clave.equals("")||celular.equals("")) {
+				throw new ErrorCancelar();
+			}else {
+				Alert a = new Alert(AlertType.CONFIRMATION);
+				a.setContentText("seguro que quiere crear al tendero "+ nombre+" ?");
+				a.show();
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK) {
+					admin.crearRestaurante(nombre, direccion, celular, clave);
+					this.Cancelar();
+				}
+			}
+		}
+		} catch(ErrorExistente e1) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e1.getMessage());
+			a.show();
 			this.Cancelar();
 		}
-		} catch (ErrorCancelar e) {
+		catch (ErrorCancelar e) {
 			Alert a = new Alert(AlertType.WARNING);
 			a.setContentText(e.getMessage());
 			a.show();

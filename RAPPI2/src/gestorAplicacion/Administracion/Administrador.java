@@ -7,6 +7,7 @@ import gestorAplicacion.Interaccion.Cliente;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import BaseDatos.Data;
 
@@ -138,7 +139,6 @@ public class Administrador extends Perfil implements Serializable{
 							((Tendero) usuario).opciones.add(posicion);
 							return true;
 						} else {
-							// System.out.println("Ingrese un numero valido");
 							return false;
 						}
 					}
@@ -183,6 +183,7 @@ public class Administrador extends Perfil implements Serializable{
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(!c.opciones.contains(i)) {
 						c.opciones.add(i);
+						c.opciones.sort(Comparator.naturalOrder());
 					}
 				}
 			}
@@ -194,6 +195,7 @@ public class Administrador extends Perfil implements Serializable{
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(!t.opciones.contains(i)) {
 						t.opciones.add(i);
+						t.opciones.sort(Comparator.naturalOrder());
 					}
 				}
 			}
@@ -204,6 +206,7 @@ public class Administrador extends Perfil implements Serializable{
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(!r.opciones.contains(i)) {
 						r.opciones.add(i);
+						r.opciones.sort(Comparator.naturalOrder());
 					}
 				}
 			}

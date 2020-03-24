@@ -38,9 +38,11 @@ public class AdministradorScene extends Application{
 	private HBox hb;
 	static BorderPane root;
 	private GridPane gp;
-	static Administrador usuario = Data.buscarAdministrador("Admin");
+	static Administrador usuario = null;
 	public void start(Stage stage) {
 		Data.CargarOpciones();
+		Data.llenarDataBases();
+		usuario = Data.buscarAdministrador("Admin");
 		// Manejo de la barra de men� de la vantana
 		MenuBar barraMenu = new MenuBar();
 		
@@ -275,11 +277,25 @@ public class AdministradorScene extends Application{
 						Button ac = new Button("Aceptar");
 						ac.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
-								((QuitarFuncionalidades) Data.getOpciones().get(26)).Aceptar();
+									((QuitarFuncionalidades) Data.getOpciones().get(26)).Aceptar();
 								Button ac1 = new Button("Aceptar");
 								ac1.setOnAction(new EventHandler<ActionEvent>() {
 									public void handle(ActionEvent event) {
+										try {
 										((QuitarFuncionalidades) Data.getOpciones().get(26)).AceptarS();
+										}catch(Exception e) {
+											Button ca = new Button("Cancelar");
+											ca.setOnAction(new EventHandler<ActionEvent>() {
+												public void handle(ActionEvent event) {
+												((QuitarFuncionalidades) Data.getOpciones().get(26)).Cancelar();
+
+												}
+											});
+											hb = new HBox(ac, ca);
+											hb.setAlignment(Pos.TOP_CENTER);
+											hb.setMaxHeight(Double.MAX_VALUE);
+											root.setBottom(hb);
+										}
 									}
 								});
 								Button ca = new Button("Cancelar");
@@ -327,7 +343,21 @@ public class AdministradorScene extends Application{
 								Button ac1 = new Button("Aceptar");
 								ac1.setOnAction(new EventHandler<ActionEvent>() {
 									public void handle(ActionEvent event) {
-										((AgregarFuncionalidades) Data.getOpciones().get(27)).AceptarS();
+										try {
+											((AgregarFuncionalidades) Data.getOpciones().get(27)).AceptarS();
+											}catch(Exception e) {
+												Button ca = new Button("Cancelar");
+												ca.setOnAction(new EventHandler<ActionEvent>() {
+													public void handle(ActionEvent event) {
+													((QuitarFuncionalidades) Data.getOpciones().get(26)).Cancelar();
+
+													}
+												});
+												hb = new HBox(ac, ca);
+												hb.setAlignment(Pos.TOP_CENTER);
+												hb.setMaxHeight(Double.MAX_VALUE);
+												root.setBottom(hb);
+											}
 									}
 								});
 								Button ca = new Button("Cancelar");
