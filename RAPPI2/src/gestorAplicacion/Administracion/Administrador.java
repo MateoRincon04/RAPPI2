@@ -79,13 +79,11 @@ public class Administrador extends Perfil implements Serializable{
 
 	public boolean crearAdministrador(String nombre, int telefono, int comuna, String clave, String userName,long salario) {
 		Administrador administrador = new Administrador(nombre, telefono, comuna, clave, userName, salario);
-		ArrayList<Administrador> dataBase = Data.traerDataBaseAdministrador();
+		ArrayList<Administrador> dataBase = Data.getdbAdmin();
 		if (!dataBase.contains(administrador)) {
 			Data.agregarObjetoDataBaseAdministrador(administrador);
-
 			return true;
 		} else {
-
 			return false;
 		}
 	}
@@ -124,7 +122,6 @@ public class Administrador extends Perfil implements Serializable{
 						if (posicion == 3 | posicion == 4 | posicion == 5 | posicion == 6 | posicion == 7
 								| posicion == 8 | posicion == 9) {
 							usuario = (Cliente) Main.usuario;
-							((Cliente) usuario).opciones.add(posicion);
 							return true;
 						} else {
 							// System.out.println("Ingresa un numero valido");

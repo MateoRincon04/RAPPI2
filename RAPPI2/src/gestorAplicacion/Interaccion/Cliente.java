@@ -105,7 +105,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 			pedido.crearNotificacion(pedido.getId());
 			this.agregarAlHistorial(pedido.getId());
 			this.pedido = pedido.getId();
-			Data.actualizarDataBaseCliente((Cliente) Main.usuario);
+			//Data.actualizarDataBaseCliente((Cliente) Main.usuario);
 			return true;
 		} else {
 
