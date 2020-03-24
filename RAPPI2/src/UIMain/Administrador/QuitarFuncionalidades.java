@@ -1,6 +1,7 @@
 package UIMain.Administrador;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 
 import BaseDatos.Data;
@@ -99,6 +100,7 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 				}else {
 					Cliente c = Data.buscarCliente(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
+					c.opciones.sort(Comparator.naturalOrder());
 					for (int i = 0; i < c.opciones.size(); i++) {
 						OpcionDeMenu aux = Data.getOpciones().get(c.opciones.get(i));
 						op.add(aux.toString());
@@ -121,6 +123,7 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 				}else {
 					Tendero c = Data.buscarTendero(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
+					c.opciones.sort(Comparator.naturalOrder());
 					for (int i = 0; i < c.opciones.size(); i++) {
 						OpcionDeMenu aux = Data.getOpciones().get(c.opciones.get(i));
 						op.add(aux.toString());
@@ -142,6 +145,7 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 				}else {
 					Restaurante c = Data.buscarRestaurante(valor.getText());
 					ArrayList<String> op = new ArrayList<String>();
+					c.opciones.sort(Comparator.naturalOrder());
 					for (int i = 0; i < c.opciones.size(); i++) {
 						OpcionDeMenu aux = Data.getOpciones().get(c.opciones.get(i));
 						op.add(aux.toString());
@@ -171,23 +175,21 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 		
 	}
 	public void AceptarS(){
-		Alert a = new Alert(AlertType.NONE);
 		try {
 			if(valor1.getText().equals("")) {
 				throw new ErrorCancelar();
 			}else {
-				a.setAlertType(AlertType.CONFIRMATION);
+				Alert a = new Alert(AlertType.CONFIRMATION);
 				a.setContentText("seguro que quiere eliminarle a "+valor.getText() + " la funcionalidad "+ valor1.getText()+" ?");
-				a.show();
 				Optional<ButtonType> result = a.showAndWait();
 				if(result.get()==ButtonType.OK) {
-				admin.quitarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
+					admin.quitarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
 				}
 			}
 		}catch (ErrorCancelar e) {
-			a.setAlertType(AlertType.WARNING);
-			a.setContentText(e.getMessage());
-			a.show();
+			Alert a1 = new Alert(AlertType.WARNING);
+			a1.setContentText(e.getMessage());
+			a1.show();
 		}
 		
 	}

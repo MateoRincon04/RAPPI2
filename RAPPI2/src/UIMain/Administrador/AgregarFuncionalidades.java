@@ -179,22 +179,19 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 		
 	}
 	public void AceptarS() {
-
-		Alert a = new Alert(AlertType.NONE);
 		try {
 			if(valor1.getText().equals("")) {
 				throw new ErrorCancelar();
 			}else {
-				a.setAlertType(AlertType.CONFIRMATION);
+				Alert a = new Alert(AlertType.CONFIRMATION);
 				a.setContentText("seguro que quiere agregarle a "+valor.getText() + " la funcionalidad "+ valor1.getText()+" ?");
-				a.show();
 				Optional<ButtonType> result = a.showAndWait();
 				if(result.get()==ButtonType.OK) {
 				admin.agregarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
 				}
 			}
 		}catch (ErrorCancelar e) {
-			a.setAlertType(AlertType.WARNING);
+			Alert a = new Alert(AlertType.WARNING);
 			a.setContentText(e.getMessage());
 			a.show();
 		}
