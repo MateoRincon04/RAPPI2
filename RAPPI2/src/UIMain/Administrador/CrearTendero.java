@@ -1,15 +1,19 @@
 package UIMain.Administrador;
 
+import java.util.Optional;
+
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
+import UIMain.Excepciones.ErrorExistente;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
@@ -55,7 +59,7 @@ public class CrearTendero extends OpcionDeMenu {
 	public void Aceptar() {
 		try {
 			if (Data.buscarTendero(fp.getValue(fp.criterios[1]))!=null) {
-			throw new ErrorCancelar();
+			throw new ErrorExistente();
 		} else {
 			String nombre = fp.getValue(fp.criterios[0]);
 			String userName = fp.getValue(fp.criterios[1]);
@@ -63,13 +67,34 @@ public class CrearTendero extends OpcionDeMenu {
 			String telefono = fp.getValue(fp.criterios[3]);
 			String comuna = fp.getValue(fp.criterios[4]);
 			String salario = fp.getValue(fp.criterios[5]);
-			int tel = Integer.valueOf(telefono);
-			int com = Integer.valueOf(comuna);
-			int sal = Integer.valueOf(salario);
-			admin.crearTendero(nombre, tel, com, clave, userName, sal);
+			if(nombre.equals("")||userName.equals("")||clave.equals("")||telefono.equals("")||comuna.equals("")||salario.equals("")) {
+				throw new ErrorCancelar();
+			}else {
+				try {
+					int tel = Integer.valueOf(telefono);
+					int com = Integer.valueOf(comuna);
+					int sal = Integer.valueOf(salario);
+					Alert a = new Alert(AlertType.CONFIRMATION);
+					a.setContentText("seguro que quiere crear al tendero "+ userName+" ?");
+					a.show();
+					Optional<ButtonType> result = a.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						admin.crearTendero(nombre, tel, com, clave, userName, sal);
+						this.Cancelar();
+					}
+				}catch(Exception e2) {
+					throw new ErrorCancelar();
+				}
+				this.Cancelar();
+				}
+			}
+		} catch(ErrorExistente e1) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e1.getMessage());
+			a.show();
 			this.Cancelar();
 		}
-		} catch (ErrorCancelar e) {
+		catch (ErrorCancelar e) {
 			Alert a = new Alert(AlertType.WARNING);
 			a.setContentText(e.getMessage());
 			a.show();

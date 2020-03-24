@@ -6,6 +6,7 @@ import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
+import UIMain.Excepciones.ErrorNoExiste;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
 import javafx.beans.value.ChangeListener;
@@ -88,14 +89,14 @@ public class TenderoReparteMas extends OpcionDeMenu {
 		try {
 			Restaurante rAux = Data.buscarRestaurante(valor.getText());
 			if (rAux.tenderoQueMasMeEntrega()==null) {
-			throw new ErrorCancelar();
+			throw new ErrorNoExiste("Tendero",rAux.tenderoQueMasMeEntrega().getUserName());
 		} else {
 				al.setAlertType(AlertType.INFORMATION);
-				al.setContentText(rAux.tenderoQueMasMeEntrega().getNombre());
+				al.setContentText("el tendero que mas pedidos ha entregado en "+ rAux.getNombre()+" es " + rAux.tenderoQueMasMeEntrega().getNombre());
 				al.show();
 			}
 			this.Cancelar();
-		} catch (ErrorCancelar e) {
+		} catch (ErrorNoExiste e) {
 			al.setAlertType(AlertType.WARNING);
 			al.setContentText(e.getMessage());
 			al.show();
