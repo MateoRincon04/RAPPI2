@@ -70,7 +70,6 @@ public class HacerPedido extends OpcionDeMenu {
 					Plato plato = escogerPlato(res);
 					if (plato != null) {
 						usuarioCliente = EscenaCliente.cliente;
-						System.out.println(usuarioCliente.getNombre());
 						boolean rea = usuarioCliente.hacerPedido(plato); // usuarioCliente.hacerPedido(plato);
 						if (rea) { //
 							Alert q = new Alert(AlertType.INFORMATION);

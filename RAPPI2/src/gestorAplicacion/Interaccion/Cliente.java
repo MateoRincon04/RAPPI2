@@ -102,7 +102,6 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 			this.setSaldo((long) (this.getSaldo() - plato.getPrecio()));
 			Pedido pedido = new Pedido(this, plato);
 			Data.agregarObjetoDataBasePedido(pedido);
-			System.out.println("AQui");
 			pedido.crearNotificacion(pedido.getId());
 			this.agregarAlHistorial(pedido.getId());
 			this.pedido = pedido.getId();
