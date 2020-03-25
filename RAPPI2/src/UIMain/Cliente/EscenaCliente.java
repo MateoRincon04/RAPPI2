@@ -73,6 +73,7 @@ public class EscenaCliente extends Application {
 				Optional<ButtonType> result = conf.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					try {
+						System.out.close();
 						Data.getOpciones().get(29).ejecutar();
 					} catch (AlertaConfirmacion al) {
 						Alert ala = new Alert(AlertType.ERROR);
@@ -306,6 +307,27 @@ public class EscenaCliente extends Application {
 				hb.setMaxHeight(Double.MAX_VALUE);
 				root.setBottom(hb);
 
+			}
+		});
+		//salir
+		menu1.getItems().get(16).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Alert conf = new Alert(AlertType.CONFIRMATION);
+				conf.setTitle("Confirmacion de salida");
+				conf.setContentText("¿Seguro que desea salir?");
+				Optional<ButtonType> result = conf.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					try {
+						Data.getOpciones().get(29).ejecutar();
+					} catch (AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+					stage.close();
+
+				} else {
+					// nada
+				}
 			}
 		});
 

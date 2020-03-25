@@ -5,6 +5,7 @@ import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.AccionExitosa;
 import UIMain.Excepciones.ErrorCancelar;
 import UIMain.Restaurante.RestauranteEscena;
 import gestorAplicacion.Interaccion.Cliente;
@@ -23,15 +24,16 @@ import javafx.scene.layout.GridPane;
  */
 public class CalificarTendero extends OpcionDeMenu {
 	private String tituloCriterios = "Criterios: ";
-	private String[] criterios = new String[] { "Ingrese la calificación al tendero que realizó su pedido:" };
+	private String[] criterios = new String[] { "Ingrese la calificación al tendero que realizó su pedido:",
+			"Ingrese el nombre del tendero que realizó su pedido:" };
 	private String tituloValores = "Calificación: ";
-	private String[] valores = new String[] { "", };
-	private boolean[] habilitado = new boolean[] { true };
+	private String[] valores = new String[] { "", "" };
+	private boolean[] habilitado = new boolean[] { true, true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-	Cliente usuario = Data.buscarCliente("guille");
+	Cliente usuario;
 
 	public void ejecutar() {
-
+		usuario = Data.buscarCliente("Guille");
 		GridPane bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para calificar a un tendero que realizó un pedido a un cliente: ");
 		desc.setAlignment(Pos.CENTER);
@@ -56,12 +58,22 @@ public class CalificarTendero extends OpcionDeMenu {
 
 	public void Aceptar() {
 		try {
-			double calificacion = Double.parseDouble((fp.getValue(fp.criterios[0])));
-			if (calificacion >= 0 && calificacion <= 5) {
-				usuario.calificarTendero(calificacion);
-				this.Cancelar();
+			try {
+				double calificacion = Double.parseDouble((fp.getValue(fp.criterios[0])));
+				String tendero = fp.getValue(fp.criterios[1]);
+				if (calificacion >= 0 && calificacion <= 5) {
+					usuario.calificarTendero(calificacion, tendero);
+					throw new AccionExitosa();
 
-			} else {
+				} else {
+					throw new ErrorCancelar();
+				}
+			} catch (AccionExitosa a) {
+				Alert b = new Alert(AlertType.INFORMATION);
+				b.setContentText(a.getMessage());
+				b.show();
+				this.Cancelar();
+			} catch (Exception e) {
 				throw new ErrorCancelar();
 			}
 
