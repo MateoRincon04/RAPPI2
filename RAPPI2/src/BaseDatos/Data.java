@@ -537,9 +537,9 @@ public class Data {
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
-	 * datos de clientes
+	 * datos de Pedidos
 	 * 
-	 * @see: {@link #traerDataBaseCliente()}
+	 * @see: {@link #traerDataBasePedido()}
 	 */
 	public static File cargarFileDataBasePedido() throws IOException {
 		Gson gson = new Gson();
@@ -649,7 +649,7 @@ public class Data {
 		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
 		ArrayList<Tendero> tenderos = new ArrayList<>();
-		try (FileReader fr = new FileReader(filepathCliente)) {
+		try (FileReader fr = new FileReader(filepathTendero)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
 			for (JsonElement jsonElement : array) {
@@ -665,9 +665,9 @@ public class Data {
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
-	 * datos de clientes
+	 * datos de Tenderos
 	 * 
-	 * @see: {@link #traerDataBaseCliente()}
+	 * @see: {@link #traerDataBaseTendero()}
 	 */
 	public static File cargarFileDataBaseTendero() throws IOException {
 		Gson gson = new Gson();
@@ -855,7 +855,7 @@ public class Data {
 	 * Metodo para buscar un usuario en la base de datos de Calificacion usando solo
 	 * el ID
 	 * 
-	 * @see: {@link #traerDataBasePedido()}
+	 * @see: {@link #traerDataBaseCalificacion()}
 	 */
 	public static Calificacion buscarCalificacion(int ID) {
 		Calificacion calificacion = null;
@@ -945,9 +945,9 @@ public class Data {
 	}
 
 	/**
-	 * El metodo actualiza en la base de datos del restaurante
+	 * El metodo actualiza en la base de datos de la Notificacion
 	 * 
-	 * @param administrador El parametro define el restaurante que va a ser
+	 * @param administrador El parametro define la notificacion que va a ser
 	 *                      actualizado
 	 */
 	public static void actualizarDataBaseNotificacion(Notificacion notificacion) {
