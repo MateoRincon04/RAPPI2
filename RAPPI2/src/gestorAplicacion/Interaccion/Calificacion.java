@@ -1,5 +1,7 @@
 package gestorAplicacion.Interaccion;
 
+import BaseDatos.Data;
+
 /**
  * Clase Calificacion Esta clase tiene como finalidad hacer la conexion entre el
  * calificado y el calificador para saber cada dato de estos
@@ -11,7 +13,6 @@ public class Calificacion {
 	private String calificado;
 	private double puntuacion = 5.0;
 	private String calificador;
-	private static int contador = 0;
 	private int ID = 0;
 
 	/**
@@ -29,8 +30,11 @@ public class Calificacion {
 		this.setCalificado(calificado);
 		this.setCalificador(calificador);
 		this.puntuacion = puntuacion;
-		++Calificacion.contador;
-		this.ID = contador;
+		if(!Data.getdbCalificacion().isEmpty()) {
+			this.ID=Data.getdbCalificacion().size()+1;
+		}else {
+			this.ID=1;
+		}
 	}
 
 	public int getID() {

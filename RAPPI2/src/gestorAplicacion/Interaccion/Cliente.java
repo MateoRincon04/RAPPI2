@@ -189,7 +189,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	}
 
 	public ArrayList<Restaurante> verListaDeRestaurantes() {
-		return Data.traerDataBaseRestaurante();
+		return Data.getdbRestaurante();
 	}
 
 	/**
