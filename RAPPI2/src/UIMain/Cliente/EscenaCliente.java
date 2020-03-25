@@ -32,11 +32,14 @@ import javafx.stage.Stage;
 public class EscenaCliente extends Application {
 	private Scene escenaCliente;
 	private GridPane panel;
-	private Cliente cliente = Data.buscarCliente("guille");
+	public static Cliente cliente;
 	static BorderPane root;
 	private HBox hb;
 	public void start(Stage stage) {
 
+		Data.CargarOpciones();
+		Data.llenarDataBases();
+		cliente = Data.buscarCliente("guille");
 		MenuBar barraArriba = new MenuBar();
 		Menu menu = new Menu("Archivo");
 		Menu menu1 = new Menu("Procesos y consultas");
@@ -312,7 +315,6 @@ public class EscenaCliente extends Application {
 	}
 
 	public static void main(String[] args) {
-		Data.CargarOpciones();
 		launch(args);
 	}
 }

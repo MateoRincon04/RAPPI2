@@ -72,7 +72,6 @@ public class AceptarPedido extends OpcionDeMenu {
 			if (usu.getNotificaciones().size() < 1) {
 				throw new ErrorCancelar();
 			} else {
-				+++++
 				boolean b = usu.aceptarPedido();
 				if (b) {
 					Notificacion notificacion = Data.buscarNotificacion(usu.getNotificaciones().get(usu.getNotificaciones().size() - 1));

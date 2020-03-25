@@ -30,10 +30,13 @@ public class RestauranteEscena extends Application {
 	private Scene sceneRes;
 	private HBox hb;
 	static BorderPane root;
-	private Restaurante usuario = Main.usuarioRestaurante;
+	private Restaurante usuario;
 
 	public void start(Stage stage) {
 
+		Data.CargarOpciones();
+		Data.llenarDataBases();
+		usuario = Data.buscarRestaurante("MC");
 		// Manejo de la barra de menú de la vantana
 		MenuBar barraMenu = new MenuBar();
 
@@ -427,7 +430,6 @@ public class RestauranteEscena extends Application {
 	}
 
 	public static void main(String[] args) {
-		Data.CargarOpciones();
 		launch(args);
 	}
 }

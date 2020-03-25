@@ -70,6 +70,7 @@ public class Data {
 		opciones.add(new AgregarFuncionalidades()); // 27 admin
 		opciones.add(new cambiarContraseñaAdmin()); //28 Admin
 		opciones.add(new Salir()); // 29 todos
+		opciones.add(new Entregado()); //30 tendero
 
 	}
 
