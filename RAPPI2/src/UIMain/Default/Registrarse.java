@@ -1,6 +1,17 @@
 package UIMain.Default;
 
 import gestorAplicacion.Interaccion.Cliente;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
@@ -9,8 +20,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import BaseDatos.Data;
+import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
+import UIMain.Administrador.AdministradorScene;
 
 /**
  * Clase Registrarse
@@ -23,7 +36,32 @@ import UIMain.OpcionDeMenu;
 
 public class Registrarse extends OpcionDeMenu {
 
+	String tituloCriterios = "Datos";
+	String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Saldo","Direccion"};
+	String tituloValores = "Valor: ";
+	String[] valores = {"","","","","","",""};
+	Label descripcion = new Label("Usted será registrado en el sistema.");
+	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
 	public void ejecutar() {
+		GridPane bonito = new GridPane();
+		bonito.setVgap(20);
+		bonito.setPadding(new Insets(100,10,10,10));
+		Label desc = new Label("Registrarse");
+		desc.setFont(new Font("Arial",15));
+		desc.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		desc.setAlignment(Pos.CENTER);
+		desc.setTextFill(Color.BLACK);
+		desc.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		descripcion.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+		descripcion.setAlignment(Pos.CENTER);
+		descripcion.setTextFill(Color.BLACK);
+		descripcion.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		bonito.add(desc, 0, 0);
+		bonito.add(descripcion, 0, 1);
+		bonito.add(fp, 0, 2);
+		
+		bonito.setAlignment(Pos.TOP_CENTER);
+		//AdministradorScene.root.setCenter(bonito);
 
 		System.out.println("Usted sera registrado en el sistema.");
 		System.out.println("Ingrese su nombre: ");
