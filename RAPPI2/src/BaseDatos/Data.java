@@ -140,6 +140,7 @@ public class Data {
 		dbCalificacion = Data.traerDataBaseCalificacion();
 		dbPedido = Data.traerDataBasePedido();
 		dbPlato = Data.traerDataBasePlato();
+		
 	}
 	
 	//si lo llenan mal tambien morimos
@@ -150,7 +151,8 @@ public class Data {
 		Data.actualizarDataBaseTendero(dbTendero);
 		Data.actualizarDataBasePlato(dbPlato);
 		Data.actualizarDataBaseCalificacion(dbCalificacion);
-		
+		Data.actualizarDataBaseRestaurante(dbRestaurante);
+		Data.actualizarDataBaseNotificacion(dbNotificacion);
 	}
 	
 	//metodos en RAM para Administrador
@@ -341,6 +343,75 @@ public class Data {
 			}
 		}
 		return DataBase;
+	}
+	
+	public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
+		for(int i = 0; i<dbRestaurante.size();i++) {
+			if(dbRestaurante.get(i).getNombre().equals(obj.getNombre())) {
+				dbRestaurante.add(obj);
+			}
+		}
+		Data.actualizarDataBaseRestaurante(dbRestaurante);
+	}
+	
+	//RESTAURANTE
+	//metodos en RAM para RESTAURANTE
+	/**
+	 * Metodo que elimina cierto objeto de la dataBaseRestaurante
+	 * 
+	 * @see: {@link #traerDataBaseRestaurante()}
+	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
+	 */
+	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
+		String userName = obj.getNombre();
+		for(int i = 0;i<dbRestaurante.size();i++) {
+			if(dbRestaurante.get(i).getNombre().equals(userName)) {
+				dbRestaurante.remove(i);
+			}
+		}
+		Data.actualizarDataBaseRestaurante(dbRestaurante);
+	}
+	/**
+	 * Metodo para buscar un usuario en la base de datos de restaurante usando
+	 * solo el nombre
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	public static Restaurante buscarRestaurante(String userName) {
+		Restaurante restaurante = null;
+		for (Restaurante r : dbRestaurante) {
+			if (userName.equals(r.getNombre())) {
+				restaurante = r;
+			}
+		}
+		return restaurante;
+	}
+
+	/**
+	 * Metodo para buscar un usuario en la base de datos de restaurante usando el
+	 * userName y la clave del usuario
+	 * 
+	 * @see: {@link #traerDataBaseAdministrador()}
+	 */
+	public static Restaurante buscarRestaurante(String userName, String clave) {
+		Restaurante restaurante = null;
+		for (Restaurante r : dbRestaurante) {
+			if (userName.equals(r.getNombre()) && clave.equals(r.getClave())) {
+				restaurante = r;
+			}
+		}
+		return restaurante;
+	}
+	/**
+	 * El metodo actualiza en la base de datos del restaurante
+	 * 
+	 * @param administrador El parametro define el restaurante que va a ser
+	 *                      actualizado
+	 */
+	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
+		Restaurante aux = restaurante;
+		Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(restaurante.getNombre()));
+		Data.agregarObjetoDataBaseRestaurante(aux);
 	}
 	
 	//PEDIDO
@@ -811,6 +882,51 @@ public class Data {
 			}
 		}
 	}
+	
+		//NOTIFICACION
+		//metodos en RAM para NOTIFICACION
+		/**
+		 * Metodo que elimina cierto objeto de la dataBaseNotificacion
+		 * 
+		 * @see: {@link #traerDataBaseNotificacion()}
+		 * @see: {@link #actualizarDataBaseNotificacion(JsonArray)}
+		 */
+		public static void eliminarObjetoDataBaseNotificacion(Notificacion obj) {
+			int id = obj.getID();
+			for(int i = 0;i<dbNotificacion.size();i++) {
+				if(dbNotificacion.get(i).getID()==id) {
+					dbNotificacion.remove(i);
+				}
+			}
+			Data.actualizarDataBaseNotificacion(dbNotificacion);
+		}
+		/**
+		 * Metodo para buscar un usuario en la base de datos de restaurante usando
+		 * solo el nombre
+		 * 
+		 * @see: {@link #traerDataBaseAdministrador()}
+		 */
+		public static Notificacion buscarNotificacion(int id) {
+			Notificacion notificacion = null;
+			for (Notificacion n : dbNotificacion) {
+				if (id == n.getID()) {
+					notificacion = n;
+				}
+			}
+			return notificacion;
+		}
+
+		/**
+		 * El metodo actualiza en la base de datos del restaurante
+		 * 
+		 * @param administrador El parametro define el restaurante que va a ser
+		 *                      actualizado
+		 */
+		public static void actualizarDataBaseNotificacion(Notificacion notificacion) {
+			Notificacion aux = notificacion;
+			Data.eliminarObjetoDataBaseNotificacion(Data.buscarNotificacion(notificacion.getID()));
+			Data.agregarObjetoDataBaseNotificacion(aux);
+		}
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
@@ -865,11 +981,11 @@ public class Data {
 		}
 	}
 
-	public static void actualizarDataBaseNotificacion(Notificacion notificacion) {
+	/*public static void actualizarDataBaseNotificacion(Notificacion notificacion) {
 		Notificacion aux = notificacion;
 		Data.eliminarObjetoDataBaseNotificacion(Data.buscarNotificacion(notificacion.getID()));
 		Data.agregarObjetoDataBaseNotificacion(aux);
-	}
+	}*/
 
 	public static void agregarObjetoDataBaseNotificacion(Notificacion obj) {
 		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
@@ -881,7 +997,7 @@ public class Data {
 		}
 	}
 
-	public static void eliminarObjetoDataBaseNotificacion(Notificacion obj) {
+	/*public static void eliminarObjetoDataBaseNotificacion(Notificacion obj) {
 		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
 		int id = obj.getID();
 		for(int i = 0;i<dataBase.size();i++) {
@@ -890,9 +1006,9 @@ public class Data {
 			}
 		}
 		Data.actualizarDataBaseNotificacion(dataBase);
-	}
+	}*/
 
-	public static Notificacion buscarNotificacion(int ID) {
+	/*public static Notificacion buscarNotificacion(int ID) {
 		Notificacion notificacion = null;
 		ArrayList<Notificacion> dataBase = Data.traerDataBaseNotificacion();
 		for (Notificacion n : dataBase) {
@@ -902,7 +1018,7 @@ public class Data {
 		}
 		return notificacion;
 	}
-
+*/
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
 	 * datos de Calificaciones
@@ -1375,12 +1491,12 @@ public class Data {
 	 * @param restaurante El parametro define el restaurante que va a ser
 	 *                    actualizado
 	 */
-	public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
+	/*public static void actualizarDataBaseRestaurante(Restaurante restaurante) {
 		Restaurante aux = restaurante;
 		Data.eliminarObjetoDataBaseRestaurante(Data.buscarRestaurante(restaurante.getNombre()));
 		Data.agregarObjetoDataBaseRestaurante(aux);
 	}
-
+*/
 /*	public static void actualizarDataBasePedido(Pedido pedido) {
 		Data.eliminarObjetoDataBasePedido(Data.buscarPedido(pedido.getId()));
 		Data.agregarObjetoDataBasePedido(pedido);
@@ -1449,7 +1565,7 @@ public class Data {
 	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
 	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
-	public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
+	/*public static void agregarObjetoDataBaseRestaurante(Restaurante obj) {
 		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
 		if (!dataBase.contains(obj)) {
 			dataBase.add(obj);
@@ -1457,7 +1573,7 @@ public class Data {
 		} else {
 			System.out.println("no se puede agregar el restaurante a la base de datos");
 		}
-	}
+	}*/
 
 	/*public static void agregarObjetoDataBasePedido(Pedido obj) {
 		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
@@ -1526,7 +1642,7 @@ public class Data {
 	 * @see: {@link #traerDataBaseRestaurante()}
 	 * @see: {@link #actualizarDataBaseRestaurante(JsonArray)}
 	 */
-	public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
+	/*public static void eliminarObjetoDataBaseRestaurante(Restaurante obj) {
 		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
 		String userName = obj.getNombre();
 		for(int i = 0;i<dataBase.size();i++) {
@@ -1536,7 +1652,7 @@ public class Data {
 		}
 		Data.actualizarDataBaseRestaurante(dataBase);
 	}
-
+*/
 	/*public static void eliminarObjetoDataBasePedido(Pedido obj) {
 		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
 		int id = obj.getId();
@@ -1640,7 +1756,7 @@ public class Data {
 	 * Metodo para buscar un restaurante en la base de datos de restaurante
 	 */
 
-	public static Restaurante buscarRestaurante(String userName) {
+	/*public static Restaurante buscarRestaurante(String userName) {
 		Restaurante restaurante = null;
 		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
 		for (Restaurante r : dataBase) {
@@ -1650,14 +1766,14 @@ public class Data {
 		}
 		return restaurante;
 	}
-
+*/
 	/**
 	 * Metodo para buscar un usuario en la base de datos de restaurante usando el
 	 * userName y la clave del restaurante
 	 * 
 	 * @see: {@link #traerDataBaseRestaurante()}
 	 */
-	public static Restaurante buscarRestaurante(String userName, String clave) {
+	/*public static Restaurante buscarRestaurante(String userName, String clave) {
 		Restaurante restaurante = null;
 		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
 		for (Restaurante r : dataBase) {
@@ -1667,7 +1783,7 @@ public class Data {
 		}
 		return restaurante;
 	}
-
+*/
 	/*public static Pedido buscarPedido(int ID) {
 		Pedido pedido = null;
 		ArrayList<Pedido> dataBase = Data.traerDataBasePedido();
