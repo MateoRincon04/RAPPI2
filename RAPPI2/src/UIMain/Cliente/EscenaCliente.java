@@ -37,6 +37,7 @@ public class EscenaCliente extends Application {
 	private HBox hb;
 	public void start(Stage stage) {
 
+		Data.LlenarTenderos();
 		Data.CargarOpciones();
 		Data.llenarDataBases();
 		cliente = Data.buscarCliente("guille");

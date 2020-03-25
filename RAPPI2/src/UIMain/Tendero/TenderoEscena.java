@@ -29,9 +29,13 @@ public class TenderoEscena extends Application {
 	private Scene sceneRes;
 	private HBox hb;
 	static BorderPane root;
-	private Tendero usuario = (Tendero)Main.usuario;
+	static Tendero usuario;
 
 	public void start(Stage stage) {
+		
+		Data.CargarOpciones();
+		Data.llenarDataBases();
+		usuario = Data.buscarTendero("Guille");
 
 		// Manejo de la barra de menú de la vantana
 		MenuBar barraMenu = new MenuBar();
@@ -53,6 +57,9 @@ public class TenderoEscena extends Application {
 			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
+		menu1.getItems().add(new MenuItem(Data.getOpciones().get(30).toString()));
+		menu1.getItems().add(new SeparatorMenuItem());
+		
 		menu1.getItems().add(new MenuItem(Data.getOpciones().get(29).toString()));
 		menu1.getItems().add(new SeparatorMenuItem());
 
@@ -148,7 +155,7 @@ public class TenderoEscena extends Application {
 				Button ac = new Button("Aceptar");
 				ac.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((AceptarPedido) Data.getOpciones().get(15)).Aceptar();
+						((AceptarPedido) Data.getOpciones().get(12)).Aceptar();
 
 					}
 				});
@@ -156,7 +163,7 @@ public class TenderoEscena extends Application {
 				Button ca = new Button("Cancelar");
 				ca.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-						((AceptarPedido) Data.getOpciones().get(15)).Cancelar();
+						((AceptarPedido) Data.getOpciones().get(12)).Cancelar();
 
 					}
 				});
@@ -200,8 +207,41 @@ public class TenderoEscena extends Application {
 
 			}
 		});
-		// Salir
+		
+		// Entregado
 		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try {
+					Data.getOpciones().get(30).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((Entregado) Data.getOpciones().get(30)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((Entregado) Data.getOpciones().get(30)).Cancelar();
+
+					}
+				});
+				hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				root.setBottom(hb);
+
+			}
+		});
+		// Salir
+		menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Alert conf = new Alert(AlertType.CONFIRMATION);
 				conf.setTitle("Confirmacion de salida");

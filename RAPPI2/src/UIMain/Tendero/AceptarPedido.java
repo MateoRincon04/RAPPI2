@@ -27,9 +27,10 @@ public class AceptarPedido extends OpcionDeMenu {
 	private String[] valores;
 	private boolean[] habilitado = new boolean[] { false, false };
 	private FieldPanel fp;
-	private Tendero usu = (Tendero) Main.usuario;
+	private Tendero usu;
 
 	public void ejecutar() {
+		usu = TenderoEscena.usuario;
 
 		if (usu.getNotificaciones().size() < 1) {
 			valores = new String[] { "", "" };
@@ -68,6 +69,7 @@ public class AceptarPedido extends OpcionDeMenu {
 	}
 
 	public void Aceptar() {
+		usu = TenderoEscena.usuario;
 		try {
 			if (usu.getNotificaciones().size() < 1) {
 				throw new ErrorCancelar();
@@ -77,14 +79,15 @@ public class AceptarPedido extends OpcionDeMenu {
 					Notificacion notificacion = Data.buscarNotificacion(usu.getNotificaciones().get(usu.getNotificaciones().size() - 1));
 					Pedido pedido = Data.buscarPedido(notificacion.getPedido());
 					pedido.setTendero(usu);
+					usu.setPedido(pedido.getId());
 					pedido.setEntregado();
-					ArrayList<Tendero> historial = Data.traerDataBaseTendero();
+					ArrayList<Tendero> historial = Data.getdbTendero();
 					for (int i = 0; i < historial.size(); i++) {
 						historial.get(i).quitarNotificacion();
 						Data.actualizarDataBaseTendero(historial.get(i));
 					}
 					Data.actualizarDataBasePedido(pedido);
-					Data.actualizarDataBaseTendero((Tendero) Main.usuario);
+					Data.actualizarDataBaseTendero(usu);
 					this.ejecutar();
 				}
 
@@ -100,6 +103,7 @@ public class AceptarPedido extends OpcionDeMenu {
 	}
 
 	public void Cancelar() {
+		usu = TenderoEscena.usuario;
 		for (int i = 0; i < criterios.length; i++) {
 			fp.setValue(criterios[i]);
 		}

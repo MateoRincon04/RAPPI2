@@ -24,13 +24,19 @@ public class Entregado extends OpcionDeMenu {
 	private String[] valores;
 	private boolean[] habilitado = new boolean[] { false, false };
 	private FieldPanel fp;
-	private Tendero usu = (Tendero) Main.usuario;
+	private Tendero usu;
 
 	public void ejecutar() {
 
+		usu = TenderoEscena.usuario;
+		if(usu.getPedido() != -1) {
 		String nomRes = Data.buscarPedido(usu.getPedido()).getRestaurante();
 		String nomPlato = Data.buscarPedido(usu.getPedido()).getPlato();
 		valores = new String[] { nomPlato, nomRes };
+		}
+		else {
+			valores = new String[] { "", "" };
+		}
 		fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
 
 		GridPane bonito = new GridPane();
@@ -53,15 +59,19 @@ public class Entregado extends OpcionDeMenu {
 		bonito.add(desc, 1, 1);
 		bonito.add(fp, 1, 2);
 		TenderoEscena.root.setCenter(bonito);
+		
 	}
 
 	public void Aceptar() {
+		usu = TenderoEscena.usuario;
 		try {
 			if (usu.getPedido() == -1) {
 				throw new ErrorCancelar();
 			} else {
 				usu.setPedido(-1);
 				usu.setEstaDisponible();
+				Data.actualizarDataBaseTendero(usu);
+				this.Cancelar();
 			}
 
 		} catch (ErrorCancelar e) {
@@ -74,6 +84,7 @@ public class Entregado extends OpcionDeMenu {
 	}
 
 	public void Cancelar() {
+		usu = TenderoEscena.usuario;
 		for (int i = 0; i < criterios.length; i++) {
 			fp.setValue(criterios[i]);
 		}

@@ -13,6 +13,7 @@ import gestorAplicacion.Administracion.*;
 import gestorAplicacion.Oferta.*;
 import BaseDatos.Data;
 import UIMain.Main;
+import UIMain.Cliente.EscenaCliente;
 
 /**
  * Clase Cliente La finalidad de esta clase es la de creacion de objetos de tipo
@@ -105,7 +106,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 			pedido.crearNotificacion(pedido.getId());
 			this.agregarAlHistorial(pedido.getId());
 			this.pedido = pedido.getId();
-			//Data.actualizarDataBaseCliente((Cliente) Main.usuario);
+			Data.actualizarDataBaseCliente(EscenaCliente.cliente);
 			return true;
 		} else {
 

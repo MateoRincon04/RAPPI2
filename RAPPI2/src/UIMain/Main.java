@@ -16,7 +16,7 @@ import gestorAplicacion.Interaccion.Tendero;
  */
 public class Main {
 
-	public static Perfil usuario = new Tendero("Guillermo", 1242354, 2, "Guille", "Guille", 236243611);
+	public static Perfil usuario;
 	public static Restaurante usuarioRestaurante;
 	public static Scanner user = new Scanner(System.in);
 	public static ArrayList<String> tenderos = new ArrayList<>();
