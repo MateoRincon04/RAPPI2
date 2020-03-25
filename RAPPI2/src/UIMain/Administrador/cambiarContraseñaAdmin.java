@@ -33,10 +33,11 @@ public class cambiarContraseñaAdmin extends OpcionDeMenu {
 	String[] valores = {"","",""};
 	Label descripcion = new Label("Usted cambiara su contraseña");
 	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
-	Administrador admin = AdministradorScene.usuario;
+	Administrador admin ;
 	public void ejecutar() throws AlertaConfirmacion {
 		 // funcion unica del Admin
 		try {
+			admin = AdministradorScene.usuario;
 			GridPane bonito = new GridPane();
 			bonito.setVgap(20);
 			bonito.setPadding(new Insets(100,10,10,10));

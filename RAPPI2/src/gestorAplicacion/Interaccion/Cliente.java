@@ -142,10 +142,9 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 * @see: {@link Calificacion#Calificacion(Object, double, Object)}
 	 * @param puntuacion El parametro puntuacion define la calificacion del Tendero
 	 */
-	public void calificarTendero(double puntuacion) {
-		if ((Data.buscarPedido(historial.get(historial.size() - 1)).getEntregado()).equals("entregado")) {
-			Tendero calificando = Data
-					.buscarTendero(Data.buscarPedido(historial.get(historial.size() - 1)).getTendero());
+	public void calificarTendero(double puntuacion, String tendero) {
+		if (Data.buscarTendero(tendero)!=null) {
+			Tendero calificando = Data.buscarTendero(tendero);
 			Calificacion calificacionTendero = new Calificacion(this.getUserName(), puntuacion,
 					calificando.getUserName());
 			calificando.agregarCalificacion(calificacionTendero);
@@ -161,15 +160,13 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	 * @param puntuacion El parametro puntuacion define la calificacion del
 	 *                   Restaurante
 	 */
-	public void calificarRestaurante(double puntuacion) {
-		if ((Data.buscarPedido(historial.get(historial.size() - 1)).getEntregado()).equals("entregado")) {
-			gestorAplicacion.Oferta.Restaurante calificando = Data
-					.buscarRestaurante(Data.buscarPedido(historial.get(historial.size() - 1)).getRestaurante());
-			Data.eliminarObjetoDataBaseRestaurante(calificando);
+	public void calificarRestaurante(double puntuacion,String restaurante) {
+		if ((Data.buscarRestaurante(restaurante))!=null) {
+			Restaurante calificando = Data.buscarRestaurante(restaurante);
 			Calificacion calificacionRestaurante = new Calificacion(this.getUserName(), puntuacion,
 					calificando.getNombre());
 			calificando.agregarCalificacion(calificacionRestaurante);
-			Data.agregarObjetoDataBaseRestaurante(calificando);
+			Data.actualizarDataBaseRestaurante(calificando);
 		}
 	}
 
