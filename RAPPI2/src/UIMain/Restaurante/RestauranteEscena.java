@@ -1,13 +1,12 @@
 package UIMain.Restaurante;
 
 import java.util.Optional;
-
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
+import UIMain.Default.InterfazInicio;
 import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Oferta.Restaurante;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -24,21 +23,19 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-public class RestauranteEscena extends Application {
-	private Scene sceneRes;
+public class RestauranteEscena {
+	private static Scene sceneRes;
 	private HBox hb;
 	static BorderPane root;
-	private Restaurante usuario;
-	private Stage window;
+	private Restaurante usuario = Main.usuarioRestaurante;
 
-	public void start(Stage stage) {
+	public RestauranteEscena() {
 
-		window = stage;
+		/*window = stage;
 		Data.CargarOpciones();
-		Data.llenarDataBases();
-		usuario = Data.buscarRestaurante("MC");
+		Data.llenarDataBases();*/
+		InterfazInicio.window.setTitle("Usuario: " + Main.usuarioRestaurante.getNombre());
 		// Manejo de la barra de menú de la vantana
 		MenuBar barraMenu = new MenuBar();
 
@@ -86,7 +83,7 @@ public class RestauranteEscena extends Application {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					//window.setScene(UIMain.Default.InterfazInicio.getScene());
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
 
 				} else {
 					// nada
@@ -393,7 +390,7 @@ public class RestauranteEscena extends Application {
 						ala.setContentText(al.getMessage());
 					}
 					Main.usuarioRestaurante = null;
-					//window.setScene(UIMain.Default.InterfazInicio.getScene());
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
 
 				} else {
 					// nada
@@ -425,18 +422,10 @@ public class RestauranteEscena extends Application {
 			}
 		});
 
-		// Display sceneRes at first
-		stage.setScene(sceneRes);
-		stage.setTitle("Usuario: " + usuario.getNombre());
-		stage.show();
-
 	}
 	
 	public Scene getScene() {
 		return sceneRes;
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

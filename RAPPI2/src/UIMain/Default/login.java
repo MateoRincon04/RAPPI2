@@ -4,10 +4,26 @@ import gestorAplicacion.Administracion.*;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.HBox;
+
+import java.util.Optional;
+
 import BaseDatos.Data;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import UIMain.Excepciones.AlertaConfirmacion;
+import UIMain.Restaurante.RestauranteEscena;
+import UIMain.Tendero.TenderoEscena;
 
 /**
  * Clase login
@@ -19,50 +35,62 @@ import UIMain.OpcionDeMenu;
  */
 
 public class login extends OpcionDeMenu {
+
 	public void ejecutar() {
-		Object usuario = null;
-		try {
-			System.out.println("Ingrese su usuario: ");
-			String userName = Main.user.next();
-			System.out.println("Ingrese su clave: ");
-			String clave = Main.user.next();
-			if (Data.buscarCliente(userName, clave) != null) {
-				usuario = Data.buscarCliente(userName, clave);
-				Main.usuario =(Cliente) usuario;
-				System.out.println("Datos ingresados correctamente");
-			} else if (Data.buscarAdministrador(userName, clave) != null) {
-				usuario = Data.buscarAdministrador(userName, clave);
-				Main.usuario =(Administrador) usuario;
-				System.out.println("Datos ingresados correctamente");
-			} else if (Data.buscarTendero(userName, clave) != null) {
-				usuario = Data.buscarTendero(userName, clave);
-				Main.usuario =(Tendero) usuario;
-				System.out.println("Datos ingresados correctamente");
-			} else if (Data.buscarRestaurante(userName, clave) != null) {
-				usuario = Data.buscarRestaurante(userName, clave);
-				Main.usuarioRestaurante =(Restaurante) usuario;
-				System.out.println("Datos ingresados correctamente");
-			} else {
-				System.out.println("Usuario no existente");
-				MenuDeConsola.lanzarMenu();
+
+		Label user = new Label("Username: ");
+		Label clave = new Label("Clave: ");
+		TextField us = new TextField("");
+		TextField cl = new TextField("");
+		Button ac = new Button("Aceptar");
+		Button can = new Button("Cancelar");
+		HBox hb = new HBox(user, us, clave, cl, ac, can);
+		hb.setPadding(new Insets(5));
+		InterfazInicio.P3.setTop(hb);
+		
+		ac.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String usu = us.getText();
+				String cla = cl.getText();
+				if(usu.equals("") || cla.equals("")) {
+					Alert al = new Alert(AlertType.ERROR);
+					al.setContentText("Ingrese los valores necesarios para realizar un inicio de sesion");
+					al.show();
+				}else {
+					if(Data.buscarAdministrador(usu, cla) != null) {
+						Main.usuario = Data.buscarAdministrador(usu);
+						//InterfazInicio.setScene();
+					}else if(Data.buscarCliente(usu, cla) != null) {
+						Main.usuario = Data.buscarCliente(usu);
+						//InterfazInicio.setScene();
+					}else if(Data.buscarTendero(usu, cla) != null) {
+						Main.usuario = Data.buscarTendero(usu);
+						TenderoEscena ten= new TenderoEscena();
+						InterfazInicio.setScene(ten.getScene());
+					}else if(Data.buscarRestaurante(usu, cla) != null) {
+						Main.usuarioRestaurante = Data.buscarRestaurante(usu);
+						RestauranteEscena res= new RestauranteEscena();
+						InterfazInicio.setScene(res.getScene());
+					}else {
+						Alert al = new Alert(AlertType.ERROR);
+						al.setContentText("No se encotro usuario con dichos datos");
+						al.show();
+					}
+				}
+				us.setText("");
+				cl.setText("");
+				
 			}
-		} catch (Exception e4) {
-			System.out.println("Error ingresando usuario, intente nuevamente");
-			ejecutar();
-		}
-		if (usuario instanceof Cliente) {
-			usuario = (Cliente) Main.usuario;
-			System.out.println("Bienvenido Cliente " + ((Cliente) usuario).getNombre());
-		} else if (usuario instanceof Tendero) {
-			usuario = (Tendero) Main.usuario;
-			System.out.println("Bienvenido Tendero " +((Tendero) usuario).getNombre());
-		} else if (usuario instanceof Administrador) {
-			usuario = (Administrador) Main.usuario;
-			System.out.println("Bienvenido Administrador " +((Administrador) usuario).getNombre());
-		} else if (usuario instanceof Restaurante) {
-			usuario = (Restaurante) Main.usuarioRestaurante;
-			System.out.println("Bienvenido Restaurante " + ((Restaurante) usuario).getNombre());
-		}
+		});
+		
+		can.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				us.setText("");
+				cl.setText("");
+				
+			}
+		});
+		
 	}
 
 	public String toString() {

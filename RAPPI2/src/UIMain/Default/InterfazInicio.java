@@ -1,11 +1,16 @@
 package UIMain.Default;
 
+import BaseDatos.Data;
+import UIMain.Excepciones.AlertaConfirmacion;
 import javafx.application.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,17 +21,21 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class InterfazInicio extends Application{
+	
+	
+	public static Stage window;//
+	static Scene escena; //
 	GridPane P1 = new GridPane();
 	BorderPane P2 = new BorderPane();
-	BorderPane P3 = new BorderPane();
+	public static BorderPane P3 = new BorderPane();
 	FlowPane f1 = new FlowPane();
 	FlowPane f2 = new FlowPane();
 	Button login = new Button("Log In");
 	Button signup = new Button("Sign Up");
 	Label autores = new Label("AUTORES");
-	Image imagen1 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/tender2.png"));
-	ImageView imagenView1 = new ImageView(imagen1);
-	Label imagenlabel1 = new Label("",imagenView1);
+	//Image imagen1 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/tender2.png"));
+	//ImageView imagenView1 = new ImageView(imagen1);
+	//Label imagenlabel1 = new Label("",imagenView1);
 	Label generico = new Label("");
 	Label mateo = new Label("Mateo Rincón Arias\r\n" + 
 			"Estudiante\r\n" + 
@@ -112,7 +121,13 @@ public class InterfazInicio extends Application{
 	
 	
 	public void start(Stage MyStage) throws Exception{
+		
+		Data.CargarOpciones();//
+		Data.llenarDataBases();//
+		
+		
 	
+		window = MyStage;//
 		MyStage.setTitle("RAPPI2");
 		
 		generico.setStyle("-fx-background-color:POWDERBLUE");
@@ -124,9 +139,7 @@ public class InterfazInicio extends Application{
 		
 		autores.setStyle("-fx-alignment: center; -fx-background-color:POWDERBLUE");
 		autores.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
-		
-		
-		login.setMaxWidth(Double.MAX_VALUE);
+		login.setMaxWidth(Double.MAX_VALUE);		
 		signup.setMaxWidth(Double.MAX_VALUE);
 		autores.setMaxWidth(Double.MAX_VALUE);
 	
@@ -144,21 +157,36 @@ public class InterfazInicio extends Application{
 		P2.setTop(autores);
 		P2.setCenter(generico);
 		P3.setTop(f1);
-		P3.setCenter(imagenlabel1);
+		//P3.setCenter(imagenlabel1);
 		
 		P1.add(P2, 0, 0);
 		P1.add(P3, 1, 0);
 		P1.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 	
-		imagenView1.setX(30);
+		/*imagenView1.setX(30);
 		imagenView1.setY(30);
 		imagenView1.setFitHeight(200);
-		imagenView1.setFitWidth(300);
+		imagenView1.setFitWidth(300);*/
+		
+		
+		//Funcionalidad Log In
+		login.setOnAction(new EventHandler<ActionEvent>() { //
+			public void handle(ActionEvent event) {
+				P3.getChildren().remove(f1);
+				try {
+					Data.getOpciones().get(1).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+			}
+		}); //
 
 		
-		Scene escena = new Scene(P1, 1200,600);
-		MyStage.setScene(escena);
-		MyStage.show();
+		escena = new Scene(P1, 1200,600);
+		window.setScene(escena);//
+		window.show();//
 		
 		generico.setText(mateo.getText());
 		generico.setOnMouseClicked(cambio);
@@ -186,6 +214,14 @@ public class InterfazInicio extends Application{
 		}
 	};	
 	
+	public static Scene getScene() { //
+		return escena;
+	}
+	
+	public static void setScene(Scene scene) { //
+		window.setScene(scene);
+		window.show();
+	}
 	
 	public static void main (String[]args) {
 		launch(args);

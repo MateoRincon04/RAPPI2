@@ -3,9 +3,10 @@ package UIMain.Tendero;
 import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
+import UIMain.Main;
+import UIMain.Default.InterfazInicio;
 import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Interaccion.Tendero;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -22,19 +23,18 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-public class TenderoEscena extends Application {
+public class TenderoEscena{
 	private Scene sceneTen;
 	private HBox hb;
 	static BorderPane root;
 	static Tendero usuario;
 
-	public void start(Stage stage) {
+	public TenderoEscena() {
 		
 		Data.CargarOpciones();
 		Data.llenarDataBases();
-		usuario = Data.buscarTendero("Guille");
+		usuario = (Tendero) Main.usuario;
 
 		// Manejo de la barra de menú de la vantana
 		MenuBar barraMenu = new MenuBar();
@@ -86,7 +86,7 @@ public class TenderoEscena extends Application {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					stage.close();
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
 
 				} else {
 					// nada
@@ -253,7 +253,7 @@ public class TenderoEscena extends Application {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					stage.close();
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
 
 				} else {
 					// nada
@@ -284,20 +284,15 @@ public class TenderoEscena extends Application {
 				root.getChildren().remove(hb);
 			}
 		});
+		InterfazInicio.window.setTitle("Usuario: " + usuario.getNombre());
 
 		// Display sceneRes at first
-		stage.setScene(sceneTen);
-		stage.setTitle("Usuario: " + usuario.getNombre());
-		stage.show();
+		/*stage.setScene(sceneTen);
+		stage.show();*/
 
 	}
 	
 	public Scene getScene() {
 		return sceneTen;
-	}
-
-	public static void main(String[] args) {
-		Data.CargarOpciones();
-		launch(args);
 	}
 }
