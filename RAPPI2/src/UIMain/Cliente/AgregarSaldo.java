@@ -21,9 +21,9 @@ public class AgregarSaldo extends OpcionDeMenu {
 	private String[] valores = new String[] { "" };
 	private boolean[] habilitado = new boolean[] { true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-	Cliente cliente = Data.buscarCliente("guille");
+	Cliente cliente;
 	public void ejecutar() {
-		
+		cliente = Data.buscarCliente("guille");
 		GridPane bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para agregar saldo a la cuenta del cliente: ");
 		desc.setAlignment(Pos.CENTER);
@@ -47,17 +47,19 @@ public class AgregarSaldo extends OpcionDeMenu {
 	}
 
 	public void Aceptar() {
-		
 		try {
 			try {
+				
 				long num = Long.parseLong((fp.getValue(fp.criterios[0])));
 				if(num>=0) {
 					cliente.agregarSaldo(num);
+					Data.actualizarDataBaseCliente(cliente);
 					this.Cancelar();
 				}else {
 					throw new ErrorCancelar();
 				}
 			}catch(Exception e1) {
+				//System.out.println(e1.getMessage());
 				throw new ErrorCancelar();
 			}
 		} catch (ErrorCancelar e) {

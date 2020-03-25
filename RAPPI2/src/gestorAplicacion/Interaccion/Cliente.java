@@ -2,17 +2,11 @@ package gestorAplicacion.Interaccion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 
 import gestorAplicacion.Administracion.*;
 import gestorAplicacion.Oferta.*;
 import BaseDatos.Data;
-import UIMain.Main;
 import UIMain.Cliente.EscenaCliente;
 
 /**
@@ -31,7 +25,7 @@ import UIMain.Cliente.EscenaCliente;
 public class Cliente extends Perfil implements Interfaz, Serializable {
 	private List<Integer> calificaciones = new ArrayList<Integer>();
 	private String metodoDePago;
-	private long saldo;
+	private long saldo=0;
 	private int pedido;
 	private String direccion;
 	private ArrayList<Integer> historial = new ArrayList<Integer>();
@@ -50,7 +44,7 @@ public class Cliente extends Perfil implements Interfaz, Serializable {
 	public Cliente(String nombre, int telefono, int comuna, String clave, String userName, long saldo,
 			String metodoDePago, String direccion) {
 		super(nombre, telefono, comuna, clave, userName);
-		this.setSaldo(saldo);
+		this.saldo=saldo;
 		this.direccion = direccion;
 		this.setMetodoDePago(metodoDePago);
 		this.opciones.add(3);
