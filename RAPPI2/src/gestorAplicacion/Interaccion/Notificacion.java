@@ -1,5 +1,6 @@
 package gestorAplicacion.Interaccion;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import gestorAplicacion.Oferta.Restaurante;
@@ -57,9 +58,9 @@ public class Notificacion {
 		Restaurante notif = Data.buscarRestaurante( Data.buscarPedido(pedido).getRestaurante());
 		notif.agregarNotificacion(this);
 		Data.actualizarDataBaseRestaurante(notif);
-		Iterator<String> iterator = Main.tenderos.iterator();
-		while (iterator.hasNext()) {
-			Tendero notificado = Data.buscarTendero(iterator.next());
+		ArrayList<Tendero> iterator = Data.getdbTendero();
+		for (int o = 0; o < iterator.size() ; o++) {
+			Tendero notificado = Data.buscarTendero(iterator.get(o).getUserName());
 			if (notificado.getEstaDisponible().equals("disponible")) {
 				notificado.agregarNotificacion(this);
 				Data.actualizarDataBaseTendero(notificado);
