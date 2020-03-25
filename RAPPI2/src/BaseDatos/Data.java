@@ -537,18 +537,18 @@ public class Data {
 
 	/**
 	 * Metodo que se usa al principio del Main para cargar el file con la base de
-	 * datos de clientes
+	 * datos de pedidos
 	 * 
-	 * @see: {@link #traerDataBaseCliente()}
+	 * @see: {@link #traerDataBasePedido()}
 	 */
 	public static File cargarFileDataBasePedido() throws IOException {
 		Gson gson = new Gson();
 		File DataBase = new File(filepathPedido);
-		if (Data.traerDataBaseTendero() != null) {
+		if (Data.traerDataBasePedido() != null) {
 			System.out.println("La dataBasePedido se ha cargado correctamente");
 		} else {
 			System.out.println("La dataBasePedido se ha creado correctamente");
-			Tendero[] aux = new Tendero[0];
+			Pedido[] aux = new Pedido[0];
 			JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
 			try (FileWriter fw = new FileWriter(filepathPedido)) {
 				fw.write(array.toString());
@@ -649,7 +649,7 @@ public class Data {
 		Gson gson = new Gson();
 		JsonParser jp = new JsonParser();
 		ArrayList<Tendero> tenderos = new ArrayList<>();
-		try (FileReader fr = new FileReader(filepathCliente)) {
+		try (FileReader fr = new FileReader(filepathTendero)) {
 			Object obj = jp.parse(fr);
 			JsonArray array = (JsonArray) obj;
 			for (JsonElement jsonElement : array) {
