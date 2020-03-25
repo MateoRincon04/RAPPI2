@@ -32,6 +32,8 @@ public class TenderoReparteMas extends OpcionDeMenu {
 	TextField valor;
 	GridPane fp;
 	public void ejecutar() {
+		Data.llenarDataBases();
+		Data.LlenarTenderos();
 		GridPane bonito = new GridPane();
 		Label descripcion = new Label("Podras observar al tendero que mas pedidos ha entregado");
 		bonito.setVgap(20);
@@ -87,9 +89,10 @@ public class TenderoReparteMas extends OpcionDeMenu {
 	public void Aceptar() {
 		Alert al = new Alert(AlertType.NONE);
 		try {
+			Data.llenarDataBases();
 			Restaurante rAux = Data.buscarRestaurante(valor.getText());
 			if (rAux.tenderoQueMasMeEntrega()==null) {
-			throw new ErrorNoExiste("Tendero",rAux.tenderoQueMasMeEntrega().getUserName());
+			throw new ErrorNoExiste(rAux.getNombre());
 		} else {
 				al.setAlertType(AlertType.INFORMATION);
 				al.setContentText("el tendero que mas pedidos ha entregado en "+ rAux.getNombre()+" es " + rAux.tenderoQueMasMeEntrega().getNombre());
