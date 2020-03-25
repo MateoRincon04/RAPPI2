@@ -157,7 +157,7 @@ public class Restaurante implements Serializable {
 			
 		}
 		else {
-			Data.eliminarObjetoDataBasePlato(Data.buscarPlato(menu));
+			Data.eliminarObjetoDataBasePlato(Data.buscarPlato(this.menu));
 			this.menu = platoCambio.getNombre();
 			Data.agregarObjetoDataBasePlato(platoCambio);
 		}

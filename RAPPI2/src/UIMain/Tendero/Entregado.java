@@ -1,20 +1,16 @@
 package UIMain.Tendero;
 
-import java.util.ArrayList;
-
 import BaseDatos.Data;
 import UIMain.FieldPanel;
-import UIMain.Main;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
-import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
-import gestorAplicacion.Oferta.Pedido;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class Entregado extends OpcionDeMenu {
 
@@ -25,6 +21,7 @@ public class Entregado extends OpcionDeMenu {
 	private boolean[] habilitado = new boolean[] { false, false };
 	private FieldPanel fp;
 	private Tendero usu;
+	GridPane bonito;
 
 	public void ejecutar() {
 
@@ -39,7 +36,7 @@ public class Entregado extends OpcionDeMenu {
 		}
 		fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
 
-		GridPane bonito = new GridPane();
+		bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para dar por terminado el pedido que tengo a cargo");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(30).toString());
@@ -72,6 +69,16 @@ public class Entregado extends OpcionDeMenu {
 				usu.setEstaDisponible();
 				Data.actualizarDataBaseTendero(usu);
 				this.Cancelar();
+				Label r = new Label("Usted ha entregado el pedido: " + usu.getPedido() + " al cliente: " + Data.buscarPedido(usu.getPedido()).getCliente());
+				r.setAlignment(Pos.CENTER);
+				r.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				r.setFont(new Font("Arial", 15));
+				bonito.add(r, 1, 3);
+				bonito.add(new Label(
+						"                                                                                                                        "),
+						0, 3);
+				TenderoEscena.root.getChildren().remove(bonito);
+				TenderoEscena.root.setCenter(bonito);
 			}
 
 		} catch (ErrorCancelar e) {

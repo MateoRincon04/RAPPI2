@@ -3,7 +3,6 @@ package UIMain.Tendero;
 import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
-import UIMain.Main;
 import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Interaccion.Tendero;
 import javafx.application.Application;
@@ -26,7 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class TenderoEscena extends Application {
-	private Scene sceneRes;
+	private Scene sceneTen;
 	private HBox hb;
 	static BorderPane root;
 	static Tendero usuario;
@@ -71,7 +70,7 @@ public class TenderoEscena extends Application {
 		root = new BorderPane();
 		root.setTop(barraMenu);
 		// creación de la Escena
-		sceneRes = new Scene(root, 1200, 600);
+		sceneTen = new Scene(root, 1200, 600);
 
 		// programa para Archivo SALIR
 		mi2.setOnAction(new EventHandler<ActionEvent>() {
@@ -287,10 +286,14 @@ public class TenderoEscena extends Application {
 		});
 
 		// Display sceneRes at first
-		stage.setScene(sceneRes);
+		stage.setScene(sceneTen);
 		stage.setTitle("Usuario: " + usuario.getNombre());
 		stage.show();
 
+	}
+	
+	public Scene getScene() {
+		return sceneTen;
 	}
 
 	public static void main(String[] args) {

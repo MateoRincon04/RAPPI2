@@ -1,7 +1,6 @@
 package UIMain.Tendero;
 
 import BaseDatos.Data;
-import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Interaccion.Tendero;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -58,7 +57,7 @@ public class MenuTendero extends Application {
 					GridPane nuevoPanel = new GridPane();
 					Label saludo = new Label("Estos son los datos del Tendero	: ");
 					panelcito.setTop(saludo);
-					panelcito.setAlignment(saludo, Pos.CENTER);
+					BorderPane.setAlignment(saludo, Pos.CENTER);
 					Label nombre = new Label(" Nombre: ");
 					Label valorNombre = new Label(" " + tendero.getNombre() + " ");
 					Label clave = new Label(" clave: ");

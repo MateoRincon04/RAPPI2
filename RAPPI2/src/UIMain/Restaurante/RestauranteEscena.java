@@ -31,9 +31,11 @@ public class RestauranteEscena extends Application {
 	private HBox hb;
 	static BorderPane root;
 	private Restaurante usuario;
+	private Stage window;
 
 	public void start(Stage stage) {
 
+		window = stage;
 		Data.CargarOpciones();
 		Data.llenarDataBases();
 		usuario = Data.buscarRestaurante("MC");
@@ -84,7 +86,7 @@ public class RestauranteEscena extends Application {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					stage.close();
+					//window.setScene(UIMain.Default.InterfazInicio.getScene());
 
 				} else {
 					// nada
@@ -100,7 +102,7 @@ public class RestauranteEscena extends Application {
 				String[] criterios = new String[] { "Nombre: ", "Direcciones: ", "Celular: ", "Menu: ", "Clave: " };
 				String tituloValores = "Valor";
 				String aux = "";
-				for (int in = 0; in < Main.usuarioRestaurante.getDireccion().size(); in++) {
+				for (int in = 0; in < usuario.getDireccion().size(); in++) {
 					if (in == 0) {
 						aux = usuario.getDireccion().get(0);
 
@@ -390,7 +392,8 @@ public class RestauranteEscena extends Application {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					stage.close();
+					Main.usuarioRestaurante = null;
+					//window.setScene(UIMain.Default.InterfazInicio.getScene());
 
 				} else {
 					// nada
@@ -427,6 +430,10 @@ public class RestauranteEscena extends Application {
 		stage.setTitle("Usuario: " + usuario.getNombre());
 		stage.show();
 
+	}
+	
+	public Scene getScene() {
+		return sceneRes;
 	}
 
 	public static void main(String[] args) {

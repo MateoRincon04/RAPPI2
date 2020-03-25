@@ -14,10 +14,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class EliminarPlato extends OpcionDeMenu {
 	String[] criterios;
 	FieldPanel fp;
+	GridPane bonito;
 
 	public void ejecutar() {
 
@@ -30,6 +32,7 @@ public class EliminarPlato extends OpcionDeMenu {
 		boolean[] habilitado = new boolean[1];
 		habilitado[0] = false;
 		
+		
 
 		if (Main.usuarioRestaurante.getMenu().equals("")) {
 
@@ -39,7 +42,7 @@ public class EliminarPlato extends OpcionDeMenu {
 		}
 
 		fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-		GridPane bonito = new GridPane();
+		bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para eliminar el plato que posee en su menu: ");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(19).toString());
@@ -76,8 +79,19 @@ public class EliminarPlato extends OpcionDeMenu {
 						this.Cancelar();
 					}
 				} catch (ErrorConfirmacion e) {
+					String vie = Main.usuarioRestaurante.getMenu();
 					Main.usuarioRestaurante.setMenu("");
-					this.ejecutar();
+					this.Cancelar();
+					Label r = new Label("Usted ha eliminado el plato" + vie + " de su menu" );
+					r.setAlignment(Pos.CENTER);
+					r.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+					r.setFont(new Font("Arial", 15));
+					bonito.add(r, 1, 3);
+					bonito.add(new Label(
+							"                                                                                                                        "),
+							0, 3);
+					RestauranteEscena.root.getChildren().remove(bonito);
+					RestauranteEscena.root.setCenter(bonito);
 				}
 
 			} else {

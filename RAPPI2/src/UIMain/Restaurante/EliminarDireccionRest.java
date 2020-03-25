@@ -1,7 +1,6 @@
 package UIMain.Restaurante;
 
 import java.util.Optional;
-
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
@@ -19,6 +18,7 @@ import javafx.scene.layout.GridPane;
 public class EliminarDireccionRest extends OpcionDeMenu {
 	String[] criterios;
 	FieldPanel fp;
+	GridPane bonito;
 
 	public void ejecutar() throws AlertaConfirmacion{
 
@@ -50,7 +50,7 @@ public class EliminarDireccionRest extends OpcionDeMenu {
 		}
 
 		fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-		GridPane bonito = new GridPane();
+		bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para eliminar una de las direcciones de mis registros: ");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(18).toString());
@@ -92,13 +92,10 @@ public class EliminarDireccionRest extends OpcionDeMenu {
 					}
 				} catch (ErrorConfirmacion e) {
 					Main.usuarioRestaurante.eliminarDireccion(direEliminar);
-					try{
+					try {
 						this.ejecutar();
-					} catch (AlertaConfirmacion al) {
-						Alert ala = new Alert(AlertType.ERROR);
-						ala.setContentText(al.getMessage());
+					} catch (AlertaConfirmacion e1) {
 					}
-					
 				}
 
 			} else {
@@ -114,9 +111,11 @@ public class EliminarDireccionRest extends OpcionDeMenu {
 	}
 
 	public void Cancelar() {
-		fp.setValue(criterios[Main.usuarioRestaurante.getDireccion().size()]);
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
+		}
 	}
-
+	
 	public String toString() {
 		return "Eliminar direccion restaurante";
 	}
