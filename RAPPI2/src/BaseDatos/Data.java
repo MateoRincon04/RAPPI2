@@ -756,29 +756,6 @@ public class Data {
 						return null;
 					}
 				}
-				/**
-				 * Metodo que se usa al principio del Main para cargar el file con la base de
-				 * datos de clientes
-				 * 
-				 * @see: {@link #traerDataBaseCliente()}
-				 */
-				public static File cargarFileDataBaseCalificacion() throws IOException {
-					Gson gson = new Gson();
-					File DataBase = new File(filepathCalificacion);
-					if (Data.traerDataBaseCalificacion() != null) {
-						System.out.println("La dataBaseCalificaciones se ha cargado correctamente");
-					} else {
-						System.out.println("La dataBaseCalificaciones se ha creado correctamente");
-						Tendero[] aux = new Tendero[0];
-						JsonArray array = gson.fromJson(gson.toJson(aux), JsonArray.class);
-						try (FileWriter fw = new FileWriter(filepathCalificacion)) {
-							fw.write(array.toString());
-							fw.flush();
-						} catch (IOException e) {
-						}
-					}
-					return DataBase;
-				}
 			
 	
 	

@@ -34,8 +34,11 @@ public class Pedido {
 		this.cliente = cliente.getUserName();
 		this.plato = plato.getNombre();
 		this.restaurante = Data.buscarPlato(plato.getNombre()).getRestaurante(); //Data.buscarRestaurante(Data.buscarPlato(plato.getNombre()).getRestaurante()).getNombre();
-		++Pedido.contador;
-		this.ID= contador;
+		if(!Data.getdbPedido().isEmpty()) {
+			this.ID = Data.getdbPedido().size()+1;
+		}else {
+			this.ID = 1;
+		}
 	}
 	
 	public int getId(){

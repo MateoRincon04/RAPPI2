@@ -66,7 +66,7 @@ public class Administrador extends Perfil implements Serializable{
 	public boolean crearTendero(String nombre, int telefono, int comuna, String clave, String userName, long salario) {
 		Tendero tendero = new Tendero(nombre, telefono, comuna, clave, userName, salario);
 		Main.tenderos.add(tendero.getUserName());
-		ArrayList<Tendero> dataBase = Data.traerDataBaseTendero();
+		ArrayList<Tendero> dataBase = Data.getdbTendero();
 		if (!dataBase.contains(tendero)) {
 			Data.agregarObjetoDataBaseTendero(tendero);
 
@@ -100,7 +100,7 @@ public class Administrador extends Perfil implements Serializable{
 	 */
 	public boolean crearRestaurante(String nombre, String direccion, String celular, String clave) {
 		Restaurante restaurante = new Restaurante(nombre, direccion, celular, clave);
-		ArrayList<Restaurante> dataBase = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> dataBase = Data.getdbRestaurante();
 		if (!dataBase.contains(restaurante)) {
 			Data.agregarObjetoDataBaseRestaurante(restaurante);
 
@@ -158,7 +158,11 @@ public class Administrador extends Perfil implements Serializable{
 			Tendero t = Data.buscarTendero(userName);
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
-					t.opciones.remove(i-9);
+					if(funcionalidad.equals("Entregado")&&t.opciones.get(t.opciones.size()-1)==30) {
+						t.opciones.remove(t.opciones.size()-1);
+					}else {
+						t.opciones.remove(i-9);
+					}
 				}
 			}
 			Data.actualizarDataBaseTendero(t);
