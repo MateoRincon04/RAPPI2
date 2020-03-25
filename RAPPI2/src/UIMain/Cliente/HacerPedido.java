@@ -3,16 +3,12 @@ package UIMain.Cliente;
 import gestorAplicacion.Interaccion.Cliente;
 
 import java.util.Optional;
-
 import BaseDatos.Data;
 import UIMain.FieldPanel;
-import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.AlertaConfirmacion;
 import UIMain.Excepciones.ErrorCancelar;
 import UIMain.Excepciones.ErrorConfirmacion;
-import UIMain.Restaurante.RestauranteEscena;
 import gestorAplicacion.Oferta.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -34,7 +30,7 @@ public class HacerPedido extends OpcionDeMenu {
 	private String[] valores = new String[] { "" };
 	private boolean[] habilitado = new boolean[] { true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-	Cliente usuarioCliente = Data.buscarCliente("guille");
+	Cliente usuarioCliente;
 
 	public void ejecutar() throws AlertaConfirmacion {
 		// se esta definiendo la forma como hace el pedido el usuario
@@ -71,9 +67,9 @@ public class HacerPedido extends OpcionDeMenu {
 						+ res.getMenu() + " ?");
 				Optional<ButtonType> but = b.showAndWait(); // a.showAndWait();
 				if (but.get() == ButtonType.OK) {
-
 					Plato plato = escogerPlato(res);
 					if (plato != null) {
+						usuarioCliente = EscenaCliente.cliente;
 						boolean rea = usuarioCliente.hacerPedido(plato); // usuarioCliente.hacerPedido(plato);
 						if (rea) { //
 							Alert q = new Alert(AlertType.INFORMATION);

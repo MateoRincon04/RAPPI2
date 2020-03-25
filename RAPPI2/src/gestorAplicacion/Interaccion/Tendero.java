@@ -3,11 +3,6 @@ package gestorAplicacion.Interaccion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import BaseDatos.Data;
 import gestorAplicacion.Administracion.Perfil;
 
@@ -26,7 +21,7 @@ import gestorAplicacion.Administracion.Perfil;
  */
 
 public class Tendero extends Perfil implements Serializable {
-	private int pedido;
+	private int pedido = -1;
 	private String estaDisponible;
 	private int entregados;
 	private ArrayList<Integer> notificaciones = new ArrayList<Integer>();
@@ -46,6 +41,7 @@ public class Tendero extends Perfil implements Serializable {
 		this.opciones.add(11);
 		this.opciones.add(12);
 		this.opciones.add(13);
+		this.opciones.add(30);
 		this.salario = salario;
 		this.entregados = 0;
 		this.estaDisponible = "disponible";
@@ -101,6 +97,7 @@ public class Tendero extends Perfil implements Serializable {
 		Notificacion Aux = Data.buscarNotificacion(notificaciones.get(notificaciones.size() - 1));
 		if (!Data.buscarPedido(Aux.getPedido()).getEntregado().equals("entregado") && (Data.buscarPedido(Aux.getPedido()).getTendero()).equals("nadie")) {
 			Aux.setTomarPedido();
+			this.setPedido(Aux.getPedido());
 			this.setEstaDisponible();
 			Data.actualizarDataBaseNotificacion(Aux);
 			this.setEntregados(this.getEntregados() + 1);
@@ -128,6 +125,14 @@ public class Tendero extends Perfil implements Serializable {
 			Data.agregarObjetoDataBaseCalificacion(calificacionCliente);
 			calificando.agregarCalificacion(calificacionCliente);
 		}
+	}
+	
+	public int getPedido() {
+		return this.pedido;
+	}
+	
+	public void setPedido(int pedido) {
+		this.pedido = pedido;
 	}
 
 	/**
