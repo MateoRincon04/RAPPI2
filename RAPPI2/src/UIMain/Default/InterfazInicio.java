@@ -1,3 +1,5 @@
+package UIMain.Default;
+
 import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
