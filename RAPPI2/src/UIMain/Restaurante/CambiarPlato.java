@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class CambiarPlato extends OpcionDeMenu {
 
@@ -20,11 +21,12 @@ public class CambiarPlato extends OpcionDeMenu {
 	private String[] valores = new String[] { "", "", "", "" };
 	private boolean[] habilitado = new boolean[] { true, true, true, true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
+	GridPane bonito;
 
 	public void ejecutar() {
 
-		GridPane bonito = new GridPane();
-		Label desc = new Label("Se va a cambiar el plato " + Main.usuarioRestaurante.getMenu() + " del restaurante: ");
+		bonito = new GridPane();
+		Label desc = new Label("Se va a cambiar el plato del restaurante: ");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(17).toString());
 		nom.setAlignment(Pos.CENTER);
@@ -61,8 +63,19 @@ public class CambiarPlato extends OpcionDeMenu {
 					int pr = Integer.valueOf(precio);
 					int res = Integer.valueOf(restriccion);
 					Plato cambio = new Plato(nombre, descripcion, pr, res, Main.usuarioRestaurante);
+					String vie = Main.usuarioRestaurante.getMenu();
 					Main.usuarioRestaurante.cambiarPlato(cambio);
 					this.Cancelar();
+					Label r = new Label("Usted ha eliminado su plato " +vie+ " por uno nuevo llamado: " + nombre);
+					r.setAlignment(Pos.CENTER);
+					r.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+					r.setFont(new Font("Arial", 15));
+					bonito.add(r, 1, 3);
+					bonito.add(new Label(
+							"                                                                                                                        "),
+							0, 3);
+					RestauranteEscena.root.getChildren().remove(bonito);
+					RestauranteEscena.root.setCenter(bonito);
 				}
 
 			}

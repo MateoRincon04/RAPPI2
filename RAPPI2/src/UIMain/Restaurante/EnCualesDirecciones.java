@@ -1,14 +1,9 @@
 package UIMain.Restaurante;
 
-
-import java.util.List;
-
 import UIMain.FieldPanel;
 import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import BaseDatos.Data;
-import gestorAplicacion.Oferta.Restaurante;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -20,6 +15,7 @@ import javafx.scene.layout.GridPane;
  */
 public class EnCualesDirecciones extends OpcionDeMenu {
 	public void ejecutar() {
+		
 		String tituloCriterios = "Direcciones: ";
 		String[] criterios = new String[Main.usuarioRestaurante.getDireccion().size()];
 		for(int cr = 0; cr<criterios.length; cr++) {

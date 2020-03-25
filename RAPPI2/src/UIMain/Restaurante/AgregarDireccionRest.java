@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class AgregarDireccionRest extends OpcionDeMenu {
 
@@ -19,10 +20,11 @@ public class AgregarDireccionRest extends OpcionDeMenu {
 	private String[] valores = new String[] { "" };
 	private boolean[] habilitado = new boolean[] { true };
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
+	GridPane bonito;
 
 	public void ejecutar() {
 
-		GridPane bonito = new GridPane();
+		bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para agregar la nueva direccion de su sucursal: ");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(16).toString());
@@ -53,6 +55,17 @@ public class AgregarDireccionRest extends OpcionDeMenu {
 				String dir = fp.getValue(fp.criterios[0]);
 				Main.usuarioRestaurante.agregarDireccion(dir);
 				this.Cancelar();
+				Label r = new Label("Usted ha agregado una nueva direccion: " + dir);
+				r.setAlignment(Pos.CENTER);
+				r.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				r.setFont(new Font("Arial", 15));
+				bonito.add(r, 1, 3);
+				bonito.add(new Label(
+						"                                                                                                                        "),
+						0, 3);
+				RestauranteEscena.root.getChildren().remove(bonito);
+				RestauranteEscena.root.setCenter(bonito);
+				
 			}
 		} catch (ErrorCancelar e) {
 			Alert a = new Alert(AlertType.WARNING);

@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 import BaseDatos.Data;
 import UIMain.FieldPanel;
-import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
-import UIMain.Restaurante.RestauranteEscena;
 import gestorAplicacion.Interaccion.Notificacion;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Pedido;
-import gestorAplicacion.Oferta.Plato;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class AceptarPedido extends OpcionDeMenu {
 
@@ -28,6 +25,7 @@ public class AceptarPedido extends OpcionDeMenu {
 	private boolean[] habilitado = new boolean[] { false, false };
 	private FieldPanel fp;
 	private Tendero usu;
+	GridPane bonito;
 
 	public void ejecutar() {
 		usu = TenderoEscena.usuario;
@@ -46,7 +44,7 @@ public class AceptarPedido extends OpcionDeMenu {
 			valores = new String[] { nomPlato, nomRes };
 		}
 		fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-		GridPane bonito = new GridPane();
+		bonito = new GridPane();
 		Label desc = new Label("Se va a aceptar un pedido, y estare a cargo de la entrega de este");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(12).toString());
@@ -88,7 +86,17 @@ public class AceptarPedido extends OpcionDeMenu {
 					}
 					Data.actualizarDataBasePedido(pedido);
 					Data.actualizarDataBaseTendero(usu);
-					this.ejecutar();
+					Label r = new Label("Usted esta encargado de el pedido: " + pedido.getId() + " del cliente: " + pedido.getCliente() + " al restaurante: " + pedido.getRestaurante() + " sobre el plato: " + pedido.getPlato());
+					r.setAlignment(Pos.CENTER);
+					r.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+					r.setFont(new Font("Arial", 15));
+					bonito.add(r, 1, 3);
+					bonito.add(new Label(
+							"                                                                                                                        "),
+							0, 3);
+					TenderoEscena.root.getChildren().remove(bonito);
+					TenderoEscena.root.setCenter(bonito);
+					this.Cancelar();
 				}
 
 			}

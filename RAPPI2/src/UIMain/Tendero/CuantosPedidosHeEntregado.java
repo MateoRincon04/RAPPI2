@@ -3,9 +3,7 @@ package UIMain.Tendero;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
-import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
-import UIMain.Restaurante.RestauranteEscena;
 import gestorAplicacion.Interaccion.Tendero;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -27,7 +25,7 @@ public class CuantosPedidosHeEntregado extends OpcionDeMenu {
 		FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,habilitado);
 		
 		GridPane bonito = new GridPane();
-		Label desc = new Label("Funcionalidad para saber cuantos pedidos he realizado desde que inicie: ");
+		Label desc = new Label("Funcionalidad para saber cuantos pedidos he realizado a lo largo de mi trabajo: ");
 		desc.setAlignment(Pos.CENTER);
 		Label nom = new Label(Data.getOpciones().get(11).toString());
 		nom.setAlignment(Pos.CENTER);

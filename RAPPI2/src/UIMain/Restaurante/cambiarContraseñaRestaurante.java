@@ -15,10 +15,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class cambiarContraseñaRestaurante extends OpcionDeMenu {
 	String[] criterios;
 	FieldPanel fp;
+	GridPane bonito;
 
 	public void ejecutar() throws AlertaConfirmacion {
 
@@ -39,7 +41,7 @@ public class cambiarContraseñaRestaurante extends OpcionDeMenu {
 			habilitado[2] = true;
 
 			fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
-			GridPane bonito = new GridPane();
+			bonito = new GridPane();
 			Label desc = new Label("Funcionalidad para cambiar la contraseña del usuario: ");
 			desc.setAlignment(Pos.CENTER);
 			Label nom = new Label(Data.getOpciones().get(21).toString());
@@ -88,12 +90,17 @@ public class cambiarContraseñaRestaurante extends OpcionDeMenu {
 
 				} catch (ErrorConfirmacion e) {
 					Main.usuarioRestaurante.setClave(conNueva);
-					try {
-						this.ejecutar();
-					} catch (AlertaConfirmacion al) {
-						Alert ala = new Alert(AlertType.ERROR);
-						ala.setContentText(al.getMessage());
-					}
+					Label r = new Label("Usted ha cambiado su contraseña de " + conVieja + " por " + conNueva);
+					r.setAlignment(Pos.CENTER);
+					r.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+					r.setFont(new Font("Arial", 15));
+					bonito.add(r, 1, 3);
+					bonito.add(new Label(
+							"                                                                                                                        "),
+							0, 3);
+					RestauranteEscena.root.getChildren().remove(bonito);
+					RestauranteEscena.root.setCenter(bonito);
+					this.Cancelar();
 
 				}
 
