@@ -1776,7 +1776,7 @@ public class Data {
 	 * Metodo organiza los restaurantes de mayor a menor segun calificacion
 	 */
 	public static Restaurante OrganizarRestaurantesPorCalificacion() {
-		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> historial = Data.getdbRestaurante();
 		Restaurante best = null;
 		double max = 0;
 		for (int i = 0; i < historial.size(); i++) {
@@ -1789,7 +1789,7 @@ public class Data {
 	}
 
 	public static ArrayList<String> imprimirRestaurantes() {
-		ArrayList<Restaurante> historial = Data.traerDataBaseRestaurante();
+		ArrayList<Restaurante> historial = Data.getdbRestaurante();
 		ArrayList<String> lista = new ArrayList<String>();
 		for (int i = 0; i < historial.size(); i++) {
 			lista.add(historial.get(i).getNombre());
