@@ -49,6 +49,7 @@ public class AgregarSaldo extends OpcionDeMenu {
 	public void Aceptar() {
 		
 		try {
+			try {
 				long num = Long.parseLong((fp.getValue(fp.criterios[0])));
 				if(num>=0) {
 					cliente.agregarSaldo(num);
@@ -56,8 +57,9 @@ public class AgregarSaldo extends OpcionDeMenu {
 				}else {
 					throw new ErrorCancelar();
 				}
-				
-			
+			}catch(Exception e1) {
+				throw new ErrorCancelar();
+			}
 		} catch (ErrorCancelar e) {
 			Alert a = new Alert(AlertType.WARNING);
 			a.setContentText(e.getMessage());
