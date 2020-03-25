@@ -54,7 +54,6 @@ public class Notificacion {
 	 * realizara el Plato ordenado.
 	 */
 	public void notificar() {
-		System.out.println(pedido);
 		Restaurante notif = Data.buscarRestaurante( Data.buscarPedido(pedido).getRestaurante());
 		notif.agregarNotificacion(this);
 		Data.actualizarDataBaseRestaurante(notif);
