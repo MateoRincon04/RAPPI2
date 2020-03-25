@@ -130,6 +130,10 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 							op.add(aux.toString());
 						}
 					}
+					if(!c.opciones.contains(30)) {
+						OpcionDeMenu aux = Data.getOpciones().get(30);
+						op.add(aux.toString());
+					}
 					cbx2 = new ComboBox(FXCollections.observableArrayList(op));
 					cbx2.setPromptText("Funcionalidades");
 					fp.add(cbx2, 0, 2);

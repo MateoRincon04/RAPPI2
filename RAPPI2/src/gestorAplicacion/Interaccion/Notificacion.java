@@ -1,9 +1,7 @@
 package gestorAplicacion.Interaccion;
 
 import java.util.Iterator;
-import com.google.gson.Gson;
 
-import gestorAplicacion.Oferta.Pedido;
 import gestorAplicacion.Oferta.Restaurante;
 import BaseDatos.Data;
 import UIMain.Main;
@@ -17,15 +15,17 @@ import UIMain.Main;
  */
 public class Notificacion {
 	private int pedido;
-	private static int contador = 0;
 	private int ID = 0;
 	private String tomarPedido="disponible";
 
 	public Notificacion(int pedido) {
 		this.pedido = pedido;
-		++Notificacion.contador;
-		this.ID= contador;
 		this.tomarPedido= "disponible";
+		if(!Data.getdbNotificacion().isEmpty()) {
+			this.ID = Data.getdbNotificacion().size()+1;
+		}else {
+			this.ID = 1;
+		}
 	}
 
 	public int getID() {
