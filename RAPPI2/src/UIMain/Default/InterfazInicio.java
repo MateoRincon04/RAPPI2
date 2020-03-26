@@ -31,7 +31,7 @@ public class InterfazInicio extends Application{
 	GridPane P1 = new GridPane();
 	BorderPane P2 = new BorderPane();
 	public static BorderPane P3 = new BorderPane();
-	FlowPane f1 = new FlowPane();
+	static FlowPane f1 = new FlowPane();
 	FlowPane f2 = new FlowPane();
 	Button login = new Button("Log In");
 	Button signup = new Button("Sign Up");

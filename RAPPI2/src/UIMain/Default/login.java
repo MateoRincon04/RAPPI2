@@ -87,6 +87,8 @@ public class login extends OpcionDeMenu {
 			public void handle(ActionEvent event) {
 				us.setText("");
 				cl.setText("");
+				InterfazInicio.P3.getChildren().remove(hb);
+				InterfazInicio.P3.setTop(InterfazInicio.f1);
 				
 			}
 		});
