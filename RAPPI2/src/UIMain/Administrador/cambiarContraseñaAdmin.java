@@ -85,6 +85,10 @@ public class cambiarContraseñaAdmin extends OpcionDeMenu {
 
 				} catch (ErrorConfirmacion e) {
 					admin.setClave(conNueva);
+					Alert a4 = new Alert(AlertType.INFORMATION);
+					a4.setContentText(admin.getNombre()+" su contraseña se ha cambiado exitosamente");
+					a4.show();
+					Data.actualizarDataBaseAdministrador(admin);
 					try {
 						this.ejecutar();
 					} catch (AlertaConfirmacion al) {

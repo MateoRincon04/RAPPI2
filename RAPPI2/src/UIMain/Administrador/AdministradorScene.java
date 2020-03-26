@@ -42,7 +42,6 @@ public class AdministradorScene{
 	private GridPane gp;
 	static Administrador usuario = null;
 	public AdministradorScene() {
-		Data.CargarOpciones();
 		Data.llenarDataBases();
 		usuario =(Administrador) Main.usuario;
 		// Manejo de la barra de men� de la vantana

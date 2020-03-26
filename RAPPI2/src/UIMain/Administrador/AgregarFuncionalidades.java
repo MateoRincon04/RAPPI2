@@ -37,8 +37,9 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 	TextField valor,valor1;
 	GridPane fp;
 	ComboBox cbx1,cbx2;
-	Administrador admin = AdministradorScene.usuario;
+	Administrador admin;
 	public void ejecutar() {
+		admin = AdministradorScene.usuario;
 		GridPane bonito = new GridPane();
 		Label descripcion = new Label("Podras agregarle funcionalidades al usuario que desees");
 		bonito.setVgap(20);
@@ -134,6 +135,7 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 						OpcionDeMenu aux = Data.getOpciones().get(30);
 						op.add(aux.toString());
 					}
+					
 					cbx2 = new ComboBox(FXCollections.observableArrayList(op));
 					cbx2.setPromptText("Funcionalidades");
 					fp.add(cbx2, 0, 2);
@@ -192,6 +194,9 @@ public class AgregarFuncionalidades extends OpcionDeMenu {
 				Optional<ButtonType> result = a.showAndWait();
 				if(result.get()==ButtonType.OK) {
 				admin.agregarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
+				Alert a2 = new Alert(AlertType.INFORMATION);
+				a2.setContentText(admin.getNombre()+" has agregado exitosamente la funcionalidad "+valor1.getText()+" a "+valor.getText());
+				a2.show();
 				}
 			}
 		}catch (ErrorCancelar e) {

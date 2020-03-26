@@ -147,7 +147,8 @@ public class Administrador extends Perfil implements Serializable{
 	public void quitarFuncionalidad(String userName,String funcionalidad,String tipo) {
 		if(tipo.equals("Cliente")) {
 			Cliente c= Data.buscarCliente(userName);
-			for(int i =0 ;i<Data.getOpciones().size();i++) {
+			c.opciones.sort(Comparator.naturalOrder());
+			for(int i =0 ;i<31;i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					c.opciones.remove(i-3);
 				}
@@ -156,6 +157,7 @@ public class Administrador extends Perfil implements Serializable{
 		}
 		else if(tipo.equals("Tendero")) {
 			Tendero t = Data.buscarTendero(userName);
+			t.opciones.sort(Comparator.naturalOrder());
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(funcionalidad.equals("Entregado")&&t.opciones.get(t.opciones.size()-1)==30) {
@@ -168,6 +170,7 @@ public class Administrador extends Perfil implements Serializable{
 			Data.actualizarDataBaseTendero(t);
 		}else {
 			Restaurante r = Data.buscarRestaurante(userName);
+			r.opciones.sort(Comparator.naturalOrder());
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					r.opciones.remove(i-12);
@@ -184,10 +187,10 @@ public class Administrador extends Perfil implements Serializable{
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(!c.opciones.contains(i)) {
 						c.opciones.add(i);
-						c.opciones.sort(Comparator.naturalOrder());
 					}
 				}
 			}
+			c.opciones.sort(Comparator.naturalOrder());
 			Data.actualizarDataBaseCliente(c);
 		}
 		else if(tipo.equals("Tendero")) {
@@ -196,10 +199,10 @@ public class Administrador extends Perfil implements Serializable{
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(!t.opciones.contains(i)) {
 						t.opciones.add(i);
-						t.opciones.sort(Comparator.naturalOrder());
 					}
 				}
 			}
+			t.opciones.sort(Comparator.naturalOrder());
 			Data.actualizarDataBaseTendero(t);
 		}else {
 			Restaurante r = Data.buscarRestaurante(userName);
@@ -207,10 +210,10 @@ public class Administrador extends Perfil implements Serializable{
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
 					if(!r.opciones.contains(i)) {
 						r.opciones.add(i);
-						r.opciones.sort(Comparator.naturalOrder());
 					}
 				}
 			}
+			r.opciones.sort(Comparator.naturalOrder());
 			Data.actualizarDataBaseRestaurante(r);
 		}
 	}

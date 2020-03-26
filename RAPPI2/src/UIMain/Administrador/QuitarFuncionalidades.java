@@ -38,8 +38,10 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 	TextField valor,valor1;
 	GridPane fp;
 	ComboBox cbx1,cbx2;
-	Administrador admin = AdministradorScene.usuario;
+	Administrador admin;
 	public void ejecutar() {
+		Data.llenarDataBases();
+		admin = AdministradorScene.usuario;
 		GridPane bonito = new GridPane();
 		Label descripcion = new Label("Podras quitarle funcionalidades al usuario que desees");
 		bonito.setVgap(20);
@@ -184,6 +186,9 @@ public class QuitarFuncionalidades extends OpcionDeMenu {
 				Optional<ButtonType> result = a.showAndWait();
 				if(result.get()==ButtonType.OK) {
 					admin.quitarFuncionalidad(valor.getText(), valor1.getText(),(String)cbx1.getValue() );
+					Alert a5 = new Alert(AlertType.INFORMATION);
+					a5.setContentText(admin.getNombre()+" has quitado exitosamente la funcionalidad "+valor1.getText()+" a "+valor.getText());
+					a5.show();
 				}
 			}
 		}catch (ErrorCancelar e) {
