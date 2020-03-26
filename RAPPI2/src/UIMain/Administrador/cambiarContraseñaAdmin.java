@@ -95,7 +95,6 @@ public class cambiarContraseñaAdmin extends OpcionDeMenu {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-
 				}
 
 			} else {

@@ -30,9 +30,10 @@ public class CrearAdministrador extends OpcionDeMenu {
 	String[] valores = {"","","","","",""};
 	Label descripcion = new Label("Usted ingresará un nuevo Administrador en el sistema.");
 	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
-	Administrador admin = AdministradorScene.usuario;
+	Administrador admin;
 	
 	public void ejecutar() {
+		admin = AdministradorScene.usuario;
 		GridPane bonito = new GridPane();
 		bonito.setVgap(20);
 		bonito.setPadding(new Insets(100,10,10,10));

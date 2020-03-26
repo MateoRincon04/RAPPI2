@@ -33,9 +33,10 @@ public class CrearTendero extends OpcionDeMenu {
 	String[] valores = {"","","","","",""};
 	Label descripcion = new Label("Usted ingresará un nuevo Tendero en el sistema.");
 	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
-	Administrador admin = AdministradorScene.usuario;
+	Administrador admin;
 	@Override
 	public void ejecutar() { // funcion unica del Admin
+		admin = AdministradorScene.usuario;
 		GridPane bonito = new GridPane();
 		bonito.setVgap(20);
 		bonito.setPadding(new Insets(100,10,10,10));
