@@ -1,10 +1,12 @@
 package UIMain.Default;
 
 import BaseDatos.Data;
+import UIMain.Administrador.CrearTendero;
 import UIMain.Excepciones.AlertaConfirmacion;
 import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
@@ -17,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -183,6 +186,37 @@ public class InterfazInicio extends Application{
 			}
 		}); //
 
+		//Funcionalidad signup
+		signup.setOnAction(new EventHandler<ActionEvent>() { //
+			public void handle(ActionEvent event) {
+				P3.getChildren().remove(f1);
+				try {
+					Data.getOpciones().get(0).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+				Button ac = new Button("Aceptar");
+				ac.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((Registrarse) Data.getOpciones().get(0)).Aceptar();
+
+					}
+				});
+
+				Button ca = new Button("Cancelar");
+				ca.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						((Registrarse) Data.getOpciones().get(0)).Cancelar();
+
+					}
+				});
+				HBox hb = new HBox(ac, ca);
+				hb.setAlignment(Pos.TOP_CENTER);
+				hb.setMaxHeight(Double.MAX_VALUE);
+				P3.setBottom(hb);
+			}
+		});
 		
 		escena = new Scene(P1, 1200,600);
 		window.setScene(escena);//

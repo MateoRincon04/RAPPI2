@@ -37,9 +37,9 @@ import UIMain.Administrador.AdministradorScene;
 public class Registrarse extends OpcionDeMenu {
 
 	String tituloCriterios = "Datos";
-	String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Saldo","Direccion"};
+	String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Saldo","Direccion","Metodo de pago"};
 	String tituloValores = "Valor: ";
-	String[] valores = {"","","","","","",""};
+	String[] valores = {"","","","","","","",""};
 	Label descripcion = new Label("Usted será registrado en el sistema.");
 	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
 	public void ejecutar() {
@@ -59,57 +59,15 @@ public class Registrarse extends OpcionDeMenu {
 		bonito.add(desc, 0, 0);
 		bonito.add(descripcion, 0, 1);
 		bonito.add(fp, 0, 2);
-		
 		bonito.setAlignment(Pos.TOP_CENTER);
-		//AdministradorScene.root.setCenter(bonito);
-
-		System.out.println("Usted sera registrado en el sistema.");
-		System.out.println("Ingrese su nombre: ");
-		String nombre = Main.user.next();
-		System.out.println("Ingrese su Username: ");
-		String username = Main.user.next();
-		System.out.println("Ingrese su metodo de pago (efectivo,tarjeta): ");
-		String metodoDePago;
-		while (true) {
-			metodoDePago = Main.user.next();
-			if(metodoDePago.equals("efectivo")||metodoDePago.equals("tarjeta")) {
-				break;
-				}
-			else {
-				System.out.println("Ingrese una opcion valida");
-				}
-			}
-		System.out.println("Ingrese el numero de su comuna: ");
-		int comuna = Main.user.nextInt();
-		System.out.println("Ingrese su clave: ");
-		String clave = Main.user.next();
-		System.out.println("Ingrese su telefono: ");
-		int telefono = Main.user.nextInt();
-		System.out.println("Ingrese su saldo: ");
-		long saldo;
-		while (true) {
-			saldo = Main.user.nextLong();
-			if (Cliente.revisarSaldo(saldo) == false) {
-				System.out.println("Ingrese un saldo mayor a cero: ");
-			}
-			else {
-				break;
-			}
-		}
-		System.out.println("Ingrese su direccion: ");
-		String direccion = Main.user.next();
-		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago, direccion);
-		Gson gson = new Gson();
-		String aux = gson.toJson(cliente);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
-		if (!dataBase.contains(je)) {
-			Data.agregarObjetoDataBaseCliente(cliente); 
-			System.out.println("Usuario creado exitosamente ");
-			Main.usuario = cliente;
-		} else {
-			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
-			ejecutar();
+		InterfazInicio.P3.setCenter(bonito);
+	}
+	public void Aceptar() {
+		
+	}
+	public void Cancelar() {
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
 		}
 	}
 	public String toString() {
