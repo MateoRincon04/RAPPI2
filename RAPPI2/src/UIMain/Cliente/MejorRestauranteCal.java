@@ -18,9 +18,9 @@ import javafx.scene.layout.GridPane;
  * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
  */
 public class MejorRestauranteCal extends OpcionDeMenu {
-
+	Cliente usuarioUno;
 	public void ejecutar() {
-		Cliente usuarioUno = Data.buscarCliente("guille");
+		usuarioUno = EscenaCliente.cliente;
 		String tituloCriterios = "Mejor restaurante calificado: ";
 		String[] criterios = new String[2];
 		criterios[0]="El restaurante mejor calificado de los actualmente disponibles es:";

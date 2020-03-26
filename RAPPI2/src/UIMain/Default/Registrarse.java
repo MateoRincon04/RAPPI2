@@ -1,9 +1,13 @@
 package UIMain.Default;
 
+import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -14,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -24,6 +29,8 @@ import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
 import UIMain.Administrador.AdministradorScene;
+import UIMain.Excepciones.ErrorCancelar;
+import UIMain.Excepciones.ErrorExistente;
 
 /**
  * Clase Registrarse
@@ -35,11 +42,11 @@ import UIMain.Administrador.AdministradorScene;
  */
 
 public class Registrarse extends OpcionDeMenu {
-
+	
 	String tituloCriterios = "Datos";
-	String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Saldo","Direccion"};
+	String[] criterios = {"Nombre","UserName","Clave","Telefono","Comuna","Saldo","Direccion","Metodo de pago"};
 	String tituloValores = "Valor: ";
-	String[] valores = {"","","","","","",""};
+	String[] valores = {"","","","","","","",""};
 	Label descripcion = new Label("Usted será registrado en el sistema.");
 	FieldPanel fp = new FieldPanel(tituloCriterios,criterios,tituloValores,valores,null);
 	public void ejecutar() {
@@ -59,60 +66,97 @@ public class Registrarse extends OpcionDeMenu {
 		bonito.add(desc, 0, 0);
 		bonito.add(descripcion, 0, 1);
 		bonito.add(fp, 0, 2);
-		
 		bonito.setAlignment(Pos.TOP_CENTER);
-		//AdministradorScene.root.setCenter(bonito);
+		InterfazInicio.P3.setCenter(bonito);
 
-		System.out.println("Usted sera registrado en el sistema.");
-		System.out.println("Ingrese su nombre: ");
-		String nombre = Main.user.next();
-		System.out.println("Ingrese su Username: ");
-		String username = Main.user.next();
-		System.out.println("Ingrese su metodo de pago (efectivo,tarjeta): ");
-		String metodoDePago;
-		while (true) {
-			metodoDePago = Main.user.next();
-			if(metodoDePago.equals("efectivo")||metodoDePago.equals("tarjeta")) {
-				break;
-				}
-			else {
-				System.out.println("Ingrese una opcion valida");
-				}
-			}
-		System.out.println("Ingrese el numero de su comuna: ");
-		int comuna = Main.user.nextInt();
-		System.out.println("Ingrese su clave: ");
-		String clave = Main.user.next();
-		System.out.println("Ingrese su telefono: ");
-		int telefono = Main.user.nextInt();
-		System.out.println("Ingrese su saldo: ");
-		long saldo;
-		while (true) {
-			saldo = Main.user.nextLong();
-			if (Cliente.revisarSaldo(saldo) == false) {
-				System.out.println("Ingrese un saldo mayor a cero: ");
-			}
-			else {
-				break;
-			}
-		}
-		System.out.println("Ingrese su direccion: ");
-		String direccion = Main.user.next();
-		Cliente cliente = new Cliente(nombre, telefono, comuna, clave, username, saldo, metodoDePago, direccion);
-		Gson gson = new Gson();
-		String aux = gson.toJson(cliente);
-		JsonElement je = gson.fromJson(aux, JsonElement.class);
-		ArrayList<Cliente> dataBase = Data.traerDataBaseCliente();
-		if (!dataBase.contains(je)) {
-			Data.agregarObjetoDataBaseCliente(cliente); 
-			System.out.println("Usuario creado exitosamente ");
-			Main.usuario = cliente;
+	}
+	public void Aceptar() {
+		try {
+			if (Data.buscarCliente(fp.getValue(fp.criterios[1]))!=null) {
+			throw new ErrorExistente();
 		} else {
-			System.out.println("Usuario ya existente, por favor ingrese de nuevo ");
-			ejecutar();
+			String nombre = fp.getValue(fp.criterios[0]);
+			String userName = fp.getValue(fp.criterios[1]);
+			String clave = fp.getValue(fp.criterios[2]);
+			String telefono = fp.getValue(fp.criterios[3]);
+			String comuna = fp.getValue(fp.criterios[4]);
+			String saldo = fp.getValue(fp.criterios[5]);
+			String direccion = fp.getValue(fp.criterios[6]);
+			String metodopago = fp.getValue(fp.criterios[7]);
+			
+			if(nombre.equals("")||userName.equals("")||clave.equals("")||telefono.equals("")||comuna.equals("")||saldo.equals("")||direccion.equals("")||metodopago.equals("")) {
+				throw new ErrorCancelar();
+			}
+			if(isNumeric(telefono)==false) {
+				Alert al = new Alert(AlertType.WARNING);
+				al.setContentText("El telefono debe tener solo numeros");
+				al.show();
+			}
+			 if(isNumeric(saldo)==false ) {
+				Alert al = new Alert(AlertType.WARNING);
+				al.setContentText("El saldo debe tener solo numeros");
+				al.show();
+			}
+			 if(Integer.valueOf(saldo)<0) {
+					Alert al = new Alert(AlertType.WARNING);
+					al.setContentText("El saldo debe ser mayor que cero");
+					al.show();
+				}
+			 if(!metodopago.equals("efectivo")||!metodopago.equals("tarjeta")) {
+					Alert al = new Alert(AlertType.WARNING);
+					al.setContentText("El metodo de pago debe ser efectivo o tarjeta");
+					al.show();
+				}
+			else {
+				try {
+					int tel = Integer.valueOf(telefono);
+					int com = Integer.valueOf(comuna);
+					int sal = Integer.valueOf(saldo);
+					Alert a = new Alert(AlertType.CONFIRMATION);
+					a.setContentText("seguro que desea registrarse "+ userName+" ?");
+					a.show();
+					Optional<ButtonType> result = a.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						Cliente cliente = new Cliente(nombre, tel, com, clave, userName, sal, metodopago, direccion);
+						cliente = (Cliente) Main.usuario;
+						Data.agregarObjetoDataBaseCliente(cliente);
+						this.Cancelar();
+					}
+				}catch(Exception e2) {
+					throw new ErrorCancelar();
+				}
+				this.Cancelar();
+				}
+			}
+		}catch(ErrorExistente e1) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e1.getMessage());
+			a.show();
+			this.Cancelar();
+		}
+		catch (ErrorCancelar e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setContentText(e.getMessage());
+			a.show();
+			this.Cancelar();
+		}
+
+	}
+	public void Cancelar() {
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
 		}
 	}
 	public String toString() {
 		return "Registrarse";
+	}
+	
+	private static boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
 	}
 }

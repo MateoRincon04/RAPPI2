@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import BaseDatos.Data;
 import UIMain.FieldPanel;
+import UIMain.Main;
+import UIMain.Default.InterfazInicio;
 import UIMain.Excepciones.AlertaConfirmacion;
 import gestorAplicacion.Administracion.Administrador;
 import javafx.application.Application;
@@ -33,16 +35,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class AdministradorScene extends Application{
-	private Scene scene1;
+public class AdministradorScene{
+	private Scene sceneAdmin;
 	private HBox hb;
 	static BorderPane root;
 	private GridPane gp;
 	static Administrador usuario = null;
-	public void start(Stage stage) {
+	public AdministradorScene() {
 		Data.CargarOpciones();
 		Data.llenarDataBases();
-		usuario = Data.buscarAdministrador("Admin");
+		usuario =(Administrador) Main.usuario;
 		// Manejo de la barra de menï¿½ de la vantana
 		MenuBar barraMenu = new MenuBar();
 		
@@ -59,14 +61,8 @@ public class AdministradorScene extends Application{
 		menu.getItems().addAll(mi1,separator,mi2);
 		
 		//se adiciona los elementos de Procesos y consultas
-		for (int i = 22; i < Data.getOpciones().size()-1; i++) {
-			MenuItem mi = new MenuItem(Data.getOpciones().get(i).toString());
-			mi.setOnAction(new EventHandler<ActionEvent>() {
-				public void handle(ActionEvent event) {
-					
-				}
-			});
-			menu1.getItems().add(mi);
+		for (int i = 22; i < 29; i++) {
+			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
 		//se adiciona los elementos de ayuda
@@ -78,19 +74,28 @@ public class AdministradorScene extends Application{
 		root.setBorder(new Border(new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
 		root.setTop(barraMenu);
 		//creaciï¿½n de la Escena
-		scene1 = new Scene(root,1200,600);
+		sceneAdmin = new Scene(root,1200,600);
 		
 		// programa para Archivo SALIR
 		mi2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Alert conf = new Alert(AlertType.CONFIRMATION);
 				conf.setTitle("Confirmacion de salida");
-				conf.setContentText("ï¿½Seguro que desea salir?");
+				conf.setContentText("¿Seguro que desea salir?");
 				Optional<ButtonType> result = conf.showAndWait();
 				if (result.get() == ButtonType.OK) {
-					//cambia a la escena de bienvenida
-					stage.setScene(scene1);
-				} 
+					try {
+						Data.getOpciones().get(29).ejecutar();
+					} catch (AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
+					InterfazInicio.window.setTitle("RAPPI2");
+
+				} else {
+					// nada
+				}
 			}
 		});
 		
@@ -418,14 +423,13 @@ public class AdministradorScene extends Application{
 						root.setBottom(hb);
 					}
 				});
-		
+				InterfazInicio.window.setTitle("Usuario: " + usuario.getNombre());
 		//Display scene 1 at first
-		 stage.setScene(scene1);
-		 stage.setTitle("Usuario: " + usuario.getNombre());
-		 stage.show(); 
+		 /*stage.setScene(scene1);	
+		 stage.show(); */
 		
 	}
-	public static void main(String[] args) {
-		launch(args);
+	public Scene getScene() {
+		return sceneAdmin;
 	}
 }

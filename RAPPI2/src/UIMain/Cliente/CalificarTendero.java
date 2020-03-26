@@ -33,7 +33,7 @@ public class CalificarTendero extends OpcionDeMenu {
 	Cliente usuario;
 
 	public void ejecutar() {
-		usuario = Data.buscarCliente("Guille");
+		usuario = EscenaCliente.cliente;
 		GridPane bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para calificar a un tendero que realizó un pedido a un cliente: ");
 		desc.setAlignment(Pos.CENTER);

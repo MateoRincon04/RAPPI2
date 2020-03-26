@@ -84,7 +84,7 @@ public class RestauranteEscena {
 						ala.setContentText(al.getMessage());
 					}
 					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
-
+					InterfazInicio.window.setTitle("RAPPI2");
 				} else {
 					// nada
 				}
