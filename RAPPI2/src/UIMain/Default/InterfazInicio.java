@@ -1,7 +1,6 @@
 package UIMain.Default;
 
 import BaseDatos.Data;
-import UIMain.Administrador.CrearTendero;
 import UIMain.Excepciones.AlertaConfirmacion;
 import javafx.application.*;
 import javafx.event.ActionEvent;

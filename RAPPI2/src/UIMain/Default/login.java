@@ -21,6 +21,7 @@ import BaseDatos.Data;
 import UIMain.Main;
 import UIMain.MenuDeConsola;
 import UIMain.OpcionDeMenu;
+import UIMain.Administrador.AdministradorScene;
 import UIMain.Excepciones.AlertaConfirmacion;
 import UIMain.Restaurante.RestauranteEscena;
 import UIMain.Tendero.TenderoEscena;
@@ -59,7 +60,8 @@ public class login extends OpcionDeMenu {
 				}else {
 					if(Data.buscarAdministrador(usu, cla) != null) {
 						Main.usuario = Data.buscarAdministrador(usu);
-						//InterfazInicio.setScene();
+						AdministradorScene admin = new AdministradorScene();
+						InterfazInicio.setScene(admin.getScene());
 					}else if(Data.buscarCliente(usu, cla) != null) {
 						Main.usuario = Data.buscarCliente(usu);
 						//InterfazInicio.setScene();
