@@ -1,5 +1,6 @@
 package UIMain.Tendero;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
@@ -24,14 +25,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-public class TenderoEscena{
+public class TenderoEscena {
 	private Scene sceneTen;
 	private HBox hb;
 	static BorderPane root;
 	static Tendero usuario;
 
 	public TenderoEscena() {
-		
+
 		Data.CargarOpciones();
 		Data.llenarDataBases();
 		usuario = (Tendero) Main.usuario;
@@ -58,7 +59,7 @@ public class TenderoEscena{
 		}
 		menu1.getItems().add(new MenuItem(Data.getOpciones().get(30).toString()));
 		menu1.getItems().add(new SeparatorMenuItem());
-		
+
 		menu1.getItems().add(new MenuItem(Data.getOpciones().get(29).toString()));
 		menu1.getItems().add(new SeparatorMenuItem());
 
@@ -127,55 +128,67 @@ public class TenderoEscena{
 			}
 		});
 
+		ArrayList<Object> lista = new ArrayList<>();
+		ArrayList<Integer> ind = new ArrayList<>();
+		for (int i = 0; i < menu1.getItems().size(); i = i + 2) {
+			lista.add(menu1.getItems().get(i).getText());
+			ind.add(i);
+		}
+
 		// Programa para las funcionalidades
 		// Cuantos pedidos he entregado
-		menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					Data.getOpciones().get(11).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
-				}
+		if (lista.contains("¿Cuántos pedidos he entregado?")) {
+			menu1.getItems().get(ind.get(lista.indexOf("¿Cuántos pedidos he entregado?")))
+					.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							try {
+								Data.getOpciones().get(11).ejecutar();
+							} catch (AlertaConfirmacion al) {
+								Alert ala = new Alert(AlertType.ERROR);
+								ala.setContentText(al.getMessage());
+							}
 
-			}
-		});
+						}
+					});
+		}
 
 		// Aceptar Pedido
-		menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					Data.getOpciones().get(12).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
+		if (lista.contains("Aceptar pedido")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Aceptar pedido"))).setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					try {
+						Data.getOpciones().get(12).ejecutar();
+					} catch (AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
+					}
+
+					Button ac = new Button("Aceptar");
+					ac.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							((AceptarPedido) Data.getOpciones().get(12)).Aceptar();
+
+						}
+					});
+
+					Button ca = new Button("Cancelar");
+					ca.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							((AceptarPedido) Data.getOpciones().get(12)).Cancelar();
+
+						}
+					});
+					hb = new HBox(ac, ca);
+					hb.setAlignment(Pos.TOP_CENTER);
+					hb.setMaxHeight(Double.MAX_VALUE);
+					root.setBottom(hb);
+
 				}
-
-				Button ac = new Button("Aceptar");
-				ac.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						((AceptarPedido) Data.getOpciones().get(12)).Aceptar();
-
-					}
-				});
-
-				Button ca = new Button("Cancelar");
-				ca.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						((AceptarPedido) Data.getOpciones().get(12)).Cancelar();
-
-					}
-				});
-				hb = new HBox(ac, ca);
-				hb.setAlignment(Pos.TOP_CENTER);
-				hb.setMaxHeight(Double.MAX_VALUE);
-				root.setBottom(hb);
-
-			}
-		});
-
-		// Cambiar Contraseña Tendero 
-		menu1.getItems().get(4).setOnAction(new EventHandler<ActionEvent>() {
+			});
+		}
+		// Cambiar Contraseña Tendero
+		if (lista.contains("Cambiar contraseña tendero")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Cambiar contraseña tendero"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(13).ejecutar();
@@ -206,9 +219,11 @@ public class TenderoEscena{
 
 			}
 		});
-		
+		}
+
 		// Entregado
-		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
+		if (lista.contains("Terminar pedido")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Terminar pedido"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(30).ejecutar();
@@ -239,8 +254,10 @@ public class TenderoEscena{
 
 			}
 		});
+		}
 		// Salir
-		menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
+		if (lista.contains("Salir")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Salir"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Alert conf = new Alert(AlertType.CONFIRMATION);
 				conf.setTitle("Confirmacion de salida");
@@ -260,7 +277,7 @@ public class TenderoEscena{
 				}
 			}
 		});
-
+		}
 		// programa para Ayuda Acerca de
 		mi3.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -287,11 +304,12 @@ public class TenderoEscena{
 		InterfazInicio.window.setTitle("Usuario: " + usuario.getNombre());
 
 		// Display sceneRes at first
-		/*stage.setScene(sceneTen);
-		stage.show();*/
+		/*
+		 * stage.setScene(sceneTen); stage.show();
+		 */
 
 	}
-	
+
 	public Scene getScene() {
 		return sceneTen;
 	}
