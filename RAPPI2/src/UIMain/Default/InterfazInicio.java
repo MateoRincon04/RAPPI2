@@ -263,6 +263,14 @@ public class InterfazInicio extends Application{
 		}
 	};
 	
+	public static Scene getScene() { //
+		return escena;
+	}
+	
+	public static void setScene(Scene scene) { //
+		window.setScene(scene);
+		window.show();
+	}
 	public static void main (String[]args) {
 		launch(args);
 	}
