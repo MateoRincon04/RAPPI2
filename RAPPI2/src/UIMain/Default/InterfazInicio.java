@@ -35,9 +35,17 @@ public class InterfazInicio extends Application{
 	Button login = new Button("Log In");
 	Button signup = new Button("Sign Up");
 	Label autores = new Label("AUTORES");
-	//Image imagen1 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/tender2.png"));
-	//ImageView imagenView1 = new ImageView(imagen1);
-	//Label imagenlabel1 = new Label("",imagenView1);
+	ImageView imagenViewGenerico = new ImageView();
+	Image imagen1 = new Image(getClass().getResourceAsStream("UIMain.Defaul.Images/tender2.png"));
+	ImageView imagenView1 = new ImageView(imagen1);
+	Image imagen2 = new Image(getClass().getResourceAsStream("UIMain.Defaul.Images/comida.jpg"));
+	ImageView imagenView2 = new ImageView(imagen2);
+	Image imagen3 = new Image(getClass().getResourceAsStream("UIMain.Defaul.Images/moto.jpg"));
+	ImageView imagenView3 = new ImageView(imagen3);
+	Image imagen4 = new Image(getClass().getResourceAsStream("UIMain.Defaul.Images/celular.jpg"));
+	ImageView imagenView4 = new ImageView(imagen4);
+	Image imagen5 = new Image(getClass().getResourceAsStream("UIMain.Defaul.Images/completo.jpg"));
+	ImageView imagenView5 = new ImageView(imagen5);
 	Label generico = new Label("");
 	Label mateo = new Label("Mateo Rincón Arias\r\n" + 
 			"Estudiante\r\n" + 
@@ -120,16 +128,11 @@ public class InterfazInicio extends Application{
 			"		Universidad Nacional de Colombia, Sede Medellin\r\n" + 
 			"	Bachiller\r\n" + 
 			"		Diego Echavarria Misas. Medellin, Colombia 2017");
+	Image [] imagenes = new Image[5];
 	
 	
 	public void start(Stage MyStage) throws Exception{
-		
-		Data.CargarOpciones();//
-		Data.llenarDataBases();//
-		
-		
 	
-		window = MyStage;//
 		MyStage.setTitle("RAPPI2");
 		
 		generico.setStyle("-fx-background-color:POWDERBLUE");
@@ -141,7 +144,9 @@ public class InterfazInicio extends Application{
 		
 		autores.setStyle("-fx-alignment: center; -fx-background-color:POWDERBLUE");
 		autores.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
-		login.setMaxWidth(Double.MAX_VALUE);		
+		
+		
+		login.setMaxWidth(Double.MAX_VALUE);
 		signup.setMaxWidth(Double.MAX_VALUE);
 		autores.setMaxWidth(Double.MAX_VALUE);
 	
@@ -159,67 +164,41 @@ public class InterfazInicio extends Application{
 		P2.setTop(autores);
 		P2.setCenter(generico);
 		P3.setTop(f1);
-		//P3.setCenter(imagenlabel1);
+		P3.setCenter(imagenViewGenerico);
 		
 		P1.add(P2, 0, 0);
 		P1.add(P3, 1, 0);
 		P1.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
 	
-		/*imagenView1.setX(30);
+		imagenView1.setX(30);
 		imagenView1.setY(30);
 		imagenView1.setFitHeight(200);
-		imagenView1.setFitWidth(300);*/
+		imagenView1.setFitWidth(300);
+
+		imagenView2.setX(30);
+		imagenView2.setY(30);
+		imagenView2.setFitHeight(200);
+		imagenView2.setFitWidth(300);
 		
+		imagenView3.setX(30);
+		imagenView3.setY(30);
+		imagenView3.setFitHeight(200);
+		imagenView3.setFitWidth(300);
 		
-		//Funcionalidad Log In
-		login.setOnAction(new EventHandler<ActionEvent>() { //
-			public void handle(ActionEvent event) {
-				P3.getChildren().remove(f1);
-				try {
-					Data.getOpciones().get(1).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
-				}
-
-			}
-		}); //
-
-		//Funcionalidad signup
-		signup.setOnAction(new EventHandler<ActionEvent>() { //
-			public void handle(ActionEvent event) {
-				P3.getChildren().remove(f1);
-				try {
-					Data.getOpciones().get(0).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
-				}
-				Button ac = new Button("Aceptar");
-				ac.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						((Registrarse) Data.getOpciones().get(0)).Aceptar();
-
-					}
-				});
-
-				Button ca = new Button("Cancelar");
-				ca.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						((Registrarse) Data.getOpciones().get(0)).Cancelar();
-
-					}
-				});
-				HBox hb = new HBox(ac, ca);
-				hb.setAlignment(Pos.TOP_CENTER);
-				hb.setMaxHeight(Double.MAX_VALUE);
-				P3.setBottom(hb);
-			}
-		});
+		imagenView4.setX(30);
+		imagenView4.setY(30);
+		imagenView4.setFitHeight(200);
+		imagenView4.setFitWidth(300);
 		
-		escena = new Scene(P1, 1200,600);
-		window.setScene(escena);//
-		window.show();//
+		imagenView5.setX(30);
+		imagenView5.setY(30);
+		imagenView5.setFitHeight(200);
+		imagenView5.setFitWidth(300);
+
+		
+		Scene escena = new Scene(P1, 1200,600);
+		MyStage.setScene(escena);
+		MyStage.show();
 		
 		generico.setText(mateo.getText());
 		generico.setOnMouseClicked(cambio);
@@ -227,7 +206,21 @@ public class InterfazInicio extends Application{
 		santiago.setOnMouseClicked(cambio);
 		guille.setOnMouseClicked(cambio);
 		andre.setOnMouseClicked(cambio);
+	
+		imagenes[0] = imagen1;
+		imagenes[1] = imagen2;
+		imagenes[2] = imagen3;
+		imagenes[3] = imagen4;
+		imagenes[4] = imagen5;
 		
+		imagenViewGenerico.setImage(imagen1);
+		imagenViewGenerico.setX(30);
+		imagenViewGenerico.setY(30);
+		imagenViewGenerico.setFitHeight(200);
+		imagenViewGenerico.setFitWidth(300);
+		
+		imagenViewGenerico.setOnMouseEntered(entrar);
+		imagenViewGenerico.setOnMouseEntered(salir);
 	}
 		
 	EventHandler<MouseEvent> cambio = new EventHandler<MouseEvent>() {
@@ -247,14 +240,28 @@ public class InterfazInicio extends Application{
 		}
 	};	
 	
-	public static Scene getScene() { //
-		return escena;
-	}
-	
-	public static void setScene(Scene scene) { //
-		window.setScene(scene);
-		window.show();
-	}
+	int contador = 0;
+	boolean verdad = true;
+	EventHandler<MouseEvent> entrar = new EventHandler<MouseEvent>() {
+		public void handle(MouseEvent event) {
+			while(verdad) {
+				if(contador<5) {
+					if (imagenViewGenerico.equals(new ImageView(imagenes[contador]))) {
+						contador ++;
+						imagenViewGenerico.setImage(imagenes[contador]);
+					}
+					else {
+						contador = 0;
+					}
+				}
+			}
+		}
+	};
+	EventHandler<MouseEvent> salir = new EventHandler<MouseEvent>() {
+		public void handle(MouseEvent event) {
+			verdad = false;
+		}
+	};
 	
 	public static void main (String[]args) {
 		launch(args);
