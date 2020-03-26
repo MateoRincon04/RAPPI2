@@ -143,9 +143,8 @@ public class Registrarse extends OpcionDeMenu {
 
 	}
 	public void Cancelar() {
-		for (int i = 0; i < criterios.length; i++) {
-			fp.setValue(criterios[i]);
-		}
+		InterfazInicio.P3.getChildren().clear();
+		InterfazInicio.P3.getChildren().add(InterfazInicio.f1);
 	}
 	public String toString() {
 		return "Registrarse";
