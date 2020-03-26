@@ -5,9 +5,11 @@ import java.util.Optional;
 import BaseDatos.Data;
 import UIMain.FieldPanel;
 import UIMain.Main;
+import UIMain.Default.InterfazInicio;
 import UIMain.Excepciones.AlertaConfirmacion;
 import UIMain.Restaurante.CrearPlato;
 import UIMain.Restaurante.cambiarContraseñaRestaurante;
+import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Cliente;
 import gestorAplicacion.Oferta.Restaurante;
 import javafx.application.Application;
@@ -29,18 +31,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class EscenaCliente extends Application {
+public class EscenaCliente{
 	private Scene escenaCliente;
 	private GridPane panel;
 	public static Cliente cliente;
 	static BorderPane root;
 	private HBox hb;
-	public void start(Stage stage) {
+	public EscenaCliente() {
 
 		Data.LlenarTenderos();
 		Data.CargarOpciones();
 		Data.llenarDataBases();
-		cliente = Data.buscarCliente("guille");
+		cliente = (Cliente) Main.usuario;
 		MenuBar barraArriba = new MenuBar();
 		Menu menu = new Menu("Archivo");
 		Menu menu1 = new Menu("Procesos y consultas");
@@ -323,21 +325,20 @@ public class EscenaCliente extends Application {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
-					stage.close();
-
 				} else {
 					// nada
 				}
 			}
 		});
-
-		stage.setScene(escenaCliente);
+		
+		InterfazInicio.window.setTitle("Usuario: " + cliente.getNombre());
+		/*stage.setScene(escenaCliente);
 		stage.setTitle("Usuario: " + cliente.getNombre());
-		stage.show();
+		stage.show();*/
 
 	}
 
-	public static void main(String[] args) {
-		launch(args);
+	public Scene getScene() {
+		return escenaCliente;
 	}
 }
