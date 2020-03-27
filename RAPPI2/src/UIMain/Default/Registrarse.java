@@ -94,7 +94,7 @@ public class Registrarse extends OpcionDeMenu {
 				al.setContentText("El telefono debe tener solo numeros");
 				al.show();
 			}
-			 if(isNumeric(saldo)==false ) {
+			if(isNumeric(saldo)==false ) {
 				Alert al = new Alert(AlertType.WARNING);
 				al.setContentText("El saldo debe tener solo numeros");
 				al.show();
@@ -104,11 +104,13 @@ public class Registrarse extends OpcionDeMenu {
 					al.setContentText("El saldo debe ser mayor que cero");
 					al.show();
 				}
-			 if(!metodopago.equals("efectivo")||!metodopago.equals("tarjeta")) {
-					Alert al = new Alert(AlertType.WARNING);
+			 if(metodopago.equals("efectivo")==false) {
+				 if(metodopago.equals("tarjeta")==false){
+				 	Alert al = new Alert(AlertType.WARNING);
 					al.setContentText("El metodo de pago debe ser efectivo o tarjeta");
 					al.show();
-				}
+				 }
+			}
 			else {
 				try {
 					int tel = Integer.valueOf(telefono);
