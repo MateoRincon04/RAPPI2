@@ -64,6 +64,10 @@ public class AdministradorScene{
 			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
+		
+		menu1.getItems().add(new MenuItem(Data.getOpciones().get(31).toString()));
+		menu1.getItems().add(new SeparatorMenuItem());
+		
 		//se adiciona los elementos de ayuda
 		MenuItem mi3 = new MenuItem("Acerca de");
 		menu2.getItems().add(mi3);
@@ -422,6 +426,38 @@ public class AdministradorScene{
 						root.setBottom(hb);
 					}
 				});
+				
+				//MirarCalificacion
+				menu1.getItems().get(14).setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						try {
+							Data.getOpciones().get(31).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((MirarCalificacion) Data.getOpciones().get(31)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((MirarCalificacion) Data.getOpciones().get(28)).Cancelar();
+
+							}
+						});
+						hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						root.setBottom(hb);
+					}
+				});
+				
 				InterfazInicio.window.setTitle("Usuario: " + usuario.getNombre());
 		//Display scene 1 at first
 		 /*stage.setScene(scene1);	

@@ -121,4 +121,7 @@ public class MirarCalificacion extends OpcionDeMenu  {
 	}public void Cancelar() {
 		((TextField) fp.getChildren().get(1)).setText("");
 	}
+	public String toString() {
+		return "Mirar calificacion de alguien";
+	}
 }
