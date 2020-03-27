@@ -53,7 +53,7 @@ public class Data {
 		opciones.add(new cambiarContraCliente()); // 10 cliente
 		opciones.add(new CuantosPedidosHeEntregado()); // 11 tendero
 		opciones.add(new AceptarPedido()); // 12 tendero
-		opciones.add(new cambiarContraseï¿½aTendero()); // 13 tendero
+		opciones.add(new cambiarContraseñaTendero()); // 13 tendero
 		opciones.add(new EnCualesDirecciones()); // 14 restaurante
 		opciones.add(new CrearPlato()); // 15 restaurante
 		opciones.add(new AgregarDireccionRest()); // 16 restaurante
@@ -61,14 +61,14 @@ public class Data {
 		opciones.add(new EliminarDireccionRest());// 18 restaurante
 		opciones.add(new EliminarPlato()); // 19 restaurante
 		opciones.add(new CambiarDireccionRest());// 20 restaurante
-		opciones.add(new cambiarContraseï¿½aRestaurante()); // 21 restaurante
+		opciones.add(new cambiarContraseñaRestaurante()); // 21 restaurante
 		opciones.add(new CrearAdministrador()); // 22 Admin
 		opciones.add(new CrearRestaurante()); // 23 admin
 		opciones.add(new CrearTendero()); // 24 admin
 		opciones.add(new TenderoReparteMas()); // 25 admin
 		opciones.add(new QuitarFuncionalidades()); // 26 admin
 		opciones.add(new AgregarFuncionalidades()); // 27 admin
-		opciones.add(new cambiarContraseï¿½aAdmin()); // 28 Admin
+		opciones.add(new cambiarContraseñaAdmin()); // 28 Admin
 		opciones.add(new Salir()); // 29 todos
 		opciones.add(new Entregado()); // 30 tendero
 
