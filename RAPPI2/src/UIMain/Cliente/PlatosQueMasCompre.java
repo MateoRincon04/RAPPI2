@@ -18,9 +18,9 @@ import javafx.scene.layout.GridPane;
  * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
  */
 public class PlatosQueMasCompre extends OpcionDeMenu {
-
+	Cliente usuarioUno;
 	public void ejecutar() {
-		Cliente usuarioUno = Data.buscarCliente("guille");
+		usuarioUno = EscenaCliente.cliente;
 		String tituloCriterios = "Platos que más he comprado: ";
 		String[] criterios = new String[1];
 		criterios[0]="El plato que usted más ha comprado es:";

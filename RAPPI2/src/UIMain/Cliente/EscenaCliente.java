@@ -66,7 +66,7 @@ public class EscenaCliente{
 		root.setTop(barraArriba);
 
 		escenaCliente = new Scene(root, 1200, 600);
-
+		//salir
 		mi2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Alert conf = new Alert(AlertType.CONFIRMATION);
@@ -75,19 +75,20 @@ public class EscenaCliente{
 				Optional<ButtonType> result = conf.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					try {
-						System.out.close();
 						Data.getOpciones().get(29).ejecutar();
 					} catch (AlertaConfirmacion al) {
 						Alert ala = new Alert(AlertType.ERROR);
 						ala.setContentText(al.getMessage());
 					}
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
+					InterfazInicio.window.setTitle("RAPPI2");
 
-					System.exit(0);
 				} else {
-
+					// nada
 				}
 			}
 		});
+		
 
 		mi1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -313,23 +314,27 @@ public class EscenaCliente{
 		});
 		//salir
 		menu1.getItems().get(16).setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				Alert conf = new Alert(AlertType.CONFIRMATION);
-				conf.setTitle("Confirmacion de salida");
-				conf.setContentText("¿Seguro que desea salir?");
-				Optional<ButtonType> result = conf.showAndWait();
-				if (result.get() == ButtonType.OK) {
-					try {
-						Data.getOpciones().get(29).ejecutar();
-					} catch (AlertaConfirmacion al) {
-						Alert ala = new Alert(AlertType.ERROR);
-						ala.setContentText(al.getMessage());
+				public void handle(ActionEvent event) {
+					Alert conf = new Alert(AlertType.CONFIRMATION);
+					conf.setTitle("Confirmacion de salida");
+					conf.setContentText("¿Seguro que desea salir?");
+					Optional<ButtonType> result = conf.showAndWait();
+					if (result.get() == ButtonType.OK) {
+						try {
+							Data.getOpciones().get(29).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
+						InterfazInicio.window.setTitle("RAPPI2");
+
+					} else {
+						// nada
 					}
-				} else {
-					// nada
 				}
-			}
-		});
+			});
+			
 		
 		InterfazInicio.window.setTitle("Usuario: " + cliente.getNombre());
 		/*stage.setScene(escenaCliente);

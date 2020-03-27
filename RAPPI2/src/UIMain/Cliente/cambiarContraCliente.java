@@ -22,9 +22,10 @@ import javafx.scene.layout.GridPane;
 public class cambiarContraCliente extends OpcionDeMenu {
 	String[] criterios;
 	FieldPanel fp;
+	Cliente cliente;
 	public void ejecutar() throws AlertaConfirmacion {
 		try {
-			Cliente cliente = Data.buscarCliente("guille");
+			cliente = EscenaCliente.cliente;
 			String tituloCriterios = "Contraseñas: ";
 			criterios = new String[3];
 			criterios[0] = "Contraseña actual: ";
@@ -67,7 +68,7 @@ public class cambiarContraCliente extends OpcionDeMenu {
 	}
 
 	public void Aceptar() {
-		Cliente cliente=Data.buscarCliente("guille");
+		
 		String conVieja = fp.getValue(fp.criterios[0]);
 		String conNueva = fp.getValue(fp.criterios[1]);
 		String conFNueva = fp.getValue(fp.criterios[2]);
@@ -91,6 +92,7 @@ public class cambiarContraCliente extends OpcionDeMenu {
 
 				} catch (ErrorConfirmacion e) {
 					cliente.setClave(conNueva);
+					Data.actualizarDataBaseCliente(cliente);
 					try {
 						this.ejecutar();
 					} catch (AlertaConfirmacion al) {
