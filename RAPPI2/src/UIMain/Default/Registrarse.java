@@ -119,7 +119,7 @@ public class Registrarse extends OpcionDeMenu {
 					Optional<ButtonType> result = a.showAndWait();
 					if(result.get()==ButtonType.OK) {
 						Cliente cliente = new Cliente(nombre, tel, com, clave, userName, sal, metodopago, direccion);
-						cliente = (Cliente) Main.usuario;
+						Main.usuario = cliente ;
 						Data.agregarObjetoDataBaseCliente(cliente);
 						EscenaCliente cli = new EscenaCliente();
 						InterfazInicio.setScene(cli.getScene());
