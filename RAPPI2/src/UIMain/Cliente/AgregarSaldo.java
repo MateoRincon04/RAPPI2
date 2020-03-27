@@ -23,7 +23,7 @@ public class AgregarSaldo extends OpcionDeMenu {
 	private FieldPanel fp = new FieldPanel(tituloCriterios, criterios, tituloValores, valores, habilitado);
 	Cliente cliente;
 	public void ejecutar() {
-		cliente = Data.buscarCliente("guille");
+		cliente = EscenaCliente.cliente;
 		GridPane bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para agregar saldo a la cuenta del cliente: ");
 		desc.setAlignment(Pos.CENTER);
