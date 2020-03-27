@@ -286,7 +286,9 @@ public class InterfazInicio extends Application{
 						Button ca = new Button("Cancelar");
 						ca.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
-								((Registrarse) Data.getOpciones().get(0)).Cancelar();
+								P3.setTop(f1);
+								P3.setCenter(imagenView1);
+								P3.setBottom(Bienvenida);
 
 							}
 						});

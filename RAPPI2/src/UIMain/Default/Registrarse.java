@@ -16,6 +16,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -143,8 +144,9 @@ public class Registrarse extends OpcionDeMenu {
 
 	}
 	public void Cancelar() {
-		InterfazInicio.P3.getChildren().clear();
-		InterfazInicio.P3.getChildren().add(InterfazInicio.f1);
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
+		}
 	}
 	public String toString() {
 		return "Registrarse";
