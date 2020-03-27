@@ -25,7 +25,7 @@ public class Salir extends OpcionDeMenu {
 			}else {
 				Data.actualizarDataBaseAdministrador((Administrador) Main.usuario);
 			}
-			
+			Data.actualizarDataBases();
 		}
 
 	}
