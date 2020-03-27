@@ -51,6 +51,7 @@ public class InterfazInicio extends Application{
 	ImageView imagenView5 = new ImageView(imagen5);
 	ImageView imagenView5_2 = new ImageView(imagen5);
 	Label generico = new Label("");
+	Label Bienvenida = new Label("¡Bienvenido a RAPPI2!");
 	Label mateo = new Label("Mateo Rincón Arias\r\n" + 
 			"Estudiante\r\n" + 
 			"Bachiller cursando el cuarto semestre de educacion superior\r\n" + 
@@ -149,6 +150,9 @@ public class InterfazInicio extends Application{
 		autores.setStyle("-fx-alignment: center; -fx-background-color:POWDERBLUE");
 		autores.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
 		
+		Bienvenida.setStyle("-fx-alignment: center; -fx-background-color:POWDERBLUE");
+		Bienvenida.setFont(Font.font("Verdana", FontWeight.LIGHT, 50));
+		
 		
 		login.setMaxWidth(Double.MAX_VALUE);
 		signup.setMaxWidth(Double.MAX_VALUE);
@@ -169,6 +173,7 @@ public class InterfazInicio extends Application{
 		P2.setCenter(generico);
 		P3.setTop(f1);
 		P3.setCenter(imagenView1);
+		P3.setBottom(Bienvenida);
 		
 		P1.add(P2, 0, 0);
 		P1.add(P3, 1, 0);
@@ -230,11 +235,11 @@ public class InterfazInicio extends Application{
 		imagenView5.setFitWidth(300);
 		imagenView5.setOnMouseEntered(cambio2);
 
-		imagenView4_2.setX(30);
-		imagenView4_2.setY(30);
-		imagenView4_2.setFitHeight(200);
-		imagenView4_2.setFitWidth(300);
-		imagenView4_2.setOnMouseExited(cambioparapasar2);
+		imagenView5_2.setX(30);
+		imagenView5_2.setY(30);
+		imagenView5_2.setFitHeight(200);
+		imagenView5_2.setFitWidth(300);
+		imagenView5_2.setOnMouseExited(cambioparapasar2);
 
 		Scene escena = new Scene(P1, 1200,600);
 		MyStage.setScene(escena);
@@ -340,7 +345,26 @@ public class InterfazInicio extends Application{
 	
 	EventHandler<MouseEvent> cambioparapasar2 = new EventHandler<MouseEvent>() {
 		public void handle(MouseEvent event) {
-			
+			if(P3.getChildren().contains(imagenView1_2)) {
+				P3.getChildren().remove(imagenView1_2);
+				P3.setCenter(imagenView1);
+			}
+			else if(P3.getChildren().contains(imagenView2_2)) {
+				P3.getChildren().remove(imagenView2_2);
+				P3.setCenter(imagenView2);
+			}
+			else if(P3.getChildren().contains(imagenView3_2)) {
+				P3.getChildren().remove(imagenView3_2);
+				P3.setCenter(imagenView3);
+			}
+			else if(P3.getChildren().contains(imagenView4_2)) {
+				P3.getChildren().remove(imagenView4_2);
+				P3.setCenter(imagenView4);
+			}
+			else if(P3.getChildren().contains(imagenView5_2)) {
+				P3.getChildren().remove(imagenView5_2);
+				P3.setCenter(imagenView5);
+			}
 		}
 	};
 	
