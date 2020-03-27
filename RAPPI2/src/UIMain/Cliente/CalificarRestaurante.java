@@ -31,7 +31,7 @@ public class CalificarRestaurante extends OpcionDeMenu {
 
 	public void ejecutar() {
 
-		usuario = Data.buscarCliente("guille");
+		usuario = EscenaCliente.cliente;
 		GridPane bonito = new GridPane();
 		Label desc = new Label("Funcionalidad para calificar a un restaurante que preparó el pedido a un cliente: ");
 		desc.setAlignment(Pos.CENTER);
