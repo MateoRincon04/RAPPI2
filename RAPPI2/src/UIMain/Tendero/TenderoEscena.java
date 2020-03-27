@@ -54,7 +54,8 @@ public class TenderoEscena {
 
 		// se adiciona los elementos de Procesos y consultas
 		for (int i = 0; i < usuario.getOpciones().size(); i++) {
-			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
+			int opcion = usuario.getOpciones().get(i);
+			menu1.getItems().add(new MenuItem(Data.getOpciones().get(opcion).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
 
