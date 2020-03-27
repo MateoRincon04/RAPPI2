@@ -34,7 +34,8 @@ public class InterfazInicio extends Application{
 	FlowPane f2 = new FlowPane();
 	Button login = new Button("Log In");
 	Button signup = new Button("Sign Up");
-	Label autores = new Label("AUTORES");
+	Label autores = new Label("RAPPI2 es una plataforma que conecta a restaurantes, tenderos y clientes\r\n" + 
+			"para permitir la entrega de comida a domicilio.");
 	Image imagen1 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/tender2.png"));
 	ImageView imagenView1 = new ImageView(imagen1);
 	ImageView imagenView1_2 = new ImageView(imagen1);
@@ -148,7 +149,7 @@ public class InterfazInicio extends Application{
 		P3.setMinWidth(600);
 		
 		autores.setStyle("-fx-alignment: center; -fx-background-color:POWDERBLUE");
-		autores.setFont(Font.font("Verdana", FontWeight.LIGHT, 20));
+		autores.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
 		
 		Bienvenida.setStyle("-fx-alignment: center; -fx-background-color:POWDERBLUE");
 		Bienvenida.setFont(Font.font("Verdana", FontWeight.LIGHT, 50));
@@ -187,45 +188,45 @@ public class InterfazInicio extends Application{
 		
 		imagenView1_2.setX(30);
 		imagenView1_2.setY(30);
-		imagenView1_2.setFitHeight(200);
-		imagenView1_2.setFitWidth(300);
+		imagenView1_2.setFitHeight(300);
+		imagenView1_2.setFitWidth(400);
 		imagenView1_2.setOnMouseExited(cambioparapasar2);
 
 		imagenView2.setX(30);
 		imagenView2.setY(30);
-		imagenView2.setFitHeight(200);
-		imagenView2.setFitWidth(300);
+		imagenView2.setFitHeight(300);
+		imagenView2.setFitWidth(400);
 		imagenView2.setOnMouseEntered(cambio2);
 		
 		imagenView2_2.setX(30);
 		imagenView2_2.setY(30);
-		imagenView2_2.setFitHeight(200);
-		imagenView2_2.setFitWidth(300);
+		imagenView2_2.setFitHeight(300);
+		imagenView2_2.setFitWidth(400);
 		imagenView2_2.setOnMouseExited(cambioparapasar2);
 
 		imagenView3.setX(30);
 		imagenView3.setY(30);
-		imagenView3.setFitHeight(200);
-		imagenView3.setFitWidth(300);
+		imagenView3.setFitHeight(300);
+		imagenView3.setFitWidth(400);
 		imagenView3.setOnMouseEntered(cambio2);
 		
 		imagenView3_2.setX(30);
 		imagenView3_2.setY(30);
-		imagenView3_2.setFitHeight(200);
-		imagenView3_2.setFitWidth(300);
+		imagenView3_2.setFitHeight(300);
+		imagenView3_2.setFitWidth(400);
 		imagenView3_2.setOnMouseExited(cambioparapasar2);
 
 		
 		imagenView4.setX(30);
 		imagenView4.setY(30);
-		imagenView4.setFitHeight(200);
-		imagenView4.setFitWidth(300);
+		imagenView4.setFitHeight(300);
+		imagenView4.setFitWidth(400);
 		imagenView4.setOnMouseEntered(cambio2);
 		
 		imagenView4_2.setX(30);
 		imagenView4_2.setY(30);
-		imagenView4_2.setFitHeight(200);
-		imagenView4_2.setFitWidth(300);
+		imagenView4_2.setFitHeight(300);
+		imagenView4_2.setFitWidth(400);
 		imagenView4_2.setOnMouseExited(cambioparapasar2);
 
 		
@@ -286,7 +287,9 @@ public class InterfazInicio extends Application{
 						Button ca = new Button("Cancelar");
 						ca.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
-								((Registrarse) Data.getOpciones().get(0)).Cancelar();
+								P3.setTop(f1);
+								P3.setCenter(imagenView1);
+								P3.setBottom(Bienvenida);
 
 							}
 						});

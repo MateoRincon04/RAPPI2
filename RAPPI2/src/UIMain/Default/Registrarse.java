@@ -16,6 +16,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -29,6 +30,7 @@ import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
 import UIMain.Administrador.AdministradorScene;
+import UIMain.Cliente.EscenaCliente;
 import UIMain.Excepciones.ErrorCancelar;
 import UIMain.Excepciones.ErrorExistente;
 
@@ -120,7 +122,8 @@ public class Registrarse extends OpcionDeMenu {
 						Cliente cliente = new Cliente(nombre, tel, com, clave, userName, sal, metodopago, direccion);
 						cliente = (Cliente) Main.usuario;
 						Data.agregarObjetoDataBaseCliente(cliente);
-						this.Cancelar();
+						EscenaCliente cli = new EscenaCliente();
+						InterfazInicio.setScene(cli.getScene());
 					}
 				}catch(Exception e2) {
 					throw new ErrorCancelar();
@@ -143,8 +146,9 @@ public class Registrarse extends OpcionDeMenu {
 
 	}
 	public void Cancelar() {
-		InterfazInicio.P3.getChildren().clear();
-		InterfazInicio.P3.getChildren().add(InterfazInicio.f1);
+		for (int i = 0; i < criterios.length; i++) {
+			fp.setValue(criterios[i]);
+		}
 	}
 	public String toString() {
 		return "Registrarse";
