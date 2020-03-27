@@ -168,12 +168,12 @@ public class Administrador extends Perfil implements Serializable{
 				}
 			}
 			Data.actualizarDataBaseTendero(t);
-		}else {
+		}else if(tipo.equals("Restaurante")) {
 			Restaurante r = Data.buscarRestaurante(userName);
 			r.opciones.sort(Comparator.naturalOrder());
 			for(int i =0 ;i<Data.getOpciones().size();i++) {
 				if(funcionalidad.equals(Data.getOpciones().get(i).toString())) {
-					r.opciones.remove(i-12);
+					r.opciones.remove(i-14);
 				}
 			}
 			Data.actualizarDataBaseRestaurante(r);
