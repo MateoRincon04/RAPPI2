@@ -35,17 +35,21 @@ public class InterfazInicio extends Application{
 	Button login = new Button("Log In");
 	Button signup = new Button("Sign Up");
 	Label autores = new Label("AUTORES");
-	ImageView imagenViewGenerico = new ImageView();
 	Image imagen1 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/tender2.png"));
 	ImageView imagenView1 = new ImageView(imagen1);
+	ImageView imagenView1_2 = new ImageView(imagen1);
 	Image imagen2 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/comida.jpg"));
 	ImageView imagenView2 = new ImageView(imagen2);
+	ImageView imagenView2_2 = new ImageView(imagen2);
 	Image imagen3 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/moto.jpg"));
 	ImageView imagenView3 = new ImageView(imagen3);
+	ImageView imagenView3_2 = new ImageView(imagen3);
 	Image imagen4 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/celular.jpg"));
 	ImageView imagenView4 = new ImageView(imagen4);
+	ImageView imagenView4_2 = new ImageView(imagen4);
 	Image imagen5 = new Image(getClass().getResourceAsStream("UIMain.Default.Images/completo.jpg"));
 	ImageView imagenView5 = new ImageView(imagen5);
+	ImageView imagenView5_2 = new ImageView(imagen5);
 	Label generico = new Label("");
 	Label mateo = new Label("Mateo Rincón Arias\r\n" + 
 			"Estudiante\r\n" + 
@@ -128,11 +132,11 @@ public class InterfazInicio extends Application{
 			"		Universidad Nacional de Colombia, Sede Medellin\r\n" + 
 			"	Bachiller\r\n" + 
 			"		Diego Echavarria Misas. Medellin, Colombia 2017");
-	Image [] imagenes = new Image[5];
-	
 	
 	public void start(Stage MyStage) throws Exception{
-	
+		Data.CargarOpciones();//
+		Data.llenarDataBases();//
+		window = MyStage;//
 		MyStage.setTitle("RAPPI2");
 		
 		generico.setStyle("-fx-background-color:POWDERBLUE");
@@ -164,7 +168,7 @@ public class InterfazInicio extends Application{
 		P2.setTop(autores);
 		P2.setCenter(generico);
 		P3.setTop(f1);
-		P3.setCenter(imagenViewGenerico);
+		P3.setCenter(imagenView1);
 		
 		P1.add(P2, 0, 0);
 		P1.add(P3, 1, 0);
@@ -174,28 +178,64 @@ public class InterfazInicio extends Application{
 		imagenView1.setY(30);
 		imagenView1.setFitHeight(200);
 		imagenView1.setFitWidth(300);
+		imagenView1.setOnMouseEntered(cambio2);
+		
+		imagenView1_2.setX(30);
+		imagenView1_2.setY(30);
+		imagenView1_2.setFitHeight(200);
+		imagenView1_2.setFitWidth(300);
+		imagenView1_2.setOnMouseExited(cambioparapasar2);
 
 		imagenView2.setX(30);
 		imagenView2.setY(30);
 		imagenView2.setFitHeight(200);
 		imagenView2.setFitWidth(300);
+		imagenView2.setOnMouseEntered(cambio2);
 		
+		imagenView2_2.setX(30);
+		imagenView2_2.setY(30);
+		imagenView2_2.setFitHeight(200);
+		imagenView2_2.setFitWidth(300);
+		imagenView2_2.setOnMouseExited(cambioparapasar2);
+
 		imagenView3.setX(30);
 		imagenView3.setY(30);
 		imagenView3.setFitHeight(200);
 		imagenView3.setFitWidth(300);
+		imagenView3.setOnMouseEntered(cambio2);
+		
+		imagenView3_2.setX(30);
+		imagenView3_2.setY(30);
+		imagenView3_2.setFitHeight(200);
+		imagenView3_2.setFitWidth(300);
+		imagenView3_2.setOnMouseExited(cambioparapasar2);
+
 		
 		imagenView4.setX(30);
 		imagenView4.setY(30);
 		imagenView4.setFitHeight(200);
 		imagenView4.setFitWidth(300);
+		imagenView4.setOnMouseEntered(cambio2);
+		
+		imagenView4_2.setX(30);
+		imagenView4_2.setY(30);
+		imagenView4_2.setFitHeight(200);
+		imagenView4_2.setFitWidth(300);
+		imagenView4_2.setOnMouseExited(cambioparapasar2);
+
 		
 		imagenView5.setX(30);
 		imagenView5.setY(30);
 		imagenView5.setFitHeight(200);
 		imagenView5.setFitWidth(300);
+		imagenView5.setOnMouseEntered(cambio2);
 
-		
+		imagenView4_2.setX(30);
+		imagenView4_2.setY(30);
+		imagenView4_2.setFitHeight(200);
+		imagenView4_2.setFitWidth(300);
+		imagenView4_2.setOnMouseExited(cambioparapasar2);
+
 		Scene escena = new Scene(P1, 1200,600);
 		MyStage.setScene(escena);
 		MyStage.show();
@@ -206,21 +246,54 @@ public class InterfazInicio extends Application{
 		santiago.setOnMouseClicked(cambio);
 		guille.setOnMouseClicked(cambio);
 		andre.setOnMouseClicked(cambio);
-	
-		imagenes[0] = imagen1;
-		imagenes[1] = imagen2;
-		imagenes[2] = imagen3;
-		imagenes[3] = imagen4;
-		imagenes[4] = imagen5;
-		
-		imagenViewGenerico.setImage(imagen1);
-		imagenViewGenerico.setX(30);
-		imagenViewGenerico.setY(30);
-		imagenViewGenerico.setFitHeight(200);
-		imagenViewGenerico.setFitWidth(300);
-		
-		imagenViewGenerico.setOnMouseEntered(entrar);
-		imagenViewGenerico.setOnMouseEntered(salir);
+
+		//funcionalidad log in
+		login.setOnAction(new EventHandler<ActionEvent>() { //
+			public void handle(ActionEvent event) {
+				P3.getChildren().remove(f1);
+				try {
+					Data.getOpciones().get(1).ejecutar();
+				} catch (AlertaConfirmacion al) {
+					Alert ala = new Alert(AlertType.ERROR);
+					ala.setContentText(al.getMessage());
+				}
+
+			}
+		}); 
+		//Funcionalidad signup
+				signup.setOnAction(new EventHandler<ActionEvent>() { //
+					public void handle(ActionEvent event) {
+						P3.getChildren().remove(f1);
+						try {
+							Data.getOpciones().get(0).ejecutar();
+						} catch (AlertaConfirmacion al) {
+							Alert ala = new Alert(AlertType.ERROR);
+							ala.setContentText(al.getMessage());
+						}
+						Button ac = new Button("Aceptar");
+						ac.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((Registrarse) Data.getOpciones().get(0)).Aceptar();
+
+							}
+						});
+
+						Button ca = new Button("Cancelar");
+						ca.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								((Registrarse) Data.getOpciones().get(0)).Cancelar();
+
+							}
+						});
+						HBox hb = new HBox(ac, ca);
+						hb.setAlignment(Pos.TOP_CENTER);
+						hb.setMaxHeight(Double.MAX_VALUE);
+						P3.setBottom(hb);
+					}
+				});
+
+		window.setScene(escena);//
+		window.show();//
 	}
 		
 	EventHandler<MouseEvent> cambio = new EventHandler<MouseEvent>() {
@@ -239,27 +312,35 @@ public class InterfazInicio extends Application{
 			}
 		}
 	};	
-	
-	int contador = 0;
-	boolean verdad = true;
-	EventHandler<MouseEvent> entrar = new EventHandler<MouseEvent>() {
+
+	EventHandler<MouseEvent> cambio2 = new EventHandler<MouseEvent>() {
 		public void handle(MouseEvent event) {
-			while(verdad) {
-				if(contador<5) {
-					if (imagenViewGenerico.equals(new ImageView(imagenes[contador]))) {
-						contador ++;
-						imagenViewGenerico.setImage(imagenes[contador]);
-					}
-					else {
-						contador = 0;
-					}
-				}
+			if(P3.getChildren().contains(imagenView1)) {
+				P3.getChildren().remove(imagenView1);
+				P3.setCenter(imagenView2_2);
+			}
+			else if(P3.getChildren().contains(imagenView2)) {
+				P3.getChildren().remove(imagenView2);
+				P3.setCenter(imagenView3_2);
+			}
+			else if(P3.getChildren().contains(imagenView3)) {
+				P3.getChildren().remove(imagenView3);
+				P3.setCenter(imagenView4_2);
+			}
+			else if(P3.getChildren().contains(imagenView4)) {
+				P3.getChildren().remove(imagenView4);
+				P3.setCenter(imagenView5_2);
+			}
+			else if(P3.getChildren().contains(imagenView5)) {
+				P3.getChildren().remove(imagenView5);
+				P3.setCenter(imagenView1_2);
 			}
 		}
 	};
-	EventHandler<MouseEvent> salir = new EventHandler<MouseEvent>() {
+	
+	EventHandler<MouseEvent> cambioparapasar2 = new EventHandler<MouseEvent>() {
 		public void handle(MouseEvent event) {
-			verdad = false;
+			
 		}
 	};
 	
