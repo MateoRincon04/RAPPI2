@@ -193,7 +193,6 @@ public class AdministradorScene{
 						ac.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
 								((CrearRestaurante) Data.getOpciones().get(23)).Aceptar();
-
 							}
 						});
 

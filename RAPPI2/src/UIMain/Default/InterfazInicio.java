@@ -290,6 +290,7 @@ public class InterfazInicio extends Application{
 								P3.setTop(f1);
 								P3.setCenter(imagenView1);
 								P3.setBottom(Bienvenida);
+								((Registrarse) Data.getOpciones().get(0)).Cancelar();
 
 							}
 						});

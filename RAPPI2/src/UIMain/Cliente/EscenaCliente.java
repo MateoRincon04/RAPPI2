@@ -55,7 +55,8 @@ public class EscenaCliente {
 		SeparatorMenuItem separator = new SeparatorMenuItem();
 		menu.getItems().addAll(mi1, separator, mi2);
 		for (int i = 0; i < cliente.getOpciones().size(); i++) {
-			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
+			int opcion = cliente.getOpciones().get(i);
+			menu1.getItems().add(new MenuItem(Data.getOpciones().get(opcion).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
 

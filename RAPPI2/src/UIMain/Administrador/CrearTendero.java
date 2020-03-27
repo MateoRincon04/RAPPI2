@@ -77,7 +77,6 @@ public class CrearTendero extends OpcionDeMenu {
 					int sal = Integer.valueOf(salario);
 					Alert a = new Alert(AlertType.CONFIRMATION);
 					a.setContentText("seguro que quiere crear al tendero "+ userName+" ?");
-					a.show();
 					Optional<ButtonType> result = a.showAndWait();
 					if(result.get()==ButtonType.OK) {
 						admin.crearTendero(nombre, tel, com, clave, userName, sal);

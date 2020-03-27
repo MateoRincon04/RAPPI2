@@ -68,11 +68,13 @@ public class CrearRestaurante extends OpcionDeMenu {
 				throw new ErrorCancelar();
 			}else {
 				Alert a = new Alert(AlertType.CONFIRMATION);
-				a.setContentText("seguro que quiere crear al tendero "+ nombre+" ?");
-				a.show();
+				a.setContentText("seguro que quiere crear al restaurante "+ nombre+" ?");
 				Optional<ButtonType> result = a.showAndWait();
 				if(result.get()==ButtonType.OK) {
 					admin.crearRestaurante(nombre, direccion, celular, clave);
+					Alert a1 = new Alert(AlertType.CONFIRMATION);
+					a1.setContentText("el restaurante "+ nombre+" ha sido creado exitosamente");
+					a1.show();
 					this.Cancelar();
 				}
 			}
