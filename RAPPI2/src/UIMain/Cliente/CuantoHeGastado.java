@@ -19,8 +19,9 @@ import javafx.scene.layout.GridPane;
  * @author Paula A. Taborda, Guillermo Toloza, Santiago Tamayo, Mateo Rincon
  */
 public class CuantoHeGastado extends OpcionDeMenu {
+	Cliente usuarioUno;
 	public void ejecutar() {
-		Cliente usuarioUno = Data.buscarCliente("guille");
+		usuarioUno = EscenaCliente.cliente;
 		String tituloCriterios = "Cuanto dinero he gastado en la aplicación: ";
 		String[] criterios = new String[2];
 		criterios[0]="Usted ha gastado esta cantidad de dinero:";
