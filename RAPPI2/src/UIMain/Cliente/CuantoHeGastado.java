@@ -29,7 +29,12 @@ public class CuantoHeGastado extends OpcionDeMenu {
 		
 		String tituloValores = "Dinero:";
 		String[] valores = new String[2];
-		valores[0]=String.valueOf(usuarioUno.cuantoHeGastado());
+		if(usuarioUno.getHistorial().size()>0) {
+			valores[0] = String.valueOf(usuarioUno.cuantoHeGastado());
+		}else {
+			valores[0] = "0";
+		}
+		
 		valores[1]=String.valueOf(usuarioUno.getSaldo());
 		boolean[] habilitado = new boolean[2];
 		habilitado[0]=false;

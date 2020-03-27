@@ -28,7 +28,12 @@ public class MejorRestauranteCal extends OpcionDeMenu {
 		Restaurante res = Data.OrganizarRestaurantesPorCalificacion();
 		String tituloValores = "restaurante: ";
 		String[] valores = new String[2];
-		valores[0]=res.getNombre(); //hay que conectar bien.
+		if(res != null) {
+			valores[0]=res.getNombre(); //hay que conectar bien.
+		}else {
+			valores[0]= "No se ha calificado ningun restaurante"; //hay que conectar bien.
+		}
+		
 		valores[1]=String.valueOf(res.getCalificacionPromediada());
 		boolean[] habilitado = new boolean[2];
 		habilitado[0]=false;
