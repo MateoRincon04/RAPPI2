@@ -30,6 +30,7 @@ import UIMain.FieldPanel;
 import UIMain.Main;
 import UIMain.OpcionDeMenu;
 import UIMain.Administrador.AdministradorScene;
+import UIMain.Cliente.EscenaCliente;
 import UIMain.Excepciones.ErrorCancelar;
 import UIMain.Excepciones.ErrorExistente;
 
@@ -121,7 +122,8 @@ public class Registrarse extends OpcionDeMenu {
 						Cliente cliente = new Cliente(nombre, tel, com, clave, userName, sal, metodopago, direccion);
 						cliente = (Cliente) Main.usuario;
 						Data.agregarObjetoDataBaseCliente(cliente);
-						this.Cancelar();
+						EscenaCliente cli = new EscenaCliente();
+						InterfazInicio.setScene(cli.getScene());
 					}
 				}catch(Exception e2) {
 					throw new ErrorCancelar();
