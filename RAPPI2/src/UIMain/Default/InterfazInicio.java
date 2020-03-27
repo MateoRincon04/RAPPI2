@@ -236,7 +236,7 @@ public class InterfazInicio extends Application{
 		imagenView4_2.setFitWidth(300);
 		imagenView4_2.setOnMouseExited(cambioparapasar2);
 
-		Scene escena = new Scene(P1, 1200,600);
+		escena = new Scene(P1, 1200,600);
 		MyStage.setScene(escena);
 		MyStage.show();
 		
@@ -291,7 +291,6 @@ public class InterfazInicio extends Application{
 						P3.setBottom(hb);
 					}
 				});
-
 		window.setScene(escena);//
 		window.show();//
 	}
