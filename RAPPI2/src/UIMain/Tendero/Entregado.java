@@ -2,6 +2,7 @@ package UIMain.Tendero;
 
 import BaseDatos.Data;
 import UIMain.FieldPanel;
+import UIMain.Main;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
 import gestorAplicacion.Interaccion.Tendero;
@@ -25,7 +26,7 @@ public class Entregado extends OpcionDeMenu {
 
 	public void ejecutar() {
 
-		usu = TenderoEscena.usuario;
+		usu = (Tendero)Main.usuario;
 		if(usu.getPedido() != -1) {
 		String nomRes = Data.buscarPedido(usu.getPedido()).getRestaurante();
 		String nomPlato = Data.buscarPedido(usu.getPedido()).getPlato();
@@ -65,7 +66,6 @@ public class Entregado extends OpcionDeMenu {
 			if (usu.getPedido() == -1) {
 				throw new ErrorCancelar();
 			} else {
-				usu.setPedido(-1);
 				usu.setEstaDisponible();
 				Data.actualizarDataBaseTendero(usu);
 				this.Cancelar();
@@ -79,6 +79,8 @@ public class Entregado extends OpcionDeMenu {
 						0, 3);
 				TenderoEscena.root.getChildren().remove(bonito);
 				TenderoEscena.root.setCenter(bonito);
+				usu.setPedido(-1);
+
 			}
 
 		} catch (ErrorCancelar e) {

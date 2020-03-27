@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import BaseDatos.Data;
 import UIMain.FieldPanel;
+import UIMain.Main;
 import UIMain.OpcionDeMenu;
 import UIMain.Excepciones.ErrorCancelar;
 import gestorAplicacion.Interaccion.Notificacion;
@@ -28,7 +29,7 @@ public class AceptarPedido extends OpcionDeMenu {
 	GridPane bonito;
 
 	public void ejecutar() {
-		usu = TenderoEscena.usuario;
+		usu = (Tendero) Main.usuario;
 
 		if (usu.getNotificaciones().size() < 1) {
 			valores = new String[] { "", "" };
@@ -79,6 +80,7 @@ public class AceptarPedido extends OpcionDeMenu {
 					pedido.setTendero(usu);
 					usu.setPedido(pedido.getId());
 					pedido.setEntregado();
+					Data.actualizarDataBaseTendero(usu);
 					ArrayList<Tendero> historial = Data.getdbTendero();
 					for (int i = 0; i < historial.size(); i++) {
 						historial.get(i).quitarNotificacion();

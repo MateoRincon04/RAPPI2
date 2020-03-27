@@ -101,6 +101,7 @@ public class Tendero extends Perfil implements Serializable {
 			this.setEstaDisponible();
 			Data.actualizarDataBaseNotificacion(Aux);
 			this.setEntregados(this.getEntregados() + 1);
+			Data.actualizarDataBaseTendero(this);
 			return true;
 		} else {
 			return false;
@@ -159,7 +160,8 @@ public class Tendero extends Perfil implements Serializable {
 	}
 
 	public void quitarNotificacion() {
-		notificaciones.remove(notificaciones.size() - 1);
+		int index = notificaciones.size()-1;
+		notificaciones.remove(index);
 	}
 
 	public int getEntregados() {
