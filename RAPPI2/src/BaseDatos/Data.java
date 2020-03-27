@@ -77,7 +77,7 @@ public class Data {
 	public static final ArrayList<OpcionDeMenu> getOpciones() {
 		return opciones;
 	}
-
+/*
 	private static final String filepathPedido = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" + "pedidoGuardados.json";
 	private static final String filepathCliente = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" + "clientesGuardados.json";
 	private static final String filepathTendero = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" + "tenderosGuardados.json";
@@ -86,15 +86,15 @@ public class Data {
 	private static final String filepathPlato = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" + "platosGuardados.json";
 	static final String filepathNotificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" + "NotificacionesGuardados.json";
 	private static final String filepathCalificacion = System.getProperty("user.dir") + "\\src\\BaseDatos\\temp\\" + "CalificacionesGuardados.json";
-	
-/*	private static final String filepathPedido = "RAPPI2\\src\\BaseDatos\\temp\\" + "pedidoGuardados.json";
+	*/
+	private static final String filepathPedido = "RAPPI2\\src\\BaseDatos\\temp\\" + "pedidoGuardados.json";
 	private static final String filepathCliente ="RAPPI2\\src\\BaseDatos\\temp\\" + "clientesGuardados.json";
 	private static final String filepathTendero ="RAPPI2\\src\\BaseDatos\\temp\\" + "tenderosGuardados.json";
 	private static final String filepathAdministrador ="RAPPI2\\src\\BaseDatos\\temp\\" + "administradoresGuardados.json";
 	private static final String filepathRestaurantes ="RAPPI2\\src\\BaseDatos\\temp\\" + "restaurantesGuardados.json";
 	private static final String filepathPlato ="RAPPI2\\src\\BaseDatos\\temp\\" + "platosGuardados.json";
 	static final String filepathNotificacion ="RAPPI2\\src\\BaseDatos\\temp\\" + "NotificacionesGuardados.json";
-	private static final String filepathCalificacion ="RAPPI2\\src\\BaseDatos\\temp\\" + "CalificacionesGuardados.json";*/
+	private static final String filepathCalificacion ="RAPPI2\\src\\BaseDatos\\temp\\" + "CalificacionesGuardados.json";
 	
 	//Aca vamos a organizar el data para que todo se manede desde la ram como pide guzman 
 	private static ArrayList<Administrador> dbAdmin = new ArrayList<Administrador>();
