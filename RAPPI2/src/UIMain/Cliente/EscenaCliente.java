@@ -1,5 +1,6 @@
 package UIMain.Cliente;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import BaseDatos.Data;
@@ -31,12 +32,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class EscenaCliente{
+public class EscenaCliente {
 	private Scene escenaCliente;
 	private GridPane panel;
 	public static Cliente cliente;
 	static BorderPane root;
 	private HBox hb;
+
 	public EscenaCliente() {
 
 		Data.LlenarTenderos();
@@ -52,12 +54,10 @@ public class EscenaCliente{
 		MenuItem mi2 = new MenuItem("Salir");
 		SeparatorMenuItem separator = new SeparatorMenuItem();
 		menu.getItems().addAll(mi1, separator, mi2);
-		for (int i = 3; i < 11; i++) {
+		for (int i = 0; i < cliente.getOpciones().size(); i++) {
 			menu1.getItems().add(new MenuItem(Data.getOpciones().get(i).toString()));
 			menu1.getItems().add(new SeparatorMenuItem());
 		}
-		menu1.getItems().add(new MenuItem(Data.getOpciones().get(29).toString()));
-		menu1.getItems().add(new SeparatorMenuItem());
 
 		MenuItem mi3 = new MenuItem("Acerca de");
 		menu2.getItems().add(mi3);
@@ -66,7 +66,7 @@ public class EscenaCliente{
 		root.setTop(barraArriba);
 
 		escenaCliente = new Scene(root, 1200, 600);
-		//salir
+		// salir
 		mi2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Alert conf = new Alert(AlertType.CONFIRMATION);
@@ -88,7 +88,6 @@ public class EscenaCliente{
 				}
 			}
 		});
-		
 
 		mi1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -114,45 +113,64 @@ public class EscenaCliente{
 			}
 		});
 
+		ArrayList<Object> lista = new ArrayList<>();
+		ArrayList<Integer> ind = new ArrayList<>();
+		for (int i = 0; i < menu1.getItems().size(); i = i + 2) {
+			lista.add(menu1.getItems().get(i).getText());
+			ind.add(i);
+		}
+
 		// funcionalidades
-		//mejor restaurante calificado
-		menu1.getItems().get(8).setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					Data.getOpciones().get(7).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
-				}
-			}
-		});
-		//plato mas comprado
-		menu1.getItems().get(10).setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					Data.getOpciones().get(8).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
-				}
-			}
-		
-		});
-		//cuanto he gastado
-		menu1.getItems().get(6).setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					Data.getOpciones().get(6).ejecutar();
-				} catch (AlertaConfirmacion al) {
-					Alert ala = new Alert(AlertType.ERROR);
-					ala.setContentText(al.getMessage());
-				}
-			}
-		
-		});
-		
-		//Agregar Saldo
-		menu1.getItems().get(12).setOnAction(new EventHandler<ActionEvent>() {
+		// mejor restaurante calificado
+		if (lista.contains("Mejor restaurante")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Mejor restaurante")))
+					.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							try {
+								Data.getOpciones().get(7).ejecutar();
+							} catch (AlertaConfirmacion al) {
+								Alert ala = new Alert(AlertType.ERROR);
+								ala.setContentText(al.getMessage());
+							}
+						}
+					});
+		}
+
+		// plato mas comprado
+		if (lista.contains("Platos que más compré")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Platos que más compré")))
+					.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							try {
+								Data.getOpciones().get(8).ejecutar();
+							} catch (AlertaConfirmacion al) {
+								Alert ala = new Alert(AlertType.ERROR);
+								ala.setContentText(al.getMessage());
+							}
+						}
+
+					});
+		}
+
+		// cuanto he gastado
+		if (lista.contains("¿Cuánto he gastado?")) {
+			menu1.getItems().get(ind.get(lista.indexOf("¿Cuánto he gastado?")))
+					.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							try {
+								Data.getOpciones().get(6).ejecutar();
+							} catch (AlertaConfirmacion al) {
+								Alert ala = new Alert(AlertType.ERROR);
+								ala.setContentText(al.getMessage());
+							}
+						}
+
+					});
+		}
+
+		// Agregar Saldo
+		if (lista.contains("Agregar Saldo")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Agregar Saldo"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(9).ejecutar();
@@ -183,8 +201,10 @@ public class EscenaCliente{
 
 			}
 		});
-		//Hacer Pedido
-		menu1.getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
+		}
+		// Hacer Pedido
+		if (lista.contains("Hacer pedido")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Hacer pedido"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(3).ejecutar();
@@ -215,9 +235,10 @@ public class EscenaCliente{
 
 			}
 		});
-		
-		//cambiar contra cliente
-		menu1.getItems().get(14).setOnAction(new EventHandler<ActionEvent>() {
+		}
+		// cambiar contra cliente
+		if (lista.contains("Cambiar contraseña cliente")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Cambiar contraseña cliente"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(10).ejecutar();
@@ -248,8 +269,10 @@ public class EscenaCliente{
 
 			}
 		});
-		//calificar restaurante
-		menu1.getItems().get(4).setOnAction(new EventHandler<ActionEvent>() {
+		}
+		// calificar restaurante
+		if (lista.contains("Calificar Restaurante")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Calificar Restaurante"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(5).ejecutar();
@@ -280,8 +303,10 @@ public class EscenaCliente{
 
 			}
 		});
-		//calificar tendero
-		menu1.getItems().get(2).setOnAction(new EventHandler<ActionEvent>() {
+		}
+		// calificar tendero
+		if (lista.contains("Calificar Tendero")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Calificar Tendero"))).setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					Data.getOpciones().get(4).ejecutar();
@@ -312,34 +337,37 @@ public class EscenaCliente{
 
 			}
 		});
-		//salir
-		menu1.getItems().get(16).setOnAction(new EventHandler<ActionEvent>() {
-				public void handle(ActionEvent event) {
-					Alert conf = new Alert(AlertType.CONFIRMATION);
-					conf.setTitle("Confirmacion de salida");
-					conf.setContentText("¿Seguro que desea salir?");
-					Optional<ButtonType> result = conf.showAndWait();
-					if (result.get() == ButtonType.OK) {
-						try {
-							Data.getOpciones().get(29).ejecutar();
-						} catch (AlertaConfirmacion al) {
-							Alert ala = new Alert(AlertType.ERROR);
-							ala.setContentText(al.getMessage());
-						}
-						InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
-						InterfazInicio.window.setTitle("RAPPI2");
-
-					} else {
-						// nada
+		}
+		// salir
+		if (lista.contains("Salir")) {
+			menu1.getItems().get(ind.get(lista.indexOf("Salir"))).setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Alert conf = new Alert(AlertType.CONFIRMATION);
+				conf.setTitle("Confirmacion de salida");
+				conf.setContentText("¿Seguro que desea salir?");
+				Optional<ButtonType> result = conf.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					try {
+						Data.getOpciones().get(29).ejecutar();
+					} catch (AlertaConfirmacion al) {
+						Alert ala = new Alert(AlertType.ERROR);
+						ala.setContentText(al.getMessage());
 					}
+					InterfazInicio.window.setScene(UIMain.Default.InterfazInicio.getScene());
+					InterfazInicio.window.setTitle("RAPPI2");
+
+				} else {
+					// nada
 				}
-			});
-			
-		
+			}
+		});
+		}
+
 		InterfazInicio.window.setTitle("Usuario: " + cliente.getNombre());
-		/*stage.setScene(escenaCliente);
-		stage.setTitle("Usuario: " + cliente.getNombre());
-		stage.show();*/
+		/*
+		 * stage.setScene(escenaCliente); stage.setTitle("Usuario: " +
+		 * cliente.getNombre()); stage.show();
+		 */
 
 	}
 
