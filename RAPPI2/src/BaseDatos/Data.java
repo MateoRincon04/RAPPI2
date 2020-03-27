@@ -71,6 +71,7 @@ public class Data {
 		opciones.add(new cambiarContraseñaAdmin()); // 28 Admin
 		opciones.add(new Salir()); // 29 todos
 		opciones.add(new Entregado()); // 30 tendero
+		opciones.add(new MirarCalificacion()); // 31 admin
 
 	}
 

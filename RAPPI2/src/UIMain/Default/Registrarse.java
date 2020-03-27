@@ -116,7 +116,6 @@ public class Registrarse extends OpcionDeMenu {
 					int sal = Integer.valueOf(saldo);
 					Alert a = new Alert(AlertType.CONFIRMATION);
 					a.setContentText("seguro que desea registrarse "+ userName+" ?");
-					a.show();
 					Optional<ButtonType> result = a.showAndWait();
 					if(result.get()==ButtonType.OK) {
 						Cliente cliente = new Cliente(nombre, tel, com, clave, userName, sal, metodopago, direccion);

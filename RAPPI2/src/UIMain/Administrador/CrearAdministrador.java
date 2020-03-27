@@ -74,7 +74,6 @@ public class CrearAdministrador extends OpcionDeMenu {
 					int sal = Integer.valueOf(salario);
 					Alert a = new Alert(AlertType.CONFIRMATION);
 					a.setContentText("seguro que quiere crear al administrador "+ userName+" ?");
-					a.show();
 					Optional<ButtonType> result = a.showAndWait();
 					if(result.get()==ButtonType.OK) {
 						admin.crearAdministrador(nombre, tel, com, clave, userName, sal);

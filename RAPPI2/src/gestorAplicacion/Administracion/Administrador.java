@@ -103,7 +103,6 @@ public class Administrador extends Perfil implements Serializable{
 		ArrayList<Restaurante> dataBase = Data.getdbRestaurante();
 		if (!dataBase.contains(restaurante)) {
 			Data.agregarObjetoDataBaseRestaurante(restaurante);
-
 			return true;
 		} else {
 

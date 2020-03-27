@@ -9,8 +9,6 @@ import UIMain.Excepciones.ErrorNoExiste;
 import gestorAplicacion.Administracion.Administrador;
 import gestorAplicacion.Interaccion.Tendero;
 import gestorAplicacion.Oferta.Restaurante;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -94,13 +92,18 @@ public class MirarCalificacion extends OpcionDeMenu  {
 					throw new ErrorNoExiste("Tendero",valor.getText());
 				}else {
 					Tendero t= Data.buscarTendero(valor.getText());
+					Alert a = new Alert(AlertType.WARNING);
+					a.setContentText("la calificacion promediada de "+ t.getNombre()+"es "+ t.getCalificacionPromediada());
+					a.show();
 				}
 			}else {
 				if(Data.buscarRestaurante(valor.getText())==null) {
 					throw new ErrorNoExiste("Restaurante",valor.getText());
 				}else {
 					Restaurante c = Data.buscarRestaurante(valor.getText());
-					
+					Alert a = new Alert(AlertType.WARNING);
+					a.setContentText("la calificacion promediada de "+ c.getNombre()+"es "+ c.getCalificacionPromediada());
+					a.show();
 				}
 			}
 		} catch (ErrorCancelar e) {
@@ -117,5 +120,8 @@ public class MirarCalificacion extends OpcionDeMenu  {
 		
 	}public void Cancelar() {
 		((TextField) fp.getChildren().get(1)).setText("");
+	}
+	public String toString() {
+		return "Mirar calificacion de alguien";
 	}
 }
